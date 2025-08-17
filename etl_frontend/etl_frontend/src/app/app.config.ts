@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
       config: {
         clientId: "my_frontend_app",
         realm: 'codestar',
-        url: "192.168.25.178:8080",
+        url: "http://192.168.25.178:8080",
       },
       initOptions: {
         onLoad: 'check-sso',
