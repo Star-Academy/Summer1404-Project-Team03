@@ -11,9 +11,14 @@ export const routes: Routes = [
         loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
         canMatch: [] //TODO addin auth guard
     },
-    {
-        path: '**',
-        // redirectTo: //TODO add not found pages 
-    }
+  {
+        path: 'landing',
+        loadComponent: () => import('./features/landing/landing.component').then(m => m.LandingComponent),
+        canMatch: [] //TODO addin auth guard
+    },
+    // {
+    //     path: '**',
+    //     // redirectTo: //TODO add not found pages
+    // }
 
 ];

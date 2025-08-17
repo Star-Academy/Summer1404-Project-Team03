@@ -1,0 +1,83 @@
+.header {
+  height: 10vh;
+  padding-inline: 2rem;
+}
+.header__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+}
+.header__logo__icon {
+  inline-size: 7rem;
+  block-size: 5.5rem;
+}
+.header__logo__text {
+  font-size: 3rem;
+}
+
+.main {
+  height: 87vh;
+}
+.main__content {
+  block-size: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3.5rem;
+}
+.main__content__text {
+  inline-size: 50vw;
+  font-size: 2rem;
+  text-align: start;
+  line-height: 3.5rem;
+  word-spacing: 0.3rem;
+  font-weight: 500;
+}
+.main__content__img {
+  inline-size: 43rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.main__content__text {
+  animation: fadeInRight 1.2s ease-out forwards;
+}
+
+.main__content__img {
+  animation: fadeInLeft 1.2s ease-out forwards;
+}
+
+.main__content__btn {
+  animation: fadeInUp 1.5s ease-out forwards;
+}
+
+/*# sourceMappingURL=landing.component.css.map */
