@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { ButtonModule } from 'primeng/button';
+import {ButtonModule} from 'primeng/button';
 import {RouterOutlet} from '@angular/router';
 
 @Component({
@@ -11,5 +11,4 @@ import {RouterOutlet} from '@angular/router';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  
 }
