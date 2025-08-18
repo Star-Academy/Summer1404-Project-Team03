@@ -5,9 +5,9 @@ import { includeBearerTokenInterceptor, provideKeycloak, } from 'keycloak-angula
 
 
 import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { CustomAura } from './themes/custome-aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +27,12 @@ export const appConfig: ApplicationConfig = {
     }),
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: CustomAura,
+        options: {
+          prefix: 'p',
+          darkModeSelector: 'dark-mode',
+          cssLayer: false
+        }
       },
       ripple: true
     }
