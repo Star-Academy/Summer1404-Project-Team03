@@ -4,3 +4,8 @@ GET {{etl_backend_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+GET http://localhost:8080/realms/codestar/.well-known/openid-configuration
+
+
+
+
