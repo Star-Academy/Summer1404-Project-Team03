@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Toolbar} from 'primeng/toolbar';
 import {Button} from 'primeng/button';
-import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-landing',
@@ -12,4 +11,5 @@ import {NgOptimizedImage} from '@angular/common';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
 })
-export class LandingComponent {}
+export class LandingComponent {
+}
