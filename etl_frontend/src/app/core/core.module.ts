@@ -6,9 +6,7 @@ import {CommonModule} from '@angular/common';
   imports: [
     CommonModule,
   ],
-  providers: [
-    // KeycloakAuthGuard
-  ]
+  providers: []
 })
 export class CoreModule {
 }

@@ -5,96 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add role guard">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_17_2025_10_24_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_17_2025_10_24_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/.vscode/extensions.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/.vscode/launch.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/.vscode/tasks.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/angular.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/public/assets/silent-check-login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/public/landing/dataAnalist.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/public/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/auth-guard.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/configs/key-cloack.config.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/core/core.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/landing/landing.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/guard/role-guard.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/app/themes/custome-aura.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/main.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/styles.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/src/styles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/tsconfig.app.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/tsconfig.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/etl_frontend/tsconfig.spec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/.idea/etl_frontend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Summer1404-Project-Team03.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/.idea/watcherTasks.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/.vscode/extensions.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/public/landing/dataAnalist.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/public/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.config.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/app.routes.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/dashboard/dashboard.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/features/landing/landing.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/app/themes/custome-aura.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/styles.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/src/styles.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/etl_frontend/tsconfig.spec.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/configs/key-cloack.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/core/core.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/core/core.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/guard/role-guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/guard/role-guard.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,8 +105,17 @@
       <workItem from="1755456845586" duration="52000" />
       <workItem from="1755500194305" duration="147000" />
       <workItem from="1755501083862" duration="63000" />
-      <workItem from="1755501165284" duration="4025000" />
+      <workItem from="1755501165284" duration="11568000" />
     </task>
+    <task id="LOCAL-00001" summary="feat: add role guard">
+      <option name="closed" value="true" />
+      <created>1755506055288</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1755506055288</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
