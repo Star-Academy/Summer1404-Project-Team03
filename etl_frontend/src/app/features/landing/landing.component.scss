@@ -1,45 +1,57 @@
+:host {
+  block-size: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+}
+
 .header {
-  height: 10vh;
-  padding-inline: 2rem;
+  block-size: 10%;
+  padding-inline: 1.5rem;
+
+  ::ng-deep p-toolbar {
+    padding: 0 !important;
+  }
+
   &__logo {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.6rem;
+    gap: 1rem;
 
     &__icon {
-      inline-size: 7rem;
-      block-size: 5.5rem;
+      inline-size: 4.5rem;
+      block-size: 3.2rem;
     }
 
     &__text {
-      font-size: 3rem;
+      font-size: 1.5rem;
     }
   }
 }
 
 .main {
-  height: 87vh;
+  block-size: 90%;
   &__content {
     block-size: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    gap: 3.5rem;
 
     &__text {
       inline-size: 50vw;
-      font-size: 2rem;
+      font-size: 1.4rem;
       text-align: start;
-      line-height: 3.5rem;
-      word-spacing: 0.3rem;
+      line-height: 2rem;
+      word-spacing: 0.1rem;
       font-weight: 500;
-      letter-spacing: 0.12rem;
+      letter-spacing: 0.06rem;
       animation: fadeInRight 1.2s ease-out forwards;
     }
 
     &__img {
-      inline-size: 43rem;
+      inline-size: 28rem;
       animation: fadeInLeft 1.2s ease-out forwards;
     }
 
@@ -52,7 +64,7 @@
 @keyframes fadeInRight {
   from {
     opacity: 0;
-    transform: translateX(-40px);
+    transform: translateX(-2rem);
   }
   to {
     opacity: 1;
@@ -63,7 +75,7 @@
 @keyframes fadeInLeft {
   from {
     opacity: 0;
-    transform: translateX(40px);
+    transform: translateX(2rem);
   }
   to {
     opacity: 1;

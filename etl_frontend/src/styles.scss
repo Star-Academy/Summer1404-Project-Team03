@@ -1,18 +1,19 @@
 html {
-  font-size: 62.5%;
+  //font-size: 62.5%;
   overflow: hidden;
 }
 
 p-toolbar .p-toolbar {
   background-color: transparent;
-  border: none;
+  border-inline: none;
+  border-block-start: none;
 }
 
-.p-button {
-  font-size: 1.8rem !important;
-  padding: 0.75rem 1.25rem !important;
-}
-
-.p-button-icon {
-  font-size: 1.5rem !important;
-}
+//.p-button {
+//  font-size: 1.8rem !important;
+//  padding: 0.75rem 1.25rem !important;
+//}
+//
+//.p-button-icon {
+//  font-size: 1.5rem !important;
+//}
