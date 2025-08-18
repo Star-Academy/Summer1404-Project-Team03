@@ -34,22 +34,18 @@
       line-height: 3.5rem;
       word-spacing: 0.3rem;
       font-weight: 500;
+      letter-spacing: 0.12rem;
+      animation: fadeInRight 1.2s ease-out forwards;
     }
 
     &__img {
       inline-size: 43rem;
+      animation: fadeInLeft 1.2s ease-out forwards;
     }
-  }
-}
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    &__btn {
+      animation: fadeInUp 1.5s ease-out forwards;
+    }
   }
 }
 
@@ -73,16 +69,4 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.main__content__text {
-  animation: fadeInRight 1.2s ease-out forwards;
-}
-
-.main__content__img {
-  animation: fadeInLeft 1.2s ease-out forwards;
-}
-
-.main__content__btn {
-  animation: fadeInUp 1.5s ease-out forwards;
 }

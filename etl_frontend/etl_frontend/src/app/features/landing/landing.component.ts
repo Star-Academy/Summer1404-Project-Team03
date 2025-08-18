@@ -8,7 +8,6 @@ import {NgOptimizedImage} from '@angular/common';
   imports: [
     Toolbar,
     Button,
-    NgOptimizedImage
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss'
