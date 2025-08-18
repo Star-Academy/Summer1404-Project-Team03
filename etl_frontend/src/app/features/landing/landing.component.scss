@@ -1,16 +1,14 @@
 :host {
   block-size: 100vh;
-
   display: flex;
   flex-direction: column;
-
 }
 
 .header {
   block-size: 10%;
   padding-inline: 1.5rem;
 
-  ::ng-deep p-toolbar {
+  ::ng-deep .p-toolbar {
     padding: 0 !important;
   }
 
@@ -33,6 +31,7 @@
 
 .main {
   block-size: 90%;
+  padding-inline: 2rem;
   &__content {
     block-size: 100%;
     display: flex;
@@ -57,6 +56,91 @@
 
     &__btn {
       animation: fadeInUp 1.5s ease-out forwards;
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .main__content {
+    gap: 1.5rem;
+
+    &__text {
+      inline-size: 60vw;
+      font-size: 1.2rem;
+      line-height: 1.8rem;
+    }
+
+    &__img {
+      inline-size: 22rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    block-size: auto;
+
+    &__logo {
+      &__icon {
+        inline-size: 3.5rem;
+        block-size: 2.5rem;
+      }
+      &__text {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .main__content {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+
+    &__text {
+      inline-size: 90%;
+      font-size: 1.1rem;
+      line-height: 1.6rem;
+    }
+
+    &__img {
+      inline-size: 18rem;
+    }
+
+    &__btn {
+      width: 100%;
+      max-width: 18rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .header__logo {
+    gap: 0.5rem;
+
+    &__icon {
+      inline-size: 2.5rem;
+      block-size: 1.8rem;
+    }
+    &__text {
+      font-size: 1rem;
+    }
+  }
+
+  .main__content {
+    gap: 1rem;
+
+    &__text {
+      font-size: 1rem;
+      line-height: 1.4rem;
+    }
+
+    &__img {
+      inline-size: 14rem;
+    }
+
+    &__btn {
+      font-size: 0.9rem;
+      padding: 0.5rem 1rem;
     }
   }
 }
