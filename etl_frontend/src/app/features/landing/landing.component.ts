@@ -1,7 +1,6 @@
-import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {Component} from '@angular/core';
 import {Toolbar} from 'primeng/toolbar';
 import {Button} from 'primeng/button';
-import {LottiePlayer} from "@lottiefiles/lottie-player";
 
 @Component({
   selector: 'app-landing',
