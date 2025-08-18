@@ -1,10 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using etl_backend.Configuration;
 using etl_backend.Extensions;
 using etl_backend.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -60,8 +64,24 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
 
     });
+    
 builder.Services.AddSingleton<IAuthorizationService, AuthorizationService>();
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    var roleSettings = builder.Configuration
+        .GetSection("Authorization:Roles")
+        .Get<RoleSettings>();
+
+    options.AddPolicy("RequireDataAdmin",
+        p => p.RequireRole(roleSettings!.DataAdmin));
+
+    options.AddPolicy("RequireSysAdmin",
+        p => p.RequireRole(roleSettings!.SysAdmin));
+
+    options.AddPolicy("RequireAnalyst",
+        p => p.RequireRole(roleSettings!.Analyst));
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenWithAuth(builder.Configuration);

@@ -6,23 +6,23 @@ namespace etl_backend.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[Authorize]
-public class TempCheckClamesController : ControllerBase
+public class TempCheckClaimsController : ControllerBase
 {
     // GET
     private readonly IAuthorizationService _authService;
 
-    public TempCheckClamesController(IAuthorizationService authService)
+    public TempCheckClaimsController(IAuthorizationService authService)
     {
         _authService = authService;
     }
 
     [HttpGet("admin-data")]
     
+    [Authorize(Policy = "RequireDataAdmin")]
     public IActionResult GetAdminData()
     {
-        if (!_authService.HasRole(User, "data_admin"))
-            return Forbid();
+        // if (!_authService.HasRole(User, "data_admin"))
+        //     return Forbid();
         //
         // return Ok("This is admin-only data.");
         var claims = User.Claims.Select(c => new { c.Type, c.Value });

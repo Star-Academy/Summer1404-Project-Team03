@@ -3,8 +3,8 @@
 services:
   webapi:
     build:
-      context: .
-      dockerfile: ./etl_backend/Dockerfile
+      context: ../../
+      dockerfile: ./etl_backend/Docker/Dockerfile
     container_name: aspnet_webapi
     ports:
       - "5000:5000"   # HTTP
@@ -26,7 +26,7 @@ services:
     environment:
       - POSTGRES_USER=myuser
       - POSTGRES_PASSWORD=mypassword
-      - POSTGRES_DB=mydatabase
+      - POSTGRES_DB=myappdb
     ports:
       - "5432:5432"
     volumes:
