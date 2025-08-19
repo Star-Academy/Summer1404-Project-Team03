@@ -29,6 +29,7 @@ export class SignInDirective {
     this.AuthService.getSignInUrl().subscribe({
       next: (res: { redirectUrl: string }) => {
         this.isLoading.set(false);
+        console.log(res)
         window.location.href = res.redirectUrl;
       },
       error: () => {
