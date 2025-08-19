@@ -11,7 +11,8 @@ import { CoreModule } from './core/core.module';
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(CoreModule),
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideAnimationsAsync(),
+    provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
@@ -25,5 +26,7 @@ export const appConfig: ApplicationConfig = {
       },
       ripple: true,
     }),
+    provideStore(),
+    provideHttpClient(  )
   ],
 };
