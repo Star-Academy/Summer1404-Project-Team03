@@ -6,8 +6,8 @@ import { Avatar } from 'primeng/avatar';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 import { dashboardRoutes } from './dashboard.module.routing';
-
-
+import {HeaderComponent} from "../../shared/components/header/header.component";
+import {ProfilePopoverComponent} from './components/profile-popover/profile-popover.component';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -16,7 +16,9 @@ import { dashboardRoutes } from './dashboard.module.routing';
     Button,
     Toolbar,
     Avatar,
-    RouterModule.forChild(dashboardRoutes)
+    RouterModule.forChild(dashboardRoutes),
+    HeaderComponent,
+    ProfilePopoverComponent
   ],
 })
 export class DashboardModule { }
