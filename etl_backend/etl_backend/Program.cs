@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using etl_backend.Authentication;
 using etl_backend.Configuration;
 using etl_backend.Extensions;
 using etl_backend.Services;
@@ -38,58 +39,8 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.RequireHttpsMetadata = false;
+builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
-        // 👇 This points to your Keycloak realm, it includes the JWKS endpoint
-        options.Authority = $"{builder.Configuration["Keycloak:ServerUrl"]}/realms/{builder.Configuration["Keycloak:Realm"]}";
-
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidateLifetime = true,
-            ValidateIssuerSigningKey = true,
-
-            // 👇 match your client id in Keycloak
-            ValidAudience = builder.Configuration["Keycloak:Audience"],
-            ValidIssuer = $"{builder.Configuration["Keycloak:ServerUrl"]}/realms/{builder.Configuration["Keycloak:Realm"]}"
-        };
-
-        options.Events = new JwtBearerEvents
-        {
-            OnMessageReceived = ctx =>
-            {
-                // Read token from cookie
-                if (ctx.Request.Cookies.ContainsKey("access_token"))
-                {
-                    ctx.Token = ctx.Request.Cookies["access_token"];
-                }
-                return Task.CompletedTask;
-            },
-            OnTokenValidated =  ctx =>
-            {
-                Console.WriteLine(ctx.SecurityToken);
-                var identity = ctx.Principal!.Identity as ClaimsIdentity;
-                
-                var realmAccessClaim = ctx.Principal.FindFirst("realm_access");
-                if (realmAccessClaim != null)
-                {
-                    var realmAccess = JObject.Parse(realmAccessClaim.Value);
-                    var roles = realmAccess["roles"]?.ToObject<List<string>>() ?? new();
-                
-                    foreach (var role in roles)
-                    {
-                        // Map to ASP.NET Core roles
-                        identity!.AddClaim(new Claim(ClaimTypes.Role, role));
-                    }
-                }
-                return Task.CompletedTask;
-            }
-        };
-    });
 builder.Services.AddAuthorization(options =>
 {
     var roleSettings = builder.Configuration
