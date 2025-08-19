@@ -1,0 +1,10 @@
+.popover {
+  &__username {
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+}
