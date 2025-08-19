@@ -2,12 +2,8 @@ html {
   overflow: hidden;
 }
 
-.p-toolbar {
-  color: var(--p-primary-contrast-color) !important;
-}
-
 p-toolbar .p-toolbar {
-  background-color: transparent;
+  //background-color: transparent;
   border-inline: none;
   border-block-start: none;
 }

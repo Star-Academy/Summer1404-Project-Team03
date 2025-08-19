@@ -6,12 +6,6 @@
 }
 
 .header {
-  block-size: 10%;
-
-  ::ng-deep .p-toolbar {
-    padding: 0 !important;
-  }
-
   &__logo {
     display: flex;
     justify-content: center;
