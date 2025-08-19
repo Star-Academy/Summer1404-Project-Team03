@@ -3,6 +3,8 @@ using etl_backend.Configuration;
 using etl_backend.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 
 namespace etl_backend.Controllers;
 
@@ -23,26 +25,26 @@ public class AuthController : ControllerBase
     public IActionResult Login([FromBody] LoginRequestBodyDto request)
     {
         var url =
-            $"{_options.Host}/realms/{_options.Realm}/protocol/openid-connect/auth" +
+            $"{_options.ServerUrl}/realms/{_options.Realm}/protocol/openid-connect/auth" +
             $"?client_id={Uri.EscapeDataString(_options.ClientId)}" +
-            $"&redirect_uri={Uri.EscapeDataString(request.RedirectUri)}" +
+            $"&redirect_uri={Uri.EscapeDataString(request.RedirectUrl)}" +
             $"&response_type=code" +
             $"&scope=openid";
 
-        return Ok(new { message = url });
+        return Ok(new { redirectUrl = url });
     }
     
     [HttpPost("token")]
     public async Task<IActionResult> SetToken([FromBody] SetTokenRequestDto request)
     {
-        var tokenEndpoint = $"{_options.Host}/realms/{_options.Realm}/protocol/openid-connect/token";
+        var tokenEndpoint = $"{_options.ServerUrl}/realms/{_options.Realm}/protocol/openid-connect/token";
 
         var formData = new Dictionary<string, string>
         {
             ["grant_type"] = "authorization_code",
             ["client_id"] = _options.ClientId,
             ["code"] = request.Code,
-            ["redirect_uri"] = request.RedirectUri
+            ["redirect_uri"] = request.RedirectUrl
         };
 
         // if confidential client:
@@ -76,5 +78,15 @@ public class AuthController : ControllerBase
         });
 
         return Ok(new { message = "Tokens set successfully" });
+    }
+    
+    [HttpGet("me")]
+    [Authorize(Policy = "RequireAnalyst")]
+    public IActionResult GetUserInfo()
+    {
+        var claims = User.Claims
+            .Select(c => new { c.Type, c.Value })
+            .ToList();
+        return Ok(claims);
     }
 }
