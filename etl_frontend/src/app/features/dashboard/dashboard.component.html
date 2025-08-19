@@ -1,1 +1,19 @@
-<p>dashboard works!</p>
+<header class="header">
+  <p-toolbar class="header__toolbar">
+    <ng-template #start>
+      <div class="header__toolbar__start">
+        <img src="/assets/logo.svg" alt="logo image">
+        <p-button label="Files" text plain />
+        <p-button label="Edit" text plain />
+        <p-button label="View" text plain />
+      </div>
+    </ng-template>
+
+    <ng-template #end>
+      <div class="header__toolbar__end" routerLink="">
+        <h4>Amirmohammad Barari</h4>
+        <p-avatar shape="circle" icon="pi pi-user" />
+      </div>
+    </ng-template>
+  </p-toolbar>
+</header>

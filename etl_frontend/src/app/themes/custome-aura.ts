@@ -79,14 +79,14 @@ export const CustomAura = definePreset(Aura, {
             dark: {
                 primary: {
                     color: '{cyan.400}',
-                    contrastColor: '{cyan.950}',
+                    contrastColor: '#ffffff',
                     hoverColor: '{cyan.300}',
                     activeColor: '{cyan.200}'
                 },
                 highlight: {
                     background: '{cyan.400}',
                     focusBackground: '{cyan.300}',
-                    color: '{cyan.950}',
+                    color: '#ffffff',
                     focusColor: '{cyan.950}'
                 },
                 surface: {

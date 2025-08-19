@@ -1,8 +1,11 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
+import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
+
 import { CustomAura } from './themes/custome-aura';
+
 import { CoreModule } from './core/core.module';
 
 export const appConfig: ApplicationConfig = {
@@ -10,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(CoreModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: CustomAura,
