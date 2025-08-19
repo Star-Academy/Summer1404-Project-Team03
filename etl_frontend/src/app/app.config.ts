@@ -4,6 +4,7 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { CustomAura } from './themes/custome-aura';
 import { CoreModule } from './core/core.module';
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,15 +12,16 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     providePrimeNG({
-      theme: {
-        preset: CustomAura,
-        options: {
-          prefix: 'p',
-          // darkModeSelector: 'dark-mode',
-          cssLayer: false,
+        theme: {
+            preset: CustomAura,
+            options: {
+                prefix: 'p',
+                // darkModeSelector: 'dark-mode',
+                cssLayer: false,
+            },
         },
-      },
-      ripple: true,
+        ripple: true,
     }),
-  ],
+    provideStore()
+],
 };
