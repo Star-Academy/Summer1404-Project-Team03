@@ -18,6 +18,22 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
+builder.Services.AddHttpClient();
+builder.Services.Configure<KeycloakOptions>(
+    builder.Configuration.GetSection("Keycloak"));
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
@@ -97,19 +113,17 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+app.UseHttpsRedirection();
+app.UseCors("AllowAll");
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
 app.MapGet("users/me", (ClaimsPrincipal claimsPrincipal) =>
 {
     return claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value);
 }).RequireAuthorization();
 
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseHttpsRedirection();
-app.MapControllers();
-
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

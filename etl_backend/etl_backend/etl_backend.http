@@ -25,7 +25,7 @@ grant_type=urn:ietf:params:oauth:grant-type:uma-ticket
 
 ### 
 GET {{kc_host}}/realms/codestar/protocol/openid-connect/auth
-    ?client_id=my_app
+    ?client_id=my_backend_app
     &redirect_uri=http://localhost:3000/callback
     &response_type=code
     &scope=openid
@@ -40,11 +40,18 @@ GET {{kc_host}}/realms/codestar/protocol/openid-connect/auth
 #code=865d8923-1379-45c0-a43b-21abe529a7f5.ff75d58d-c65f-4b1b-9efc-c11cc72c7d0a.26bf7264-926a-48b0-bc0e-1b1ca7dec78c
 
 
+#http://localhost:3000/callback?
+#session_state=a4cf181b-9199-47b1-9f00-ed9d2b2dbba0
+#&iss=http%3A%2F%2Flocalhost%3A8080%2Frealms%2Fcodestar
+#&code=3c4b7885-9e14-4561-b433-95eb79bdca8d.a4cf181b-9199-47b1-9f00-ed9d2b2dbba0.bf36c668-d2c8-4f69-899d-34a960d0f8e4
+
 ###
 POST {{kc_host}}/realms/{{realm}}/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=urn:ietf:params:oauth:grant-type:uma-ticket
-client_id=my_app
-code=865d8923-1379-45c0-a43b-21abe529a7f5.ff75d58d-c65f-4b1b-9efc-c11cc72c7d0a.26bf7264-926a-48b0-bc0e-1b1ca7dec78c
-redirect_uri=http://localhost:3000/callback/
+{
+  "grant_type": "authorization_code",
+  "client_id":"my_backend_app",
+  "code":"33dcdf6a-5192-4725-911c-7b850e11a077.a4cf181b-9199-47b1-9f00-ed9d2b2dbba0.bf36c668-d2c8-4f69-899d-34a960d0f8e4",
+  "redirect_uri":"http://localhost:3000/callback/"
+}
