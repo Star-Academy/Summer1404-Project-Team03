@@ -1,12 +1,12 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {Toolbar} from 'primeng/toolbar';
 import {Button} from 'primeng/button';
+import {HeaderComponent} from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-landing',
   imports: [
-    Toolbar,
     Button,
+    HeaderComponent,
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',

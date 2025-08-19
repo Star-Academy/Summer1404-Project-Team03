@@ -1,0 +1,25 @@
+
+.header {
+  block-size: 10vh;
+  padding-inline: 1.5rem;
+
+  ::ng-deep .p-toolbar {
+    padding: 0 !important;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    &__icon {
+      inline-size: 4.5rem;
+      block-size: 3.2rem;
+    }
+
+    &__text {
+      font-size: 1.5rem;
+    }
+  }
+}
