@@ -13,12 +13,13 @@
     gap: 1rem;
 
     &__icon {
-      inline-size: 4.5rem;
-      block-size: 3.2rem;
+      inline-size: 4rem;
+      block-size: 2.5rem;
     }
 
     &__text {
       font-size: 1.5rem;
+      font-weight: 800;
     }
   }
 }
