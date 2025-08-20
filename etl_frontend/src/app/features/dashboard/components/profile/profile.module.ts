@@ -5,6 +5,7 @@ import { profileRoutes } from './profile.module.routing';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { ProfileComponent } from './profile.component';
 import { ButtonModule } from 'primeng/button';
+import { TabsModule } from "primeng/tabs"
 
 
 
@@ -14,7 +15,8 @@ import { ButtonModule } from 'primeng/button';
     CommonModule,
     HeaderComponent,
     RouterModule.forChild(profileRoutes),
-    ButtonModule
+    ButtonModule,
+    TabsModule
   ]
 })
 export class ProfileModule { }

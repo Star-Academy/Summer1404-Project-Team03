@@ -19,7 +19,6 @@ import {ProfilePopoverComponent} from './components/profile-popover/profile-popo
     RouterModule.forChild(dashboardRoutes),
     HeaderComponent,
     ProfilePopoverComponent,
-    RouterModule
   ],
 })
 export class DashboardModule { }

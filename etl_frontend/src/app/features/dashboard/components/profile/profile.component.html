@@ -1,8 +1,20 @@
 <app-header>
-    <div center>
+  <div start>
+<p-tabs styleClass="custom-header-tabs" value="0">
+      <p-tablist>
+        <p-tab value="0">Your Profile</p-tab>
+        <p-tab value="1">Manage User</p-tab>
+      </p-tablist>
+    </p-tabs>
+  </div>
 
-    </div>
-    <div>
-        <p-button label="Signout" rounded text></p-button>
-    </div>
+  <div end>
+    <p-button
+      icon="pi pi-sign-out"
+      label="Signout"
+      rounded
+      text
+      appSignOut
+    ></p-button>
+  </div>
 </app-header>
