@@ -22,7 +22,7 @@ export const appConfig: ApplicationConfig = {
         preset: CustomAura,
         options: {
           prefix: 'p',
-          darkModeSelector: 'dark-mode',
+          // darkModeSelector: 'dark-mode',
           cssLayer: false,
         },
       },

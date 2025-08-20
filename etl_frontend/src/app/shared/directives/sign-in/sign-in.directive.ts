@@ -1,4 +1,4 @@
-import { Directive, effect, Host, HostListener, signal } from '@angular/core';
+import {ChangeDetectorRef, Directive, effect, Host, HostListener, signal } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
@@ -14,10 +14,12 @@ export class SignInDirective {
   constructor(
     @Host() private readonly hostButton: Button,
     private readonly authService: AuthService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly cdr: ChangeDetectorRef
   ) {
     effect(() => {
       this.hostButton.loading = this.isLoading();
+      this.cdr.detectChanges();
     });
   }
 
