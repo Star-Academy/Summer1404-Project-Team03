@@ -1,8 +1,10 @@
 ﻿using System.Text.Json;
 using etl_backend.Configuration;
 using etl_backend.DTO;
+using etl_backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 
 namespace etl_backend.Controllers;
@@ -14,7 +16,7 @@ public class AuthController : ControllerBase
     private readonly KeycloakOptions _options;
     private readonly HttpClient _httpClient;
 
-    public AuthController(IOptions<KeycloakOptions> options, IHttpClientFactory httpClientFactory)
+    public AuthController(IOptions<KeycloakOptions> options,  IHttpClientFactory httpClientFactory)
     {
         _options = options.Value;
         _httpClient = httpClientFactory.CreateClient();
@@ -32,7 +34,7 @@ public class AuthController : ControllerBase
 
         return Ok(new { redirectUrl = url });
     }
-
+    
     [HttpPost("token")]
     public async Task<IActionResult> SetToken([FromBody] SetTokenRequestDto request)
     {
@@ -45,8 +47,9 @@ public class AuthController : ControllerBase
             ["code"] = request.Code,
             ["redirect_uri"] = request.RedirectUrl
         };
-        
-        
+
+        // if confidential client:
+        // formData["client_secret"] = _options.ClientSecret;
 
         var response = await _httpClient.PostAsync(tokenEndpoint, new FormUrlEncodedContent(formData));
         var content = await response.Content.ReadAsStringAsync();
@@ -60,58 +63,21 @@ public class AuthController : ControllerBase
 
         var accessToken = json.GetProperty("access_token").GetString();
         var refreshToken = json.GetProperty("refresh_token").GetString();
-        int accessExpiresIn = json.TryGetProperty("expires_in", out var expEl) ? expEl.GetInt32() : 3600;
-        int refreshExpiresIn = json.TryGetProperty("refresh_expires_in", out var rExpEl) ? rExpEl.GetInt32() : 3600;
 
-        SetTokenCookies(accessToken!, refreshToken!, accessExpiresIn, refreshExpiresIn);
+        Response.Cookies.Append("access_token", accessToken!, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict
+        });
+
+        Response.Cookies.Append("refresh_token", refreshToken!, new CookieOptions
+        {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict
+        });
 
         return Ok(new { message = "Tokens set successfully" });
-    }
-
-    [HttpPost("logout")]
-    public IActionResult Logout()
-    {
-        RemoveTokenCookies();
-        return Ok(new { message = "Logged out successfully" });
-    }
-
-    [HttpGet("me")]
-    [Authorize(Policy = "RequireAnalyst")]
-    public IActionResult GetUserInfo()
-    {
-        var claims = User.Claims
-            .Select(c => new { c.Type, c.Value })
-            .ToList();
-        return Ok(claims);
-    }
-
-    // -----------------------
-    // Helpers
-    // -----------------------
-
-    private void SetTokenCookies(string accessToken, string refreshToken, int accessExpiresIn, int refreshExpiresIn)
-    {
-        Response.Cookies.Append("access_token", accessToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTimeOffset.UtcNow.AddSeconds(accessExpiresIn)
-        });
-
-        Response.Cookies.Append("refresh_token", refreshToken, new CookieOptions
-        {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = DateTimeOffset.UtcNow.AddSeconds(refreshExpiresIn)
-        });
-    }
-
-    private void RemoveTokenCookies()
-    {
-        
-        Response.Cookies.Delete("access_token");
-        Response.Cookies.Delete("refresh_token");
     }
 }

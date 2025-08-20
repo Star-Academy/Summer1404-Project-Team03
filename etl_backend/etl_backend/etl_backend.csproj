@@ -28,4 +28,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Services\Dtos\UserProfileDto.cs" />
+      <Compile Remove="Services\Dtos\UserWithRoles.cs" />
+    </ItemGroup>
+
 </Project>
