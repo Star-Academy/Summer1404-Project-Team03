@@ -9,8 +9,10 @@ namespace etl_backend.Authentication
     {
         public static IServiceCollection AddKeycloakAuthentication(this IServiceCollection services, IConfiguration config)
         {
-            var serverUrl = config["Keycloak:ServerUrl"];
-            serverUrl = "http://localhost:8080";
+            var authServerUrl = config["Keycloak:AuthServerUrl"] 
+                                 ?? "http://localhost:8080"; // dev default
+
+            
             var realm = config["Keycloak:Realm"];
             var audience = config["Keycloak:Audience"];
 
@@ -19,7 +21,7 @@ namespace etl_backend.Authentication
                 {
                     options.RequireHttpsMetadata = false;
 
-                    options.Authority = $"{serverUrl}/realms/{realm}";
+                    options.Authority = $"{authServerUrl}/realms/{realm}";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
@@ -28,7 +30,7 @@ namespace etl_backend.Authentication
                         ValidateIssuerSigningKey = true,
 
                         ValidAudience = audience,
-                        ValidIssuer = $"{serverUrl}/realms/{realm}"
+                        ValidIssuer = $"{authServerUrl}/realms/{realm}"
                     };
 
                     options.Events = new JwtBearerEvents

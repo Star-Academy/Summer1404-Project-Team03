@@ -55,3 +55,11 @@ Content-Type: application/x-www-form-urlencoded
   "code":"33dcdf6a-5192-4725-911c-7b850e11a077.a4cf181b-9199-47b1-9f00-ed9d2b2dbba0.bf36c668-d2c8-4f69-899d-34a960d0f8e4",
   "redirect_uri":"http://localhost:3000/callback/"
 }
+
+
+### lgoout
+POST {{kc_host}}//realms/{{realm}}/protocol/openid-connect/logout
+Content-Type: application/x-www-form-urlencoded
+
+client_id=my-client
+refresh_token=
