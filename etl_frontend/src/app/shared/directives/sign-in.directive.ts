@@ -50,8 +50,8 @@ export class SignInDirective {
   private showError(): void {
     this.messageService.add({
       severity: 'error',
-      summary: 'Login Failed',
-      detail: 'An error occurred during sign-in. Please try again later.',
+      summary: 'Signin Failed',
+      detail: 'An error occurred during Singin. Please try again later.',
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-send-token-code',
@@ -13,6 +14,7 @@ export class SendTokenCodeComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly authService: AuthService,
     private readonly router: Router,
+    private readonly messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -30,8 +32,30 @@ export class SendTokenCodeComponent implements OnInit {
 
   sendToken(tokenCode: string): void {
     this.authService.exchangeToken(tokenCode).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
-      error: () => this.router.navigate(['/landing'])
+      next: () => {
+        this.showSigninSuccess();
+        this.router.navigate(['/dashboard'])
+      },
+      error: () => {
+        this.router.navigate(['/landing'])
+        this.showSigninFail();
+      }
+    });
+  }
+
+  showSigninSuccess(): void {
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Signin Successfully',
+      detail: 'Welcome to the Data Wave',
+    });
+  }
+
+  showSigninFail(): void {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Signin Failed',
+      detail: 'An error occurred during Singin',
     });
   }
 }
