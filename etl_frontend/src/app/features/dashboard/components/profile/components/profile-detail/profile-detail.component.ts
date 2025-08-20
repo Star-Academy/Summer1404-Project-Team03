@@ -7,6 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { Image } from 'primeng/image';
 import { DatePipe } from '@angular/common';
+import { RouterLink, RouterModule } from "../../../../../../../../node_modules/@angular/router";
 
 interface User {
   name: string;
@@ -19,13 +20,14 @@ interface User {
 
 @Component({
   selector: 'app-profile-detail',
-  imports: [CardModule,
+  imports: [
+    CardModule,
     AvatarModule,
     TagModule,
     ButtonModule,
     Image,
     DividerModule,
-    DatePipe],
+    DatePipe, RouterModule, RouterLink ],
   templateUrl: './profile-detail.component.html',
   styleUrl: './profile-detail.component.scss'
 })

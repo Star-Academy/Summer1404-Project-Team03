@@ -15,8 +15,20 @@ export const profileRoutes: Routes = [
             },
             {
                 path: 'detail',
-                component: ProfileDetailComponent
-            }
+                loadComponent: () => import('./components/profile-detail/profile-detail.component').then(c => c.ProfileDetailComponent)
+            },
+            {
+                path: 'edit',
+                loadComponent: () => import('./components/edit-profile/edit-profile.component').then(c => c.EditProfileComponent)
+            },
+            {
+                path: 'change-password',
+                loadComponent: () => import('./components/change-password/change-password.component').then(c => c.ChangePasswordComponent)
+            },
+            // {
+            //     path: 'admin-panel',
+
+            // }
         ]
-    }
+    },
 ]
