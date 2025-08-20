@@ -21,7 +21,7 @@ export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
   getSignInUrl(): Observable<SignInResponse> {
-    return this.http.post<SignInResponse>(this.authApi.login, {
+    return this.http.post<SignInResponse>(this.authApi.signIn, {
       redirectUrl: this.redirectUrl
     });
   }
@@ -31,5 +31,9 @@ export class AuthService {
       code,
       redirectUrl: this.redirectUrl
     });
+  }
+
+  signOut() {
+    return this.http.post(this.authApi.singOut, {});
   }
 }

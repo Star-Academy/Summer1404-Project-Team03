@@ -1,5 +1,5 @@
 import { Directive, effect, Host, HostListener, signal } from '@angular/core';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../../services/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { take } from 'rxjs/operators';
@@ -25,22 +25,18 @@ export class SignInDirective {
   handleClick(): void {
     if (this.isLoading()) return;
 
-    this.setLoading(true);
+    this.isLoading.set(true);
 
     this.authService.getSignInUrl().pipe(take(1)).subscribe({
       next: ({ redirectUrl }) => {
-        this.setLoading(false);
+        this.isLoading.set(false);
         this.redirect(redirectUrl);
       },
       error: () => {
-        this.setLoading(false);
+        this.isLoading.set(false);
         this.showError();
       },
     });
-  }
-
-  private setLoading(state: boolean): void {
-    this.isLoading.set(state);
   }
 
   private redirect(url: string): void {

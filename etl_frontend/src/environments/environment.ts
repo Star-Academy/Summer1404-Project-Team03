@@ -5,8 +5,9 @@ export const environment = {
   redirectUrl: 'http://localhost:4200/send-token-code',
   api: {
     auth: {
-      login: `${baseUrl}/Auth/login`,
+      signIn: `${baseUrl}/Auth/login`,
       token: `${baseUrl}/Auth/token`,
+      singOut: `${baseUrl}/Auth/logout`,
       //   register: `${baseUrl}/Auth/register`,
     },
     users: {

@@ -1,12 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
 import {Button} from "primeng/button";
 import {Popover} from 'primeng/popover';
+import { SignOutDirective } from '../../../../shared/directives/sign-out/sign-out.directive';
 
 @Component({
   selector: 'app-profile-popover',
   imports: [
     Button,
-    Popover
+    Popover,
+    SignOutDirective
   ],
   templateUrl: './profile-popover.component.html',
   styleUrl: './profile-popover.component.scss'
