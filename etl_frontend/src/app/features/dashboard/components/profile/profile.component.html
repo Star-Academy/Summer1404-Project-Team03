@@ -6,17 +6,16 @@
         text
         label="Your Profile"
         class="tab"
-        severity="secondary"
         [routerLink]="'/dashboard/profile/detail'"
         [routerLinkActive]="'active-tab'"
       ></p-button>
+
       <p-button
         rounded
         text
-        severity="secondary"
         label="Mangae Users"
         class="tab"
-        [routerLink]="'/dashboard/profile/detail'"
+        [routerLink]="'/dashboard/profile/manage-user'"
         [routerLinkActive]="'active-tab'"
       ></p-button>
     </div>
@@ -32,3 +31,4 @@
     ></p-button>
   </div>
 </app-header>
+<router-outlet></router-outlet>
