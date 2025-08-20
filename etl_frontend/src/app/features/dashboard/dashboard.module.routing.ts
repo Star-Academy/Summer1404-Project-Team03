@@ -6,5 +6,9 @@ export const dashboardRoutes: Routes = [
     {
         path: '',
         component: DashboardComponent
+    },
+    {
+        path: 'profile',
+        loadChildren: ()=> import('./components/profile/profile.module').then(m => m.ProfileModule)
     }
 ]
