@@ -1,22 +1,35 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs';
+
+export interface SignInResponse {
+  redirectUrl: string;
+}
+
+export interface TokenResponse {
+  redirectUrl: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly authApi = environment.api.auth;
-  private readonly redirectUrl = "http://localhost:4200/send-token-code";
+  private readonly redirectUrl = environment.redirectUrl;
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient) {}
+
+  getSignInUrl(): Observable<SignInResponse> {
+    return this.http.post<SignInResponse>(this.authApi.login, {
+      redirectUrl: this.redirectUrl
+    });
   }
 
-  public getSignInUrl() {
-    return this.http.post<{ redirectUrl: string }>(this.authApi.login, {redirectUrl: this.redirectUrl})
-  }
-
-  public sendToken(code: string) {
-    return this.http.post<{ redirectUrl: string }>(this.authApi.token, {code, redirectUrl: this.redirectUrl})
+  exchangeToken(code: string): Observable<TokenResponse> {
+    return this.http.post<TokenResponse>(this.authApi.token, {
+      code,
+      redirectUrl: this.redirectUrl
+    });
   }
 }
