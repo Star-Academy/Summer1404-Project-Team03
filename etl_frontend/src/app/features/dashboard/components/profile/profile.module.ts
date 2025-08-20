@@ -5,18 +5,16 @@ import { profileRoutes } from './profile.module.routing';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { ProfileComponent } from './profile.component';
 import { ButtonModule } from 'primeng/button';
-import { TabsModule } from "primeng/tabs"
-
-
 
 @NgModule({
-  declarations: [ProfileComponent],
+  declarations: [
+    ProfileComponent
+  ],
   imports: [
     CommonModule,
     HeaderComponent,
     RouterModule.forChild(profileRoutes),
     ButtonModule,
-    TabsModule
   ]
 })
 export class ProfileModule { }
