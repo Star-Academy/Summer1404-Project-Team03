@@ -1,11 +1,25 @@
 <app-header>
   <div start>
-<p-tabs styleClass="custom-header-tabs" value="0">
-      <p-tablist>
-        <p-tab value="0">Your Profile</p-tab>
-        <p-tab value="1">Manage User</p-tab>
-      </p-tablist>
-    </p-tabs>
+    <div class="tabs">
+      <p-button
+        rounded
+        text
+        label="Your Profile"
+        class="tab"
+        severity="secondary"
+        [routerLink]="'/dashboard/profile/detail'"
+        [routerLinkActive]="'active-tab'"
+      ></p-button>
+      <p-button
+        rounded
+        text
+        severity="secondary"
+        label="Mangae Users"
+        class="tab"
+        [routerLink]="'/dashboard/profile/detail'"
+        [routerLinkActive]="'active-tab'"
+      ></p-button>
+    </div>
   </div>
 
   <div end>
