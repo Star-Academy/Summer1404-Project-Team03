@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {AuthService} from '../../shared/services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-send-token-code',
@@ -9,23 +9,29 @@ import {AuthService} from '../../shared/services/auth/auth.service';
   styleUrl: './send-token-code.component.scss'
 })
 export class SendTokenCodeComponent implements OnInit {
-  constructor(private readonly route: ActivatedRoute,
-              private readonly authService: AuthService,
-              private readonly router: Router,
-  ) {}
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) { }
 
   ngOnInit() {
-    const tokenCode = this.route.snapshot.queryParams['code'];
-  setTimeout(()=> {
-    console.log(tokenCode);
+    const tokenCode = this.getTokenCode();
     if (tokenCode) {
-      this.authService.sendToken(tokenCode).subscribe({
-        next: () => this.router.navigate(['/dashboard']),
-        error: () => this.router.navigate(['/landing'])
-      });
+      this.sendToken(tokenCode);
     } else {
       this.router.navigate(['/landing']);
     }
-  }, 5000)
+  }
+
+  getTokenCode(): string | undefined {
+    return this.route.snapshot.queryParams['code'];
+  }
+
+  sendToken(tokenCode: string): void {
+    this.authService.exchangeToken(tokenCode).subscribe({
+      next: () => this.router.navigate(['/dashboard']),
+      error: () => this.router.navigate(['/landing'])
+    });
   }
 }
