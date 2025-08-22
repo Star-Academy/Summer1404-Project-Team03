@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using etl_backend.Services.Auth.keycloakAuthService.Abstraction;
 using etl_backend.Services.Auth.keycloakAuthService.Dtos;
+using etl_backend.Services.Auth.keycloakService.Abstraction;
 
-namespace etl_backend.Services.Auth.keycloakAuthService;
+namespace etl_backend.Services.Auth.keycloakService;
 
 public class KeycloakTokenResponseParser: IParseTokenResponse
 {

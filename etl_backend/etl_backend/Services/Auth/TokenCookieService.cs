@@ -17,7 +17,8 @@ public class TokenCookieService : ITokenCookieService
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.Strict,
-            Expires = now.AddSeconds(tokenResponse.ExpiresIn)
+            Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn) 
+            // access token should be in cookies as long as refresh
         };
 
         var refreshOptions = new CookieOptions
@@ -32,7 +33,7 @@ public class TokenCookieService : ITokenCookieService
         response.Cookies.Append(RefreshCookieName, tokenResponse.RefreshToken, refreshOptions);
     }
 
-    public void DeleteTokens(HttpResponse response)
+    public void RemoveTokens(HttpResponse response)
     {
         response.Cookies.Delete(AccessCookieName);
         response.Cookies.Delete(RefreshCookieName);

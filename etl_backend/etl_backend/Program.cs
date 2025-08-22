@@ -1,15 +1,11 @@
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using etl_backend.Authentication;
 using etl_backend.Authentication;
 using etl_backend.Configuration;
 using etl_backend.Extensions;
-using etl_backend.Services;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using etl_backend.Services.Auth;
+using etl_backend.Services.Auth.Abstraction;
+using etl_backend.Services.Auth.keycloakService;
+using etl_backend.Services.Auth.keycloakService.Abstraction;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,15 +13,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
-
-
 builder.Services.AddHttpClient();
 builder.Services.Configure<KeycloakOptions>(
     builder.Configuration.GetSection("Keycloak"));
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", policy =>
+    options.AddPolicy("AllowDev", policy =>
     {
         policy
             .WithOrigins(
@@ -38,6 +32,15 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSingleton<ITokenExtractor, TokenCookieExtractor>();
+builder.Services.AddSingleton<ITokenCookieService, TokenCookieService>();
+builder.Services.AddSingleton<ITokenExpirationChecker, KeycloakTokenExpirationChecker>();
+builder.Services.AddSingleton<IAccessTokenRefreshable, KeycloakAccessTokenRefresher>();
+builder.Services.AddSingleton<IKeycloakAuthService, KeycloakAuthService>();
+builder.Services.AddSingleton<IParseTokenResponse, KeycloakTokenResponseParser>();
+builder.Services.AddSingleton<IKeycloakRefreshTokenRevokable, KeycloakKeycloakRefreshTokenRevoker>();
+builder.Services.AddSingleton<IKeycloakTokenHandler, KeycloakTokenHandler>();
+builder.Services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
@@ -74,15 +77,12 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
+app.UseCors("AllowDev");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.MapGet("users/me", (ClaimsPrincipal claimsPrincipal) =>
-{
-    return claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value);
-}).RequireAuthorization();
+
 
 app.Run();
 

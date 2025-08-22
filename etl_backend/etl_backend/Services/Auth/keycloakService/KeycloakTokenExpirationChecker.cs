@@ -1,7 +1,7 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using etl_backend.Services.Auth.Abstraction;
 
-namespace etl_backend.Services.Auth.keycloakAuthService;
+namespace etl_backend.Services.Auth.keycloakService;
 
 public class KeycloakTokenExpirationChecker: ITokenExpirationChecker
 {

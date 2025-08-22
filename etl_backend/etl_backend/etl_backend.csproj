@@ -28,4 +28,9 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Services\Auth\keycloakAuthService\Abstraction\IAccessTokenRefreshable.cs" />
+      <Compile Remove="Services\Auth\keycloakAuthService\KeyclaokAuthService.cs" />
+    </ItemGroup>
+
 </Project>

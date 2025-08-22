@@ -1,11 +1,9 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using etl_backend.Configuration;
-using etl_backend.Services.Auth.Abstraction;
-using etl_backend.Services.Auth.keycloakAuthService.Abstraction;
+﻿using etl_backend.Configuration;
 using etl_backend.Services.Auth.keycloakAuthService.Dtos;
+using etl_backend.Services.Auth.keycloakService.Abstraction;
 using Microsoft.Extensions.Options;
 
-namespace etl_backend.Services.Auth.keycloakAuthService;
+namespace etl_backend.Services.Auth.keycloakService;
 
 public class KeycloakAccessTokenRefresher: IAccessTokenRefreshable
 {

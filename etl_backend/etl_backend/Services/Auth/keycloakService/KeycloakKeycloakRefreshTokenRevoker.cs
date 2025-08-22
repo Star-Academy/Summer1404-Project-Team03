@@ -1,22 +1,23 @@
 ﻿using etl_backend.Configuration;
-using etl_backend.Services.Auth.keycloakAuthService.Abstraction;
+using etl_backend.Services.Auth.keycloakService.Abstraction;
+using Microsoft.Extensions.Options;
 
-namespace etl_backend.Services.Auth.keycloakAuthService;
+namespace etl_backend.Services.Auth.keycloakService;
 
-public class KeycloakRefreshTokenRevoker: IRefreshTokenRevokable
+public class KeycloakKeycloakRefreshTokenRevoker: IKeycloakRefreshTokenRevokable
 {
     private readonly KeycloakOptions _options;
     private readonly IHttpClientFactory _httpClientFactory;
 
-    public KeycloakRefreshTokenRevoker(KeycloakOptions options, IHttpClientFactory httpClientFactory)
+    public KeycloakKeycloakRefreshTokenRevoker(IOptions<KeycloakOptions> optionsAccessor, IHttpClientFactory httpClientFactory)
     {
-        _options = options;
+        _options = optionsAccessor.Value;
         _httpClientFactory = httpClientFactory;
     }
 
     public async Task<bool> RevokeTokenAsynk(string refreshToken, CancellationToken ct = default)
     {
-        var url = $"{_options.AuthServerUrl}/realms/{_options.Realm}/protocol/openid-connect/logout";
+        var url = $"{_options.AuthServerUrl}/realms/{_options.Realm}/protocol/openid-connect/revoke";
 
         var formData = new Dictionary<string, string>
         {
