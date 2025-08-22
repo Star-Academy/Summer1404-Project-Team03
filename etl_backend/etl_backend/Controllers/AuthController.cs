@@ -26,7 +26,7 @@ public class AuthController : ControllerBase
     public IActionResult Login([FromBody] LoginRequestBodyDto request)
     {
         var url =
-            $"{_options.AuthServerUrl}/realms/{_options.Realm}/protocol/openid-connect/auth" +
+            $"{_options.ServerUrl}/realms/{_options.Realm}/protocol/openid-connect/auth" +
             $"?client_id={Uri.EscapeDataString(_options.ClientId)}" +
             $"&redirect_uri={Uri.EscapeDataString(request.RedirectUrl)}" +
             $"&response_type=code" +
@@ -38,7 +38,7 @@ public class AuthController : ControllerBase
     [HttpPost("token")]
     public async Task<IActionResult> SetToken([FromBody] SetTokenRequestDto request)
     {
-        var tokenEndpoint = $"{_options.AuthServerUrl}/realms/{_options.Realm}/protocol/openid-connect/token";
+        var tokenEndpoint = $"{_options.ServerUrl}/realms/{_options.Realm}/protocol/openid-connect/token";
 
         var formData = new Dictionary<string, string>
         {
