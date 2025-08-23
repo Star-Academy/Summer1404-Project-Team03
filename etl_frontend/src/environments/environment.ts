@@ -9,9 +9,8 @@ export const environment = {
       token: `${baseUrl}/auth/token`,
       singOut: `${baseUrl}/auth/logout`,
     },
-    prfile: {
+    users: {
       me: `${baseUrl}/profile/me`,
     },
-    users: {}
   }
 };

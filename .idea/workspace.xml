@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: profile active link">
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: landing btn design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/shared/services/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/shared/services/auth/auth.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,17 +39,17 @@
     &quot;assignee&quot;: &quot;MohammadAminDadkhah&quot;
   }
 }</component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
     {
-      "id": {
-        "id": "PR_kwDOPfQjrs6lAuME",
-        "number": 10
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOPfQjrs6lAuME&quot;,
+        &quot;number&quot;: 10
       },
-      "lastSeen": 1755947076471
+      &quot;lastSeen&quot;: 1755947076471
     }
   ]
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;git@github.com:Star-Academy/Summer1404-Project-Team03.git&quot;,
@@ -77,33 +81,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "frontend/profile-api",
-    "last_opened_file_path": "C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontend/profile-api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features\dashboard\components\profile\modals\shared" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\public\landing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\services\user" />
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\services\" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\directives\sign-in" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\public" />
-      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\guard" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -141,6 +146,13 @@
       <workItem from="1755932837419" duration="3219000" />
       <workItem from="1755936105987" duration="6891000" />
       <workItem from="1755945056499" duration="1548000" />
+      <workItem from="1755950450537" duration="143000" />
+      <workItem from="1755950686622" duration="348000" />
+      <workItem from="1755951463560" duration="313000" />
+      <workItem from="1755951862833" duration="169000" />
+      <workItem from="1755952106749" duration="1113000" />
+      <workItem from="1755953250423" duration="2334000" />
+      <workItem from="1755955777530" duration="200000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add role guard">
       <option name="closed" value="true" />
@@ -262,7 +274,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755941105342</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix: landing btn design">
+      <option name="closed" value="true" />
+      <created>1755948139091</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755948139091</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,6 +313,7 @@
     <MESSAGE value="feat: add skeleton loading for table" />
     <MESSAGE value="feat: add modals and dialogs" />
     <MESSAGE value="fix: profile active link" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: profile active link" />
+    <MESSAGE value="fix: landing btn design" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: landing btn design" />
   </component>
 </project>

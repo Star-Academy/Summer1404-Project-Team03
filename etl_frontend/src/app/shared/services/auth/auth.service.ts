@@ -20,7 +20,7 @@ export class AuthService {
 
   constructor(private readonly http: HttpClient) {}
 
-  getSignInUrl(): Observable<SignInResponse> {
+  public getSignInUrl(): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(this.authApi.signIn, {
       redirectUrl: this.redirectUrl
     });
