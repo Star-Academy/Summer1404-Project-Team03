@@ -1,9 +1,13 @@
 .header {
+  padding: 1rem;
   &__toolbar {
     &__start {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
       &__img {
-        inline-size: 4.5rem;
-        block-size: 3.2rem;
+        inline-size: 4rem;
+        block-size: 2.5rem;
       }
     }
   }

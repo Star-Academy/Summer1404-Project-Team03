@@ -3,7 +3,27 @@ html {
 }
 
 p-toolbar .p-toolbar {
-  //background-color: transparent;
+  padding: 1rem;
   border-inline: none;
   border-block-start: none;
+}
+
+.tabs p-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.tabs p-button.active-tab::after {
+  content: "";
+
+  background-color: var(--primary-color, #3b82f6);
+  height: 2px;
+  width: 60%;
+
+  position: absolute;
+  bottom: -50%;
+  left: 25%;
+  transform: translateX(-10%);
+
+  transition: all 0.2s ease-in-out;
 }

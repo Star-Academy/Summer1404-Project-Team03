@@ -1,9 +1,9 @@
 
 .header {
   block-size: 100%;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
 
   ::ng-deep .p-toolbar {
-    padding: 0 !important;
+    padding: 0.5rem !important;
   }
 }

@@ -1,0 +1,36 @@
+<app-header>
+  <div start>
+    <div class="tabs">
+      <p-button
+        rounded
+        text
+        label="Your Profile"
+        class="tab"
+        [routerLink]="'/profile'"
+        [routerLinkActive]="'active-tab'"
+        [routerLinkActiveOptions]="{ exact: true }"
+      />
+
+      <p-button
+        rounded
+        text
+        label="Manage Users"
+        class="tab"
+        [routerLink]="'/profile/admin'"
+        [routerLinkActive]="'active-tab'"
+      />
+    </div>
+  </div>
+
+  <div end>
+    <p-button
+      icon="pi pi-sign-out"
+      label="Signout"
+      rounded
+      text
+      appSignOut
+    />
+  </div>
+</app-header>
+
+<router-outlet></router-outlet>
