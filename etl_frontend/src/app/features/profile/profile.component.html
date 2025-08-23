@@ -6,18 +6,19 @@
         text
         label="Your Profile"
         class="tab"
-        [routerLink]="'/dashboard/profile/detail'"
+        [routerLink]="'/profile'"
         [routerLinkActive]="'active-tab'"
-      ></p-button>
+        [routerLinkActiveOptions]="{ exact: true }"
+      />
 
       <p-button
         rounded
         text
         label="Manage Users"
         class="tab"
-        [routerLink]="'/dashboard/profile/manage-user'"
+        [routerLink]="'/profile/admin'"
         [routerLinkActive]="'active-tab'"
-      ></p-button>
+      />
     </div>
   </div>
 
@@ -28,7 +29,8 @@
       rounded
       text
       appSignOut
-    ></p-button>
+    />
   </div>
 </app-header>
+
 <router-outlet></router-outlet>

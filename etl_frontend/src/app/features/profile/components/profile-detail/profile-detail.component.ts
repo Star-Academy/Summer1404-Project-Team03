@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { Image } from 'primeng/image';
 import { DatePipe } from '@angular/common';
-import { RouterLink, RouterModule } from "../../../../../../../../node_modules/@angular/router";
+import { RouterLink, RouterModule } from "@angular/router";
 
 interface User {
   name: string;

@@ -24,6 +24,10 @@ export const routes: Routes = [
     canActivate: [] //TODO adding auth guard
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
+  },
+  {
     path: '**',
     redirectTo: 'not-found'
   },

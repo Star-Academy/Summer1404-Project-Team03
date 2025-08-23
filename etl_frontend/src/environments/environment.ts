@@ -5,15 +5,13 @@ export const environment = {
   redirectUrl: 'http://localhost:4200/send-token-code',
   api: {
     auth: {
-      signIn: `${baseUrl}/Auth/login`,
-      token: `${baseUrl}/Auth/token`,
-      singOut: `${baseUrl}/Auth/logout`,
-      //   register: `${baseUrl}/Auth/register`,
+      signIn: `${baseUrl}/auth/login`,
+      token: `${baseUrl}/auth/token`,
+      singOut: `${baseUrl}/auth/logout`,
     },
-    users: {
-      //   me: `${baseUrl}/me`,
-      //   all: `${baseUrl}/users`,
-      //   byId: (id: string) => `${baseUrl}/users/${id}`
-    }
+    prfile: {
+      me: `${baseUrl}/profile/me`,
+    },
+    users: {}
   }
 };
