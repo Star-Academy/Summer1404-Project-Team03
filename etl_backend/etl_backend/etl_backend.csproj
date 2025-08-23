@@ -33,4 +33,9 @@
       <Compile Remove="Services\Auth\keycloakAuthService\KeyclaokAuthService.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Services\Dtos\UserProfileDto.cs" />
+      <Compile Remove="Services\Dtos\UserWithRoles.cs" />
+    </ItemGroup>
+
 </Project>

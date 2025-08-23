@@ -2,6 +2,6 @@
 
 public interface ITokenExtractor
 {
-    string? GetAccessToken(HttpRequest request, string AccessCookieName);
+    string? GetAccessToken(HttpRequest request, string accessCookieName);
     string? GetRefreshToken(HttpRequest request, string refreshCookieName);
 }

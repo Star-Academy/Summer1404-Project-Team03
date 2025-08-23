@@ -1,10 +1,12 @@
 ﻿using System.Text.Json;
 using etl_backend.Configuration;
 using etl_backend.DTO;
+using etl_backend.Services;
 using etl_backend.Services.Auth.Abstraction;
 using etl_backend.Services.Auth.keycloakService.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 
@@ -36,6 +38,12 @@ public class AuthController : ControllerBase
     {
 
         var url = _keycloakAuthService.GenerateLoginUrl(request.RedirectUrl);
+        var url =
+            $"{_options.ServerUrl}/realms/{_options.Realm}/protocol/openid-connect/auth" +
+            $"?client_id={Uri.EscapeDataString(_options.ClientId)}" +
+            $"&redirect_uri={Uri.EscapeDataString(request.RedirectUrl)}" +
+            $"&response_type=code" +
+            $"&scope=openid";
 
         return Ok(new { redirectUrl = url });
     }
