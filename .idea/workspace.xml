@@ -6,45 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: profile active link">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/shared/shared-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/shared/shared-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.module.routing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -74,6 +35,17 @@
     &quot;assignee&quot;: &quot;MohammadAminDadkhah&quot;
   }
 }</component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOPfQjrs6lAuME",
+        "number": 10
+      },
+      "lastSeen": 1755947076471
+    }
+  ]
+}]]></component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;git@github.com:Star-Academy/Summer1404-Project-Team03.git&quot;,
@@ -105,23 +77,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#10 on frontend/profile&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "frontend/profile-api",
+    "last_opened_file_path": "C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features\dashboard\components\profile\modals\shared" />
