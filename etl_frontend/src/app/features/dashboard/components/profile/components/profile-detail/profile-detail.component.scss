@@ -1,0 +1,87 @@
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  inline-size: 100%;
+  min-block-size: clamp(80vh, 90vh, 100vh);
+  padding: 2rem;
+  overflow-x: auto;
+
+  .profile-card {
+    inline-size: 100%;
+    max-inline-size: 70rem;
+    min-block-size: 100%;
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 3rem;
+
+      &__top {
+        @include flex();
+        justify-content: flex-start;
+        gap: 1.5rem;
+
+        &__user-image {
+          border-radius: 50%;
+        }
+        &__user-abcent-image {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          width: 10rem;
+          aspect-ratio: 1;
+          font-weight: bold;
+          font-size: 4rem;
+          background-color: var(--p-primary-500);
+          color: var(--p-primary-color-text);
+        }
+        &__info {
+          &__user-name {
+          }
+          &__user-role {
+          }
+        }
+      }
+
+      &__bottom {
+        inline-size: 100%;
+
+        &__details {
+          @include flex();
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          padding-block-end: 3rem;
+
+          &__item {
+            @include flex();
+            gap: 0.5rem;
+
+            &__icon {
+              font-weight: 600;
+            }
+            &__title {
+              font-weight: 600;
+            }
+            &__data {
+              letter-spacing: 1px;
+            }
+          }
+        }
+      }
+    }
+
+    &__actions {
+      @include flex();
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+  }
+}

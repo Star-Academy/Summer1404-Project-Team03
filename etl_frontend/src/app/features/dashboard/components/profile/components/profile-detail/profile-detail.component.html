@@ -1,1 +1,77 @@
-<p>profile-detail works!</p>
+<p-card class="profile-card">
+  <div class="profile-card__content">
+    <div class="profile-card__content__top">
+      @if (user.imageUrl) {
+      <p-image
+        [src]="user.imageUrl"
+        class="profile-card__content__top__user-image"
+        shape="circle"
+        preview="true"
+      ></p-image>
+      } @else {
+      <div class="profile-card__content__top__user-abcent-image">
+        {{ user.name[0] }}
+      </div>
+      }
+
+      <div class="profile-card__content__top__info">
+        <h2 class="profile-card__content__top__info__user-name">
+          {{ user.name }}
+        </h2>
+
+        <p-tag
+          [value]="user.role"
+          [severity]="getSeverityForRole(user.role)"
+          class="profile-card__content__top__info__user-role"
+          [rounded]="true"
+        ></p-tag>
+      </div>
+    </div>
+    <div class="profile-card__content__bottom">
+      <div class="profile-card__content__bottom__details">
+        <div class="profile-card__content__bottom__details__item">
+          <i
+            class="pi pi-envelope profile-card__content__bottom__details__item__icon"
+          ></i>
+          <span class="profile-card__content__bottom__details__item__title"
+            >Email :
+          </span>
+          <span class="profile-card__content__bottom__details__item__data">{{
+            user.email
+          }}</span>
+        </div>
+
+        <div class="profile-card__content__bottom__details__item">
+          <i
+            class="pi pi-user profile-card__content__bottom__details__item__icon"
+          ></i>
+          <span class="profile-card__content__bottom__details__item__title"
+            >Username :
+          </span>
+          <span class="profile-card__content__bottom__details__item__data">{{
+            user.username
+          }}</span>
+        </div>
+
+        <div class="profile-card__content__bottom__details__item">
+          <i
+            class="pi pi-calendar profile-card__content__bottom__details__item__icon"
+          ></i>
+          <span class="profile-card__content__bottom__details__item__title"
+            >Member Since :
+          </span>
+          <span class="profile-card__content__bottom__details__item__data">{{
+            user.memberSince | date : "longDate"
+          }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <div class="profile-card__actions">
+      <p-button label="Change Password" icon="pi pi-key" rounded [routerLink]="'/dashboard/profile/change-password'"></p-button>
+      <p-button label="Edit Profile" icon="pi pi-pencil" rounded [routerLink]="'/dashboard/profile/edit'"></p-button>
+    </div>
+  </ng-template>
+</p-card>

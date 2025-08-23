@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { MessageService } from 'primeng/api';
@@ -7,7 +7,8 @@ import { MessageService } from 'primeng/api';
   selector: 'app-send-token-code',
   imports: [],
   templateUrl: './send-token-code.component.html',
-  styleUrl: './send-token-code.component.scss'
+  styleUrl: './send-token-code.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SendTokenCodeComponent implements OnInit {
   constructor(

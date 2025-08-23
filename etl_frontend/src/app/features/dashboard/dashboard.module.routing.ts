@@ -8,7 +8,7 @@ export const dashboardRoutes: Routes = [
         component: DashboardComponent
     },
     {
-        path: 'profile',
+        path: 'profile', //TODO change it to me or account ?
         loadChildren: ()=> import('./components/profile/profile.module').then(m => m.ProfileModule)
     }
 ]
