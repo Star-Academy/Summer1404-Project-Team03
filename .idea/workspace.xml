@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add skeleton loading for table">
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add modals and dialogs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +131,7 @@
       <workItem from="1755684296986" duration="10123000" />
       <workItem from="1755880132418" duration="6421000" />
       <workItem from="1755932837419" duration="3219000" />
-      <workItem from="1755936105987" duration="3774000" />
+      <workItem from="1755936105987" duration="4708000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add role guard">
       <option name="closed" value="true" />
@@ -235,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755933599261</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: add modals and dialogs">
+      <option name="closed" value="true" />
+      <created>1755940190110</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1755940190110</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,6 +274,7 @@
     <MESSAGE value="fix: header padding and size" />
     <MESSAGE value="feat: add home btn" />
     <MESSAGE value="feat: add skeleton loading for table" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add skeleton loading for table" />
+    <MESSAGE value="feat: add modals and dialogs" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add modals and dialogs" />
   </component>
 </project>
