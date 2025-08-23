@@ -1,5 +1,17 @@
+@if (isCreateUserModal()) {
+  <app-create-user-modal [visible]="isCreateUserModal()" (close)="changeCreateUserModalStatus()"/>
+}
+
+@if (isEditUserModal()) {
+  <app-edit-user-modal [visible]="isEditUserModal()" (close)="changeEditUserModalStatus()"/>
+}
+
+@if (isDeleteUserDialog()) {
+  <app-delete-user-dialog [visible]="isDeleteUserDialog()" (close)="changeDeleteUserDialogStatus()" />
+}
+
 <div class="manage-user__btn">
-  <p-button label="Create User" outlined rounded></p-button>
+  <p-button label="Create User" outlined rounded (click)="changeCreateUserModalStatus()"/>
 </div>
 
 <div class="table-container">
@@ -19,12 +31,14 @@
         <td>{{ user.role }}</td>
         <td class="table-container__action">
           <p-button
+            (click)="changeEditUserModalStatus()"
             icon="pi pi-pencil"
             text
             rounded
             severity="secondary"
           />
           <p-button
+            (click)="changeDeleteUserDialogStatus()"
             icon="pi pi-trash"
             text
             rounded

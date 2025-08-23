@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add home btn">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add skeleton loading for table">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,18 +74,20 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;frontend/profile&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/public/landing&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features\dashboard\components\profile\modals\shared" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\public\landing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -130,7 +128,8 @@
       <workItem from="1755678299420" duration="3283000" />
       <workItem from="1755684296986" duration="10123000" />
       <workItem from="1755880132418" duration="6421000" />
-      <workItem from="1755932837419" duration="332000" />
+      <workItem from="1755932837419" duration="3219000" />
+      <workItem from="1755936105987" duration="3774000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add role guard">
       <option name="closed" value="true" />
@@ -228,7 +227,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755685917519</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: add skeleton loading for table">
+      <option name="closed" value="true" />
+      <created>1755933599261</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1755933599261</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +263,7 @@
     <MESSAGE value="feat: add sign out directive" />
     <MESSAGE value="fix: header padding and size" />
     <MESSAGE value="feat: add home btn" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add home btn" />
+    <MESSAGE value="feat: add skeleton loading for table" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add skeleton loading for table" />
   </component>
 </project>

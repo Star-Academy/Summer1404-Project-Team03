@@ -1,0 +1,13 @@
+.dialog {
+  display: flex;
+  flex-direction: column;
+
+  inline-size: 30vh;
+
+  &__btn {
+    display: flex;
+    justify-content: center;
+    align-self: end;
+    gap: 0.5rem;
+  }
+}

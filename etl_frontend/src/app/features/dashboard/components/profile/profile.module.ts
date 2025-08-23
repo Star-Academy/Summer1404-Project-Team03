@@ -5,7 +5,9 @@ import {profileRoutes} from './profile.module.routing';
 import {HeaderComponent} from '../../../../shared/components/header/header.component';
 import {ProfileComponent} from './profile.component';
 import {ButtonModule} from 'primeng/button';
-import {TabsModule} from "primeng/tabs"
+import {TabsModule} from "primeng/tabs";
+import { MessageService } from 'primeng/api';
+
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -16,6 +18,9 @@ import {TabsModule} from "primeng/tabs"
     ButtonModule,
     TabsModule,
     RouterModule,
+  ],
+  providers: [
+    MessageService,
   ]
 })
 export class ProfileModule {
