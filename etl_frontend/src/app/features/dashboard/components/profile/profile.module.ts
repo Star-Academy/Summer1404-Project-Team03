@@ -1,13 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { profileRoutes } from './profile.module.routing';
-import { HeaderComponent } from '../../../../shared/components/header/header.component';
-import { ProfileComponent } from './profile.component';
-import { ButtonModule } from 'primeng/button';
-import { TabsModule } from "primeng/tabs"
-
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {profileRoutes} from './profile.module.routing';
+import {HeaderComponent} from '../../../../shared/components/header/header.component';
+import {ProfileComponent} from './profile.component';
+import {ButtonModule} from 'primeng/button';
+import {TabsModule} from "primeng/tabs"
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -16,7 +14,9 @@ import { TabsModule } from "primeng/tabs"
     HeaderComponent,
     RouterModule.forChild(profileRoutes),
     ButtonModule,
-    TabsModule
+    TabsModule,
+    RouterModule,
   ]
 })
-export class ProfileModule { }
+export class ProfileModule {
+}

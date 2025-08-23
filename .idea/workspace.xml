@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: header padding and size">
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add home btn">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/shared/directives/sign-in/sign-in.directive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/shared/directives/sign-in/sign-in.directive.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +101,7 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="npm i" />
+      <command value="ng  serve" />
     </option>
   </component>
   <component name="SharedIndexes">
@@ -122,7 +128,9 @@
       <workItem from="1755588371122" duration="8612000" />
       <workItem from="1755677125959" duration="1151000" />
       <workItem from="1755678299420" duration="3283000" />
-      <workItem from="1755684296986" duration="1361000" />
+      <workItem from="1755684296986" duration="10123000" />
+      <workItem from="1755880132418" duration="6421000" />
+      <workItem from="1755932837419" duration="332000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add role guard">
       <option name="closed" value="true" />
@@ -212,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755684869155</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: add home btn">
+      <option name="closed" value="true" />
+      <created>1755685917519</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1755685917519</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,6 +255,7 @@
     <MESSAGE value="feat: add header component" />
     <MESSAGE value="feat: add sign out directive" />
     <MESSAGE value="fix: header padding and size" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: header padding and size" />
+    <MESSAGE value="feat: add home btn" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add home btn" />
   </component>
 </project>

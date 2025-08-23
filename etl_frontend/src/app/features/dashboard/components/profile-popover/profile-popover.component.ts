@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Button } from "primeng/button";
 import { Popover } from 'primeng/popover';
 import { SignOutDirective } from '../../../../shared/directives/sign-out/sign-out.directive';
-import { RouterLink, RouterModule } from "../../../../../../node_modules/@angular/router";
+import { RouterModule } from "../../../../../../node_modules/@angular/router";
 
 @Component({
   selector: 'app-profile-popover',
