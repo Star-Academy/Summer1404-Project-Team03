@@ -1,14 +1,12 @@
+using etl_backend.Application.Abstraction;
+using etl_backend.Application.KeycalokAuth;
+using etl_backend.Application.KeycalokAuth.Abstraction;
+using etl_backend.Application.KeycalokAuth.Dtos;
+using etl_backend.Application.Services;
 using etl_backend.Authentication;
 using etl_backend.Configuration;
 using etl_backend.Extensions;
 using etl_backend.Middlewares;
-using etl_backend.Services.Abstraction.Admin;
-using etl_backend.Services.Abstraction.SsoServices;
-using etl_backend.Services.Admin;
-using etl_backend.Services.Auth;
-using etl_backend.Services.Auth.Abstraction;
-using etl_backend.Services.Auth.keycloakService;
-using etl_backend.Services.Auth.keycloakService.Abstraction;
 using etl_backend.Services.SsoServices;
 
 
@@ -62,6 +60,7 @@ builder.Services.AddSingleton<IEditUserService, EditUserService>();
 builder.Services.AddSingleton<IDeleteUserService, DeleteUserService>();
 builder.Services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
 builder.Services.AddSingleton<IEditUserRolesService, EditUserRolesService>();
+builder.Services.AddSingleton<IGetRolesList, GetAllRolesService>();
 
 
 builder.Services.AddAuthorization(options =>
