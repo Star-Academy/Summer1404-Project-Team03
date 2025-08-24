@@ -1,47 +1,91 @@
-using etl_backend.Configuration;
-using etl_backend.Services.Abstraction;
 using etl_backend.Services.Abstraction.SsoServices;
 using etl_backend.Services.Dtos;
-using Microsoft.Extensions.Options;
+
 
 namespace etl_backend.Services.SsoServices;
 
 public class KeycloakClientRoleManagerService : IRoleManagerService
 {
     private readonly ISsoClient _ssoClient;
-    private readonly KeycloakOptions _options;
 
-    public KeycloakClientRoleManagerService(ISsoClient ssoClient, IOptions<KeycloakOptions> options)
+    public KeycloakClientRoleManagerService(ISsoClient ssoClient)
     {
         _ssoClient = ssoClient;
-        _options = options.Value;
     }
 
-    private string UsersEndpoint => $"admin/realms/{_options.Realm}/users";
+    private string UsersEndpoint => $"users";
 
-    public async Task<IEnumerable<string>> GetUserRolesAsync(string userId, string accessToken, CancellationToken cancellationToken)
+    
+    public async Task<IEnumerable<RoleDto>> GetUserRolesAsync(
+        string userId,
+        string accessToken,
+        CancellationToken cancellationToken)
     {
-        var roles = await _ssoClient.GetAsync<List<RoleDto>>(
+        var rolesJson = await _ssoClient.GetAsync(
+            $"{UsersEndpoint}/{userId}/role-mappings/realm", 
+            accessToken, 
+            cancellationToken);
+
+        var roles = rolesJson.RootElement.EnumerateArray()
+            .Select(r => new RoleDto
+            {
+                Id = r.GetProperty("id").GetString() ?? string.Empty,
+                Name = r.GetProperty("name").GetString() ?? string.Empty
+            })
+            .Where(r => !string.IsNullOrEmpty(r.Id) && !string.IsNullOrEmpty(r.Name));
+
+        return roles;
+    }
+    
+    public async Task AssignRolesToUserAsync(
+        string userId,
+        IEnumerable<RoleDto> roles,
+        string accessToken,
+        CancellationToken cancellationToken)
+    {
+        if (!roles.Any()) return;
+
+        await _ssoClient.PostAsync(
             $"{UsersEndpoint}/{userId}/role-mappings/realm",
+            roles,
+            accessToken,
+            cancellationToken);
+    }
+
+
+    public async Task RemoveRolesFromUserAsync(
+        string userId,
+        IEnumerable<RoleDto> roles,
+        string accessToken,
+        CancellationToken cancellationToken)
+    {
+        if (!roles.Any()) return;
+
+        await _ssoClient.DeleteAsync(
+            $"{UsersEndpoint}/{userId}/role-mappings/realm",
+            roles,
+            accessToken,
+            cancellationToken);
+    }
+
+    
+    public async Task<IEnumerable<RoleDto>> GetAllRolesAsync(
+        string accessToken,
+        CancellationToken cancellationToken)
+    {
+        var rolesJson = await _ssoClient.GetAsync(
+            $"roles",
             accessToken,
             cancellationToken);
 
-        return roles?.Select(r => r.Name) ?? Array.Empty<string>();
-    }
+        var roles = rolesJson.RootElement.EnumerateArray()
+            .Select(r => new RoleDto
+            {
+                Id = r.GetProperty("id").GetString() ?? string.Empty,
+                Name = r.GetProperty("name").GetString() ?? string.Empty
+            })
+            .Where(r => !string.IsNullOrEmpty(r.Id) && !string.IsNullOrEmpty(r.Name));
 
-    public async Task AssignRolesToUserAsync(string userId, IEnumerable<string> roles, string accessToken, CancellationToken cancellationToken)
-    {
-        if (!roles.Any()) return;
-
-        var roleDtos = roles.Select(r => new RoleDto { Name = r }).ToList();
-        await _ssoClient.PostAsync($"{UsersEndpoint}/{userId}/role-mappings/realm", roleDtos, accessToken, cancellationToken);
-    }
-
-    public async Task RemoveRolesFromUserAsync(string userId, IEnumerable<string> roles, string accessToken, CancellationToken cancellationToken)
-    {
-        if (!roles.Any()) return;
-
-        var roleDtos = roles.Select(r => new RoleDto { Name = r }).ToList();
-        await _ssoClient.DeleteAsync($"{UsersEndpoint}/{userId}/role-mappings/realm", accessToken, cancellationToken);
+        return roles;
     }
 }

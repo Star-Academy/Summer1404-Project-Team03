@@ -1,6 +1,6 @@
 ﻿using etl_backend.Configuration;
-using etl_backend.Services.Auth.keycloakAuthService.Dtos;
 using etl_backend.Services.Auth.keycloakService.Abstraction;
+using etl_backend.Services.Auth.keycloakService.Dtos;
 using Microsoft.Extensions.Options;
 
 namespace etl_backend.Services.Auth.keycloakService;
@@ -35,7 +35,8 @@ public class KeycloakAuthService : IKeycloakAuthService
             ["grant_type"] = "authorization_code",
             ["client_id"] = _options.ClientId!,
             ["code"] = code,
-            ["redirect_uri"] = redirectUri
+            ["redirect_uri"] = redirectUri,
+            ["client_secret"] = _options.ClientSecret ?? throw new NullReferenceException(_options.ClientSecret),
         };
         
         var client = _httpClientFactory.CreateClient();
@@ -44,6 +45,12 @@ public class KeycloakAuthService : IKeycloakAuthService
         res.EnsureSuccessStatusCode();
 
         return _responseTokenParser.ParseTokenResponse(content);
+    }
+    
+    public string GenerateChangePasswordUrl()
+    {
+        var baseUrl = _options.AuthServerUrl!.TrimEnd('/');
+        return $"{baseUrl}/realms/{_options.Realm}/account/account-security/signing-in/";
     }
     
     

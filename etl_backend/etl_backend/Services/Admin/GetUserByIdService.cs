@@ -13,8 +13,8 @@ public class GetUserByIdService : IGetUserByIdService
         _keycloakAdminClient = keycloakAdminClient;
     }
 
-    public async Task<UserWithRolesDto> ExecuteAsync(string userId, string accessToken, CancellationToken cancellationToken)
+    public async Task<UserWithRolesDto> ExecuteAsync(string userId, CancellationToken cancellationToken)
     {
-        return await _keycloakAdminClient.GetUserByIdAsync(userId, accessToken, cancellationToken);
+        return await _keycloakAdminClient.GetUserByIdAsync(userId, cancellationToken);
     }
 }

@@ -1,31 +1,27 @@
-using etl_backend.Services.Abstraction.SsoServices;
+using etl_backend.Services.Auth.Abstraction;
 using etl_backend.Services.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace etl_backend.Controllers;
 using Microsoft.AspNetCore.Mvc;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/users")]
 public class ProfileController : ControllerBase
 {
-    private readonly ISsoProfileService _profileService;
-
-    public ProfileController(ISsoProfileService profileService)
+    
+    private readonly ITokenProfileExtractor _tokenProfileExtractor;
+    public ProfileController(ITokenProfileExtractor tokenProfileExtractor)
     {
-        _profileService = profileService;
+        _tokenProfileExtractor = tokenProfileExtractor;
     }
 
     [HttpGet("me")]
-    public async Task<ActionResult<UserProfile>> GetProfile(CancellationToken cancellationToken)
+    [Authorize]
+    public async Task<ActionResult<UserWithRolesDto>> GetProfile(CancellationToken cancellationToken)
     {
-        var authHeader = HttpContext.Request.Headers["Authorization"].ToString();
-        if (string.IsNullOrEmpty(authHeader) || !authHeader.StartsWith("Bearer "))
-        {
-            return Unauthorized("Missing or invalid Authorization header");
-        }
 
-        var token = authHeader.Substring("Bearer ".Length).Trim();
-
-        var profile = await _profileService.GetProfileAsync(token, cancellationToken);
+        var profile = await _tokenProfileExtractor.ExtractProfile(User);
         return Ok(profile);
+        
     }
 }

@@ -23,7 +23,7 @@ public class KeycloakKeycloakRefreshTokenRevoker: IKeycloakRefreshTokenRevokable
         {
             ["client_id"] = _options.ClientId,
             ["token"] = refreshToken,
-            ["token_type_hint"] = "refresh_token"
+            ["token_type_hint"] = "refresh_token",
         };
         var httpClient = _httpClientFactory.CreateClient();
         var response = await httpClient.PostAsync(url, new FormUrlEncodedContent(formData));

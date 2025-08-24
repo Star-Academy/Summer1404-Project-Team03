@@ -1,6 +1,6 @@
 ﻿using etl_backend.Configuration;
-using etl_backend.Services.Auth.keycloakAuthService.Dtos;
 using etl_backend.Services.Auth.keycloakService.Abstraction;
+using etl_backend.Services.Auth.keycloakService.Dtos;
 using Microsoft.Extensions.Options;
 
 namespace etl_backend.Services.Auth.keycloakService;
@@ -28,7 +28,8 @@ public class KeycloakAccessTokenRefresher: IAccessTokenRefreshable
         {
             ["grant_type"] = "refresh_token",
             ["client_id"] = _options.ClientId!,
-            ["refresh_token"] = refreshToken
+            ["refresh_token"] = refreshToken,
+            ["client_secret"] = _options.ClientSecret ?? throw new ArgumentNullException(nameof(_options.ClientSecret)),
         };
 
         var client = _httpClientFactory.CreateClient();

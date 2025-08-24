@@ -1,11 +1,15 @@
 using etl_backend.Authentication;
-using etl_backend.Authentication;
 using etl_backend.Configuration;
 using etl_backend.Extensions;
+using etl_backend.Middlewares;
+using etl_backend.Services.Abstraction.Admin;
+using etl_backend.Services.Abstraction.SsoServices;
+using etl_backend.Services.Admin;
 using etl_backend.Services.Auth;
 using etl_backend.Services.Auth.Abstraction;
 using etl_backend.Services.Auth.keycloakService;
 using etl_backend.Services.Auth.keycloakService.Abstraction;
+using etl_backend.Services.SsoServices;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,11 +23,12 @@ builder.Services.Configure<KeycloakOptions>(
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowDev", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
         policy
             .WithOrigins(
-                "http://localhost:4200", "http://localhost:7252", "https://localhost:7252" 
+                "http://localhost:4200", "http://localhost:7252", "https://localhost:7252",
+                "http://192.168.25.195:4200", "https://192.168.25.178:7252"
                 )
             .AllowAnyMethod()
             .AllowAnyHeader()
@@ -44,21 +49,37 @@ builder.Services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
+builder.Services.AddSingleton<IKeycloakServiceAccountTokenProvider, KeycloakServiceAccountTokenProvider>();
+
+builder.Services.AddSingleton<ISsoClient, KeycloakSsoClient>();
+builder.Services.AddSingleton<IRoleManagerService, KeycloakClientRoleManagerService>();
+builder.Services.AddSingleton<IKeycloakAdminClient,  KeycloakAdminClient>();
+
+builder.Services.AddSingleton<ITokenProfileExtractor, KeycloakTokenProfileExtractor>();
+builder.Services.AddSingleton<IGetAllUsersService, GetAllUsersService>();
+builder.Services.AddSingleton<ICreateUserService, CreateUserService>();
+builder.Services.AddSingleton<IEditUserService, EditUserService>();
+builder.Services.AddSingleton<IDeleteUserService, DeleteUserService>();
+builder.Services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
+builder.Services.AddSingleton<IEditUserRolesService, EditUserRolesService>();
+
+
 builder.Services.AddAuthorization(options =>
 {
     var roleSettings = builder.Configuration
         .GetSection("Authorization:Roles")
         .Get<RoleSettings>();
-
-    options.AddPolicy("RequireDataAdmin",
-        p => p.RequireRole(roleSettings!.DataAdmin));
-
-    options.AddPolicy("RequireSysAdmin",
-        p => p.RequireRole(roleSettings!.SysAdmin));
-
-    options.AddPolicy("RequireAnalyst",
-        p => p.RequireRole(roleSettings!.Analyst));
+    
+    options.AddPolicy("RequireDataAdmin", p =>
+        p.RequireRole(roleSettings!.DataAdmin, roleSettings.SysAdmin));
+    
+    options.AddPolicy("RequireSysAdmin", p =>
+        p.RequireRole(roleSettings!.SysAdmin));
+    
+    options.AddPolicy("RequireAnalyst", p =>
+        p.RequireRole(roleSettings!.DataAnalyst, roleSettings.DataAdmin, roleSettings.SysAdmin));
 });
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -77,9 +98,11 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-app.UseCors("AllowDev");
+app.UseRouting();
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<ApiExceptionMiddleware>();
 app.MapControllers();
 
 

@@ -1,5 +1,5 @@
 ﻿using etl_backend.Services.Auth.Abstraction;
-using etl_backend.Services.Auth.keycloakAuthService.Dtos;
+using etl_backend.Services.Auth.keycloakService.Dtos;
 
 namespace etl_backend.Services.Auth;
 
@@ -16,7 +16,7 @@ public class TokenCookieService : ITokenCookieService
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn) 
             // access token should be in cookies as long as refresh
         };
@@ -25,7 +25,7 @@ public class TokenCookieService : ITokenCookieService
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.None,
             Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn)
         };
 

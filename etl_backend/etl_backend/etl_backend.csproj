@@ -38,4 +38,8 @@
       <Compile Remove="Services\Dtos\UserWithRoles.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Api\" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,3 @@
-using etl_backend.Services.Abstraction;
 using etl_backend.Services.Abstraction.Admin;
 using etl_backend.Services.Abstraction.SsoServices;
 using etl_backend.Services.Dtos;
@@ -14,8 +13,9 @@ public class EditUserService : IEditUserService
         _keycloakAdminClient = keycloakAdminClient;
     }
 
-    public async Task ExecuteAsync(string userId, UserDto updatedUser, IEnumerable<string>? roles, string accessToken, CancellationToken cancellationToken)
+    public async Task ExecuteAsync(string userId, EditUserRequestDto userToUpdate,
+        CancellationToken cancellationToken)
     {
-        await _keycloakAdminClient.EditUserAsync(userId, updatedUser, roles, accessToken, cancellationToken);
+        await _keycloakAdminClient.EditUserAsync(userId, userToUpdate, cancellationToken);
     }
 }

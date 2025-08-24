@@ -15,8 +15,8 @@ public class GetAllUsersService : IGetAllUsersService
         _keycloakAdminClient = keycloakAdminClient;
     }
 
-    public async Task<IEnumerable<UserWithRolesDto>> ExecuteAsync(string accessToken, CancellationToken cancellationToken)
+    public async Task<IEnumerable<UserWithRolesDto>> ExecuteAsync(CancellationToken cancellationToken)
     {
-        return await _keycloakAdminClient.GetAllUsersAsync(accessToken, cancellationToken);
+        return await _keycloakAdminClient.GetAllUsersAsync(cancellationToken);
     }
 }

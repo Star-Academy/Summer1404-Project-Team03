@@ -1,4 +1,4 @@
-﻿namespace etl_backend.Services.Auth.keycloakAuthService.Dtos;
+﻿namespace etl_backend.Services.Auth.keycloakService.Dtos;
 
 public class TokenResponseDto
 {

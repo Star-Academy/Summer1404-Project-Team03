@@ -39,22 +39,21 @@ public static class KeycloakAuthenticationExtensions
                         var handler = ctx.HttpContext.RequestServices.GetRequiredService<IKeycloakTokenHandler>();
                         ctx.Token = await handler.GetOrRefreshAccessTokenAsync(ctx.HttpContext, ctx.HttpContext.RequestAborted);
                     },
-                    OnTokenValidated = ctx =>
+                    OnTokenValidated = async ctx =>
                     {
                         var identity = ctx.Principal?.Identity as ClaimsIdentity;
-                        if (identity == null) return Task.CompletedTask;
+                        if (identity == null) return ;
                         
                         var claimsScope = config["Keycloak:RoleScope"] 
                                           ?? throw new InvalidOperationException("Keycloak configuration missing.");
                         var rolesKey = config["Keycloak:RolesKey"] 
                                           ?? throw new InvalidOperationException("Keycloak configuration missing.");
                         var extractor = ctx.HttpContext.RequestServices.GetRequiredService<IRoleExtractor>();
-                        var roles = extractor.ExtractRoles(ctx.Principal!, claimsScope, rolesKey);
+                        var roles = await extractor.ExtractRoles(ctx.Principal!, claimsScope, rolesKey);
 
                         foreach (var role in roles)
-                            identity.AddClaim(new Claim(ClaimTypes.Role, role));
-
-                        return Task.CompletedTask;
+                            identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
+                        
                     }
                 };
             });

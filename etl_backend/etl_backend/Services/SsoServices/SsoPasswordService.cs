@@ -1,4 +1,3 @@
-using etl_backend.Services.Abstraction;
 using etl_backend.Services.Abstraction.SsoServices;
 
 namespace etl_backend.Services.SsoServices;

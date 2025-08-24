@@ -1,4 +1,3 @@
-using etl_backend.Services.Abstraction;
 using etl_backend.Services.Abstraction.Admin;
 using etl_backend.Services.Abstraction.SsoServices;
 
@@ -13,8 +12,8 @@ public class DeleteUserService : IDeleteUserService
         _keycloakAdminClient = keycloakAdminClient;
     }
 
-    public async Task ExecuteAsync(string userId, string accessToken, CancellationToken cancellationToken)
+    public async Task ExecuteAsync(string userId, CancellationToken cancellationToken)
     {
-        await _keycloakAdminClient.DeleteUserAsync(userId, accessToken, cancellationToken);
+        await _keycloakAdminClient.DeleteUserAsync(userId, cancellationToken);
     }
 }

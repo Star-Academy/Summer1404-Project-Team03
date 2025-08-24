@@ -1,7 +1,7 @@
-using etl_backend.Services.Abstraction;
 using etl_backend.Services.Abstraction.Admin;
 using etl_backend.Services.Abstraction.SsoServices;
 using etl_backend.Services.Dtos;
+
 
 namespace etl_backend.Services.Admin;
 
@@ -14,8 +14,9 @@ public class CreateUserService : ICreateUserService
         _keycloakAdminClient = keycloakAdminClient;
     }
 
-    public async Task ExecuteAsync(UserDto newUser, IEnumerable<string> roles, string accessToken, CancellationToken cancellationToken)
+    public async Task<UserDto> ExecuteAsync(UserCreateDto newUser, CancellationToken cancellationToken)
     {
-        await _keycloakAdminClient.CreateUserAsync(newUser, roles, accessToken, cancellationToken);
+        
+        return await _keycloakAdminClient.CreateUserAsync(newUser, cancellationToken);
     }
 }

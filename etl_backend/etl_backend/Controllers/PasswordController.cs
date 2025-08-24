@@ -1,33 +1,25 @@
-using etl_backend.Services.Abstraction;
-using etl_backend.Services.Abstraction.SsoServices;
+using etl_backend.Services.Auth.keycloakService.Abstraction;
 
 namespace etl_backend.Controllers;
 using Microsoft.AspNetCore.Mvc;
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/password")]
 public class PasswordController : ControllerBase
 {
-    private readonly ISsoPasswordService _passwordService;
+    private readonly IKeycloakAuthService _keycloakAuthService;
 
-    public PasswordController(ISsoPasswordService passwordService)
+    public PasswordController(IKeycloakAuthService keycloakAuthService)
     {
-        _passwordService = passwordService;
+        _keycloakAuthService = keycloakAuthService;
+        
     }
 
-    [HttpPost("change")]
-    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request, CancellationToken cancellationToken)
+    [HttpGet("change-password-url")]
+    public IActionResult ChangePassword()
     {
-        // Get token from Authorization header
-        var authHeader = Request.Headers["Authorization"].FirstOrDefault();
-        if (authHeader == null || !authHeader.StartsWith("Bearer "))
-            return Unauthorized("Missing or invalid Authorization header");
-
-        var token = authHeader["Bearer ".Length..];
-
-        await _passwordService.ChangeOwnPasswordAsync(token, request.CurrentPassword, request.NewPassword, cancellationToken);
-
-        return NoContent();
+        return Ok(new {
+            changePasswordUrl = _keycloakAuthService.GenerateChangePasswordUrl()
+        });
     }
 }
 
-public record ChangePasswordRequest(string CurrentPassword, string NewPassword);
