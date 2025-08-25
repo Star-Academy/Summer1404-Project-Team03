@@ -1,6 +1,65 @@
-@etl_backend_HostAddress = http://localhost:5110
+#@etl_backend_HostAddress = http://localhost:5110
+#@token=eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6MnF1SkYzaWMxblcwazJpSFBFSl90Z01fLUkweERMcEIwTTRnM1pKc0RFIn0.eyJleHAiOjE3NTU1MTE4MDcsImlhdCI6MTc1NTUxMDkwNywiYXV0aF90aW1lIjoxNzU1NTEwOTA3LCJqdGkiOiJvbnJ0bmE6YzEzMjg4MDktODE5MC1kOWIwLTNkOTEtOWZhMWJhOTUzMWM2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9jb2Rlc3RhciIsImF1ZCI6WyJyZWFsbS1tYW5hZ2VtZW50IiwiYnJva2VyIiwiYWNjb3VudCJdLCJzdWIiOiI0Y2E2YzMxNS00ZTE3LTQxOWUtYWI4Zi1kOWY3M2RkNTFkMDciLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJteV9iYWNrZW5kX2FwcCIsInNpZCI6ImU5MTg0MzNhLWIwYmYtNDYxYS04NjdhLWIxMjRmY2ZjNWIxMyIsImFjciI6IjEiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI1MiJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsImRlZmF1bHQtcm9sZXMtY29kZXN0YXIiLCJkYXRhX2FkbWluIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJjcmVhdGUtY2xpZW50Il19LCJicm9rZXIiOnsicm9sZXMiOlsicmVhZC10b2tlbiJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsInZpZXctYXBwbGljYXRpb25zIiwidmlldy1jb25zZW50Iiwidmlldy1ncm91cHMiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsImRlbGV0ZS1hY2NvdW50IiwibWFuYWdlLWNvbnNlbnQiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiY29kZSBzdGFyIGFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiY29kZXN0YXJfYWRtaW4iLCJnaXZlbl9uYW1lIjoiY29kZSBzdGFyIiwiZmFtaWx5X25hbWUiOiJhZG1pbiIsImVtYWlsIjoib2xhZ2hAZ21haWwuY29tIn0.QyKd9hNbd6-VxLLHqLvaJu6Bakd-z8AYK7Wae7tEbxVMr_TweISoorTm029Rwx2v29BDSOstowPMoUYkKlTGMIZABcEOpBXnyHzJcQCUYrWXJNIEicX-HzQhLpkIPNlLWnGgY6RePoYzzetImN9L0_kqNUoelOQDkl2nWRX91THKu1_qmkkIlmfx6griZQRNHynNVgf8aXc_o2UVc6tFMh4HNsNZWu73JJIiSS6ldUf2t4pYtezdaQewQkX71rOVd4l8BKbTr2F3GryI-NLwihauXKSbxEkYPgqcp9N4b9F7w1TJ5UfkA_keJV18bfwQ_OidohqxWdd0HMjyZj1QgA
+#@kc_host=http://localhost:8080
+#@realm=codestar
+#
+#GET {{etl_backend_HostAddress}}/weatherforecast/
+#Accept: application/json
+#
+####
+#GET http://localhost:8080/realms/codestar/.well-known/openid-configuration
+#
+#
+#
+####
+#GET {{kc_host}}/
+#
+#
+####
+#POST http://localhost:8080/realms/{{realm}}/protocol/openid-connect/token
+#Authorization: Bearer {{token}}
+#Content-Type: application/x-www-form-urlencoded
+#
+#grant_type=urn:ietf:params:oauth:grant-type:uma-ticket
+#
+#
+#### 
+#GET {{kc_host}}/realms/codestar/protocol/openid-connect/auth
+#    ?client_id=my_backend_app
+#    &redirect_uri=http://localhost:3000/callback
+#    &response_type=code
+#    &scope=openid
+#
+#
+##http://localhost:3000/callback?
+##session_state=3527a91c-d58f-4dea-a7c3-8f71a217a3f0
+##&iss=http%3A%2F%2Flocalhost%3A8080%2Frealms%2Fcodestar
+##&code=c9c441d4-e738-4fa1-a94c-9b772b0f0694.3527a91c-d58f-4dea-a7c3-8f71a217a3f0.abe78f20-26c4-4cfb-a34d-158895ffe547
+#
+##http://localhost:3000/callback?session_state=ff75d58d-c65f-4b1b-9efc-c11cc72c7d0a&iss=http%3A%2F%2Flocalhost%3A8080%2Frealms%2Fcodestar&
+##code=865d8923-1379-45c0-a43b-21abe529a7f5.ff75d58d-c65f-4b1b-9efc-c11cc72c7d0a.26bf7264-926a-48b0-bc0e-1b1ca7dec78c
+#
+#
+##http://localhost:3000/callback?
+##session_state=a4cf181b-9199-47b1-9f00-ed9d2b2dbba0
+##&iss=http%3A%2F%2Flocalhost%3A8080%2Frealms%2Fcodestar
+##&code=3c4b7885-9e14-4561-b433-95eb79bdca8d.a4cf181b-9199-47b1-9f00-ed9d2b2dbba0.bf36c668-d2c8-4f69-899d-34a960d0f8e4
+#
+####
+#POST {{kc_host}}/realms/{{realm}}/protocol/openid-connect/token
+#Content-Type: application/x-www-form-urlencoded
+#
+#{
+#  "grant_type": "authorization_code",
+#  "client_id":"my_backend_app",
+#  "code":"33dcdf6a-5192-4725-911c-7b850e11a077.a4cf181b-9199-47b1-9f00-ed9d2b2dbba0.bf36c668-d2c8-4f69-899d-34a960d0f8e4",
+#  "redirect_uri":"http://localhost:3000/callback/"
+#}
 
-GET {{etl_backend_HostAddress}}/weatherforecast/
-Accept: application/json
 
-###
+### lgoout
+POST {{kc_host}}//realms/{{realm}}/protocol/openid-connect/logout
+Content-Type: application/x-www-form-urlencoded
+
+client_id=my-client
+refresh_token=
