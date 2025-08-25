@@ -16,7 +16,7 @@ public class TokenCookieService : ITokenCookieService
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Strict,
             Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn) 
             // access token should be in cookies as long as refresh
         };
@@ -25,7 +25,7 @@ public class TokenCookieService : ITokenCookieService
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Strict,
             Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn)
         };
 

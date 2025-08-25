@@ -3,6 +3,7 @@
 public class KeycloakOptions
 {
     public string AuthServerUrl { get; set; } = string.Empty;
+    public string AuthServerUrlPublic { get; set; } =  string.Empty;
     public string Realm { get; set; } = string.Empty;
     public string ClientId { get; set; } = string.Empty;
     public string ClientSecret { get; set; } =  string.Empty;
@@ -18,6 +19,6 @@ public class KeycloakOptions
     public string RolesKey { get; set; } =  "roles";
     
     public string Authority => $"{AuthServerUrl}/realms/{Realm}";
-    public string ValidIssuer => $"{AuthServerUrl}/realms/{Realm}";
+    public string ValidIssuer => $"{AuthServerUrlPublic}/realms/{Realm}";
     public TimeSpan ClockSkew => TimeSpan.FromSeconds(ClockSkewSeconds);
 }
