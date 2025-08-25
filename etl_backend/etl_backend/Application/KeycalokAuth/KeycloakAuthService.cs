@@ -46,7 +46,7 @@ public class KeycloakAuthService : IKeycloakAuthService
         return _responseTokenParser.ParseTokenResponse(content);
     }
     
-    public string GenerateChangePasswordUrl()
+    public string GenerateChangePasswordUrlPage()
     {
         var baseUrl = _options.AuthServerUrl!.TrimEnd('/');
         return $"{baseUrl}/realms/{_options.Realm}/account/account-security/signing-in/";

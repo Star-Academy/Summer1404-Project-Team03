@@ -35,8 +35,8 @@ public class KeycloakAdminClient : IKeycloakAdminClient
                 Id = element.GetProperty("id").GetString()!,
                 Username = element.GetProperty("username").GetString() ?? string.Empty,
                 Email = element.GetProperty("email").GetString() ?? string.Empty,
-                FirstName = element.TryGetProperty("firstName", out var fn) ? fn.GetString() : null,
-                LastName = element.TryGetProperty("lastName", out var ln) ? ln.GetString() : null
+                FirstName = element.GetProperty("firstName").GetString(),
+                LastName = element.GetProperty("lastName").GetString(),
             };
 
             users.Add(user);
@@ -65,8 +65,8 @@ public class KeycloakAdminClient : IKeycloakAdminClient
             Id = element.GetProperty("id").GetString()!,
             Username = element.GetProperty("username").GetString() ?? string.Empty,
             Email = element.GetProperty("email").GetString() ?? string.Empty,
-            FirstName = element.TryGetProperty("firstName", out var fn) ? fn.GetString() : null,
-            LastName = element.TryGetProperty("lastName", out var ln) ? ln.GetString() : null
+            FirstName = element.GetProperty("firstName").GetString(),
+            LastName = element.GetProperty("lastName").GetString(),
         };
 
         var roles = await _roleManager.GetUserRolesAsync(user.Id, accessToken!, cancellationToken);
@@ -104,8 +104,8 @@ public class KeycloakAdminClient : IKeycloakAdminClient
             Id = element.GetProperty("id").GetString()!,
             Username = element.GetProperty("username").GetString() ?? string.Empty,
             Email = element.GetProperty("email").GetString() ?? string.Empty,
-            FirstName = element.TryGetProperty("firstName", out var fn) ? fn.GetString() : null,
-            LastName = element.TryGetProperty("lastName", out var ln) ? ln.GetString() : null
+            FirstName = element.GetProperty("firstName").GetString(),
+            LastName = element.GetProperty("lastName").GetString(),
         };
 
         return createdUser;
@@ -116,14 +116,14 @@ public class KeycloakAdminClient : IKeycloakAdminClient
     {
         var accessToken = await _accountTokenProvider.GetServiceAccountTokenAsync();
         await _ssoClient.PutAsync($"{UsersEndpoint}/{userId}", userToUpdate, accessToken!, cancellationToken);
-        var jsonUpdatedUserWithRoles = await GetUserByIdAsync(userId, cancellationToken);
+        var updatedUserWithRoles = await GetUserByIdAsync(userId, cancellationToken);
         var updatedUser = new UserDto
         {
-            Id = jsonUpdatedUserWithRoles.Id,
-            Username = jsonUpdatedUserWithRoles.Username,
-            Email = jsonUpdatedUserWithRoles.Email,
-            FirstName = jsonUpdatedUserWithRoles.FirstName,
-            LastName = jsonUpdatedUserWithRoles.LastName,
+            Id = updatedUserWithRoles.Id,
+            Username = updatedUserWithRoles.Username,
+            Email = updatedUserWithRoles.Email,
+            FirstName = updatedUserWithRoles.FirstName,
+            LastName = updatedUserWithRoles.LastName,
         };
         return updatedUser;
     }

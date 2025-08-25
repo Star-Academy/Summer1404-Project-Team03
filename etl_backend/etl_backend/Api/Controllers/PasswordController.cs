@@ -19,7 +19,7 @@ public class PasswordController : ControllerBase
     public IActionResult ChangePassword()
     {
         return Ok(new {
-            changePasswordUrl = _keycloakAuthService.GenerateChangePasswordUrl()
+            changePasswordUrl = _keycloakAuthService.GenerateChangePasswordUrlPage()
         });
     }
 }

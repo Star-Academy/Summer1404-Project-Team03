@@ -14,21 +14,19 @@ namespace etl_backend.Api.Controllers;
 [Route("api/auth")]
 public class AuthController : ControllerBase
 {
-    private readonly KeycloakOptions _options;
-    private readonly HttpClient _httpClient;
+    
     private readonly ITokenCookieService _tokenCookieService;
-    private readonly ITokenExtractor _tokenExtractor;
     private readonly IKeycloakAuthService  _keycloakAuthService;
-    private readonly IKeycloakRefreshTokenRevokable _keycloakRefreshRevoker;
+    private readonly IKeycloakLogOutUser _keycloakLogOutUser;
+    private readonly ITokenProfileExtractor _tokenProfileExtractor;
 
-    public AuthController(IOptions<KeycloakOptions> options, IHttpClientFactory httpClientFactory, ITokenCookieService tokenCookieService, ITokenExtractor tokenExtractor, IKeycloakAuthService keycloakAuthService, IKeycloakRefreshTokenRevokable keycloakRefreshRevoker)
+    public AuthController(ITokenCookieService tokenCookieService, IKeycloakAuthService keycloakAuthService, IKeycloakLogOutUser keycloakLogOutUser, ITokenProfileExtractor tokenProfileExtractor)
     {
         _tokenCookieService = tokenCookieService;
-        _tokenExtractor = tokenExtractor;
         _keycloakAuthService = keycloakAuthService;
-        _keycloakRefreshRevoker = keycloakRefreshRevoker;
-        _options = options.Value;
-        _httpClient = httpClientFactory.CreateClient();
+        _keycloakLogOutUser = keycloakLogOutUser;
+        _tokenProfileExtractor = tokenProfileExtractor;
+        
     }
 
     [HttpPost("login")]
@@ -54,15 +52,12 @@ public class AuthController : ControllerBase
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
-         
-        var okResponse = Ok(new { message = "Logged out successfully" });
-        var refreshToken = _tokenExtractor.GetRefreshToken(Request, _options.RefreshCookieName);
-        if (refreshToken.IsNullOrEmpty()) return okResponse;
+
+        var currentUser = await _tokenProfileExtractor.ExtractProfile(User);
+        var userId = currentUser.Id;
+        var logoutSuccessfully = await _keycloakLogOutUser.LogOutAsynk(userId, CancellationToken.None);
+        return logoutSuccessfully ? NoContent() : BadRequest();
         
-        var revokedSuccessfully = await _keycloakRefreshRevoker.RevokeTokenAsynk(refreshToken!);
-        // for now no need to check revoking was successfully of not.
-        _tokenCookieService.RemoveTokens(Response);
-        return okResponse;
     }
 
     [HttpGet("me")]

@@ -41,7 +41,7 @@ builder.Services.AddSingleton<ITokenExpirationChecker, KeycloakTokenExpirationCh
 builder.Services.AddSingleton<IAccessTokenRefreshable, KeycloakAccessTokenRefresher>();
 builder.Services.AddSingleton<IKeycloakAuthService, KeycloakAuthService>();
 builder.Services.AddSingleton<IParseTokenResponse, KeycloakTokenResponseParser>();
-builder.Services.AddSingleton<IKeycloakRefreshTokenRevokable, KeycloakKeycloakRefreshTokenRevoker>();
+builder.Services.AddSingleton<IKeycloakLogOutUser, KeycloakLogOutUser>();
 builder.Services.AddSingleton<IKeycloakTokenHandler, KeycloakTokenHandler>();
 builder.Services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
 

@@ -14,6 +14,8 @@ public class UserWithRolesDto: UserDto
         Id = user.Id;
         Username = user.Username;
         Email = user.Email;
+        FirstName = user.FirstName;
+        LastName = user.LastName;
         Roles = roles;
     }
 }
