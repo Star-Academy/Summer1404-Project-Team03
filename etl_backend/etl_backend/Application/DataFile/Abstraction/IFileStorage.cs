@@ -1,0 +1,7 @@
+﻿namespace etl_backend.Application.DataFile.Abstraction;
+
+public interface IFileStorage
+{
+    Task<string> SaveFileAsync(Stream fileStream, string fileName, string dirPath = "");
+    Task DeleteFileAsync(string filePath);
+}
