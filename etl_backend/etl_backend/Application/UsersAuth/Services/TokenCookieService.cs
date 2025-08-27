@@ -1,9 +1,9 @@
-﻿using etl_backend.Application.Abstraction;
-using etl_backend.Application.KeycalokAuth.Dtos;
+﻿using etl_backend.Application.KeycalokAuth.Dtos;
+using etl_backend.Application.UsersAuth.Abstraction;
 using etl_backend.Configuration.Enums;
 using Microsoft.Extensions.Options;
 
-namespace etl_backend.Application.Services;
+namespace etl_backend.Application.UsersAuth.Services;
 
 public class TokenCookieService : ITokenCookieService
 {
