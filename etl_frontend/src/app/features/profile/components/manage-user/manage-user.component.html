@@ -1,0 +1,60 @@
+@if (isCreateUserModal()) {
+  <app-create-user-modal [visible]="isCreateUserModal()" (close)="changeCreateUserModalStatus()"/>
+}
+
+@if (isEditUserModal()) {
+  <app-edit-user-modal [visible]="isEditUserModal()" (close)="changeEditUserModalStatus()"/>
+}
+
+@if (isDeleteUserDialog()) {
+  <app-delete-user-dialog [visible]="isDeleteUserDialog()" (close)="changeDeleteUserDialogStatus()" />
+}
+
+<div class="manage-user__btn">
+  <p-button label="Create User"  rounded (click)="changeCreateUserModalStatus()"/>
+</div>
+
+<div class="table-container">
+  <p-table [value]="users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="loading">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td class="table-container__action">
+          <p-button
+            (click)="changeEditUserModalStatus()"
+            icon="pi pi-pencil"
+            text
+            rounded
+            severity="secondary"
+          />
+          <p-button
+            (click)="changeDeleteUserDialogStatus()"
+            icon="pi pi-trash"
+            text
+            rounded
+            severity="secondary"
+          />
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="loadingbody" let-columns="columns">
+      <tr style="height:3rem">
+        @for (col of cols; track col.field) {
+          <td>
+            <p-skeleton/>
+          </td>
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

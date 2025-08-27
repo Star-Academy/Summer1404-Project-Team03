@@ -19,6 +19,15 @@ export const routes: Routes = [
     canActivate: [] //TODO adding auth guard
   },
   {
+    path: 'send-token-code',
+    loadComponent: () => import('./features/send-token-code/send-token-code.component').then(m => m.SendTokenCodeComponent),
+    canActivate: [] //TODO adding auth guard
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule),
+  },
+  {
     path: '**',
     redirectTo: 'not-found'
   },

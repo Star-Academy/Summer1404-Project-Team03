@@ -1,12 +1,14 @@
 import {Component, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {Toolbar} from 'primeng/toolbar';
 import {Button} from 'primeng/button';
+import {HeaderComponent} from '../../shared/components/header/header.component';
+import {SignInDirective} from '../../shared/directives/sign-in/sign-in.directive';
 
 @Component({
   selector: 'app-landing',
   imports: [
-    Toolbar,
     Button,
+    HeaderComponent,
+    SignInDirective,
   ],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.scss',

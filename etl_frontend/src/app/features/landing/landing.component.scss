@@ -2,16 +2,10 @@
   block-size: 100vh;
   display: flex;
   flex-direction: column;
+  padding-inline: 1rem;
 }
 
 .header {
-  block-size: 10%;
-  padding-inline: 1.5rem;
-
-  ::ng-deep .p-toolbar {
-    padding: 0 !important;
-  }
-
   &__logo {
     display: flex;
     justify-content: center;
@@ -19,43 +13,50 @@
     gap: 1rem;
 
     &__icon {
-      inline-size: 4.5rem;
-      block-size: 3.2rem;
+      inline-size: 4rem;
+      block-size: 2.5rem;
     }
 
     &__text {
       font-size: 1.5rem;
+      font-weight: 800;
     }
   }
 }
 
 .main {
   block-size: 90%;
-  padding-inline: 2rem;
+  padding-inline: 1.5rem;
   &__content {
     block-size: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    &__text {
-      inline-size: 50vw;
-      font-size: 1.4rem;
-      text-align: start;
-      line-height: 2rem;
-      word-spacing: 0.1rem;
-      font-weight: 500;
-      letter-spacing: 0.06rem;
-      animation: fadeInRight 1.2s ease-out forwards;
+    &--left {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      &__text {
+        inline-size: 50vw;
+        font-size: 1.4rem;
+        text-align: start;
+        line-height: 2rem;
+        word-spacing: 0.1rem;
+        font-weight: 500;
+        letter-spacing: 0.06rem;
+        animation: fadeInRight 1.2s ease-out forwards;
+      }
+
+      &__btn {
+        animation: fadeInUp 1.5s ease-out forwards;
+      }
     }
+
 
     &__img {
       inline-size: 28rem;
       animation: fadeInLeft 1.2s ease-out forwards;
-    }
-
-    &__btn {
-      animation: fadeInUp 1.5s ease-out forwards;
     }
   }
 }

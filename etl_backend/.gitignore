@@ -34,9 +34,6 @@ artifacts/
 packages/
 .nuget/
 
-# Entity Framework migrations
-Migrations/
-
 # Log files
 *.log
 

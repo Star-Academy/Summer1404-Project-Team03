@@ -1,27 +1,22 @@
-<header class="header">
-  <p-toolbar>
-    <ng-template #start>
-      <div class="header__logo">
-        <img src="/assets/logo.svg" alt="logo" class="header__logo__icon">
-        <h3 class="header__logo__text">DataWave</h3>
-      </div>
-    </ng-template>
+<app-header>
+  <div class="header__logo" start>
+    <img src="/assets/logo.svg" alt="logo" class="header__logo__icon">
+    <span class="header__logo__text">DataWave</span>
+  </div>
 
-    <ng-template #end>
-      <p-button label="sign in" size="large" icon="pi pi-sign-in"/>
-    </ng-template>
-  </p-toolbar>
-</header>
+  <p-button end label="Sign in" size="large" icon="pi pi-sign-in" appSignIn/>
+</app-header>
+
 <main class="main">
   <div class="main__content">
-    <div>
-      <h3 class="main__content__text">
+    <div class="main__content--left">
+      <h3 class="main__content--left__text">
         DataWeave empowers businesses and data enthusiasts to turn raw data into actionable insights. With an easy
         drag-and-drop interface and powerful visualization tools, you can explore patterns, detect trends, and make
         data-driven decisions faster than ever. Whether you’re analyzing simple datasets or building complex workflows,
         DataWeave makes data exploration seamless.
       </h3>
-      <p-button label="Get start analyst data" size="large" outlined="true" class="main__content__btn"/>
+      <p-button label="Get start analyst data" size="large" outlined="true" class="main__content__btn" appSignIn/>
     </div>
     <lottie-player
       src="/assets/landing/AnalyticsCharacterAnimation.json"
