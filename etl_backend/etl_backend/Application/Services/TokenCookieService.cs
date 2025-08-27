@@ -1,42 +1,50 @@
 ﻿using etl_backend.Application.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
+using etl_backend.Configuration.Enums;
+using Microsoft.Extensions.Options;
 
 namespace etl_backend.Application.Services;
 
 public class TokenCookieService : ITokenCookieService
 {
-    private const string AccessCookieName = "access_token";
-    private const string RefreshCookieName = "refresh_token";
+    private readonly KeycloakOptions _keycloakOptions;
+    private readonly AppEnvironment _appEnvironment;
+
+    public TokenCookieService(IConfiguration configuration, IOptions<KeycloakOptions> keycloakOptions)
+    {
+        var appEnvironmentName = configuration["ASPNETCORE_ENVIRONMENT"] ?? "Production";
+        _appEnvironment = appEnvironmentName.ToAppEnvironment();
+        _keycloakOptions = keycloakOptions.Value;
+    }
 
     public void SetTokens(HttpResponse response, TokenResponseDto tokenResponse)
     {
+        
         var now = DateTimeOffset.UtcNow;
 
-        var accessOptions = new CookieOptions
+        var sameSite = _appEnvironment switch
         {
-            HttpOnly = true,
-            Secure = true,
-            SameSite = SameSiteMode.Strict,
-            Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn) 
-            // access token should be in cookies as long as refresh
+            AppEnvironment.Development => SameSiteMode.None,
+            AppEnvironment.Test        => SameSiteMode.None,
+            AppEnvironment.Production  => SameSiteMode.Strict,
+            _ => throw new ArgumentOutOfRangeException()
         };
 
-        var refreshOptions = new CookieOptions
+        var options = new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = sameSite,
             Expires = now.AddSeconds(tokenResponse.RefreshExpiresIn)
         };
 
-        response.Cookies.Append(AccessCookieName, tokenResponse.AccessToken, accessOptions);
-        response.Cookies.Append(RefreshCookieName, tokenResponse.RefreshToken, refreshOptions);
+        response.Cookies.Append(_keycloakOptions.AccessCookieName, tokenResponse.AccessToken, options);
+        response.Cookies.Append(_keycloakOptions.RefreshCookieName, tokenResponse.RefreshToken, options);
     }
 
     public void RemoveTokens(HttpResponse response)
     {
-        response.Cookies.Delete(AccessCookieName);
-        response.Cookies.Delete(RefreshCookieName);
+        response.Cookies.Delete(_keycloakOptions.AccessCookieName);
+        response.Cookies.Delete(_keycloakOptions.RefreshCookieName);
     }
 }
-
