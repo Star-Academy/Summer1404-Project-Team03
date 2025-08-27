@@ -25,6 +25,25 @@
     <ItemGroup>
       <Compile Remove="Services\Auth\keycloakAuthService\Abstraction\IAccessTokenRefreshable.cs" />
       <Compile Remove="Services\Auth\keycloakAuthService\KeyclaokAuthService.cs" />
+      <Compile Remove="Application\Abstraction\ICreateUserService.cs" />
+      <Compile Remove="Application\Abstraction\IEditUserService.cs" />
+      <Compile Remove="Application\Abstraction\ITokenCookieService.cs" />
+      <Compile Remove="Application\Abstraction\ITokenExpirationChecker.cs" />
+      <Compile Remove="Application\Abstraction\ITokenExtractor.cs" />
+      <Compile Remove="Application\Dtos\BaseUserDto.cs" />
+      <Compile Remove="Application\Dtos\EditUserRequestDto.cs" />
+      <Compile Remove="Application\Dtos\EditUserRolesRequestDto.cs" />
+      <Compile Remove="Application\Dtos\RoleDto.cs" />
+      <Compile Remove="Application\Dtos\UserCreateDto.cs" />
+      <Compile Remove="Application\Dtos\UserDto.cs" />
+      <Compile Remove="Application\Services\CreateUserService.cs" />
+      <Compile Remove="Application\Services\DeleteUserService.cs" />
+      <Compile Remove="Application\Services\EditUserRolesService.cs" />
+      <Compile Remove="Application\Services\EditUserService.cs" />
+      <Compile Remove="Application\Services\GetAllRolesService.cs" />
+      <Compile Remove="Application\Services\GetAllUsersService.cs" />
+      <Compile Remove="Application\Services\GetUserByIdService.cs" />
+      <Compile Remove="Application\Services\TokenCookieExtractor.cs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -36,6 +55,16 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Application\Abstraction\" />
+      <Folder Include="Application\Dtos\" />
+      <Folder Include="Application\Services\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Infrastracture\" />
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
-using etl_backend.Application.Abstraction;
-using etl_backend.Application.Dtos;
 using etl_backend.Application.KeycalokAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Dtos;
 using Newtonsoft.Json.Linq;
 
 namespace etl_backend.Application.KeycalokAuth;

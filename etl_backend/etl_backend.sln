@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etl_backend", "etl_backend\etl_backend.csproj", "{A6FA3628-ED49-481A-A684-2E678444A42D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "etl_backend.Test", "etl_backend.Test\etl_backend.Test.csproj", "{19E3D7F9-8E76-4DF9-AE9D-106C30BFA311}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{A6FA3628-ED49-481A-A684-2E678444A42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6FA3628-ED49-481A-A684-2E678444A42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6FA3628-ED49-481A-A684-2E678444A42D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19E3D7F9-8E76-4DF9-AE9D-106C30BFA311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19E3D7F9-8E76-4DF9-AE9D-106C30BFA311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19E3D7F9-8E76-4DF9-AE9D-106C30BFA311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19E3D7F9-8E76-4DF9-AE9D-106C30BFA311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

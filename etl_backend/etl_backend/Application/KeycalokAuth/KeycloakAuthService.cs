@@ -1,6 +1,6 @@
-﻿using etl_backend.Application.KeycalokAuth.Abstraction;
+﻿using etl_backend.Api.Exceptions;
+using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
-using etl_backend.Services.SsoServices.Exceptions;
 using Microsoft.Extensions.Options;
 
 namespace etl_backend.Application.KeycalokAuth;

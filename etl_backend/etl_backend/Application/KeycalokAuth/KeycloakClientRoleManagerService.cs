@@ -1,5 +1,5 @@
-using etl_backend.Application.Dtos;
 using etl_backend.Application.KeycalokAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Dtos;
 
 namespace etl_backend.Application.KeycalokAuth;
 

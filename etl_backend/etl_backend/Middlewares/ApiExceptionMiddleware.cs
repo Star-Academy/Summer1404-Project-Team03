@@ -1,4 +1,4 @@
-﻿using etl_backend.Services.SsoServices.Exceptions;
+﻿using etl_backend.Api.Exceptions;
 
 namespace etl_backend.Middlewares;
 

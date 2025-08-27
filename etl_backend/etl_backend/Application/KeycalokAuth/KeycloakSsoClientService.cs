@@ -2,9 +2,9 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using etl_backend.Api.Exceptions;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
-using etl_backend.Services.SsoServices.Exceptions;
 using Microsoft.Extensions.Options;
 
 namespace etl_backend.Application.KeycalokAuth;

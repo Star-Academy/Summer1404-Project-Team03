@@ -1,5 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
-using etl_backend.Application.Abstraction;
+using etl_backend.Application.UsersAuth.Abstraction;
 
 namespace etl_backend.Application.KeycalokAuth;
 

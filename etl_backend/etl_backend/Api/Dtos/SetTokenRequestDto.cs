@@ -1,4 +1,4 @@
-﻿namespace etl_backend.DTO;
+﻿namespace etl_backend.Api.Dtos;
 
 public class SetTokenRequestDto
 {

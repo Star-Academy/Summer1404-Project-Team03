@@ -1,8 +1,8 @@
-﻿using etl_backend.Application.Abstraction;
+﻿using etl_backend.Api.Dtos;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
+using etl_backend.Application.UsersAuth.Abstraction;
 using etl_backend.Configuration;
-using etl_backend.DTO;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

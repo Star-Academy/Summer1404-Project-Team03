@@ -1,12 +1,11 @@
 ﻿using System.Security.Claims;
-using etl_backend.Application.Abstraction;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
-using etl_backend.Configuration;
+using etl_backend.Application.UsersAuth.Abstraction;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
-namespace etl_backend.Authentication;
+namespace etl_backend.Middlewares.Authentication;
 
 public static class KeycloakAuthenticationExtensions
 {

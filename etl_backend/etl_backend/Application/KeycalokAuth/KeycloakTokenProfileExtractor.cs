@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
-using etl_backend.Application.Abstraction;
-using etl_backend.Application.Dtos;
 using etl_backend.Application.KeycalokAuth.Dtos;
+using etl_backend.Application.UsersAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Dtos;
 using Microsoft.Extensions.Options;
 
 namespace etl_backend.Application.KeycalokAuth;

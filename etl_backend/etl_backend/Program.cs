@@ -1,13 +1,16 @@
-using etl_backend.Application.Abstraction;
+using etl_backend.Application.DataFile.Configurations;
+using etl_backend.Application.DataFile.Enums;
 using etl_backend.Application.KeycalokAuth;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
-using etl_backend.Application.Services;
-using etl_backend.Authentication;
+using etl_backend.Application.UsersAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Services;
 using etl_backend.Configuration;
+using etl_backend.DbConfig;
 using etl_backend.Extensions;
 using etl_backend.Middlewares;
-using etl_backend.Services.SsoServices;
+using etl_backend.Middlewares.Authentication;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +21,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient();
 builder.Services.Configure<KeycloakOptions>(
     builder.Configuration.GetSection("Keycloak"));
+
+builder.Services.Configure<StorageSettings>(
+    builder.Configuration.GetSection("Storage"));
+
+builder.Services.AddDbContextFactory<AppDbContext>(options =>
+    options.UseNpgsql(builder.Configuration["Database:ConnectionString"]));
 
 builder.Services.AddCors(options =>
 {

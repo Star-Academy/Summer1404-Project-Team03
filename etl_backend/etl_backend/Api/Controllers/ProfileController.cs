@@ -1,5 +1,5 @@
-using etl_backend.Application.Abstraction;
-using etl_backend.Application.Dtos;
+using etl_backend.Application.UsersAuth.Abstraction;
+using etl_backend.Application.UsersAuth.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
