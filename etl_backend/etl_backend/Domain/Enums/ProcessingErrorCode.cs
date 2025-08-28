@@ -5,7 +5,7 @@ public enum ProcessingErrorCode
     None = 0,
     StorageSaveFailed,
     StagingDbWriteFailed,
-    SchemaRegistered,
+    SchemaRegistrationFailed,
     SchemaDbWriteFailed,
     CreateTableFailed,
     LoadFailed,

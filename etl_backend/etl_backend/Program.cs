@@ -1,4 +1,5 @@
 using etl_backend.Application.DataFile.Abstraction;
+using etl_backend.Application.DataFile.Configurations;
 using etl_backend.Application.DataFile.Services;
 using etl_backend.Application.KeycalokAuth;
 using etl_backend.Application.KeycalokAuth.Abstraction;
@@ -65,6 +66,15 @@ builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository
 
 //Data saving related services
 builder.Services.AddScoped<IFileStagingService, FileStagingService>();
+builder.Services.AddScoped<IColumnNameSanitizer, PostgresColumnNameSanitizer>();
+builder.Services.AddScoped<IColumnDefinitionBuilder, DefaultColumnDefinitionBuilder>();
+builder.Services.AddScoped<ITableNameGenerator, DefaultTableNameGenerator>();
+builder.Services.AddScoped<IHeaderProvider, StorageHeaderProvider>();
+builder.Services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService>();
+builder.Services.Configure<PostgresStoreOptions>(config.GetSection("PostgresStore"));
+builder.Services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
+builder.Services.AddSingleton<ITypeMapper, PostgresTypeMapper>();
+
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 

@@ -46,4 +46,12 @@ public class LocalFileStorageService : IFileStorage
         return Task.FromResult(size);
     }
     
+    public Task<Stream> OpenReadAsync(string relativePath)
+    {
+        var fullPath = Path.Combine(_mediaRoot, relativePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+        Stream s = new FileStream(fullPath, FileMode.Open, FileAccess.Read, FileShare.Read, 64 * 1024, useAsync: true);
+        return Task.FromResult(s);
+    }
+
+    
 }
