@@ -11,7 +11,7 @@ using etl_backend.DbConfig;
 
 namespace etl_backend.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(EtlDbContext))]
     [Migration("20250826125915_InitialCreate")]
     partial class InitialCreate
     {

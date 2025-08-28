@@ -10,7 +10,7 @@ using etl_backend.DbConfig;
 
 namespace etl_backend.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(EtlDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

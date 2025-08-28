@@ -2,6 +2,7 @@
 
 public enum FileStageState
 {
+    Uploaded,
     Staged,         
     DbSaved, 
 }

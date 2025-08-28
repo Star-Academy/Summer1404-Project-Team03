@@ -25,7 +25,7 @@ public class DataTableSchemaConfig : IEntityTypeConfiguration<DataTableSchema>
         
         builder.HasMany(t => t.Columns)
             .WithOne(c => c.DataTable)
-            .HasForeignKey(c => c.TableId)
+            .HasForeignKey(c => c.DataTableSchemaId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }

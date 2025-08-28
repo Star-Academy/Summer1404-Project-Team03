@@ -39,4 +39,11 @@ public class LocalFileStorageService : IFileStorage
         return Task.CompletedTask;
     }
     
+    public Task<long> GetFileSizeAsync(string relativePath)
+    {
+        var fullPath = Path.Combine(_mediaRoot, relativePath.Replace("/", Path.DirectorySeparatorChar.ToString()));
+        var size = File.Exists(fullPath) ? new FileInfo(fullPath).Length : 0L;
+        return Task.FromResult(size);
+    }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using etl_backend.DbConfig.Abstraction;
 using etl_backend.Domain;
 using Microsoft.EntityFrameworkCore;
 using etl_backend.DbConfig.Configurations;
@@ -7,16 +8,16 @@ using etl_backend.Domain.Entities;
 namespace etl_backend.DbConfig;
 
 [ExcludeFromCodeCoverage]
-public class AppDbContext : DbContext 
+public class EtlDbContext : DbContext,  IStagingDbContext, ISchemaDbContext
 {
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public EtlDbContext(DbContextOptions<EtlDbContext> options)
         : base(options)
     {
     }
 
-    public DbSet<DataTableSchema> DataTableSchema { get; set; }
-    public DbSet<DataTableColumn> DataTableColumns { get; set; }
-    public DbSet<StagedFile>  StagedFiles { get; set; }
+    public DbSet<DataTableSchema> DataTableSchemas { get; set; } = null!;
+    public DbSet<DataTableColumn> DataTableColumns { get; set; } = null!; 
+    public DbSet<StagedFile>  StagedFiles { get; set; } =  null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

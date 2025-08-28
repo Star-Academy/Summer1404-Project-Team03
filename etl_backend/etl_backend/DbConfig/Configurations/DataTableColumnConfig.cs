@@ -23,6 +23,6 @@ public class DataTableColumnConfig : IEntityTypeConfiguration<DataTableColumn>
         builder.Property(c => c.OrdinalPosition)
             .IsRequired();
         
-        builder.HasIndex(c => new { c.TableId, c.ColumnName }).IsUnique();
+        builder.HasIndex(c => new { c.DataTableSchemaId, c.ColumnName }).IsUnique();
     }
 }

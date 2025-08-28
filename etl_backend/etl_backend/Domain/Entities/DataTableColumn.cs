@@ -10,6 +10,6 @@ public class DataTableColumn
     
     public string ColumnType { get; set; } = "string"; // default all strings
 
-    public int TableId { get; set; }
+    public int DataTableSchemaId { get; set; }
     public DataTableSchema? DataTable { get; set; }
 }

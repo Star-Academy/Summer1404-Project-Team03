@@ -14,7 +14,9 @@ public class StagedFile
     
     public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
     
-    public FileStageState State { get; set; }
+    public ProcessingStage Stage { get; set; } = ProcessingStage.None;
+    public ProcessingStatus Status { get; set; } = ProcessingStatus.InProgress;
+    public ProcessingErrorCode ErrorCode { get; set; } = ProcessingErrorCode.None;
     
     
     public string? ErrorMessage { get; set; } // in case staging/validation fails

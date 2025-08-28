@@ -1,3 +1,5 @@
+using etl_backend.Application.DataFile.Abstraction;
+using etl_backend.Application.DataFile.Services;
 using etl_backend.Application.KeycalokAuth;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
@@ -5,16 +7,16 @@ using etl_backend.Application.UsersAuth.Abstraction;
 using etl_backend.Application.UsersAuth.Services;
 using etl_backend.Configuration;
 using etl_backend.DbConfig;
+using etl_backend.DbConfig.Abstraction;
 using etl_backend.Extensions;
 using etl_backend.Middlewares;
 using etl_backend.Middlewares.Authentication;
+using etl_backend.Repositories;
+using etl_backend.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddHttpClient();
 builder.Services.Configure<KeycloakOptions>(
@@ -23,7 +25,7 @@ builder.Services.Configure<KeycloakOptions>(
 builder.Services.Configure<StorageSettings>(
     builder.Configuration.GetSection("Storage"));
 
-builder.Services.AddDbContextFactory<AppDbContext>(options =>
+builder.Services.AddDbContextFactory<EtlDbContext>(options =>
     options.UseNpgsql(builder.Configuration["Database:ConnectionString"]));
 
 builder.Services.AddCors(options =>
@@ -51,6 +53,18 @@ builder.Services.AddSingleton<IParseTokenResponse, KeycloakTokenResponseParser>(
 builder.Services.AddSingleton<IKeycloakLogOutUser, KeycloakLogOutUser>();
 builder.Services.AddSingleton<IKeycloakTokenHandler, KeycloakTokenHandler>();
 builder.Services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
+
+builder.Services.AddDbContextFactory<EtlDbContext>(opt =>
+    opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IEtlDbContextFactory, EtlDbContextFactory>();
+
+//repositories
+builder.Services.AddScoped<IStagedFileRepository, StagedFileRepository>();
+builder.Services.AddScoped<IDataTableSchemaRepository, DataTableSchemaRepository>();
+builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
+
+//Data saving related services
+builder.Services.AddScoped<IFileStagingService, FileStagingService>();
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
