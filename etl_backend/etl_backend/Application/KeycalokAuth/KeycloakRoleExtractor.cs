@@ -19,33 +19,18 @@ public class KeycloakRoleExtractor : IRoleExtractor
         _tokenProvider = tokenProvider;
     }
 
-    public async Task<IEnumerable<RoleDto>> ExtractRoles(ClaimsPrincipal principal, string scope, string key)
+    public async Task<IEnumerable<RoleDto>> ExtractRoles(ClaimsPrincipal user, string scope, string key)
     {
-        var claim = principal.FindFirst(scope);
-        if (claim == null) return Enumerable.Empty<RoleDto>();
+        string? userId = user.FindFirst("id")?.Value
+                     ?? user.FindFirst(c => c.Type.EndsWith("nameidentifier"))?.Value;
+        
+        var token = await _tokenProvider.GetServiceAccountTokenAsync();
 
-        try
-        {
-            var obj = JObject.Parse(claim.Value);
-            var roleNames = obj[key]?.ToObject<List<string>>() ?? new();
-            if (!roleNames.Any()) return Enumerable.Empty<RoleDto>();
-            
-            var token = await _tokenProvider.GetServiceAccountTokenAsync();
-            if (string.IsNullOrEmpty(token)) return Enumerable.Empty<RoleDto>();
-
-            
-            var allRoles = _roleManagerService.GetAllRolesAsync(token!, CancellationToken.None)
-                .GetAwaiter().GetResult();
-            
-            var matchedRoles = allRoles
-                .Where(r => roleNames.Contains(r.Name))
-                .ToList();
-
-            return matchedRoles;
-        }
-        catch
-        {
-            return Enumerable.Empty<RoleDto>();
-        }
+        
+        var userRoles = await _roleManagerService.GetUserRolesAsync(
+            userId ?? throw new InvalidOperationException(nameof(userId)),
+            token ?? throw new InvalidOperationException(nameof(token)),
+            CancellationToken.None);
+        return userRoles;
     }
 }
