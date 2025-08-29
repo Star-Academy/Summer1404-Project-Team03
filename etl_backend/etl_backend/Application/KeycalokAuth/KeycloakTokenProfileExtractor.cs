@@ -28,13 +28,18 @@ public class KeycloakTokenProfileExtractor : ITokenProfileExtractor
                         ?? user.FindFirst(c => c.Type.EndsWith("emailaddress"))?.Value;
         string? id = user.FindFirst("id")?.Value
                      ?? user.FindFirst(c => c.Type.EndsWith("nameidentifier"))?.Value;
+        string? firstName = user.FindFirst("givenname")?.Value
+                     ?? user.FindFirst(c => c.Type.EndsWith("givenname"))?.Value;
+        string? lastName = user.FindFirst("surname")?.Value
+                     ?? user.FindFirst(c => c.Type.EndsWith("surname"))?.Value;
+        
         return new UserWithRolesDto
         {
             Id = id!,
             Username = user.FindFirst("preferred_username")?.Value!,
             Email = email,
-            FirstName = user.FindFirst("given_name")?.Value,
-            LastName = user.FindFirst("family_name")?.Value,
+            FirstName = firstName,
+            LastName = lastName,
             Roles = roles
         };
     }
