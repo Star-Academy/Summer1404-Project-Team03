@@ -1,4 +1,4 @@
-const baseUrl = 'https://192.168.25.178:7252/api';
+const baseUrl = 'http://localhost:5000/api';
 
 export const environment = {
   production: true,
@@ -10,7 +10,7 @@ export const environment = {
       singOut: `${baseUrl}/auth/logout`,
     },
     users: {
-      me: `${baseUrl}/profile/me`,
+      me: `${baseUrl}/auth/me`,
     },
   }
 };

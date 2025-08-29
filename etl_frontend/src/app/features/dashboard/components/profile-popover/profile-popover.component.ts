@@ -26,15 +26,7 @@ export class ProfilePopoverComponent {
   ];
 
   public toggle(event: Event) {
+    event.stopPropagation();
     this.op.toggle(event);
-  }
-
-  public selectOption(link: string) {
-    this.op.hide();
-  }
-
-  public onClickAccount() {
-    console.log("click")
-    this.router.navigateByUrl('/profile');
   }
 }
