@@ -1,10 +1,15 @@
-import {Injectable} from '@angular/core';
-import {ComponentStore} from "@ngrx/component-store";
-import {tap} from 'rxjs';
-import {UsersService} from "../services/user/users.service"
+import { Injectable } from '@angular/core';
+import { ComponentStore } from "@ngrx/component-store";
+import { finalize, tap } from 'rxjs';
+import { UsersService } from "../services/user/users.service";
 
-export type UserStore = {
-  user: object
+export type User = {
+  username: string;
+  email: string;
+}
+
+type UserStore = {
+  user: User;
   isLoading: boolean;
 }
 
@@ -13,34 +18,30 @@ export type UserStore = {
 })
 export class UserStoreService extends ComponentStore<UserStore> {
   constructor(private readonly http: UsersService) {
-    super({user: {}, isLoading: false});
+    super({ user: { username: '', email: '' }, isLoading: false }); // fixed
   }
 
-  private readonly user$ = this.select((state) => state.user);
-  private readonly isLoading$ = this.select((state) => state.isLoading);
+  private readonly user = this.selectSignal((state) => state.user);
+  private readonly isLoading = this.selectSignal((state) => state.isLoading);
 
-  public readonly vm$ = this.select(
-    this.user$,
-    this.isLoading$,
-    (user, isLoading) => ({user, isLoading})
-  )
+  public readonly vm = this.selectSignal(
+    this.user,
+    this.isLoading,
+    (user, isLoading) => ({ user, isLoading })
+  );
 
-  readonly setUser = this.updater((state, user: object) => ({...state, user}));
-  readonly setLoading = this.updater((state, isLoading: boolean) => ({...state, isLoading}));
+  readonly setUser = this.updater((state, user: User) => ({ ...state, user }));
 
   public loadUser(): void {
-    this.setLoading(true);
+    this.patchState({ isLoading: true });
 
     this.http.getUserInformation().pipe(
       tap({
-        next: (user: object) => {
-          this.setUser(user);
-          this.setLoading(false);
+        next: (user: User) => {
+          this.setUser(user)
         },
-        error: () => {
-          this.setLoading(false);
-        }
-      })
+      }),
+      finalize(() => this.patchState({ isLoading: false }))
     ).subscribe();
   }
 }

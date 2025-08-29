@@ -1,8 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { Button } from "primeng/button";
-import { Popover } from 'primeng/popover';
-import { SignOutDirective } from '../../../../shared/directives/sign-out/sign-out.directive';
-import {Router, RouterModule } from "../../../../../../node_modules/@angular/router";
+import {Component, input, ViewChild} from '@angular/core';
+import {Button} from "primeng/button";
+import {Popover} from 'primeng/popover';
+import {SignOutDirective} from '../../../../shared/directives/sign-out/sign-out.directive';
+import {RouterModule} from "../../../../../../node_modules/@angular/router";
 
 @Component({
   selector: 'app-profile-popover',
@@ -16,13 +16,12 @@ import {Router, RouterModule } from "../../../../../../node_modules/@angular/rou
   styleUrl: './profile-popover.component.scss'
 })
 export class ProfilePopoverComponent {
-  constructor(private readonly router: Router) {
-  }
+  public readonly username = input.required<string>();
   @ViewChild('op') op!: Popover;
 
   public readonly options = [
-    { label: 'Account', link: '/profile', icon: 'pi pi-user' },
-    { label: 'Sign out', link: '', icon: 'pi pi-sign-out' },
+    {label: 'Account', link: '/profile', icon: 'pi pi-user'},
+    {label: 'Sign out', link: '', icon: 'pi pi-sign-out'},
   ];
 
   public toggle(event: Event) {
