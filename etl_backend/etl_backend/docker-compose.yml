@@ -1,20 +1,64 @@
-﻿services:
-  
+﻿#services:
+#  
+#  backend_team3:
+#    image: etl_backend:v1.1
+#    build: .
+#    ports:
+#      - "5000:80"
+##      - "5001:443"
+#      - "443:443"
+#    
+#    env_file:
+#      - .dev.env
+#    
+#    networks:
+#      - internal
+#  
+#  
+#networks:
+#  internal:
+#    driver: bridge
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: etl_dev
+      POSTGRES_USER: etl_user
+      POSTGRES_PASSWORD: etl_password
+    ports:
+      - "5432:5432"             # optional: expose for psql/GUI
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etl_user -d etl_dev"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - internal
+
   backend_team3:
     image: etl_backend:v1.1
     build: .
     ports:
       - "5000:80"
-#      - "5001:443"
-      - "443:443"
-    
+      # - "443:443"
     env_file:
       - .dev.env
-    
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # Persist uploaded files across restarts (matches Storage__Root=storage)
+      - storage_data:/app/storage
     networks:
       - internal
-  
-  
+
 networks:
   internal:
     driver: bridge
+
+volumes:
+  pgdata:
+  storage_data:

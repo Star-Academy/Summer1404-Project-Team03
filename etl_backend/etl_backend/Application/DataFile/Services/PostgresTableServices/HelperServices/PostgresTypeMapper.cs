@@ -8,7 +8,6 @@ public sealed class PostgresTypeMapper : ITypeMapper
     public string ToProviderType(string logicalType) => logicalType.ToLowerInvariant() switch
     {
         "string"   => "TEXT",
-        // future-proofing:
         "int"      => "INTEGER",
         "long"     => "BIGINT",
         "decimal"  => "NUMERIC",

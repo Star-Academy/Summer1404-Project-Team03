@@ -42,15 +42,18 @@ namespace etl_backend.Migrations
                         .HasColumnType("character varying(100)")
                         .HasDefaultValue("string");
 
+                    b.Property<int>("DataTableSchemaId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("OrdinalPosition")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TableId")
-                        .HasColumnType("integer");
+                    b.Property<string>("OriginalColumnName")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TableId", "ColumnName")
+                    b.HasIndex("DataTableSchemaId", "ColumnName")
                         .IsUnique();
 
                     b.ToTable("DataTableColumns");
@@ -79,7 +82,7 @@ namespace etl_backend.Migrations
                     b.HasIndex("TableName")
                         .IsUnique();
 
-                    b.ToTable("DataTableSchema");
+                    b.ToTable("DataTableSchemas");
                 });
 
             modelBuilder.Entity("etl_backend.Domain.Entities.StagedFile", b =>
@@ -90,46 +93,64 @@ namespace etl_backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ErrorCode")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
                     b.Property<string>("ErrorMessage")
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(2000)
+                        .HasColumnType("character varying(2000)");
 
                     b.Property<long>("FileSize")
                         .HasColumnType("bigint");
 
                     b.Property<string>("OriginalFileName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)");
 
                     b.Property<int?>("SchemaId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("State")
+                    b.Property<string>("Stage")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasMaxLength(64)
+                        .HasColumnType("character varying(64)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(32)
+                        .HasColumnType("character varying(32)");
 
                     b.Property<string>("StoredFilePath")
                         .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasMaxLength(1024)
+                        .HasColumnType("character varying(1024)");
 
                     b.Property<DateTime>("UploadedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamptz");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SchemaId")
                         .IsUnique();
 
-                    b.ToTable("StagedFiles");
+                    b.HasIndex("StoredFilePath")
+                        .IsUnique();
+
+                    b.HasIndex("UploadedAt");
+
+                    b.HasIndex("Stage", "Status");
+
+                    b.ToTable("staged_files", (string)null);
                 });
 
             modelBuilder.Entity("etl_backend.Domain.Entities.DataTableColumn", b =>
                 {
                     b.HasOne("etl_backend.Domain.Entities.DataTableSchema", "DataTable")
                         .WithMany("Columns")
-                        .HasForeignKey("TableId")
+                        .HasForeignKey("DataTableSchemaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

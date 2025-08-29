@@ -1,6 +1,8 @@
 using etl_backend.Application.DataFile.Abstraction;
 using etl_backend.Application.DataFile.Configurations;
+using etl_backend.Application.DataFile.Enums;
 using etl_backend.Application.DataFile.Services;
+using etl_backend.Application.DataFile.Services.StageFileRelated;
 using etl_backend.Application.KeycalokAuth;
 using etl_backend.Application.KeycalokAuth.Abstraction;
 using etl_backend.Application.KeycalokAuth.Dtos;
@@ -16,6 +18,7 @@ using etl_backend.Repositories;
 using etl_backend.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Npgsql;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,36 +59,6 @@ builder.Services.AddSingleton<IKeycloakLogOutUser, KeycloakLogOutUser>();
 builder.Services.AddSingleton<IKeycloakTokenHandler, KeycloakTokenHandler>();
 builder.Services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
 
-builder.Services.AddDbContextFactory<EtlDbContext>(opt =>
-    opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IEtlDbContextFactory, EtlDbContextFactory>();
-
-//repositories
-builder.Services.AddScoped<IStagedFileRepository, StagedFileRepository>();
-builder.Services.AddScoped<IDataTableSchemaRepository, DataTableSchemaRepository>();
-builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
-
-//Data saving related services
-builder.Services.AddScoped<IFileStagingService, FileStagingService>();
-builder.Services.AddScoped<IColumnNameSanitizer, PostgresColumnNameSanitizer>();
-builder.Services.AddScoped<IColumnDefinitionBuilder, DefaultColumnDefinitionBuilder>();
-builder.Services.AddScoped<ITableNameGenerator, DefaultTableNameGenerator>();
-builder.Services.AddScoped<IHeaderProvider, StorageHeaderProvider>();
-builder.Services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService>();
-builder.Services.Configure<PostgresStoreOptions>(config.GetSection("PostgresStore"));
-builder.Services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
-builder.Services.AddSingleton<ITypeMapper, PostgresTypeMapper>();
-builder.Services.AddSingleton<ITableNameParser, PostgresTableNameParser>();
-builder.Services.AddSingleton<IDdlBuilder, PostgresDdlBuilder>();
-builder.Services.AddSingleton<ITableCatalog, PostgresTableCatalog>();
-builder.Services.AddSingleton<ISqlExecutor, NpgsqlSqlExecutor>();
-builder.Services.AddSingleton<ICsvRowFormatter>(sp =>
-{
-    var opts = sp.GetRequiredService<IOptions<CsvStagingOptions>>().Value;
-    return new CsvRowFormatter(opts.Delimiter, opts.QuoteChar);
-});
-
-
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
 builder.Services.AddSingleton<IKeycloakServiceAccountTokenProvider, KeycloakServiceAccountTokenProvider>();
@@ -102,6 +75,81 @@ builder.Services.AddSingleton<IDeleteUserService, DeleteUserService>();
 builder.Services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
 builder.Services.AddSingleton<IEditUserRolesService, EditUserRolesService>();
 builder.Services.AddSingleton<IGetRolesList, GetAllRolesService>();
+// builder.Services.AddSingleton<IRowSourceFactory, StorageCsvRowSourceFactory>();
+builder.Services.AddScoped<ICsvHeaderReader, CsvHeaderReader>();
+builder.Services.AddSingleton<ITableAdmin, PostgresTableAdmin>();
+builder.Services.AddSingleton<IColumnAdmin, PostgresColumnAdmin>();
+
+
+
+
+// --- DbContext factory (EF Core) ---
+builder.Services.AddDbContextFactory<EtlDbContext>(opt =>
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped<IEtlDbContextFactory, EtlDbContextFactory>();
+
+// --- Options ---
+builder.Services.Configure<StorageSettings>(builder.Configuration.GetSection("Storage"));
+builder.Services.Configure<CsvStagingOptions>(builder.Configuration.GetSection("CsvStaging"));
+builder.Services.Configure<PostgresStoreOptions>(builder.Configuration.GetSection("PostgresStore"));
+
+// --- Npgsql DataSource (for Postgres adapters) ---
+var cs = builder.Configuration.GetConnectionString("DefaultConnection")
+         ?? throw new InvalidOperationException("Missing DefaultConnection.");
+builder.Services.AddSingleton(sp => new NpgsqlDataSourceBuilder(cs).Build());
+
+// --- Repositories ---
+builder.Services.AddScoped<IStagedFileRepository, StagedFileRepository>();
+builder.Services.AddScoped<IDataTableSchemaRepository, DataTableSchemaRepository>();
+builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
+
+// --- Cross-cutting ---
+builder.Services.AddSingleton<IClock, SystemClock>();
+
+// --- Storage + CSV header/rows ---
+builder.Services.AddScoped<IFileStorage, LocalFileStorageService>();
+builder.Services.AddSingleton<ICsvHeaderReader, CsvHeaderReader>();
+builder.Services.AddScoped<IRowSourceFactory, StorageCsvRowSourceFactory>();
+
+
+// --- Components / helpers ---
+builder.Services.AddScoped<IColumnNameSanitizer, PostgresColumnNameSanitizer>();
+builder.Services.AddScoped<IColumnDefinitionBuilder, DefaultColumnDefinitionBuilder>();
+builder.Services.AddScoped<ITableNameGenerator, DefaultTableNameGenerator>();
+builder.Services.AddScoped<IHeaderProvider, StorageHeaderProvider>();
+builder.Services.AddScoped<ITableSpecFactory, DefaultTableSpecFactory>();
+
+builder.Services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
+builder.Services.AddSingleton<ITypeMapper, PostgresTypeMapper>();
+builder.Services.AddSingleton<ITableNameParser, PostgresTableNameParser>();
+builder.Services.AddSingleton<IDdlBuilder, PostgresDdlBuilder>();
+builder.Services.AddSingleton<ITableCatalog, PostgresTableCatalog>();
+builder.Services.AddSingleton<ISqlExecutor, NpgsqlSqlExecutor>();
+builder.Services.AddSingleton<ICsvRowFormatter>(sp =>
+{
+    var opts = sp.GetRequiredService<IOptions<CsvStagingOptions>>().Value;
+    return new CsvRowFormatter(opts.Delimiter, opts.QuoteChar);
+});
+
+// --- Provider adapters (Postgres) ---
+builder.Services.AddSingleton<ITableAdmin, PostgresTableAdmin>();
+builder.Services.AddSingleton<IColumnAdmin, PostgresColumnAdmin>();
+builder.Services.AddSingleton<IDataWrite, PostgresBulkWriter>();
+
+// --- Use-cases / orchestrators ---
+builder.Services.AddScoped<IFileStagingService, FileStagingService>();
+builder.Services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService>();
+builder.Services.AddScoped<ILoadPreconditionsService, LoadPreconditionsService>();
+builder.Services.AddScoped<IStagedFileStateService, StagedFileStateService>();
+builder.Services.AddScoped<ITableLoadService, TableLoadService>();
+
+// --- Load policy (pick a default; prefer overriding per-call) ---
+builder.Services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
+    mode: LoadMode.Append,
+    dropOnFailure: false
+));
+
+
 
 
 builder.Services.AddAuthorization(options =>

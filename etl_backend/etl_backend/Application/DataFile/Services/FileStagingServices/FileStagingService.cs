@@ -20,11 +20,8 @@ public sealed class FileStagingService : IFileStagingService
         string? savedPath = null;
         try
         {
-            // 1) Save file first (unique path from storage impl)
             savedPath = await _storage.SaveFileAsync(fileStream, originalFileName, subdir ?? "");
             var size = await _storage.GetFileSizeAsync(savedPath);
-
-            // 2) Insert staging row; if this fails, delete the file (compensation)
             var staged = new StagedFile
             {
                 OriginalFileName = originalFileName,
