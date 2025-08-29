@@ -3,12 +3,14 @@ import {Button} from "primeng/button";
 import {Popover} from 'primeng/popover';
 import {SignOutDirective} from '../../../../shared/directives/sign-out/sign-out.directive';
 import {RouterModule} from "../../../../../../node_modules/@angular/router";
+import { Skeleton } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-profile-popover',
   imports: [
     Button,
     Popover,
+    Skeleton,
     SignOutDirective,
     RouterModule
   ],
@@ -17,6 +19,8 @@ import {RouterModule} from "../../../../../../node_modules/@angular/router";
 })
 export class ProfilePopoverComponent {
   public readonly username = input.required<string>();
+  public readonly isLoading = input.required<boolean>();
+
   @ViewChild('op') op!: Popover;
 
   public readonly options = [

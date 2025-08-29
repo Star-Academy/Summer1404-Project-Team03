@@ -5,7 +5,7 @@
   </div>
   <div class="header__toolbar__end" routerLink="" end>
     @if (user(); as currentUser) {
-      <app-profile-popover [username]="currentUser.username"/>
+      <app-profile-popover [username]="currentUser.username" [isLoading]="isLoading()"/>
     }
   </div>
 </app-header>

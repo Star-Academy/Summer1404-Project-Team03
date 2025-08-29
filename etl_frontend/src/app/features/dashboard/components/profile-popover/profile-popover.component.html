@@ -1,7 +1,11 @@
 <p-button icon="pi pi-user" label="Profile" (click)="toggle($event)" outlined rounded text/>
 
 <p-popover class="popover" #op>
-  <p class="popover__username">{{ username() }}</p>
+  @if (isLoading()) {
+    <p-skeleton inline-size="4rem" block-size="2rem" borderRadius="1rem" padding="1rem"></p-skeleton>
+  } @else {
+    <p class="popover__username">{{ username() }}</p>
+  }
   <div class="popover__list">
     <p-button
       [label]="options[0].label"

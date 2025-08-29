@@ -9,9 +9,9 @@ import {UserStoreService} from "../../shared/stores/user-store.service"
 })
 export class DashboardComponent implements OnInit {
   public readonly user = computed(() => this.userStore.vm().user);
+  public readonly isLoading = computed(() => this.userStore.vm().isLoading);
 
-  constructor(private userStore: UserStoreService) {
-  }
+  constructor(private userStore: UserStoreService) {}
 
   ngOnInit() {
     this.userStore.loadUser();

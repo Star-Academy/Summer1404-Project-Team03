@@ -29,6 +29,11 @@ export class UserStoreService extends ComponentStore<UserStore> {
   private readonly user = this.selectSignal((state) => state.user);
   private readonly isLoading = this.selectSignal((state) => state.isLoading);
 
+  private readonly setLoading = this.updater((state, value: boolean) => ({
+    ...state,
+    isLoading: value
+  }));
+
   public readonly vm = this.selectSignal(
     this.user,
     this.isLoading,
@@ -38,15 +43,13 @@ export class UserStoreService extends ComponentStore<UserStore> {
   readonly setUser = this.updater((state, user: UserInfo) => ({...state, user}));
 
   public loadUser(): void {
-    this.patchState({isLoading: true});
+    this.setLoading(true);
 
     this.http.getUserInformation().pipe(
       tap({
-        next: (user: UserInfo) => {
-          this.setUser(user)
-        },
+        next: (user: UserInfo) => this.setUser(user),
       }),
-      finalize(() => this.patchState({isLoading: false}))
+      finalize(() => this.setLoading(false)),
     ).subscribe();
   }
 }

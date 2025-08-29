@@ -16,7 +16,8 @@ import {UserStoreService} from "../../../../shared/stores/user-store.service"
     TagModule,
     ButtonModule,
     DividerModule,
-    RouterModule, RouterLink],
+    RouterModule, RouterLink
+  ],
   templateUrl: './profile-detail.component.html',
   styleUrl: './profile-detail.component.scss'
 })
