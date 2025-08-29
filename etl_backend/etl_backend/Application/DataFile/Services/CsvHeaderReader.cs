@@ -1,3 +1,5 @@
+using etl_backend.Application.DataFile.Abstraction;
+
 namespace etl_backend.Application.DataFile.Services;
 
 using System.Globalization;
@@ -7,10 +9,6 @@ using etl_backend.Application.DataFile.Configurations;
 using etl_backend.Application.DataFile.Enums;
 using Microsoft.Extensions.Options;
 
-public interface ICsvHeaderReader
-{
-    Task<IReadOnlyList<string>> ReadHeadersAsync(Stream stream, CancellationToken ct = default);
-}
 
 public sealed class CsvHeaderReader : ICsvHeaderReader
 {
