@@ -1,15 +1,11 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from "@ngrx/component-store";
-import { finalize, tap } from 'rxjs';
-import { UsersService } from "../services/user/users.service";
-
-export type User = {
-  username: string;
-  email: string;
-}
+import {Injectable} from '@angular/core';
+import {ComponentStore} from "@ngrx/component-store";
+import {finalize, tap} from 'rxjs';
+import {UsersService} from "../services/user/users.service";
+import {UserInfo} from '../types/UserInfoType';
 
 type UserStore = {
-  user: User;
+  user: UserInfo;
   isLoading: boolean;
 }
 
@@ -18,7 +14,16 @@ type UserStore = {
 })
 export class UserStoreService extends ComponentStore<UserStore> {
   constructor(private readonly http: UsersService) {
-    super({ user: { username: '', email: '' }, isLoading: false }); // fixed
+    super({
+      user: {
+        email: '',
+        firstName: '',
+        id: '',
+        lastName: null,
+        roles: [{id: '', name: ''}],
+        username: '',
+      }, isLoading: false
+    });
   }
 
   private readonly user = this.selectSignal((state) => state.user);
@@ -27,21 +32,21 @@ export class UserStoreService extends ComponentStore<UserStore> {
   public readonly vm = this.selectSignal(
     this.user,
     this.isLoading,
-    (user, isLoading) => ({ user, isLoading })
+    (user, isLoading) => ({user, isLoading})
   );
 
-  readonly setUser = this.updater((state, user: User) => ({ ...state, user }));
+  readonly setUser = this.updater((state, user: UserInfo) => ({...state, user}));
 
   public loadUser(): void {
-    this.patchState({ isLoading: true });
+    this.patchState({isLoading: true});
 
     this.http.getUserInformation().pipe(
       tap({
-        next: (user: User) => {
+        next: (user: UserInfo) => {
           this.setUser(user)
         },
       }),
-      finalize(() => this.patchState({ isLoading: false }))
+      finalize(() => this.patchState({isLoading: false}))
     ).subscribe();
   }
 }

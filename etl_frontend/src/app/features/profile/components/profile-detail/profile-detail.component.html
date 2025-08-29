@@ -1,27 +1,18 @@
 <p-card class="profile-card">
   <div class="profile-card__content">
     <div class="profile-card__content__top">
-      @if (user.imageUrl) {
-      <p-image
-        [src]="user.imageUrl"
-        class="profile-card__content__top__user-image"
-        shape="circle"
-        preview="true"
-      ></p-image>
-      } @else {
       <div class="profile-card__content__top__user-abcent-image">
-        {{ user.name[0] }}
+        {{ user().username[0] }}
       </div>
-      }
 
       <div class="profile-card__content__top__info">
         <h2 class="profile-card__content__top__info__user-name">
-          {{ user.name }}
+          {{ user().firstName + user().lastName }}
         </h2>
 
         <p-tag
-          [value]="user.role"
-          [severity]="getSeverityForRole(user.role)"
+          [value]="userRole()"
+          [severity]="getSeverityForRole()"
           class="profile-card__content__top__info__user-role"
           [rounded]="true"
         ></p-tag>
@@ -34,11 +25,9 @@
             class="pi pi-envelope profile-card__content__bottom__details__item__icon"
           ></i>
           <span class="profile-card__content__bottom__details__item__title"
-            >Email :
+          >Email :
           </span>
-          <span class="profile-card__content__bottom__details__item__data">{{
-            user.email
-          }}</span>
+          <span class="profile-card__content__bottom__details__item__data">{{ user().email }}</span>
         </div>
 
         <div class="profile-card__content__bottom__details__item">
@@ -46,11 +35,9 @@
             class="pi pi-user profile-card__content__bottom__details__item__icon"
           ></i>
           <span class="profile-card__content__bottom__details__item__title"
-            >Username :
+          >Username :
           </span>
-          <span class="profile-card__content__bottom__details__item__data">{{
-            user.username
-          }}</span>
+          <span class="profile-card__content__bottom__details__item__data">{{ user().username }}</span>
         </div>
 
         <div class="profile-card__content__bottom__details__item">
@@ -58,11 +45,9 @@
             class="pi pi-calendar profile-card__content__bottom__details__item__icon"
           ></i>
           <span class="profile-card__content__bottom__details__item__title"
-            >Member Since :
+          >Date :
           </span>
-          <span class="profile-card__content__bottom__details__item__data">{{
-            user.memberSince | date : "longDate"
-          }}</span>
+          <span class="profile-card__content__bottom__details__item__data">{{ date }}</span>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
-import {Component, computed, effect, OnInit, signal} from '@angular/core';
-import {User, UserStoreService} from "../../shared/stores/user-store.service"
+import {Component, computed, OnInit} from '@angular/core';
+import {UserStoreService} from "../../shared/stores/user-store.service"
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,8 @@ import {User, UserStoreService} from "../../shared/stores/user-store.service"
 export class DashboardComponent implements OnInit {
   public readonly user = computed(() => this.userStore.vm().user);
 
-  constructor(private userStore: UserStoreService) {}
+  constructor(private userStore: UserStoreService) {
+  }
 
   ngOnInit() {
     this.userStore.loadUser();
