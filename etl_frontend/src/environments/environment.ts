@@ -1,7 +1,7 @@
 const baseUrl = 'http://localhost:5000/api';
 
 export const environment = {
-  production: true,
+  production: false,
   redirectUrl: `http://localhost:4200/send-token-code`,
   api: {
     auth: {
