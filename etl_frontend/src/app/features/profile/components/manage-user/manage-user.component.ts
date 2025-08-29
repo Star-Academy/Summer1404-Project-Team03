@@ -36,7 +36,7 @@ import { UsersListState } from './models/user.model';
   templateUrl: './manage-user.component.html',
   styleUrl: './manage-user.component.scss'
 })
-export class ManageUserComponent implements OnInit {
+export class ManageUserComponent {
   public readonly vm: Signal<UsersListState>;
 
   public isCreateUserModal = signal<boolean>(false);
@@ -45,6 +45,7 @@ export class ManageUserComponent implements OnInit {
 
   constructor(private usersListStore: UserListStore) {
     this.vm = this.usersListStore.vm;
+    this.usersListStore.getUsers();
   }
 
   public changeCreateUserModalStatus() {
@@ -56,6 +57,4 @@ export class ManageUserComponent implements OnInit {
   public changeDeleteUserDialogStatus() {
     this.isDeleteUserDialog.update((currentValue) => !currentValue);
   }
-
-  ngOnInit() {}
 }

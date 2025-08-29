@@ -12,7 +12,7 @@ export class ManageUsersService {
 
   constructor(private readonly http: HttpClient) { }
 
-  fetchUsers(): Observable<User> {
-    return this.http.get<User>(this.getAllusersApi);
+  fetchUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.getAllusersApi);
   }
 }
