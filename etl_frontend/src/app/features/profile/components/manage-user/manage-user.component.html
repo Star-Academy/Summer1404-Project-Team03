@@ -1,21 +1,36 @@
 @if (isCreateUserModal()) {
-  <app-create-user-modal [visible]="isCreateUserModal()" (close)="changeCreateUserModalStatus()"/>
-}
-
-@if (isEditUserModal()) {
-  <app-edit-user-modal [visible]="isEditUserModal()" (close)="changeEditUserModalStatus()"/>
-}
-
-@if (isDeleteUserDialog()) {
-  <app-delete-user-dialog [visible]="isDeleteUserDialog()" (close)="changeDeleteUserDialogStatus()" />
+<app-create-user-modal
+  [visible]="isCreateUserModal()"
+  (close)="changeCreateUserModalStatus()"
+/>
+} @if (isEditUserModal()) {
+<app-edit-user-modal
+  [visible]="isEditUserModal()"
+  (close)="changeEditUserModalStatus()"
+/>
+} @if (isDeleteUserDialog()) {
+<app-delete-user-dialog
+  [visible]="isDeleteUserDialog()"
+  (close)="changeDeleteUserDialogStatus()"
+/>
 }
 
 <div class="manage-user__btn">
-  <p-button label="Create User"  rounded (click)="changeCreateUserModalStatus()"/>
+  <p-button
+    label="Create User"
+    rounded
+    (click)="changeCreateUserModalStatus()"
+  />
 </div>
 
 <div class="table-container">
-  <p-table [value]="vm().users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="vm().isLoading">
+  <p-table
+    [value]="vm().users"
+    [scrollable]="true"
+    scrollHeight="70vh"
+    [virtualScrollItemSize]="46"
+    [loading]="vm().isLoading"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>Username</th>
@@ -24,11 +39,20 @@
         <th>Action</th>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="body" let-user>
       <tr>
         <td>{{ user.username }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.role }}</td>
+        <td>
+          <div class="roles">
+            <p-chip
+              *ngFor="let role of user.roles"
+              [label]="role.name"
+              class="roles__chip"
+            ></p-chip>
+          </div>
+        </td>
         <td class="table-container__action">
           <p-button
             (click)="changeEditUserModalStatus()"
@@ -47,12 +71,13 @@
         </td>
       </tr>
     </ng-template>
+
     <ng-template pTemplate="loadingbody" let-columns="columns">
-      <tr style="height:3rem">
+      <tr style="height: 3rem">
         @for (col of ['header', 'email', 'role', 'action']; track col) {
-          <td>
-            <p-skeleton/>
-          </td>
+        <td>
+          <p-skeleton />
+        </td>
         }
       </tr>
     </ng-template>

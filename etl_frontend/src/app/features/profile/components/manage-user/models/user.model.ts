@@ -4,6 +4,12 @@ export interface User {
     email: string;
     id: string;
     username: string;
+    roles: UserRole[];
+}
+
+interface UserRole {
+    id: string;
+    name: string;
 }
 
 export interface UsersListState {

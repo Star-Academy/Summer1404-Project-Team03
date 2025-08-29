@@ -4,6 +4,7 @@ import { TableModule } from 'primeng/table'
 import { CommonModule } from '@angular/common';
 import { SkeletonModule } from "primeng/skeleton";
 import { InputTextModule } from 'primeng/inputtext';
+import { ChipModule } from 'primeng/chip';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
@@ -12,7 +13,8 @@ import { CreateUserModalComponent } from './components/create-user-modal/create-
 import { EditUserModalComponent } from './components/edit-user-modal/edit-user-modal.component';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 import { UserListStore } from './stores/user-list/user-list-store.service';
-import { UsersListState } from './models/user.model';
+import { User, UsersListState } from './models/user.model';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-manage-user',
@@ -28,7 +30,9 @@ import { UsersListState } from './models/user.model';
     FormsModule,
     CreateUserModalComponent,
     EditUserModalComponent,
-    DeleteUserDialogComponent
+    DeleteUserDialogComponent,
+    ChipModule,
+    TooltipModule
   ],
   providers: [
     UserListStore

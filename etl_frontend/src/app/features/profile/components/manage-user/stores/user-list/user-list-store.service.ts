@@ -26,6 +26,7 @@ export class UserListStore extends ComponentStore<UsersListState> {
       tap(() => this.patchState({ isLoading: true, error: null })),
       exhaustMap(() => this.mangeUsersService.fetchUsers().pipe(
         tap((users) => this.patchState({ users: users, isLoading: false })),
+        tap((users) => console.log(users)),
         catchError(err => {
           this.patchState({ error: err.message, isLoading: false });
           return of(err);
