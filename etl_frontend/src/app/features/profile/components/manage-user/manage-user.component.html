@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-container">
-  <p-table [value]="users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="loading">
+  <p-table [value]="vm.users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="vm.isLoading">
     <ng-template pTemplate="header">
       <tr>
         <th>Username</th>
@@ -49,7 +49,7 @@
     </ng-template>
     <ng-template pTemplate="loadingbody" let-columns="columns">
       <tr style="height:3rem">
-        @for (col of cols; track col.field) {
+        @for (col of ['header', 'email', 'role', 'action']; track col) {
           <td>
             <p-skeleton/>
           </td>
