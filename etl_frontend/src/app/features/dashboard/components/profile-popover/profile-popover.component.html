@@ -1,10 +1,15 @@
-<p-button icon="pi pi-user" label="Profile" type="button" outlined (click)="toggle($event)" rounded text/>
+<p-button icon="pi pi-user" label="Profile" (click)="toggle($event)" outlined rounded text/>
 
 <p-popover class="popover" #op>
   <p class="popover__username">test name</p>
   <div class="popover__list">
-    <p-button [label]="options[0].label" [icon]="options[0].icon" [routerLink]="options[0].link"
-              (click)="onClickAccount()" text rounded/>
+    <p-button
+      [label]="options[0].label"
+      [icon]="options[0].icon"
+      [routerLink]="options[0].link"
+      text
+      rounded
+    />
     <p-button [label]="options[1].label" [icon]="options[1].icon" appSignOut text rounded/>
   </div>
 </p-popover>
