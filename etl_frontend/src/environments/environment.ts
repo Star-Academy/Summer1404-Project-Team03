@@ -10,7 +10,7 @@ export const environment = {
       singOut: `${baseUrl}/auth/logout`,
     },
     users: {
-      me: `${baseUrl}/auth/me`,
+      me: `${baseUrl}/users/me`,
     },
   }
 };
