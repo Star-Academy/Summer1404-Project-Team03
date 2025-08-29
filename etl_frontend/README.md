@@ -1,59 +1,87 @@
-# EtlFrontend
+🚀 ETL Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+This project is an Angular frontend application that can be run in two modes:
 
-## Development server
+Development mode → live reload with Angular CLI (ng serve)
 
-To start a local development server, run:
+Production mode → built Angular app served with nginx
 
-```bash
-ng serve
-```
+📦 Requirements
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Docker
+ (20+ recommended)
 
-## Code scaffolding
+Docker Compose
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+🛠 Project Structure
+etl_frontend/
+├── src/...
+├── package.json
+├── angular.json
+├── nginx.conf
+├── Dockerfile             # Production build
+├── Dockerfile.dev         # Development build
+├── docker-compose.yml     # Production compose
+└── docker-compose.dev.yml # Development compose
 
-```bash
-ng generate component component-name
-```
+🔧 Development Mode (Hot Reload)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Run Angular with live reload (ng serve) inside Docker.
+Any local code changes will automatically rebuild inside the container.
 
-```bash
-ng generate --help
-```
+docker compose -f docker-compose.dev.yml up --build
 
-## Building
 
-To build the project run:
+App available at: http://localhost:4200
 
-```bash
-ng build
-```
+Local code is mounted into the container.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Uses Dockerfile.dev.
 
-## Running unit tests
+🚀 Production Mode (nginx)
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Build a static Angular production bundle and serve it via nginx.
 
-```bash
-ng test
-```
+docker compose up --build
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+App available at: http://localhost
 
-```bash
-ng e2e
-```
+Runs the built Angular app from /dist/etl_frontend/browser.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Uses Dockerfile and nginx.conf.
 
-## Additional Resources
+⚙️ Notes
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Make sure package.json has this script for dev mode:
+
+"scripts": {
+  "start": "ng serve --host 0.0.0.0 --poll 2000"
+}
+
+
+Your nginx.conf should handle Angular SPA routing (redirect unknown routes to index.html):
+
+server {
+  listen 80;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+
+🧹 Cleanup
+
+Stop and remove containers:
+
+docker compose down
+docker compose -f docker-compose.dev.yml down
+
+✅ Summary
+
+Production → docker compose up --build
+
+Development → docker compose -f docker-compose.dev.yml up --build
