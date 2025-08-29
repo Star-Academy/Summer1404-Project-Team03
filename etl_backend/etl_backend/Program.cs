@@ -15,6 +15,7 @@ using etl_backend.Middlewares.Authentication;
 using etl_backend.Repositories;
 using etl_backend.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -74,6 +75,15 @@ builder.Services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService
 builder.Services.Configure<PostgresStoreOptions>(config.GetSection("PostgresStore"));
 builder.Services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
 builder.Services.AddSingleton<ITypeMapper, PostgresTypeMapper>();
+builder.Services.AddSingleton<ITableNameParser, PostgresTableNameParser>();
+builder.Services.AddSingleton<IDdlBuilder, PostgresDdlBuilder>();
+builder.Services.AddSingleton<ITableCatalog, PostgresTableCatalog>();
+builder.Services.AddSingleton<ISqlExecutor, NpgsqlSqlExecutor>();
+builder.Services.AddSingleton<ICsvRowFormatter>(sp =>
+{
+    var opts = sp.GetRequiredService<IOptions<CsvStagingOptions>>().Value;
+    return new CsvRowFormatter(opts.Delimiter, opts.QuoteChar);
+});
 
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
