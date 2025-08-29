@@ -6,7 +6,8 @@ import {TagModule} from 'primeng/tag';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {RouterLink, RouterModule} from "@angular/router";
-import {UserStoreService} from "../../../../shared/stores/user-store.service"
+import {UserStoreService} from "../../../../shared/stores/user-store.service";
+import { ChangePasswordDirective } from '../../../../shared/directives/change-password/change-password.directive';
 
 @Component({
   selector: 'app-profile-detail',
@@ -16,6 +17,7 @@ import {UserStoreService} from "../../../../shared/stores/user-store.service"
     TagModule,
     ButtonModule,
     DividerModule,
+    ChangePasswordDirective,
     RouterModule, RouterLink
   ],
   templateUrl: './profile-detail.component.html',

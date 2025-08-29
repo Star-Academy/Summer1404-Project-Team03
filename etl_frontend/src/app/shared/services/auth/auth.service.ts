@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
 
-export interface SignInResponse {
+export type SignInResponse = {
   redirectUrl: string;
 }
 
-export interface TokenResponse {
+export type TokenResponse = {
   redirectUrl: string;
 }
 

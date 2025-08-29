@@ -20,10 +20,6 @@ export const profileRoutes: Routes = [
         loadComponent: () => import('./components/edit-profile/edit-profile.component').then(c => c.EditProfileComponent)
       },
       {
-        path: 'change-password',
-        loadComponent: () => import('./components/change-password/change-password.component').then(c => c.ChangePasswordComponent)
-      },
-      {
         path: 'admin',
         loadComponent: () => import('./components/manage-user/manage-user.component').then(c => c.ManageUserComponent)
       }

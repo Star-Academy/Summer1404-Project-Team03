@@ -11,6 +11,7 @@ export const environment = {
     },
     users: {
       me: `${baseUrl}/users/me`,
+      password: `${baseUrl}/password/change-password-url`,
     },
     admin: {
       usersList: `${baseUrl}/admin/users`

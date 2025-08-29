@@ -55,8 +55,8 @@
 
   <ng-template pTemplate="footer">
     <div class="profile-card__actions">
-      <p-button label="Change Password" icon="pi pi-key" rounded [routerLink]="'/profile/change-password'"></p-button>
-      <p-button label="Edit Profile" icon="pi pi-pencil" rounded [routerLink]="'/profile/edit'"></p-button>
+      <p-button label="Change Password" icon="pi pi-key" rounded appChangePassword />
+      <p-button label="Edit Profile" icon="pi pi-pencil" rounded [routerLink]="'/profile/edit'" />
     </div>
   </ng-template>
 </p-card>
