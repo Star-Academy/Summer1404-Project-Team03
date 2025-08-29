@@ -8,9 +8,9 @@ import {RippleModule} from 'primeng/ripple';
 import {PaginatorModule} from 'primeng/paginator';
 import { FormsModule } from '@angular/forms';
 
-import { CreateUserModalComponent } from '../../modals/create-user-modal/create-user-modal.component';
-import { EditUserModalComponent } from '../../modals/edit-user-modal/edit-user-modal.component';
-import { DeleteUserDialogComponent } from '../../modals/delete-user-dialog/delete-user-dialog.component';
+import { CreateUserModalComponent } from './components/create-user-modal/create-user-modal.component';
+import { EditUserModalComponent } from './components/edit-user-modal/edit-user-modal.component';
+import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 
 type Column = {
   field: string;
