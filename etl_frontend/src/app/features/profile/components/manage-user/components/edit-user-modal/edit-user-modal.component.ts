@@ -4,14 +4,13 @@ import { Button } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 
-
 @Component({
-  selector: 'app-create-user-modal',
-  imports: [Dialog, Button, DropdownModule, InputTextModule],
-  templateUrl: './create-user-modal.component.html',
-  styleUrls: ['./create-user-modal.component.scss', '../shared/shared-modal.component.scss']
+  selector: 'app-edit-user-modal',
+  imports: [Button, Dialog, DropdownModule, InputTextModule],
+  templateUrl: './edit-user-modal.component.html',
+  styleUrls: ['./edit-user-modal.component.scss', './../../styles/shared-modal.component.scss']
 })
-export class CreateUserModalComponent {
+export class EditUserModalComponent {
   public visible = input.required<boolean>();
   public close = output<void>();
 
