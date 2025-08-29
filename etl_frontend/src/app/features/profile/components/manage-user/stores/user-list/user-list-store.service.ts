@@ -15,5 +15,5 @@ export class UserListStore extends ComponentStore<UsersListState> {
     super(initialUser);
   }
 
-  public readonly vm = this.state();
+  public readonly vm = this.selectSignal(s => s);
 }

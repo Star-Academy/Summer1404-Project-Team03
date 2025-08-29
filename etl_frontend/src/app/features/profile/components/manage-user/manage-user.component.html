@@ -15,7 +15,7 @@
 </div>
 
 <div class="table-container">
-  <p-table [value]="vm.users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="vm.isLoading">
+  <p-table [value]="vm().users" [scrollable]="true" scrollHeight="70vh" [virtualScrollItemSize]="46" [loading]="vm().isLoading">
     <ng-template pTemplate="header">
       <tr>
         <th>Username</th>

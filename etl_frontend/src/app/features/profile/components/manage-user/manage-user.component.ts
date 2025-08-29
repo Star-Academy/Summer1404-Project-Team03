@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, Signal, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table'
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { CreateUserModalComponent } from './components/create-user-modal/create-
 import { EditUserModalComponent } from './components/edit-user-modal/edit-user-modal.component';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 import { UserListStore } from './stores/user-list/user-list-store.service';
+import { UsersListState } from './models/user.model';
 
 @Component({
   selector: 'app-manage-user',
@@ -36,7 +37,7 @@ import { UserListStore } from './stores/user-list/user-list-store.service';
   styleUrl: './manage-user.component.scss'
 })
 export class ManageUserComponent implements OnInit {
-  public readonly vm;
+  public readonly vm: Signal<UsersListState>;
 
   public isCreateUserModal = signal<boolean>(false);
   public isEditUserModal = signal<boolean>(false);
