@@ -28,6 +28,7 @@ import {EditProfileComponent} from './components/edit-profile/edit-profile.compo
 export class ProfileDetailComponent {
   public readonly user = computed(() => this.userStore.vm().user)
   public readonly userRole = computed(() => this.user().roles.map(r => r.name).join(', '));
+  public readonly userFullName = computed(() => this.user().firstName + ' ' + this.user().lastName);
   public readonly date = new Date().getUTCDate();
 
   public isEditProfileModal = signal<boolean>(false);
