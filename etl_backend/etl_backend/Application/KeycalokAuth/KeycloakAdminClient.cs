@@ -30,17 +30,21 @@ public class KeycloakAdminClient : IKeycloakAdminClient
 
         foreach (var element in usersJsonDoc.RootElement.EnumerateArray())
         {
+            string? GetProp(string name) =>
+                element.TryGetProperty(name, out var prop) ? prop.GetString() : null;
+
             var user = new UserDto
             {
-                Id = element.GetProperty("id").GetString()!,
-                Username = element.GetProperty("username").GetString() ?? string.Empty,
-                Email = element.GetProperty("email").GetString() ?? string.Empty,
-                FirstName = element.GetProperty("firstName").GetString(),
-                LastName = element.GetProperty("lastName").GetString(),
+                Id = GetProp("id") ?? string.Empty,
+                Username = GetProp("username") ?? string.Empty,
+                Email = GetProp("email") ?? string.Empty,
+                FirstName = GetProp("firstName") ?? string.Empty,
+                LastName = GetProp("lastName") ?? string.Empty
             };
 
             users.Add(user);
         }
+
 
         var result = new List<UserWithRolesDto>();
 
