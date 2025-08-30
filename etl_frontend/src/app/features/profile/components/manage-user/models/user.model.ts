@@ -4,16 +4,18 @@ interface baseUser {
     email: string;
     username: string;
 }
-export interface User extends baseUser{
+export interface User extends baseUser {
     id: string;
     roles: UserRole[];
 }
 
-export interface NewUser extends baseUser{
+export interface UserState extends baseState, User { }
+
+export interface NewUser extends baseUser {
     password: string;
 }
 
-interface UserRole {
+export interface UserRole {
     id: string;
     name: string;
 }
@@ -31,4 +33,8 @@ export interface baseState {
     error: string | null;
 }
 
-// interface User 
+export interface EditUser {
+    email: string;
+    firstName: string;
+    lastName: string;
+}

@@ -7,6 +7,7 @@
 <app-edit-user-modal
   [visible]="isEditUserModal()"
   (close)="changeEditUserModalStatus()"
+  [userInfo]="selectedUserToEdit()"
 />
 } @if (isDeleteUserDialog() && selectedUserToDelete()) {
 <app-delete-user-dialog
@@ -56,7 +57,7 @@
         </td>
         <td class="table-container__action">
           <p-button
-            (click)="changeEditUserModalStatus()"
+            (click)="changeEditUserModalStatus(user)"
             icon="pi pi-pencil"
             text
             rounded

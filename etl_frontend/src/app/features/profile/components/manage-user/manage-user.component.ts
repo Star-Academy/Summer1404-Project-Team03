@@ -15,6 +15,7 @@ export class ManageUserComponent {
   public isEditUserModal = signal<boolean>(false);
   public isDeleteUserDialog = signal<boolean>(false);
   public selectedUserToDelete = signal<string>('');
+  public selectedUserToEdit = signal<User>({ email: '', firstName: '', id: '', lastName: '', roles: [], username: '' });
 
   users: User[] = [
     {
@@ -59,13 +60,19 @@ export class ManageUserComponent {
   public changeCreateUserModalStatus() {
     this.isCreateUserModal.update((currentValue) => !currentValue);
   }
-  public changeEditUserModalStatus() {
-    this.isEditUserModal.update((currentValue) => !currentValue);
+  public changeEditUserModalStatus(user?: User) {
+    if (user) {
+      this.selectedUserToEdit.set(user);
+      this.isEditUserModal.set(true);
+    } else {
+      this.isEditUserModal.set(false);
+      this.selectedUserToEdit.set({ email: '', firstName: '', id: '', lastName: '', roles: [], username: '' });
+    }
   }
   public changeDeleteUserDialogStatus(userId?: string) {
     if (userId) {
       this.selectedUserToDelete.set(userId);
-      this.isDeleteUserDialog.set(true);      
+      this.isDeleteUserDialog.set(true);
     } else {
       this.isDeleteUserDialog.set(false);
       this.selectedUserToDelete.set('');

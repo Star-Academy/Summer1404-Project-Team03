@@ -20,6 +20,7 @@ import { UserListStore } from './stores/user-list/user-list-store.service';
 import { RouterModule } from '@angular/router';
 import { manageUserRoutes } from './manage-user.module.routing';
 import { DeleteUserStore } from './components/delete-user-dialog/stores/delete-user/delete-user-store.service';
+import { EditUserStore } from './components/edit-user-modal/stores/edit-user/edit-user-store.service';
 
 @NgModule({
     declarations: [ManageUserComponent],
@@ -44,6 +45,7 @@ import { DeleteUserStore } from './components/delete-user-dialog/stores/delete-u
         ManageUsersService,
         UserListStore,
         DeleteUserStore,
+        EditUserStore
     ],
 })
 export class ManageUsersModule {
