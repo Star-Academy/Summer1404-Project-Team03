@@ -1,11 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpInterceptorFn } from '@angular/common/http';
 
-import { crendentialInterceptor } from './crendential.interceptor';
+import { errorHandlingInterceptor } from './error-handling.interceptor';
 
-describe('crendentialInterceptor', () => {
+describe('errorHandlingInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) => 
-    TestBed.runInInjectionContext(() => crendentialInterceptor(req, next));
+    TestBed.runInInjectionContext(() => errorHandlingInterceptor(req, next));
 
   beforeEach(() => {
     TestBed.configureTestingModule({});

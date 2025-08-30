@@ -9,7 +9,7 @@
 
   import { CoreModule } from './core/core.module';
   import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-  import {CredentialsInterceptor} from './shared/inceptors/crendential.interceptor'
+  import {CredentialsInterceptor} from './shared/interceptors/credentials/crendential.interceptor'
 
   export const appConfig: ApplicationConfig = {
     providers: [
