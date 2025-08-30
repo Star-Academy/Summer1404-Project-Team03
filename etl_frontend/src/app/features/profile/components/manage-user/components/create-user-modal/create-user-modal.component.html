@@ -1,20 +1,151 @@
-<p-dialog header="Create User" [modal]="true" [visible]="this.visible()" [draggable]="false">
-  <div class="modal">
-   <div class="modal__inputs">
-     <div class="modal__input">
-       <input pInputText type="text" id="username" placeholder="Username" name="username" required/>
-     </div>
-     <div class="modal__input">
-       <input pInputText type="text" id="role" placeholder="email" name="email" required/>
-     </div>
-     <div class="modal__input">
-       <p-dropdown [options]="this.roles" [checkmark]="true" optionLabel="roles" [showClear]="true"
-                   placeholder="Select a Role" class="modal__select"/>
-     </div>
-   </div>
-    <div class="modal__btn">
-      <p-button label="Cancel" severity="secondary" (click)="onClose()" rounded />
-      <p-button label="Save" (click)="onClose()" rounded />
+<!-- The p-dialog component remains the same -->
+<p-dialog
+  header="Create User"
+  [modal]="true"
+  [visible]="this.visible()"
+  [draggable]="false"
+  (onHide)="onClose()"
+>
+  <form [formGroup]="userForm" (ngSubmit)="onCreateUser()" novalidate>
+    <div class="modal">
+      <div class="modal__inputs">
+        <div class="modal__input">
+          <input
+            pInputText
+            type="text"
+            id="username"
+            placeholder="Username"
+            formControlName="username"
+          />
+          <div
+            *ngIf="
+              f['username'].invalid &&
+              (f['username'].dirty || f['username'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['username'].errors?.['required']"
+              >Username is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <input
+            pInputText
+            type="email"
+            id="email"
+            placeholder="Email"
+            formControlName="email"
+          />
+          <div
+            *ngIf="
+              f['email'].invalid && (f['email'].dirty || f['email'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['email'].errors?.['required']"
+              >Email is required.</small
+            >
+            <small *ngIf="f['email'].errors?.['email']"
+              >Please enter a valid email address.</small
+            >
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <input
+            pInputText
+            type="text"
+            id="firstName"
+            placeholder="First Name"
+            formControlName="firstName"
+          />
+          <div
+            *ngIf="
+              f['firstName'].invalid &&
+              (f['firstName'].dirty || f['firstName'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['firstName'].errors?.['required']"
+              >First name is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <input
+            pInputText
+            type="text"
+            id="lastName"
+            placeholder="Last Name"
+            formControlName="lastName"
+          />
+          <div
+            *ngIf="
+              f['lastName'].invalid &&
+              (f['lastName'].dirty || f['lastName'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['lastName'].errors?.['required']"
+              >Last name is required.</small
+            >
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <input
+            pInputText
+            type="password"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div
+            *ngIf="
+              f['password'].invalid &&
+              (f['password'].dirty || f['password'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['password'].errors?.['required']"
+              >Password is required.</small
+            >
+            <small *ngIf="f['password'].errors?.['minlength']"
+              >Password must be at least 8 characters.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__btn">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (click)="onClose()"
+          rounded
+          type="button"
+        />
+        <p-button
+          label="Create User"
+          type="submit"
+          [disabled]="userForm.invalid"
+          rounded
+        />
+      </div>
     </div>
-  </div>
+  </form>
 </p-dialog>
+
+<!-- <div class="modal__input">
+        <p-select
+          [options]="this.roles"
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="Select a Role"
+          class="modal__select"
+          [(ngModel)]="selectedRole"
+        />
+      </div> -->

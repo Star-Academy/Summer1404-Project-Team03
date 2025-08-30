@@ -2,10 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1.5rem;
   justify-content: space-between;
 
   inline-size: 75vh;
-  block-size: 30vh;
+  min-block-size: 20vh;
+  block-size: fit-content;
 
   &__inputs {
     display: flex;

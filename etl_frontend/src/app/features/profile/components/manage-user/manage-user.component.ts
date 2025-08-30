@@ -1,42 +1,10 @@
-import { Component, OnInit, Signal, signal } from '@angular/core';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table'
-import { CommonModule } from '@angular/common';
-import { SkeletonModule } from "primeng/skeleton";
-import { InputTextModule } from 'primeng/inputtext';
-import { ChipModule } from 'primeng/chip';
-import { RippleModule } from 'primeng/ripple';
-import { PaginatorModule } from 'primeng/paginator';
-import { FormsModule } from '@angular/forms';
-
-import { CreateUserModalComponent } from './components/create-user-modal/create-user-modal.component';
-import { EditUserModalComponent } from './components/edit-user-modal/edit-user-modal.component';
-import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
+import { Component, Signal, signal } from '@angular/core';
 import { UserListStore } from './stores/user-list/user-list-store.service';
-import { User, UsersListState } from './models/user.model';
-import { TooltipModule } from 'primeng/tooltip';
+import { UsersListState } from './models/user.model';
 
 @Component({
   selector: 'app-manage-user',
-  standalone: true,
-  imports: [
-    ButtonModule,
-    TableModule,
-    CommonModule,
-    SkeletonModule,
-    InputTextModule,
-    RippleModule,
-    PaginatorModule,
-    FormsModule,
-    CreateUserModalComponent,
-    EditUserModalComponent,
-    DeleteUserDialogComponent,
-    ChipModule,
-    TooltipModule
-  ],
-  providers: [
-    UserListStore
-  ],
+  standalone: false,
   templateUrl: './manage-user.component.html',
   styleUrl: './manage-user.component.scss'
 })

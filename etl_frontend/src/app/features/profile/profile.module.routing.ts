@@ -25,7 +25,7 @@ export const profileRoutes: Routes = [
       },
       {
         path: 'admin',
-        loadComponent: () => import('./components/manage-user/manage-user.component').then(c => c.ManageUserComponent)
+        loadChildren: () => import('./components/manage-user/manage-user.module').then(c => c.ManageUsersModule)
       }
     ]
   }

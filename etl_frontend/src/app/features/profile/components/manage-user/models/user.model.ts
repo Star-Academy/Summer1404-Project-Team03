@@ -1,10 +1,16 @@
-export interface User {
+interface baseUser {
     firstName: string;
     lastName: string;
     email: string;
-    id: string;
     username: string;
+}
+export interface User extends baseUser{
+    id: string;
     roles: UserRole[];
+}
+
+export interface NewUser extends baseUser{
+    password: string;
 }
 
 interface UserRole {
@@ -12,8 +18,15 @@ interface UserRole {
     name: string;
 }
 
-export interface UsersListState {
+export interface UsersListState extends State {
     users: User[];
+}
+
+export interface NewUserState extends State {
+    user: NewUser;
+}
+
+interface State {
     isLoading: boolean;
     error: string | null;
 }
