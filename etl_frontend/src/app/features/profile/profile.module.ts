@@ -22,8 +22,5 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     RouterModule,
     HeaderComponent,
   ],
-  providers: [
-    MessageService,
-  ]
 })
 export class ProfileModule { }

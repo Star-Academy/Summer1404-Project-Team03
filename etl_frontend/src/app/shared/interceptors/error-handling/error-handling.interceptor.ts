@@ -21,10 +21,8 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
           detail: 'Your session has expired. Please log in again.',
           sticky: true,
         });
-        console.log("unauthorized: 401");
       } else {
         const errorMessage = error.error?.message || error.statusText || 'An unknown error occurred.';
-        console.error(`HTTP Error: ${error.status}`, errorMessage);
 
         messageService.add({
           severity: 'error',
