@@ -1,5 +1,4 @@
 import {Component, computed, signal} from '@angular/core';
-
 import {CardModule} from 'primeng/card';
 import {AvatarModule} from 'primeng/avatar';
 import {TagModule} from 'primeng/tag';
