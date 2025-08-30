@@ -8,6 +8,7 @@ import { TabsModule } from 'primeng/tabs';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { HeaderComponent } from '../../shared/components/header/header.component';
+import { SignOutDirective } from '../../shared/directives/sign-out/sign-out.directive'
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     ButtonModule,
     TabsModule,
     RouterModule,
-    HeaderComponent
+    HeaderComponent,
+    SignOutDirective,
   ],
   providers: [
     MessageService,

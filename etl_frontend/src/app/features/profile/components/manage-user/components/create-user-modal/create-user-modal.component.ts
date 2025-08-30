@@ -1,9 +1,8 @@
-import { Component, input, output } from '@angular/core';
-import { Dialog } from 'primeng/dialog';
-import { Button } from 'primeng/button';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputTextModule } from 'primeng/inputtext';
-
+import {Component, input, output} from '@angular/core';
+import {Dialog} from 'primeng/dialog';
+import {Button} from 'primeng/button';
+import {DropdownModule} from 'primeng/dropdown';
+import {InputTextModule} from 'primeng/inputtext';
 
 @Component({
   selector: 'app-create-user-modal',
@@ -16,8 +15,8 @@ export class CreateUserModalComponent {
   public close = output<void>();
 
   public readonly roles = [
-    { label: 'Data Admin', value: 'data_admin' },
-    { label: 'Data Analyst', value: 'data_analyst' }
+    {label: 'Data Admin', value: 'data_admin'},
+    {label: 'Data Analyst', value: 'data_analyst'}
   ];
 
   public onClose() {

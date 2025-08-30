@@ -1,3 +1,7 @@
+@if (isEditProfileModal()) {
+  <app-edit-profile (close)="changeEditProfileModalStatus()" [visible]="isEditProfileModal()"/>
+}
+
 <p-card class="profile-card">
   <div class="profile-card__content">
     <div class="profile-card__content__top">
@@ -56,7 +60,7 @@
   <ng-template pTemplate="footer">
     <div class="profile-card__actions">
       <p-button label="Change Password" icon="pi pi-key" rounded appChangePassword />
-      <p-button label="Edit Profile" icon="pi pi-pencil" rounded [routerLink]="'/profile/edit'" />
+      <p-button label="Edit Profile" icon="pi pi-pencil" rounded (click)="changeEditProfileModalStatus()" />
     </div>
   </ng-template>
 </p-card>

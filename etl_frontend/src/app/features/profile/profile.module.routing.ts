@@ -16,10 +16,6 @@ export const profileRoutes: Routes = [
         loadComponent: () => import('./components/profile-detail/profile-detail.component').then(c => c.ProfileDetailComponent)
       },
       {
-        path: 'edit',
-        loadComponent: () => import('./components/edit-profile/edit-profile.component').then(c => c.EditProfileComponent)
-      },
-      {
         path: 'admin',
         loadComponent: () => import('./components/manage-user/manage-user.component').then(c => c.ManageUserComponent)
       }

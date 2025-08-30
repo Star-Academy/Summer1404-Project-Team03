@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ComponentStore} from "@ngrx/component-store";
 import {finalize, tap} from 'rxjs';
 import {UsersService} from "../services/user/users.service";
-import {UserInfo} from '../types/UserInfoType';
+import {UserInfo} from '../types/UserType';
 
 type UserStore = {
   user: UserInfo;
@@ -19,7 +19,7 @@ export class UserStoreService extends ComponentStore<UserStore> {
         email: '',
         firstName: '',
         id: '',
-        lastName: null,
+        lastName: '',
         roles: [{id: '', name: ''}],
         username: '',
       }, isLoading: false
