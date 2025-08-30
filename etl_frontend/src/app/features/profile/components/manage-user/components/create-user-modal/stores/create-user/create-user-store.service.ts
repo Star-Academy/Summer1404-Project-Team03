@@ -35,7 +35,14 @@ export class CreateUserStore extends ComponentStore<NewUserState> {
         ),
         catchError(err => {
           this.patchState({ error: err.message, isLoading: false });
-          this.showErrorToast(err.message);
+
+          if (err.status === 409) {
+            this.showErrorToast("User already exists.");
+          } else if (err.status === 500) {
+            this.showErrorToast("Internal server error. Please try again later.");
+          } else {
+            this.showErrorToast(err.message || "Failed to create user.");
+          }
           return of(err);
         })
       ))
@@ -54,7 +61,7 @@ export class CreateUserStore extends ComponentStore<NewUserState> {
     this.messageService.add({
       severity: 'error',
       summary: 'Error',
-      detail: message || 'Failed to create user.',
+      detail: message,
       sticky: true,
     });
   }
