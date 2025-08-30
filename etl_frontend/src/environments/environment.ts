@@ -10,7 +10,8 @@ export const environment = {
       singOut: `${baseUrl}/auth/logout`,
     },
     users: {
-      me: `${baseUrl}/auth/me`,
+      me: `${baseUrl}/users/me`,
+      password: `${baseUrl}/password/change-password-url`,
     },
     admin: {
       users: `${baseUrl}/admin/users`,

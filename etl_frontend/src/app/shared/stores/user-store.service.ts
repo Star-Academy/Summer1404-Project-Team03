@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from "@ngrx/component-store";
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 import { UsersService } from "../services/user/users.service"
+import { UserInfo } from '../types/UserType';
 
-export type UserStore = {
-  user: object
+type UserStore = {
+  user: UserInfo;
   isLoading: boolean;
 }
 
-const initialUser = {user: { }, isLoading: false}
+const initialUser = {
+  user: {
+    email: '',
+    firstName: '',
+    id: '',
+    lastName: '',
+    roles: [],
+    username: '',
+  }, isLoading: false
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,31 +28,30 @@ export class UserStoreService extends ComponentStore<UserStore> {
     super(initialUser);
   }
 
-  private readonly user$ = this.select((state) => state.user);
-  private readonly isLoading$ = this.select((state) => state.isLoading);
+  private readonly user = this.selectSignal((state) => state.user);
+  private readonly isLoading = this.selectSignal((state) => state.isLoading);
 
-  public readonly vm$ = this.select(
-    this.user$,
-    this.isLoading$,
+  private readonly setLoading = this.updater((state, value: boolean) => ({
+    ...state,
+    isLoading: value
+  }));
+
+  public readonly vm = this.selectSignal(
+    this.user,
+    this.isLoading,
     (user, isLoading) => ({ user, isLoading })
-  )
+  );
 
-  readonly setUser = this.updater((state, user: object) => ({ ...state, user }));
-  readonly setLoading = this.updater((state, isLoading: boolean) => ({ ...state, isLoading }));
+  readonly setUser = this.updater((state, user: UserInfo) => ({ ...state, user }));
 
   public loadUser(): void {
     this.setLoading(true);
 
     this.http.getUserInformation().pipe(
       tap({
-        next: (user: object) => {
-          this.setUser(user);
-          this.setLoading(false);
-        },
-        error: () => {
-          this.setLoading(false);
-        }
-      })
+        next: (user: UserInfo) => this.setUser(user),
+      }),
+      finalize(() => this.setLoading(false)),
     ).subscribe();
   }
 

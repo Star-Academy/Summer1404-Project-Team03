@@ -1,22 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, computed, signal} from '@angular/core';
 
-import { CardModule } from 'primeng/card';
-import { AvatarModule } from 'primeng/avatar';
-import { TagModule } from 'primeng/tag';
-import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
-import { Image } from 'primeng/image';
-import { DatePipe } from '@angular/common';
-import { RouterLink, RouterModule } from "@angular/router";
-
-interface User {
-  name: string;
-  username: string;
-  email: string;
-  imageUrl: string;
-  role: 'Admin' | 'Editor' | 'User'; // Use literal types for roles
-  memberSince: Date;
-}
+import {CardModule} from 'primeng/card';
+import {AvatarModule} from 'primeng/avatar';
+import {TagModule} from 'primeng/tag';
+import {ButtonModule} from 'primeng/button';
+import {DividerModule} from 'primeng/divider';
+import {RouterModule} from "@angular/router";
+import {UserStoreService} from "../../../../shared/stores/user-store.service";
+import { ChangePasswordDirective } from '../../../../shared/directives/change-password/change-password.directive';
+import {EditProfileComponent} from './components/edit-profile/edit-profile.component'
 
 @Component({
   selector: 'app-profile-detail',
@@ -25,29 +17,42 @@ interface User {
     AvatarModule,
     TagModule,
     ButtonModule,
-    Image,
     DividerModule,
-    DatePipe, RouterModule, RouterLink ],
+    ChangePasswordDirective,
+    RouterModule,
+    EditProfileComponent
+  ],
   templateUrl: './profile-detail.component.html',
   styleUrl: './profile-detail.component.scss'
 })
 export class ProfileDetailComponent {
-  user: User = {
-    name: 'Eleanor Vance',
-    username: 'evance',
-    email: 'eleanor.vance@example.com',
-    // imageUrl: 'https://primefaces.org/cdn/primeng/images/demo/avatar/annafali.png',
-    imageUrl: '',
-    role: 'Admin',
-    memberSince: new Date('2023-01-15T10:00:00Z'),
-  };
+  public readonly user = computed(() => this.userStore.vm().user)
+  public readonly userRole = computed(() => this.user().roles.map(r => r.name).join(', '));
+  public readonly date = new Date().getUTCDate();
 
-  getSeverityForRole(role: User['role']): string {
-    switch (role?.toLowerCase()) {
-      case 'admin': return 'danger';
-      case 'editor': return 'warning';
-      case 'user': return 'info';
-      default: return 'secondary';
+  public isEditProfileModal = signal<boolean>(false);
+
+  constructor(private readonly userStore: UserStoreService) {
+    if (this.user().firstName === '') this.userStore.loadUser();
+  }
+
+  public getSeverityForRole() {
+    const roles = this.userRole().toLowerCase().split(',');
+
+    switch (roles[0].trim()) {
+      case 'sys_admin':
+        return 'danger';
+      case 'data_admin':
+        return 'warning';
+      case 'data_analist':
+        return 'info';
+      default:
+        return 'secondary'
     }
   }
+
+  public changeEditProfileModalStatus() {
+    this.isEditProfileModal.update((currentValue) => !currentValue);
+  }
 }
+
