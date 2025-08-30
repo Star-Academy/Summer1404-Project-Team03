@@ -1,67 +1,113 @@
-🚀 ETL Frontend
+# 🚀 ETL Frontend
 
-This project is an Angular frontend application that can be run in two modes:
+This project is an **Angular frontend application** that can be run in two modes:
 
-Development mode → live reload with Angular CLI (ng serve)
+- **Development mode** → Live reload with Angular CLI (`ng serve`)
+- **Production mode** → Built Angular app served with **nginx**
 
-Production mode → built Angular app served with nginx
+---
 
-📦 Requirements
+## 📦 Requirements
 
-Docker
- (20+ recommended)
+- [Docker](https://docs.docker.com/get-docker/) (20+ recommended)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Make](https://www.gnu.org/software/make/) (optional, for using the provided shortcuts)
 
-Docker Compose
+---
 
-🛠 Project Structure
+## 🛠 Project Structure
+
 etl_frontend/
 ├── src/...
 ├── package.json
 ├── angular.json
 ├── nginx.conf
-├── Dockerfile             # Production build
-├── Dockerfile.dev         # Development build
-├── docker-compose.yml     # Production compose
-└── docker-compose.dev.yml # Development compose
+├── Dockerfile # Production build
+├── Dockerfile.dev # Development build
+├── docker-compose.yml # Production compose
+├── docker-compose.dev.yml # Development compose
+└── Makefile # Command shortcuts
 
-🔧 Development Mode (Hot Reload)
+---
 
-Run Angular with live reload (ng serve) inside Docker.
-Any local code changes will automatically rebuild inside the container.
+## ⚡️ Quick Commands (Makefile)
 
-docker compose -f docker-compose.dev.yml up --build
+A `Makefile` is included to simplify the Docker commands.
 
+### Development
 
-App available at: http://localhost:4200
+- **Start development server:**
+  ```bash
+  make dev
+  ```
+- **Build & start development server:**
+  ```bash
+  make dev-build
+  ```
+- **Stop development server:**
+  ```bash
+  make dev-down
+  ```
 
-Local code is mounted into the container.
+### Production
 
-Uses Dockerfile.dev.
+- **Start production server:**
+  ```bash
+  make prod
+  ```
+- **Build & start production server:**
+  ```bash
+  make prod-build
+  ```
+- **Stop production server:**
+  ```bash
+  make prod-down
+  ```
 
-🚀 Production Mode (nginx)
+---
 
-Build a static Angular production bundle and serve it via nginx.
+## 🔧 Development Mode (Hot Reload)
 
-docker compose up --build
+This mode runs Angular with live reload (`ng serve`) inside a Docker container. Any local code changes will automatically trigger a rebuild inside the container.
 
+- **To run (using Makefile):**
+  ```bash
+  make dev-build
+  ```
+- **To run (manual command):**
+  ```bash
+  docker compose -f docker-compose.dev.yml up --build
+  ```
 
-App available at: http://localhost
+The app will be available at: **http://localhost:4200**
 
-Runs the built Angular app from /dist/etl_frontend/browser.
+✅ **Dev Notes:**
+Make sure `package.json` includes the following script to allow connections from outside the container:
 
-Uses Dockerfile and nginx.conf.
-
-⚙️ Notes
-
-Make sure package.json has this script for dev mode:
-
+````json
 "scripts": {
   "start": "ng serve --host 0.0.0.0 --poll 2000"
 }
 
+## 🚀 Production Mode (nginx)
 
-Your nginx.conf should handle Angular SPA routing (redirect unknown routes to index.html):
+This mode builds a static Angular production bundle and serves it using an efficient `nginx` web server.
 
+-   **To run (using Makefile):**
+    ```bash
+    make prod-build
+    ```
+-   **To run (manual command):**
+    ```bash
+    docker compose up --build
+    ```
+
+The app will be available at: **http://localhost**
+
+✅ **Nginx Notes:**
+The `nginx.conf` file is configured to handle single-page application (SPA) routing by redirecting all non-file requests back to `index.html`.
+
+```nginx
 server {
   listen 80;
 
@@ -72,16 +118,17 @@ server {
     try_files $uri $uri/ /index.html;
   }
 }
-
 🧹 Cleanup
+To stop and remove the containers for a specific environment, use the down commands.
 
-Stop and remove containers:
+Stop the development environment:
 
-docker compose down
-docker compose -f docker-compose.dev.yml down
+Bash
 
-✅ Summary
+make dev-down
+Stop the production environment:
 
-Production → docker compose up --build
+Bash
 
-Development → docker compose -f docker-compose.dev.yml up --build
+make prod-down
+````
