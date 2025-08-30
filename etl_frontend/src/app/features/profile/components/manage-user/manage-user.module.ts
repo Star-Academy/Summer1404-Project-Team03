@@ -17,6 +17,8 @@ import { CreateUserModalComponent } from './components/create-user-modal/create-
 import { EditUserModalComponent } from './components/edit-user-modal/edit-user-modal.component';
 import { DeleteUserDialogComponent } from './components/delete-user-dialog/delete-user-dialog.component';
 import { UserListStore } from './stores/user-list/user-list-store.service';
+import { RouterModule } from '@angular/router';
+import { manageUserRoutes } from './manage-user.module.routing';
 
 @NgModule({
     declarations: [ManageUserComponent],
@@ -33,7 +35,9 @@ import { UserListStore } from './stores/user-list/user-list-store.service';
         EditUserModalComponent,
         DeleteUserDialogComponent,
         ChipModule,
-        TooltipModule
+        TooltipModule,
+        RouterModule.forChild(manageUserRoutes),
+        RouterModule
     ],
     providers: [
         ManageUsersService,

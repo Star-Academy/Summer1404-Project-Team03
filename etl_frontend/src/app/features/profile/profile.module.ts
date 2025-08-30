@@ -20,7 +20,7 @@ import { HeaderComponent } from '../../shared/components/header/header.component
     ButtonModule,
     TabsModule,
     RouterModule,
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [
     MessageService,
