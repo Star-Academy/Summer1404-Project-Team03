@@ -6,15 +6,15 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UserStoreService } from '../../../../../../shared/stores/user-store.service';
 import { UsersService } from '../../../../../../shared/services/user/users.service';
 import { MessageService } from 'primeng/api';
-import { AutoCompleteModule } from 'primeng/autocomplete';
+import { InputTextModule } from 'primeng/inputtext';
 import { UserUpdate } from '../../../../../../shared/types/UserType';
 import { MessageModule } from 'primeng/message';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
   standalone: true,
-  imports: [Dialog, PasswordModule, ButtonModule, ReactiveFormsModule, AutoCompleteModule, MessageModule, NgClass],
+  imports: [Dialog, PasswordModule, ButtonModule, ReactiveFormsModule, InputTextModule, MessageModule, NgClass],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss'
 })
@@ -58,7 +58,6 @@ export class EditProfileComponent {
         }
       });
     }
-
     this.formSubmitted = false;
   }
 

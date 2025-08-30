@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from "@ngrx/component-store";
-import { finalize, tap } from 'rxjs';
-import { UsersService } from "../services/user/users.service"
-import { UserInfo } from '../types/UserType';
+import {Injectable} from '@angular/core';
+import {ComponentStore} from "@ngrx/component-store";
+import {finalize, tap} from 'rxjs';
+import {UsersService} from "../services/user/users.service"
+import {UserInfo} from '../types/UserType';
 
 type UserStore = {
   user: UserInfo;
@@ -17,7 +17,9 @@ const initialUser = {
     lastName: '',
     roles: [],
     username: '',
-  }, isLoading: false
+  },
+  isLoading: false,
+  isSysAdmin: false,
 }
 
 @Injectable({
@@ -30,26 +32,35 @@ export class UserStoreService extends ComponentStore<UserStore> {
 
   private readonly user = this.selectSignal((state) => state.user);
   private readonly isLoading = this.selectSignal((state) => state.isLoading);
+  private readonly isSysAdmin = this.selectSignal((state) => state.isLoading);
 
+  private readonly setUser = this.updater((state, user: UserInfo) => ({...state, user}));
   private readonly setLoading = this.updater((state, value: boolean) => ({
     ...state,
     isLoading: value
+  }));
+  private readonly setSysAdmin = this.updater((state, value: boolean) => ({
+    ...state,
+    isSysAdmin: value
   }));
 
   public readonly vm = this.selectSignal(
     this.user,
     this.isLoading,
-    (user, isLoading) => ({ user, isLoading })
+    this.isSysAdmin,
+    (user, isLoading, isSysAdmin) => ({user, isLoading, isSysAdmin})
   );
-
-  readonly setUser = this.updater((state, user: UserInfo) => ({ ...state, user }));
 
   public loadUser(): void {
     this.setLoading(true);
 
     this.http.getUserInformation().pipe(
       tap({
-        next: (user: UserInfo) => this.setUser(user),
+        next: (user: UserInfo) => {
+          const isSysAdmin = user.roles.some(role => role.name === 'sys_admin')
+          this.setUser(user)
+          this.setSysAdmin(isSysAdmin)
+        },
       }),
       finalize(() => this.setLoading(false)),
     ).subscribe();

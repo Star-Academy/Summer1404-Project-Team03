@@ -33,9 +33,7 @@ export class ProfileDetailComponent {
 
   public isEditProfileModal = signal<boolean>(false);
 
-  constructor(private readonly userStore: UserStoreService) {
-    if (this.user().firstName === '') this.userStore.loadUser();
-  }
+  constructor(private readonly userStore: UserStoreService) {}
 
   public getSeverityForRole() {
     const roles = this.userRole().toLowerCase().split(',');

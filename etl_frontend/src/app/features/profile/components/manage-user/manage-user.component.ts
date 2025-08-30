@@ -17,44 +17,12 @@ export class ManageUserComponent {
   public selectedUserToDelete = signal<string>('');
   public selectedUserToEdit = signal<User>({ email: '', firstName: '', id: '', lastName: '', roles: [], username: '' });
 
-  users: User[] = [
-    {
-      id: '1',
-      username: 'jdoe',
-      email: 'jdoe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      roles: []
-    },
-    {
-      id: '2',
-      username: 'asmith',
-      email: 'asmith@example.com',
-      firstName: 'Alice',
-      lastName: 'Smith',
-      roles: []
-    },
-    {
-      id: '3',
-      username: 'bjohnson',
-      email: 'bjohnson@example.com',
-      firstName: 'Bob',
-      lastName: 'Johnson',
-      roles: []
-    },
-    {
-      id: '4',
-      username: 'mmiller',
-      email: 'mmiller@example.com',
-      firstName: 'Mary',
-      lastName: 'Miller',
-      roles: []
-    }
-  ];
+  public readonly user!: User[]
 
   constructor(private usersListStore: UserListStore) {
     this.vm = this.usersListStore.vm;
     this.usersListStore.getUsers();
+    this.user = this.vm().users;
   }
 
   public changeCreateUserModalStatus() {

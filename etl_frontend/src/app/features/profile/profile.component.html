@@ -5,20 +5,22 @@
         rounded
         text
         label="Your Profile"
-        class="tab" 
+        class="tab"
         [routerLink]="'/profile'"
         [routerLinkActive]="'active-tab'"
         [routerLinkActiveOptions]="{ exact: true }"
       />
 
-      <p-button
-        rounded
-        text
-        label="Manage Users"
-        class="tab"
-        [routerLink]="'/profile/admin'"
-        [routerLinkActive]="'active-tab'"
-      />
+      @if (isSysAdmin()) {
+        <p-button
+          rounded
+          text
+          label="Manage Users"
+          class="tab"
+          [routerLink]="'/profile/admin'"
+          [routerLinkActive]="'active-tab'"
+        />
+      }
     </div>
   </div>
 
