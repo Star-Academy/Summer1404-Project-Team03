@@ -18,15 +18,15 @@ interface UserRole {
     name: string;
 }
 
-export interface UsersListState extends State {
+export interface UsersListState extends baseState {
     users: User[];
 }
 
-export interface NewUserState extends State {
+export interface NewUserState extends baseState {
     user: NewUser;
 }
 
-interface State {
+export interface baseState {
     isLoading: boolean;
     error: string | null;
 }

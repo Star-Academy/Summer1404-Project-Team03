@@ -4,7 +4,7 @@ import { Button } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SelectModule } from 'primeng/select';
 import { CreateUserStore } from './stores/create-user/create-user-store.service';
-import { NewUser } from '../../models/user.model';
+import { NewUser, User } from '../../models/user.model';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
@@ -21,6 +21,7 @@ export class CreateUserModalComponent implements OnInit {
   public close = output<void>();
   public readonly vm;
   userForm!: FormGroup;
+
 
   constructor(
     private readonly createUserStore: CreateUserStore,
@@ -54,10 +55,13 @@ export class CreateUserModalComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
-    
-    const newUser: NewUser = this.userForm.value;
-    console.log('Creating User:', newUser);
 
-    this.createUserStore.createUser(newUser);
+    const newUser: NewUser = this.userForm.value;
+
+    this.createUserStore.createUser({ user: newUser, onSuccess: this.onSuccessCreation.bind(this) });
+  }
+
+  onSuccessCreation(): void {
+    this.close.emit()
   }
 }

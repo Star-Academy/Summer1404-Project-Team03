@@ -13,7 +13,7 @@ export const environment = {
       me: `${baseUrl}/auth/me`,
     },
     admin: {
-      usersList: `${baseUrl}/admin/users`
+      users: `${baseUrl}/admin/users`,
     }
   }
 };

@@ -8,10 +8,11 @@
   [visible]="isEditUserModal()"
   (close)="changeEditUserModalStatus()"
 />
-} @if (isDeleteUserDialog()) {
+} @if (isDeleteUserDialog() && selectedUserToDelete()) {
 <app-delete-user-dialog
   [visible]="isDeleteUserDialog()"
   (close)="changeDeleteUserDialogStatus()"
+  [userId]="selectedUserToDelete()"
 />
 }
 
@@ -25,7 +26,7 @@
 
 <div class="table-container">
   <p-table
-    [value]="vm().users"
+    [value]="users"
     [scrollable]="true"
     scrollHeight="70vh"
     [virtualScrollItemSize]="46"
@@ -59,14 +60,14 @@
             icon="pi pi-pencil"
             text
             rounded
-            severity="secondary"
+            severity="primary"
           />
           <p-button
-            (click)="changeDeleteUserDialogStatus()"
+            (click)="changeDeleteUserDialogStatus(user.id)"
             icon="pi pi-trash"
             text
             rounded
-            severity="secondary"
+            severity="danger"
           />
         </td>
       </tr>

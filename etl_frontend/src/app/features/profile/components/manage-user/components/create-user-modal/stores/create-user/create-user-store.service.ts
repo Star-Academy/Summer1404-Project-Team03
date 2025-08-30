@@ -24,18 +24,19 @@ export class CreateUserStore extends ComponentStore<NewUserState> {
 
   public readonly vm = this.selectSignal(s => s);
 
-  public readonly createUser = this.effect<NewUser>((user$) => {
+  public readonly createUser = this.effect<{ user: NewUser, onFail?: () => void, onSuccess?: () => void }>((user$) => {
     return user$.pipe(
       tap(() => this.patchState({ isLoading: true })),
-      exhaustMap((user: NewUser) => this.manageUserService.createUser(user).pipe(
+      exhaustMap(({ user, onFail, onSuccess }) => this.manageUserService.createUser(user).pipe(
         tap((user) => {
           this.patchState({ user: user, isLoading: false });
           this.showSuccessToast(user.username);
+          onSuccess?.();
         }
         ),
         catchError(err => {
           this.patchState({ error: err.message, isLoading: false });
-
+          onFail?.();
           if (err.status === 409) {
             this.showErrorToast("User already exists.");
           } else if (err.status === 500) {
