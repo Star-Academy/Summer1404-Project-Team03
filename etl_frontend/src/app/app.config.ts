@@ -8,13 +8,15 @@ import { provideStore } from '@ngrx/store'
 import { CustomAura } from './themes/custome-aura';
 
 import { CoreModule } from './core/core.module';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { errorHandlingInterceptor } from './shared/interceptors/error-handling/error-handling.interceptor';
+import { credentialsInterceptor } from './shared/interceptors/credentials/credentials.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(CoreModule),
     provideAnimationsAsync(),
-    provideZoneChangeDetection({eventCoalescing: true}),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
     providePrimeNG({
@@ -29,6 +31,6 @@ export const appConfig: ApplicationConfig = {
       ripple: true,
     }),
     provideStore(),
-    provideHttpClient()
+    provideHttpClient(withInterceptors([errorHandlingInterceptor, credentialsInterceptor]))
   ],
 };

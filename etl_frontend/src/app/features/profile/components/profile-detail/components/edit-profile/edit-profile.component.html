@@ -1,0 +1,41 @@
+<p-dialog
+  header="Edit profile"
+  [modal]="true"
+  [visible]="visible()"
+  [draggable]="false"
+  (onHide)="onClose()"
+  class="edit-profile-card"
+>
+  <div class="modal">
+    <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="modal__form">
+      <div class="modal__inputs">
+       <div class="modal__input">
+         <input pInputText formControlName="firstName" [ngClass]="{ 'p-invalid': isInvalid('firstName') }" fluid />
+         @if (isInvalid('firstName')) {
+           <p-message severity="error" size="small" variant="simple">
+             FirstName is required.
+           </p-message>
+         }
+       </div>
+
+       <div>
+         <input pInputText formControlName="lastName" [ngClass]="{ 'p-invalid': isInvalid('firstName') }" fluid />
+         @if (isInvalid('lastName')) {
+           <p-message severity="error" size="small" variant="simple">LastName is required.</p-message>
+         }
+       </div>
+
+       <div>
+         <input pInputText formControlName="email" [ngClass]="{ 'p-invalid': isInvalid('firstName') }" fluid />
+         @if (isInvalid('email')) {
+           <p-message severity="error" size="small" variant="simple">Email is required.</p-message>
+         }
+       </div>
+      </div>
+      <div class="modal__actions">
+        <p-button  severity="secondary" label="cancel" (click)="onClose()"/>
+        <p-button  severity="primary" type="submit" label="submit" />
+      </div>
+    </form>
+  </div>
+</p-dialog>

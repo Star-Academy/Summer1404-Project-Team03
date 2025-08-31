@@ -17,9 +17,34 @@
 
   padding: 1rem;
   border-radius: 1rem;
-  box-shadow: 0.05rem 0.05rem 1rem -0.7rem rgba(32,32,32,1);
+  box-shadow: 0.05rem 0.05rem 1rem -0.7rem rgba(32, 32, 32, 1);
 }
 
 .table {
   align-self: center;
+}
+
+.roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem; // spacing between chips
+  padding: 0.2rem 0;
+
+  &__chip {
+    font-size: 0.75rem; // smaller text
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: 1rem;
+
+    // Customize colors
+    background: #f0f4ff;
+    color: #2d4ec7;
+    border: 1px solid #d0d7ff;
+
+    // Optional: hover effect
+    transition: background 0.2s ease;
+    &:hover {
+      background: #e0e7ff;
+    }
+  }
 }

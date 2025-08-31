@@ -23,7 +23,17 @@ p-toolbar .p-toolbar {
   position: absolute;
   bottom: -50%;
   left: 25%;
-  transform: translateX(-10%);
 
-  transition: all 0.2s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  animation: grow-horizontaly 0.7s forwards;
+  transform-origin: center;
+}
+
+@keyframes grow-horizontaly {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1) translateX(-10%);
+  }
 }

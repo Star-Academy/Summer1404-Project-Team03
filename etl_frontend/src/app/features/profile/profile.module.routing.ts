@@ -1,5 +1,7 @@
 import {Routes} from "@angular/router";
 import {ProfileComponent} from "./profile.component";
+import { ManageUserComponent } from "./components/manage-user/manage-user.component";
+import { sysAdminGuard } from "../../shared/guards/sys-admin.guard";
 
 export const profileRoutes: Routes = [
   {
@@ -16,16 +18,12 @@ export const profileRoutes: Routes = [
         loadComponent: () => import('./components/profile-detail/profile-detail.component').then(c => c.ProfileDetailComponent)
       },
       {
-        path: 'edit',
-        loadComponent: () => import('./components/edit-profile/edit-profile.component').then(c => c.EditProfileComponent)
-      },
-      {
-        path: 'change-password',
-        loadComponent: () => import('./components/change-password/change-password.component').then(c => c.ChangePasswordComponent)
-      },
-      {
         path: 'admin',
-        loadComponent: () => import('./components/manage-user/manage-user.component').then(c => c.ManageUserComponent)
+        loadChildren: () => import('./components/manage-user/manage-user.module').then(c => c.ManageUsersModule),
+        canMatch: [sysAdminGuard],
+        data: {
+          roles: 'sys_admin'
+        }
       }
     ]
   }

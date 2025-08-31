@@ -1,17 +1,20 @@
-const baseUrl = 'https://192.168.25.194:7252/api';
+const baseUrl = 'http://localhost:5000/api';
 
 export const environment = {
-  production: true,
-  redirectUrl: 'http://localhost:4200/send-token-code',
+  production: false,
+  redirectUrl: `http://localhost:4200/send-token-code`,
   api: {
     auth: {
       signIn: `${baseUrl}/auth/login`,
       token: `${baseUrl}/auth/token`,
       singOut: `${baseUrl}/auth/logout`,
     },
-    prfile: {
-      me: `${baseUrl}/profile/me`,
+    users: {
+      me: `${baseUrl}/users/me`,
+      password: `${baseUrl}/password/change-password-url`,
     },
-    users: {}
+    admin: {
+      users: `${baseUrl}/admin/users`,
+    }
   }
 };

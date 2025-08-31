@@ -4,47 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: profile active link">
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="feat: add api of profile-detail">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_17_2025_10_24_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_17_2025_10_24_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_20_2025_3_44_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_20_2025_3_44_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_20_2025_4_14_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_8_20_2025_4_14_PM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="fabb5b50-7916-431a-8c87-c1a8f1a77d17" name="Changes" comment="fix: landing btn design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile-popover/profile-popover.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/change-password/change-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/edit-profile/edit-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/edit-profile/edit-profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/manage-user/manage-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/manage-user/manage-user.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/components/profile-detail/profile-detail.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/components/profile-detail/profile-detail.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/create-user-modal/create-user-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/create-user-modal/create-user-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/delete-user-dialog/delete-user-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/delete-user-dialog/delete-user-dialog.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/edit-user-modal/edit-user-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/edit-user-modal/edit-user-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/modals/shared/shared-modal.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/modals/shared/shared-modal.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.module.routing.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/components/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/profile/profile.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.module.routing.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/features/dashboard/dashboard.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/etl_frontend/src/app/shared/services/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/app/shared/services/auth/auth.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/etl_frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,15 +27,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="HTML File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="frontend/profile-api" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,6 +45,17 @@
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;MohammadAminDadkhah&quot;
   }
+}</component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOPfQjrs6lAuME&quot;,
+        &quot;number&quot;: 10
+      },
+      &quot;lastSeen&quot;: 1755947076471
+    }
+  ]
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
@@ -91,7 +74,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -105,12 +88,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "backend-develop",
+    "last_opened_file_path": "C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_backend/etl_backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;#10 on frontend/profile&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;frontend/profile-api&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Mohap/Desktop/ETL-Project/Summer1404-Project-Team03/etl_frontend/src/app/features/dashboard/components/profile/modals/shared&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -121,17 +119,19 @@
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.5\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_backend\etl_backend" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features\dashboard\components\profile\modals\shared" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\public\landing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\services\user" />
+      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\services\" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\features" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\shared\directives\sign-in" />
       <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\public" />
-      <recent name="C:\Users\Mohap\Desktop\ETL-Project\Summer1404-Project-Team03\etl_frontend\src\app\guard" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -169,6 +169,24 @@
       <workItem from="1755932837419" duration="3219000" />
       <workItem from="1755936105987" duration="6891000" />
       <workItem from="1755945056499" duration="1548000" />
+      <workItem from="1755950450537" duration="143000" />
+      <workItem from="1755950686622" duration="348000" />
+      <workItem from="1755951463560" duration="313000" />
+      <workItem from="1755951862833" duration="169000" />
+      <workItem from="1755952106749" duration="1113000" />
+      <workItem from="1755953250423" duration="2334000" />
+      <workItem from="1755955777530" duration="200000" />
+      <workItem from="1756468547427" duration="7869000" />
+      <workItem from="1756476607481" duration="322000" />
+      <workItem from="1756479298736" duration="218000" />
+      <workItem from="1756479527794" duration="3608000" />
+      <workItem from="1755950450537" duration="143000" />
+      <workItem from="1755950686622" duration="348000" />
+      <workItem from="1755951463560" duration="313000" />
+      <workItem from="1755951862833" duration="169000" />
+      <workItem from="1755952106749" duration="1113000" />
+      <workItem from="1755953250423" duration="2334000" />
+      <workItem from="1755955777530" duration="200000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add role guard">
       <option name="closed" value="true" />
@@ -290,7 +308,56 @@
       <option name="project" value="LOCAL" />
       <updated>1755941105342</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="fix: landing btn design">
+      <option name="closed" value="true" />
+      <created>1755948139091</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755948139091</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: debug profile btn in dashboard page">
+      <option name="closed" value="true" />
+      <created>1756459525951</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1756459525951</updated>
+    </task>
+    <task id="LOCAL-00018" summary="feat: add interceptor for http request">
+      <option name="closed" value="true" />
+      <created>1756471678028</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1756471678028</updated>
+    </task>
+    <task id="LOCAL-00019" summary="fix: change url me">
+      <option name="closed" value="true" />
+      <created>1756472989381</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1756472989381</updated>
+    </task>
+    <task id="LOCAL-00020" summary="feat: add api of profile-detail">
+      <option name="closed" value="true" />
+      <created>1756482997351</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1756482997351</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00016" summary="fix: landing btn design">
+      <option name="closed" value="true" />
+      <created>1755948139091</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755948139091</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,6 +388,13 @@
     <MESSAGE value="feat: add skeleton loading for table" />
     <MESSAGE value="feat: add modals and dialogs" />
     <MESSAGE value="fix: profile active link" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: profile active link" />
+    <MESSAGE value="fix: landing btn design" />
+    <MESSAGE value="fix: debug profile btn in dashboard page" />
+    <MESSAGE value="feat: add interceptor for http request" />
+    <MESSAGE value="fix: change url me" />
+    <MESSAGE value="feat: add api of profile-detail" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add api of profile-detail" />
+    <MESSAGE value="fix: landing btn design" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: landing btn design" />
   </component>
 </project>

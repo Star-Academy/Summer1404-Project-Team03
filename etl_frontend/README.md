@@ -1,59 +1,134 @@
-# EtlFrontend
+# 🚀 ETL Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+This project is an **Angular frontend application** that can be run in two modes:
 
-## Development server
+- **Development mode** → Live reload with Angular CLI (`ng serve`)
+- **Production mode** → Built Angular app served with **nginx**
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## 📦 Requirements
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Docker](https://docs.docker.com/get-docker/) (20+ recommended)
+- [Docker Compose](https://docs.docker.com/compose/)
+- [Make](https://www.gnu.org/software/make/) (optional, for using the provided shortcuts)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠 Project Structure
 
-```bash
-ng generate component component-name
-```
+etl_frontend/
+├── src/...
+├── package.json
+├── angular.json
+├── nginx.conf
+├── Dockerfile # Production build
+├── Dockerfile.dev # Development build
+├── docker-compose.yml # Production compose
+├── docker-compose.dev.yml # Development compose
+└── Makefile # Command shortcuts
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## ⚡️ Quick Commands (Makefile)
 
-## Building
+A `Makefile` is included to simplify the Docker commands.
 
-To build the project run:
+### Development
 
-```bash
-ng build
-```
+- **Start development server:**
+  ```bash
+  make dev
+  ```
+- **Build & start development server:**
+  ```bash
+  make dev-build
+  ```
+- **Stop development server:**
+  ```bash
+  make dev-down
+  ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Production
 
-## Running unit tests
+- **Start production server:**
+  ```bash
+  make prod
+  ```
+- **Build & start production server:**
+  ```bash
+  make prod-build
+  ```
+- **Stop production server:**
+  ```bash
+  make prod-down
+  ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## 🔧 Development Mode (Hot Reload)
 
-## Running end-to-end tests
+This mode runs Angular with live reload (`ng serve`) inside a Docker container. Any local code changes will automatically trigger a rebuild inside the container.
 
-For end-to-end (e2e) testing, run:
+- **To run (using Makefile):**
+  ```bash
+  make dev-build
+  ```
+- **To run (manual command):**
+  ```bash
+  docker compose -f docker-compose.dev.yml up --build
+  ```
 
-```bash
-ng e2e
-```
+The app will be available at: **http://localhost:4200**
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+✅ **Dev Notes:**
+Make sure `package.json` includes the following script to allow connections from outside the container:
 
-## Additional Resources
+````json
+"scripts": {
+  "start": "ng serve --host 0.0.0.0 --poll 2000"
+}
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🚀 Production Mode (nginx)
+
+This mode builds a static Angular production bundle and serves it using an efficient `nginx` web server.
+
+-   **To run (using Makefile):**
+    ```bash
+    make prod-build
+    ```
+-   **To run (manual command):**
+    ```bash
+    docker compose up --build
+    ```
+
+The app will be available at: **http://localhost**
+
+✅ **Nginx Notes:**
+The `nginx.conf` file is configured to handle single-page application (SPA) routing by redirecting all non-file requests back to `index.html`.
+
+```nginx
+server {
+  listen 80;
+
+  root /usr/share/nginx/html;
+  index index.html;
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
+🧹 Cleanup
+To stop and remove the containers for a specific environment, use the down commands.
+
+Stop the development environment:
+
+Bash
+
+make dev-down
+Stop the production environment:
+
+Bash
+
+make prod-down
+````

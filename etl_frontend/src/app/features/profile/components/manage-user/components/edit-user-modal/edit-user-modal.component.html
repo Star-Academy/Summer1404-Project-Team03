@@ -1,0 +1,88 @@
+<p-dialog
+  header="Edit User"
+  [modal]="true"
+  [visible]="this.visible()"
+  [draggable]="false"
+  (onHide)="onClose()"
+  [style]="{ width: '70vw' }"
+>
+  <form [formGroup]="userForm" (ngSubmit)="onEditUser()" novalidate>
+    <div class="modal">
+      <div class="modal__inputs">
+        <div class="modal__input">
+          <label for="email">Email</label>
+          <div class="input-container">
+            <input
+              pInputText
+              id="email"
+              placeholder="Email"
+              formControlName="email"
+            />
+            <div
+              *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)"
+              class="p-error text-xs mt-1"
+            >
+              <small *ngIf="f['email'].errors?.['required']">Email is required.</small>
+              <small *ngIf="f['email'].errors?.['email']">Please enter a valid email address.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <label for="firstName">First Name</label>
+          <div class="input-container">
+            <input
+              pInputText
+              id="firstName"
+              placeholder="First Name"
+              formControlName="firstName"
+            />
+            <div
+              *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched)"
+              class="p-error text-xs mt-1"
+            >
+              <small *ngIf="f['firstName'].errors?.['required']">First name is required.</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal__input">
+          <label for="lastName">Last Name</label>
+          <div class="input-container">
+            <input
+              pInputText
+              id="lastName"
+              placeholder="Last Name"
+              formControlName="lastName"
+            />
+            <div
+              *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched)"
+              class="p-error text-xs mt-1"
+            >
+              <small *ngIf="f['lastName'].errors?.['required']">Last name is required.</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__btn">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (click)="onClose()"
+          rounded
+          type="button"
+          [style]="{ width: '120px' }"
+        />
+        <p-button
+          label="Save"
+          type="submit"
+          [disabled]="userForm.invalid"
+          rounded
+          [loading]="vm().isLoading"
+          [style]="{ width: '120px' }"
+        />
+      </div>
+    </div>
+  </form>
+</p-dialog>
