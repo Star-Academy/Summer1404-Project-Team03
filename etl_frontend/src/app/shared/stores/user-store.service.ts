@@ -7,6 +7,7 @@ import {UserInfo} from '../types/UserType';
 type UserStore = {
   user: UserInfo;
   isLoading: boolean;
+  isSysAdmin: boolean;
 }
 
 const initialUser = {
@@ -32,7 +33,7 @@ export class UserStoreService extends ComponentStore<UserStore> {
 
   private readonly user = this.selectSignal((state) => state.user);
   private readonly isLoading = this.selectSignal((state) => state.isLoading);
-  private readonly isSysAdmin = this.selectSignal((state) => state.isLoading);
+  private readonly isSysAdmin = this.selectSignal((state) => state.isSysAdmin);
 
   private readonly setUser = this.updater((state, user: UserInfo) => ({...state, user}));
   private readonly setLoading = this.updater((state, value: boolean) => ({

@@ -20,7 +20,10 @@ export const profileRoutes: Routes = [
       {
         path: 'admin',
         loadChildren: () => import('./components/manage-user/manage-user.module').then(c => c.ManageUsersModule),
-        canMatch: [sysAdminGuard]
+        canMatch: [sysAdminGuard],
+        data: {
+          roles: 'sys_admin'
+        }
       }
     ]
   }
