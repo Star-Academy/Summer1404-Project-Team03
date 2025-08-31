@@ -12,3 +12,11 @@
     }
   }
 }
+
+.dashboard {
+  &__sidebar {
+    inline-size: 20vw;
+    block-size: 100vh;
+  }
+}
+

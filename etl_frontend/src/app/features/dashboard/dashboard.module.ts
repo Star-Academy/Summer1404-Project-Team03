@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Button } from 'primeng/button';
 import { Toolbar } from 'primeng/toolbar';
 import { Avatar } from 'primeng/avatar';
+import { Menu } from 'primeng/menu';
 import { DashboardComponent } from './dashboard.component';
 import { RouterModule } from '@angular/router';
 import { dashboardRoutes } from './dashboard.module.routing';
@@ -19,6 +20,7 @@ import {ProfilePopoverComponent} from './components/profile-popover/profile-popo
     RouterModule.forChild(dashboardRoutes),
     HeaderComponent,
     ProfilePopoverComponent,
+    Menu,
   ],
 })
 export class DashboardModule { }
