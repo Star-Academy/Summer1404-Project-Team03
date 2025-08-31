@@ -12,7 +12,7 @@ export const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
     canMatch: [], //TODO check this
-    data: { role: "data_admin" }
+    // data: { role: "data_admin" }
   },
   {
     path: 'landing',
