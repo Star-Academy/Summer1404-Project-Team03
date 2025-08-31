@@ -13,7 +13,7 @@ export const errorHandlingInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {
       if (error.status === 401) {
-        router.navigate(['/landing']);
+        // router.navigate(['/landing']);
         userStore.clearUser();
         messageService.add({
           severity: 'warn',
