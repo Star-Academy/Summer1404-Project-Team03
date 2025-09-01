@@ -104,14 +104,34 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
   public openWorkflow = this.effect<{ workflowId: string }>(workflow$ => {
     return workflow$.pipe(
-      tap((workflow) => this.patchState({ loadingWorkflowId: workflow.workflowId })),
-      switchMap((wf) => {
-        const index = this.vm().workflows.findIndex((workflow) => workflow.id == wf.workflowId)
-        return index !== -1 ? of(this.vm().workflows[index]) : throwError('can not find workflow');
-      }),
-      tap((workflow) => this.patchState({ loadingWorkflowId: null, selectedWorkflowId: workflow.id }))
-    )
-  })
+      tap(({ workflowId }) =>
+        this.patchState({ loadingWorkflowId: workflowId })
+      ),
+      switchMap(({ workflowId }) => {
+        const workflow = this.get().workflows.find(wf => wf.id === workflowId);
+
+        if (!workflow) {
+          return throwError(() => new Error('Cannot find workflow')).pipe(
+            catchError(err => {
+              this.patchState({ loadingWorkflowId: null });
+              return throwError(() => err);
+            })
+          );
+        }
+
+        return of(workflow).pipe(
+          tap(wf =>
+            this.patchState((state) => ({
+              loadingWorkflowId: null,
+              selectedWorkflowId: wf.id,
+              openedWorkflowsId: [...state.openedWorkflowsId, wf.id]
+            }))
+          )
+        );
+      })
+    );
+  });
+
 
   public readonly reorderOpenWorkflows = this.updater((state, reorderedWorkflows: WorkflowInfo[]) => {
     const newOrderedIds = reorderedWorkflows.map(wf => wf.id);
@@ -122,33 +142,33 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     };
   });
 
-public readonly closeWorkflow = this.updater(
-  (state, workflowIdToClose: string) => {
-    const idx = state.openedWorkflowsId.indexOf(workflowIdToClose);
-    const newOpenedIds = state.openedWorkflowsId.filter(id => id !== workflowIdToClose);
+  public readonly closeWorkflow = this.updater(
+    (state, workflowIdToClose: string) => {
+      const idx = state.openedWorkflowsId.indexOf(workflowIdToClose);
+      const newOpenedIds = state.openedWorkflowsId.filter(id => id !== workflowIdToClose);
 
-    if (state.selectedWorkflowId !== workflowIdToClose) {
+      if (state.selectedWorkflowId !== workflowIdToClose) {
+        return {
+          ...state,
+          openedWorkflowsId: newOpenedIds,
+        };
+      }
+
+      let newSelectedId: string | null = null;
+      if (newOpenedIds.length > 0) {
+        if (idx < newOpenedIds.length) {
+          newSelectedId = newOpenedIds[idx];
+        } else {
+          newSelectedId = newOpenedIds[idx - 1];
+        }
+      }
+
       return {
         ...state,
         openedWorkflowsId: newOpenedIds,
+        selectedWorkflowId: newSelectedId,
       };
     }
-
-    let newSelectedId: string | null = null;
-    if (newOpenedIds.length > 0) {
-      if (idx < newOpenedIds.length) {
-        newSelectedId = newOpenedIds[idx];
-      } else {
-        newSelectedId = newOpenedIds[idx - 1];
-      }
-    }
-
-    return {
-      ...state,
-      openedWorkflowsId: newOpenedIds,
-      selectedWorkflowId: newSelectedId,
-    };
-  }
-);
+  );
 
 }
