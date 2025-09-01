@@ -1,10 +1,27 @@
 <div class="tabs-bar">
-  <div class="tabs-bar__tabs">
+  <div
+    class="tabs-bar__tabs"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="vm().openWorkflows" 
+    (cdkDropListDropped)="onDrop($event)"
+  >
     @for (tab of vm().openWorkflows; track tab.id) {
-    <app-workflow-tab (opneWorkflow)="openWorkflow($event)" [workflowInfo]="tab" [isSelected]="vm().selectedWorkflowId === tab.id ? true: false"></app-workflow-tab>
+    <app-workflow-tab
+      cdkDrag
+      (opneWorkflow)="openWorkflow($event)"
+      [workflowInfo]="tab"
+      [isSelected]="vm().selectedWorkflowId === tab.id ? true : false"
+    ></app-workflow-tab>
     }
   </div>
   <div class="tabs-bar__new-tab-btn">
-    <p-button icon="pi pi-plus" rounded outlined size="small" (click)="onCreateNewWorkflow()"></p-button>
+    <p-button
+      icon="pi pi-plus"
+      rounded
+      outlined
+      size="small"
+      (click)="onCreateNewWorkflow()"
+    ></p-button>
   </div>
 </div>

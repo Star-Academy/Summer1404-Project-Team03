@@ -4,6 +4,7 @@ import { Button } from 'primeng/button';
 import { Toolbar } from 'primeng/toolbar';
 import { Avatar } from 'primeng/avatar';
 import { DashboardComponent } from './dashboard.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
 import { dashboardRoutes } from './dashboard.module.routing';
 import {HeaderComponent} from "../../shared/components/header/header.component";
@@ -23,7 +24,8 @@ import { TooltipModule } from 'primeng/tooltip';
     RouterModule.forChild(dashboardRoutes),
     HeaderComponent,
     ProfilePopoverComponent,
-    TooltipModule
+    TooltipModule,
+    DragDropModule
   ],
   providers: [WorkflowsListStore]
 })

@@ -61,14 +61,16 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
   }
 
   public readonly vm = this.selectSignal(s => {
+    const workflowMap = new Map(s.workflows.map(wf => [wf.id, wf]));
+
+    const openWorkflows = s.openedWorkflowsId
+      .map(id => workflowMap.get(id))
+      .filter((wf): wf is WorkflowInfo => wf !== undefined);
     return {
       ...s,
-      openWorkflows: s.workflows.filter((wf) =>
-        s.openedWorkflowsId.includes(wf.id)
-      )
+      openWorkflows: openWorkflows
     }
-  }
-  );
+  })
 
   public createNewWorkflow = this.effect<{ workflowName: string }>(workflow$ => {
     return workflow$.pipe(
@@ -110,5 +112,14 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
       tap((workflow) => this.patchState({ loadingWorkflowId: null, selectedWorkflowId: workflow.id }))
     )
   })
+
+  public readonly reorderOpenWorkflows = this.updater((state, reorderedWorkflows: WorkflowInfo[]) => {
+    const newOrderedIds = reorderedWorkflows.map(wf => wf.id);
+
+    return {
+      ...state,
+      openedWorkflowsId: newOrderedIds
+    };
+  });
 
 }
