@@ -11,6 +11,7 @@ import {ProfilePopoverComponent} from './components/profile-popover/profile-popo
 import { WorkflowsListStore } from './stores/workflows-list/workflows-list-store.service';
 import { WorkflowsTabsManagementComponent } from './components/workflows-tabs-management/workflows-tabs-management.component';
 import { WorkflowTabComponent } from './components/workflows-tabs-management/components/workflow-tab/workflow-tab.component';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [DashboardComponent, WorkflowsTabsManagementComponent, WorkflowTabComponent],
@@ -22,6 +23,7 @@ import { WorkflowTabComponent } from './components/workflows-tabs-management/com
     RouterModule.forChild(dashboardRoutes),
     HeaderComponent,
     ProfilePopoverComponent,
+    TooltipModule
   ],
   providers: [WorkflowsListStore]
 })

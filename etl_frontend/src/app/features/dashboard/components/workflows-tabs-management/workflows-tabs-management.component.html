@@ -1,7 +1,7 @@
 <div class="tabs-bar">
   <div class="tabs-bar__tabs">
     @for (tab of openWorkflows$ | async; track $index) {
-    <app-workflow-tab></app-workflow-tab>
+    <app-workflow-tab [workflowInfo]="tab"></app-workflow-tab>
     }
   </div>
   <div class="tabs-bar__new-tab-btn">

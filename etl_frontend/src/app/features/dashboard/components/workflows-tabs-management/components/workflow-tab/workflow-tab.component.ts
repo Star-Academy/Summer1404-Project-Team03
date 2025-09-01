@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { WorkflowInfo } from '../../../../models/workflow.model';
 
 @Component({
   selector: 'app-workflow-tab',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './workflow-tab.component.scss'
 })
 export class WorkflowTabComponent {
-
+  workflowInfo = input.required<WorkflowInfo>();
 }

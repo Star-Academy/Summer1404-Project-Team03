@@ -1,0 +1,74 @@
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+  border-radius: 1rem;
+  padding-inline: 0.5rem;
+  transition: background 0.2s linear;
+  inline-size: 10rem;
+  max-inline-size: 10rem;
+  height: 2.5rem;
+  background-color: var(--p-surface-100); // light gray
+
+  &:hover {
+    background-color: var(--p-primary-200);
+  }
+  &:hover &__close-icon {
+    display: block;
+  }
+
+  &__name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    // transition: max-width 0.3s ease;
+  }
+
+  &__status {
+    inline-size: 0.55rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+
+    &-draft {
+      background: gray;
+    }
+    &-running {
+      background: blue;
+    }
+    &-completed {
+      background: green;
+    }
+    &-failed {
+      background: red;
+      animation: blinking 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) infinite alternate-reverse;
+    }
+  }
+
+  &__close-icon {
+    display: none;
+    animation: scale-up 0.2s linear;
+  }
+}
+
+@keyframes scale-up {
+  from {
+    transform: scale(0.3);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes blinking {
+  from {
+    transform: scale(0.5);
+    opacity: 0.3;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
