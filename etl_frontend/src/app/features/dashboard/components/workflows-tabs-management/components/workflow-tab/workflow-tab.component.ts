@@ -11,8 +11,13 @@ export class WorkflowTabComponent {
   public workflowInfo = input.required<WorkflowInfo>();
   public isSelected = input.required<boolean>();
   public opneWorkflow = output<string>();
+  public closeWorkflow = output<string>();
 
   public onOpenWorkflow(): void {
     this.opneWorkflow.emit(this.workflowInfo().id);
+  }
+
+  public onCloseWorkflow(): void {
+    this.closeWorkflow.emit(this.workflowInfo().id);
   }
 }

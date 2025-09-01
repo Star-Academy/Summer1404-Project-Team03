@@ -19,6 +19,7 @@
     @for (tab of vm().openWorkflows; track tab.id) {
     <app-workflow-tab
       cdkDrag
+      (closeWorkflow)="onCloseWorkflow($event)"
       (opneWorkflow)="openWorkflow($event)"
       [workflowInfo]="tab"
       [isSelected]="vm().selectedWorkflowId === tab.id ? true : false"

@@ -122,4 +122,33 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     };
   });
 
+public readonly closeWorkflow = this.updater(
+  (state, workflowIdToClose: string) => {
+    const idx = state.openedWorkflowsId.indexOf(workflowIdToClose);
+    const newOpenedIds = state.openedWorkflowsId.filter(id => id !== workflowIdToClose);
+
+    if (state.selectedWorkflowId !== workflowIdToClose) {
+      return {
+        ...state,
+        openedWorkflowsId: newOpenedIds,
+      };
+    }
+
+    let newSelectedId: string | null = null;
+    if (newOpenedIds.length > 0) {
+      if (idx < newOpenedIds.length) {
+        newSelectedId = newOpenedIds[idx];
+      } else {
+        newSelectedId = newOpenedIds[idx - 1];
+      }
+    }
+
+    return {
+      ...state,
+      openedWorkflowsId: newOpenedIds,
+      selectedWorkflowId: newSelectedId,
+    };
+  }
+);
+
 }

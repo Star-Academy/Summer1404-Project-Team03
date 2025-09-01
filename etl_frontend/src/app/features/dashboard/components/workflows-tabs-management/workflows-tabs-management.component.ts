@@ -28,4 +28,8 @@ export class WorkflowsTabsManagementComponent {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     this.workflowListStore.reorderOpenWorkflows(event.container.data);
   }
+
+  onCloseWorkflow(workflowId: string): void {
+    this.workflowListStore.closeWorkflow(workflowId);
+  }
 }
