@@ -121,11 +121,20 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
         return of(workflow).pipe(
           tap(wf =>
-            this.patchState((state) => ({
-              loadingWorkflowId: null,
-              selectedWorkflowId: wf.id,
-              openedWorkflowsId: [...state.openedWorkflowsId, wf.id]
-            }))
+            this.patchState((state) => {
+              if (state.openedWorkflowsId.includes(wf.id)) {
+                return {
+                  loadingWorkflowId: null,
+                  selectedWorkflowId: wf.id,
+                };
+              }
+
+              return {
+                loadingWorkflowId: null,
+                selectedWorkflowId: wf.id,
+                openedWorkflowsId: [...state.openedWorkflowsId, wf.id],
+              };
+            })
           )
         );
       })
