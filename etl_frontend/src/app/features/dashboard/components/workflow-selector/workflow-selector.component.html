@@ -1,0 +1,15 @@
+<p-button
+  icon="pi pi-angle-down"
+  outlined
+  (click)="op.toggle($event)"
+  rounded
+></p-button>
+<p-popover #op>
+  <p-listbox
+  [options]="vm().workflows"
+  (onChange)="change($event); op.hide()"
+  optionLabel="name"
+  [filter]="true"
+  [disabled]="vm().isLoadingWorkflows"
+  />
+</p-popover>
