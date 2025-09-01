@@ -1,9 +1,19 @@
 <div class="tabs-bar">
+  @if(vm().isLoadingWorkflows) { @for (index of [1, 2, 3, 4,]; track $index) {
+  <div class="tab-skeleton">
+    <p-skeleton
+      width="100px"
+      height="30px"
+      animation="wave"
+      styleClass="tab-skeleton-box"
+    ></p-skeleton>
+  </div>
+  } }@else {
   <div
     class="tabs-bar__tabs"
     cdkDropList
     cdkDropListOrientation="horizontal"
-    [cdkDropListData]="vm().openWorkflows" 
+    [cdkDropListData]="vm().openWorkflows"
     (cdkDropListDropped)="onDrop($event)"
   >
     @for (tab of vm().openWorkflows; track tab.id) {
@@ -19,9 +29,11 @@
     <p-button
       icon="pi pi-plus"
       rounded
-      outlined
+      text
+      [label]="vm().openWorkflows.length ? '' : 'Create New Workflow'"
       size="small"
       (click)="onCreateNewWorkflow()"
     ></p-button>
   </div>
+  }
 </div>

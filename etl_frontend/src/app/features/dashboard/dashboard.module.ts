@@ -13,6 +13,7 @@ import { WorkflowsListStore } from './stores/workflows-list/workflows-list-store
 import { WorkflowsTabsManagementComponent } from './components/workflows-tabs-management/workflows-tabs-management.component';
 import { WorkflowTabComponent } from './components/workflows-tabs-management/components/workflow-tab/workflow-tab.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [DashboardComponent, WorkflowsTabsManagementComponent, WorkflowTabComponent],
@@ -25,7 +26,8 @@ import { TooltipModule } from 'primeng/tooltip';
     HeaderComponent,
     ProfilePopoverComponent,
     TooltipModule,
-    DragDropModule
+    DragDropModule,
+    SkeletonModule
   ],
   providers: [WorkflowsListStore]
 })
