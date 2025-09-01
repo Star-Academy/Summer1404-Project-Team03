@@ -5,7 +5,7 @@ import { WorkflowInfo } from '../../../../models/workflow.model';
   selector: 'app-workflow-tab',
   standalone: false,
   templateUrl: './workflow-tab.component.html',
-  styleUrl: './workflow-tab.component.scss'
+  styleUrl: './workflow-tab.component.scss',
 })
 export class WorkflowTabComponent {
   public workflowInfo = input.required<WorkflowInfo>();

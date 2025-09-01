@@ -23,6 +23,7 @@
       (opneWorkflow)="openWorkflow($event)"
       [workflowInfo]="tab"
       [isSelected]="vm().selectedWorkflowId === tab.id ? true : false"
+      [@tabAnimation]
     ></app-workflow-tab>
     }
   </div>

@@ -1,5 +1,6 @@
 .tab {
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-evenly;
   cursor: pointer;
@@ -10,6 +11,8 @@
   max-inline-size: 10rem;
   height: 2.5rem;
   background-color: var(--p-surface-100);
+  // animation: swip-up-right 0.2s linear;
+
   &-active {
     background-color: var(--p-primary-200);
   }
@@ -85,5 +88,16 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes swip-up-right {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
   }
 }
