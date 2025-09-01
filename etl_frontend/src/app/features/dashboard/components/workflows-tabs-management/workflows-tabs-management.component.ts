@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { WorkflowsListStore } from '../../stores/workflows-list/workflows-list-store.service';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-workflows-tabs-management',
@@ -9,9 +10,14 @@ import { WorkflowsListStore } from '../../stores/workflows-list/workflows-list-s
 })
 export class WorkflowsTabsManagementComponent {
   public readonly vm;
-  public readonly openWorkflows$;
+  // public readonly openWorkflows$;
+
   constructor(public readonly workflowListStore: WorkflowsListStore) {
     this.vm = this.workflowListStore.vm;
-    this.openWorkflows$ = this.workflowListStore.getOpendWorkflows()
+    // this.openWorkflows$ = this.workflowListStore.getOpendWorkflows()
+  }
+
+  onCreateNewWorkflow():void {
+    this.workflowListStore.createNewWorkflow(of({workflowName: "New Workflow"}));
   }
 }
