@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-workflow-tab',
-  imports: [],
+  standalone: false,
   templateUrl: './workflow-tab.component.html',
   styleUrl: './workflow-tab.component.scss'
 })

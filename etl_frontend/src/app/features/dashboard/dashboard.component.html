@@ -1,7 +1,8 @@
 <app-header>
   <div class="header__toolbar__start" start>
     <img src="/assets/logo.svg" alt="logo image" class="header__toolbar__start__img">
-    <p-button icon="pi pi-home" text rounded label="home" [routerLink]="['/', 'dashboard', 'home']" />
+    <p-button icon="pi pi-home" text rounded size="large" [routerLink]="['/', 'dashboard', 'home']" />
+    <app-workflows-tabs-management></app-workflows-tabs-management>
   </div>
   <div class="header__toolbar__end" routerLink="" end>
     @if (user(); as currentUser) {
