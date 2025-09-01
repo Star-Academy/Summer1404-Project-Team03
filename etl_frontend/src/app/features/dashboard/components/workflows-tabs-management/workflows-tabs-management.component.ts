@@ -33,9 +33,9 @@ export class WorkflowsTabsManagementComponent {
     this.vm = this.workflowListStore.vm;
   }
 
-  onCreateNewWorkflow(): void {
-    this.workflowListStore.createNewWorkflow(of({ workflowName: "New Workflow" }));
-  }
+  // onCreateNewWorkflow(wfName?: string): void {
+  //   this.workflowListStore.createNewWorkflow(of({ workflowName: wfName ? wfName: "New Workflow" }));
+  // }
 
   openWorkflow(workflowId: string): void {
     this.workflowListStore.openWorkflow(of({ workflowId }));

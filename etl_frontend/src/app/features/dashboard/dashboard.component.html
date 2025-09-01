@@ -9,8 +9,8 @@
         size="large"
         [routerLink]="['/', 'dashboard', 'home']"
       />
-      <app-workflow-selector></app-workflow-selector>
       <app-workflows-tabs-management></app-workflows-tabs-management>
+      <app-workflow-selector></app-workflow-selector>
     </div>
     <div class="header__end">
       @if (user(); as currentUser) {

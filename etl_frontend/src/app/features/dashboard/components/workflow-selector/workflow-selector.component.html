@@ -1,15 +1,49 @@
-<p-button
-  icon="pi pi-angle-down"
-  outlined
-  (click)="op.toggle($event)"
-  rounded
-></p-button>
+<p-buttongroup>
+  <p-button
+    icon="pi pi-plus"
+    rounded
+    [label]="vm().openWorkflows.length ? '' : 'Create New Workflow'"
+    size="small"
+    (click)="onCreateNewWorkflow()"
+  ></p-button>
+  <p-button
+    icon="pi pi-angle-down"
+    size="small"
+    outlined
+    (click)="op.toggle($event)"
+    rounded
+  ></p-button>
+</p-buttongroup>
+
 <p-popover #op>
-  <p-listbox
-  [options]="vm().workflows"
-  (onChange)="change($event); op.hide()"
-  optionLabel="name"
-  [filter]="true"
-  [disabled]="vm().isLoadingWorkflows"
-  />
+  <div class="popover-content">
+    <div class="new-workflow">
+      <input
+        type="text"
+        pInputText
+        variant="filled"
+        placeholder="Enter workflow name"
+        #wfName
+        (keydown.enter)="
+          onCreateNewWorkflow(wfName.value); wfName.value = ''; op.hide()
+        "
+      />
+      <p-button
+        #createWfBtn
+        label="Create"
+        icon="pi pi-check"
+        size="small"
+        (click)="
+          onCreateNewWorkflow(wfName.value); wfName.value = ''; op.hide()
+        "
+      ></p-button>
+    </div>
+    <p-listbox
+      [options]="vm().workflows"
+      (onChange)="onSelectWorkflow($event); op.hide()"
+      optionLabel="name"
+      [filter]="true"
+      [disabled]="vm().isLoadingWorkflows"
+    ></p-listbox>
+  </div>
 </p-popover>

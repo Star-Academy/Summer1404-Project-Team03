@@ -17,6 +17,8 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { WorkflowSelectorComponent } from './components/workflow-selector/workflow-selector.component';
 import { PopoverModule } from 'primeng/popover';
 import { ListboxModule } from 'primeng/listbox';
+import { ButtonGroupModule } from 'primeng/buttongroup';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [DashboardComponent, WorkflowsTabsManagementComponent, WorkflowTabComponent, WorkflowSelectorComponent],
@@ -33,6 +35,8 @@ import { ListboxModule } from 'primeng/listbox';
     SkeletonModule,
     PopoverModule,
     ListboxModule,
+    ButtonGroupModule,
+    InputTextModule
   ],
   providers: [WorkflowsListStore]
 })

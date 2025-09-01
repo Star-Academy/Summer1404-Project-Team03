@@ -17,7 +17,11 @@ export class WorkflowSelectorComponent {
     this.vm = this.workflowsListStore.vm;
   }
 
-change(event: ListboxChangeEvent): void {
-  this.workflowsListStore.openWorkflow(of({ workflowId: event.value.id }));
-}
+  onSelectWorkflow(event: ListboxChangeEvent): void {
+    this.workflowsListStore.openWorkflow(of({ workflowId: event.value.id }));
+  }
+
+  onCreateNewWorkflow(wfName?: string): void {
+    this.workflowsListStore.createNewWorkflow(of({ workflowName: wfName ? wfName : "New Workflow" }));
+  }
 }
