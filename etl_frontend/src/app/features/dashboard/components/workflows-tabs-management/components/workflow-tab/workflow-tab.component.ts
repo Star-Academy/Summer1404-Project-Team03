@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { WorkflowInfo } from '../../../../models/workflow.model';
 
 @Component({
@@ -8,5 +8,11 @@ import { WorkflowInfo } from '../../../../models/workflow.model';
   styleUrl: './workflow-tab.component.scss'
 })
 export class WorkflowTabComponent {
-  workflowInfo = input.required<WorkflowInfo>();
+  public workflowInfo = input.required<WorkflowInfo>();
+  public isSelected = input.required<boolean>();
+  public opneWorkflow = output<string>();
+
+  public onOpenWorkflow(): void {
+    this.opneWorkflow.emit(this.workflowInfo().id);
+  }
 }

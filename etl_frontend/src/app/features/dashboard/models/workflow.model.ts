@@ -14,4 +14,5 @@ export interface WorkflowsListState {
     isLoadingWorkflows: boolean;
     error: string | null;
     isCreatingWorkflow: boolean;
+    loadingWorkflowId: string | null;
 }

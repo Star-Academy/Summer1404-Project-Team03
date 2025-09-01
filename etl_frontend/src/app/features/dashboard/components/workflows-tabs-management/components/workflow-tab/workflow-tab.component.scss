@@ -9,7 +9,10 @@
   inline-size: 10rem;
   max-inline-size: 10rem;
   height: 2.5rem;
-  background-color: var(--p-surface-100); // light gray
+  background-color: var(--p-surface-100);
+  &-active {
+    background-color: var(--p-primary-200);
+  }
 
   &:hover {
     background-color: var(--p-primary-200);
@@ -36,14 +39,17 @@
       background: gray;
     }
     &-running {
-      background: blue;
+      border-top: 2px solid blue;
+      border-left: 2px solid blue;
+      animation: spinning 0.6s linear infinite;
     }
     &-completed {
       background: green;
     }
     &-failed {
       background: red;
-      animation: blinking 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) infinite alternate-reverse;
+      animation: blinking 0.8s cubic-bezier(0.39, 0.575, 0.565, 1) infinite
+        alternate-reverse;
     }
   }
 
@@ -70,5 +76,14 @@
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+@keyframes spinning {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

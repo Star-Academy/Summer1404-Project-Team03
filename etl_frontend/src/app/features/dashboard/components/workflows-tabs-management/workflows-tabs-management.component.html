@@ -1,7 +1,7 @@
 <div class="tabs-bar">
   <div class="tabs-bar__tabs">
     @for (tab of vm().openWorkflows; track tab.id) {
-    <app-workflow-tab [workflowInfo]="tab"></app-workflow-tab>
+    <app-workflow-tab (opneWorkflow)="openWorkflow($event)" [workflowInfo]="tab" [isSelected]="vm().selectedWorkflowId === tab.id ? true: false"></app-workflow-tab>
     }
   </div>
   <div class="tabs-bar__new-tab-btn">

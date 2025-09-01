@@ -1,7 +1,7 @@
-import { effect, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { WorkflowInfo, WorkflowsListState } from '../../models/workflow.model';
-import { catchError, delay, exhaustMap, Observable, of, tap } from 'rxjs';
+import { catchError, exhaustMap, of, switchMap, tap, throwError } from 'rxjs';
 
 const initialState: WorkflowsListState = {
   workflows: [{
@@ -47,7 +47,8 @@ const initialState: WorkflowsListState = {
   error: null,
   isLoadingWorkflows: false,
   openedWorkflowsId: ['wf_005', 'wf_004', 'wf_001'],
-  selectedWorkflowId: '',
+  selectedWorkflowId: 'wf_005',
+  loadingWorkflowId: null,
   isCreatingWorkflow: false,
 }
 
@@ -56,6 +57,7 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
   constructor() {
     super(initialState);
+    //TODO handle selected workflowId at begining
   }
 
   public readonly vm = this.selectSignal(s => {
@@ -68,29 +70,13 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
   }
   );
 
-  // public loadWorkflows = this.effect<void>(trigger$ => { //TODO call api in service to fetch list of workflows
-  //   return trigger$
-  // })
-
-  // public getWorkflows(): Observable<WorkflowInfo[]> {
-  //   return of(this.vm().workflows).pipe(
-  //     tap(() => this.patchState({ isLoadingWorkflows: true })),
-  //     delay(3000),
-  //     tap(() => this.patchState({ isLoadingWorkflows: false }))
-  //   )
-  // }
-
-  // public getOpendWorkflows(): Observable<WorkflowInfo[]> {
-  //   return of(this.vm().workflows.filter((wf) => this.vm().openedWorkflowsId.includes(wf.id)));
-  // }
-
   public createNewWorkflow = this.effect<{ workflowName: string }>(workflow$ => {
     return workflow$.pipe(
       tap(() => this.patchState({ isCreatingWorkflow: true })),
       exhaustMap(({ workflowName }) => {
         // TODO: replace with actual service call
         return of({
-          id: 'wf_' + Math.floor(Math.random() * 10000), // generate unique id
+          id: 'wf_' + Math.floor(Math.random() * 10000),
           name: workflowName,
           description: 'New workflow created by user.',
           createdAt: new Date(),
@@ -113,5 +99,16 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
       })
     );
   });
+
+  public openWorkflow = this.effect<{ workflowId: string }>(workflow$ => {
+    return workflow$.pipe(
+      tap((workflow) => this.patchState({ loadingWorkflowId: workflow.workflowId })),
+      switchMap((wf) => {
+        const index = this.vm().workflows.findIndex((workflow) => workflow.id == wf.workflowId)
+        return index !== -1 ? of(this.vm().workflows[index]) : throwError('can not find workflow');
+      }),
+      tap((workflow) => this.patchState({ loadingWorkflowId: null, selectedWorkflowId: workflow.id }))
+    )
+  })
 
 }

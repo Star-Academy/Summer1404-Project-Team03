@@ -10,14 +10,16 @@ import { of } from 'rxjs';
 })
 export class WorkflowsTabsManagementComponent {
   public readonly vm;
-  // public readonly openWorkflows$;
 
   constructor(public readonly workflowListStore: WorkflowsListStore) {
     this.vm = this.workflowListStore.vm;
-    // this.openWorkflows$ = this.workflowListStore.getOpendWorkflows()
   }
 
   onCreateNewWorkflow():void {
     this.workflowListStore.createNewWorkflow(of({workflowName: "New Workflow"}));
+  }
+
+  openWorkflow(workflowId: string) :void {
+    this.workflowListStore.openWorkflow(of({workflowId}));
   }
 }

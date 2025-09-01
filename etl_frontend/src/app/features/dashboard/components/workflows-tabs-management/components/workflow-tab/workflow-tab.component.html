@@ -1,4 +1,4 @@
-<div class="tab" [pTooltip]="workflowInfo().name" tooltipPosition="bottom" showDelay="1000">
+<div (click)="onOpenWorkflow()" class="tab" [pTooltip]="workflowInfo().name" tooltipPosition="bottom" showDelay="1000" [ngClass]="{'tab-active': isSelected()}">
   <div
     class="tab__status"
     [ngClass]="'tab__status-' + workflowInfo().status"
