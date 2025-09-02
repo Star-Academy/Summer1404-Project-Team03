@@ -37,3 +37,13 @@ p-toolbar .p-toolbar {
     transform: scale(1) translateX(-10%);
   }
 }
+
+p-menu .p-menu {
+  padding-inline-start: 0.8rem;
+  border-block: none;
+  border-inline-start: none;
+}
+
+.p-menu-list {
+  block-size: 90.6vh;
+}
