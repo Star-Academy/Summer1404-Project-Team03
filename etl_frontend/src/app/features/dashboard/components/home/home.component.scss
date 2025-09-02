@@ -1,0 +1,15 @@
+:host {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  // block-size: 100vh;
+  // overflow-y: ;
+
+  .sidebar {
+    inline-size: 100vh;
+    max-inline-size: 20rem;
+  }
+  .dynamic-content {
+    flex: 1;
+  }
+}

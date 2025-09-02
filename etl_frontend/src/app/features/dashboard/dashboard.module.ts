@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Button, ButtonModule } from 'primeng/button';
 import { Toolbar } from 'primeng/toolbar';
 import { Avatar } from 'primeng/avatar';
-import { Menu } from 'primeng/menu';
+import { Menu, MenuModule } from 'primeng/menu';
 import { DashboardComponent } from './dashboard.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
@@ -38,7 +38,6 @@ import { InputTextModule } from 'primeng/inputtext';
     ListboxModule,
     ButtonGroupModule,
     InputTextModule,
-    Menu,
   ],
   providers: [WorkflowsListStore]
 })

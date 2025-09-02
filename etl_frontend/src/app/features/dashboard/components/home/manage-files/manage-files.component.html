@@ -1,1 +1,101 @@
-<p>manage-files works!</p>
+<p-card header="Manage CSV Files" subheader="Upload, view, and manage your datasets">
+  
+  <ng-template pTemplate="header">
+    <div *ngIf="selectedFileContent || uploadedFileColumns.length > 0" class="p-mb-2">
+      <p-button 
+        icon="pi pi-arrow-left" 
+        label="Back to File List" 
+        (click)="goBack()" 
+        styleClass="p-button-text">
+      </p-button>
+    </div>
+  </ng-template>
+
+  <div *ngIf="!selectedFileContent && uploadedFileColumns.length === 0">
+    <p-fileUpload 
+      name="csvUpload" 
+      accept=".csv" 
+      [customUpload]="true" 
+      (uploadHandler)="onFileUpload($event)"
+      [auto]="true"
+      chooseLabel="Upload New CSV File">
+    </p-fileUpload>
+
+    <p-table [value]="files" styleClass="p-datatable-striped p-mt-4" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>File Name</th>
+          <th>Size</th>
+          <th>Last Modified</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-file>
+        <tr>
+          <td><i class="pi pi-file p-mr-2"></i>{{ file.name }}</td>
+          <td>{{ file.size }}</td>
+          <td>{{ file.lastModified }}</td>
+          <td>
+            <p-button icon="pi pi-eye" styleClass="p-button-rounded p-button-success p-mr-2" (click)="viewFile(file)" pTooltip="View Content"></p-button>
+            <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-danger" (click)="deleteFile(file.name)" pTooltip="Delete File"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="4">No files found. Please upload a CSV file.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <div *ngIf="selectedFileContent">
+    <h4>Viewing File Content</h4>
+    <p-table [value]="selectedFileContent.data" [columns]="selectedFileContent.headers" styleClass="p-datatable-gridlines">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <div *ngIf="uploadedFileColumns.length > 0">
+    <h4>Configure Column Types</h4>
+    <p>Please assign a data type to each column from your uploaded file.</p>
+    
+    <p-table [value]="uploadedFileColumns" styleClass="p-datatable-striped p-mt-4">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Column Header</th>
+          <th>Data Type</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-column>
+        <tr>
+          <td>{{ column.header }}</td>
+          <td>
+            <p-dropdown 
+              [options]="dbTypes" 
+              [(ngModel)]="column.selectedType" 
+              placeholder="Select a Type"
+              optionLabel="label" 
+              optionValue="value">
+            </p-dropdown>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    
+    <div class="p-d-flex p-jc-end p-mt-4">
+      <p-button label="Confirm Types" icon="pi pi-check" (click)="confirmColumnTypes()"></p-button>
+    </div>
+  </div>
+</p-card>

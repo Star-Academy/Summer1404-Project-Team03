@@ -13,24 +13,6 @@ export class DashboardComponent implements OnInit {
   public readonly user = computed(() => this.userStore.vm().user);
   public readonly isLoading = computed(() => this.userStore.vm().isLoading);
 
-  public readonly menuItems: MenuItem[] = [
-    {
-      label: 'DataWave',
-      items: [
-        {
-          label: 'Workflow History',
-          icon: 'pi pi-file-plus',
-          routerLink: '/profile',
-        },
-        {
-          label: 'Data Management',
-          icon: 'pi pi-file-import',
-          routerLink: '/profile',
-        }
-      ]
-    }
-  ];
-
   constructor(private userStore: UserStoreService) {}
 
   ngOnInit() {

@@ -1,0 +1,22 @@
+// Use ::ng-deep for component-specific overrides if needed, but PrimeNG's styleClass is often better.
+// Example: Add margin to the card for spacing
+:host {
+  display: block;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+// Add some spacing between action buttons
+.p-mr-2 {
+  margin-right: 0.5rem;
+}
+
+.p-mt-4 {
+    margin-top: 1.5rem;
+}
+
+// Ensure the file upload component takes up reasonable space
+p-fileUpload {
+    display: block;
+    margin-bottom: 1.5rem;
+}
