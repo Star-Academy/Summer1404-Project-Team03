@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  font-family: var(--font-family);
+}
+
+.upload-card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+}
+
+.preview-container {
+  margin-top: 2rem;
+  border-top: 1px solid #dee2e6;
+  padding-top: 1.5rem;
+}
+
+// Ensure table inputs are full width
+:host ::ng-deep .p-datatable-sm td .p-inputtext {
+  width: 100%;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}

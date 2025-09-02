@@ -1,1 +1,75 @@
-<p>upload-file works!</p>
+<div class="upload-card">
+  <h3>Upload New Dataset</h3>
+  <p>Select one or more CSV files. The first file will be used to generate a column preview.</p>
+  
+  <p-fileUpload
+    name="files[]"
+    (onSelect)="onFileSelect($event)"
+    (onClear)="clearSelection()"
+    [multiple]="true"
+    accept=".csv"
+    [showUploadButton]="false"
+    [showCancelButton]="false"
+    chooseLabel="Choose Files"
+  >
+    <ng-template pTemplate="content">
+      <ul *ngIf="selectedFiles.length > 0" class="p-fileupload-files">
+        <li *ngFor="let file of selectedFiles">
+          <div>{{ file.name }} - {{ file.size | number }} bytes</div>
+        </li>
+      </ul>
+    </ng-template>
+  </p-fileUpload>
+
+  <div *ngIf="columnConfigurations.length > 0" class="preview-container">
+    <h4>Configure Columns</h4>
+    <p-table [value]="columnConfigurations" styleClass="p-datatable-sm">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Original Column Name</th>
+          <th>New Column Name (Editable)</th>
+          <th>Data Type</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-col>
+        <tr>
+          <td>{{ col.originalHeader }}</td>
+          <td>
+            <input pInputText type="text" [(ngModel)]="col.newHeader" class="p-inputtext-sm" />
+          </td>
+          <td>
+            <p-dropdown
+              [options]="dbTypes"
+              [(ngModel)]="col.selectedType"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select Type"
+              appendTo="body"
+            ></p-dropdown>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+  
+  <div class="action-buttons">
+    <button
+      pButton
+      type="button"
+      label="Clear"
+      icon="pi pi-times"
+      (click)="clearSelection()"
+      class="p-button-secondary"
+      [disabled]="selectedFiles.length === 0"
+    ></button>
+    <button
+      pButton
+      type="button"
+      label="Process & Upload"
+      icon="pi pi-upload"
+      (click)="processAndUploadFiles()"
+      class="p-button-primary"
+      [disabled]="selectedFiles.length === 0"
+    ></button>
+  </div>
+</div>
