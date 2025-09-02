@@ -18,6 +18,7 @@ using etl_backend.Repositories;
 using etl_backend.Repositories.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Npgsql;
 
 
@@ -30,9 +31,10 @@ builder.Services.Configure<KeycloakOptions>(
 builder.Services.Configure<StorageSettings>(
     builder.Configuration.GetSection("Storage"));
 
+// builder.Services.AddDbContextFactory<EtlDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration["Database:DefaultConnection"], x => x.MigrationsAssembly(typeof(EtlDbContext).Assembly.FullName)));
 builder.Services.AddDbContextFactory<EtlDbContext>(options =>
-    options.UseNpgsql(builder.Configuration["Database:ConnectionString"]));
-
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -79,13 +81,14 @@ builder.Services.AddSingleton<IGetRolesList, GetAllRolesService>();
 builder.Services.AddScoped<ICsvHeaderReader, CsvHeaderReader>();
 builder.Services.AddSingleton<ITableAdmin, PostgresTableAdmin>();
 builder.Services.AddSingleton<IColumnAdmin, PostgresColumnAdmin>();
+builder.Services.AddSingleton<IColumnTypeValidator, DefaultColumnTypeValidator>();
 
 
 
 
 // --- DbContext factory (EF Core) ---
-builder.Services.AddDbContextFactory<EtlDbContext>(opt =>
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// builder.Services.AddDbContextFactory<EtlDbContext>(opt =>
+//     opt.UseNpgsql(builder.Configuration["Database:DefaultConnection"]));
 builder.Services.AddScoped<IEtlDbContextFactory, EtlDbContextFactory>();
 
 // --- Options ---
@@ -94,8 +97,9 @@ builder.Services.Configure<CsvStagingOptions>(builder.Configuration.GetSection("
 builder.Services.Configure<PostgresStoreOptions>(builder.Configuration.GetSection("PostgresStore"));
 
 // --- Npgsql DataSource (for Postgres adapters) ---
-var cs = builder.Configuration.GetConnectionString("DefaultConnection")
-         ?? throw new InvalidOperationException("Missing DefaultConnection.");
+// var cs = builder.Configuration["Database:DefaultConnection"]
+//          ?? throw new InvalidOperationException("Missing DefaultConnection.");
+var cs = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddSingleton(sp => new NpgsqlDataSourceBuilder(cs).Build());
 
 // --- Repositories ---
@@ -118,6 +122,7 @@ builder.Services.AddScoped<IColumnDefinitionBuilder, DefaultColumnDefinitionBuil
 builder.Services.AddScoped<ITableNameGenerator, DefaultTableNameGenerator>();
 builder.Services.AddScoped<IHeaderProvider, StorageHeaderProvider>();
 builder.Services.AddScoped<ITableSpecFactory, DefaultTableSpecFactory>();
+builder.Services.AddSingleton<ILoadPolicyFactory, LoadPolicyFactory>();
 
 builder.Services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
 builder.Services.AddSingleton<ITypeMapper, PostgresTypeMapper>();
@@ -142,6 +147,10 @@ builder.Services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService
 builder.Services.AddScoped<ILoadPreconditionsService, LoadPreconditionsService>();
 builder.Services.AddScoped<IStagedFileStateService, StagedFileStateService>();
 builder.Services.AddScoped<ITableLoadService, TableLoadService>();
+builder.Services.AddScoped<ITableManagementService, TableManagementService>();
+builder.Services.AddScoped<IColumnAdmin, PostgresColumnAdmin>();
+builder.Services.AddScoped<IColumnManagementService, ColumnManagementService>();
+builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
 
 // --- Load policy (pick a default; prefer overriding per-call) ---
 builder.Services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
@@ -172,12 +181,22 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGenWithAuth(builder.Configuration);
-
+// builder.Services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "ETL API", Version = "v1" }); });
 
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var factory = scope.ServiceProvider.GetRequiredService<IDbContextFactory<EtlDbContext>>();
+    await using var db = await factory.CreateDbContextAsync();
+    var pending = await db.Database.GetPendingMigrationsAsync();
+    if (pending.Any())
+    {
+        Console.WriteLine("Applying migrations: " + string.Join(", ", pending));
+        await db.Database.MigrateAsync();
+    }
+}
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

@@ -6,40 +6,35 @@ using Npgsql;
 
 public sealed class PostgresColumnAdmin : IColumnAdmin
 {
-    private readonly NpgsqlDataSource _ds;
     private readonly IIdentifierPolicy _ids;
     private readonly ISqlExecutor _sql;
 
-    public PostgresColumnAdmin(NpgsqlDataSource dataSource, IIdentifierPolicy ids, ISqlExecutor sql)
-        => (_ds, _ids, _sql) = (dataSource, ids, sql);
-
-    public async Task DropColumnsAsync(TableRef table, IEnumerable<string> columnNames, CancellationToken ct = default)
+    public PostgresColumnAdmin(IIdentifierPolicy ids, ISqlExecutor sql)
     {
-        var cols = (columnNames ?? Array.Empty<string>())
-            .Where(n => !string.IsNullOrWhiteSpace(n))
-            .Select(n => $"DROP COLUMN IF EXISTS {_ids.QuoteIdentifier(n!)}")
-            .ToArray();
-
-        if (cols.Length == 0) return;
-
-        var sql = $"ALTER TABLE {table.QualifiedName} {string.Join(", ", cols)};";
-
-        await using var conn = await _ds.OpenConnectionAsync(ct);
-        await using var tx   = await conn.BeginTransactionAsync(ct);
-        await _sql.ExecuteAsync((NpgsqlConnection)conn, sql, ct);
-        await tx.CommitAsync(ct);
+        _ids = ids;
+        _sql = sql;
     }
 
-    public async Task RenameColumnAsync(TableRef table, string fromName, string toName, CancellationToken ct = default)
+    public async Task RenameAsync(Npgsql.NpgsqlConnection conn, string schema, string table, string oldName, string newName, CancellationToken ct = default)
     {
-        if (string.IsNullOrWhiteSpace(fromName) || string.IsNullOrWhiteSpace(toName))
-            throw new ArgumentException("Column names cannot be empty.");
+        var qSchema = _ids.QuoteIdentifier(schema);
+        var qTable  = _ids.QuoteIdentifier(table);
+        var qOld    = _ids.QuoteIdentifier(oldName);
+        var qNew    = _ids.QuoteIdentifier(newName);
 
-        if (string.Equals(fromName, toName, StringComparison.Ordinal)) return; // no-op
+        var sql = $"ALTER TABLE {qSchema}.{qTable} RENAME COLUMN {qOld} TO {qNew};";
+        await _sql.ExecuteAsync(conn, sql, ct);
+    }
 
-        var sql = $"ALTER TABLE {table.QualifiedName} RENAME COLUMN {_ids.QuoteIdentifier(fromName)} TO {_ids.QuoteIdentifier(toName)};";
+    public async Task DropAsync(Npgsql.NpgsqlConnection conn, string schema, string table, IReadOnlyCollection<string> columnNames, CancellationToken ct = default)
+    {
+        if (columnNames.Count == 0) return;
 
-        await using var conn = await _ds.OpenConnectionAsync(ct);
-        await _sql.ExecuteAsync((NpgsqlConnection)conn, sql, ct);
+        var qSchema = _ids.QuoteIdentifier(schema);
+        var qTable  = _ids.QuoteIdentifier(table);
+
+        var drops = string.Join(", ", columnNames.Select(n => $"DROP COLUMN IF EXISTS {_ids.QuoteIdentifier(n)}"));
+        var sql = $"ALTER TABLE {qSchema}.{qTable} {drops};";
+        await _sql.ExecuteAsync(conn, sql, ct);
     }
 }

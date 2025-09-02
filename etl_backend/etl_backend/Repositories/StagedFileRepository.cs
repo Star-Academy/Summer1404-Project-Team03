@@ -32,4 +32,10 @@ public sealed class StagedFileRepository : IStagedFileRepository
         ctx.StagedFiles.Update(entity);
         await ctx.SaveChangesAsync(ct);
     }
+    
+    public async Task<List<StagedFile>> ListAsync(CancellationToken ct = default)
+    {
+        await using var ctx = _ctxFactory.CreateStagingDbContext();
+        return await ctx.StagedFiles.AsNoTracking().OrderByDescending(x => x.UploadedAt).ToListAsync(ct);
+    }
 }

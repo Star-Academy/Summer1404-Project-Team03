@@ -4,6 +4,6 @@ namespace etl_backend.Application.DataFile.Abstraction;
 
 public interface IColumnAdmin
 {
-    Task DropColumnsAsync(TableRef table, IEnumerable<string> columnNames, CancellationToken ct = default);
-    Task RenameColumnAsync(TableRef table, string fromName, string toName, CancellationToken ct = default);
+    Task RenameAsync(Npgsql.NpgsqlConnection conn, string schema, string table, string oldName, string newName, CancellationToken ct = default);
+    Task DropAsync(Npgsql.NpgsqlConnection conn, string schema, string table, IReadOnlyCollection<string> columnNames, CancellationToken ct = default);
 }
