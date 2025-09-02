@@ -12,18 +12,20 @@ export const homeRoutes: Routes = [
             {
                 path: '',
                 pathMatch: 'full',
-                redirectTo: 'workflows'
+                redirectTo: 'workflows',
             },
             {
                 path: 'workflows',
-                component: ManageWorkflowsComponent
+                component: ManageWorkflowsComponent,
                 // loadComponent: () => import('./manage-workflows/manage-workflows.component').then(m => m.ManageWorkflowsComponent)
             },
             {
                 path: 'files',
-                component: ManageFilesComponent,
-                // loadComponent: () => import('./manage-files/manage-files.component').then(m => m.ManageFilesComponent)
-            }
-        ]
+                loadChildren: () =>
+                    import('./manage-files/manage-files.module').then(
+                        (m) => m.ManageFilesModule
+                    ),
+            },
+        ],
     },
-]
+];

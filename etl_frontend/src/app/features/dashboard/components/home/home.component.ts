@@ -15,12 +15,13 @@ export class HomeComponent {
         {
           label: 'Workflow History',
           icon: 'pi pi-file-plus',
-          routerLink: '/dashboard/home/workflow',
+          routerLink: ['/dashboard/home/workflows'],
+          routerLinkActiveOptions: { exact: true },
         },
         {
           label: 'Data Management',
           icon: 'pi pi-file-import',
-          routerLink: '/dashboard/home/files',
+          routerLink: ['/dashboard/home/files'],
         },
       ],
     },
