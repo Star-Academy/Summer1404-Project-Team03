@@ -3,14 +3,10 @@
   overflow: hidden;
   width: fit-content;
   min-inline-size: 5rem;
-  height: 2rem;
+  height: 2.2rem;
   border-radius: 1rem;
   border: 0.1rem solid var(--p-primary-color);
-  text-align: center;
-  display: grid;
-  place-items: center;
   padding: 0.5rem;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
 
   &:hover &__actions {
@@ -33,6 +29,7 @@
     display: none;
 
     &__action {
+      cursor: pointer;
       color: var(--p-primary-color-text);
       cursor: pointer;
       padding: 0.5rem;
@@ -54,6 +51,9 @@
   &__name {
     margin: 0;
     padding: 0;
+    display: flex;
+    gap: 0.2rem;
+    align-items: center;
     color: var(--p-text-color);
   }
 }
