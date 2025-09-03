@@ -28,11 +28,11 @@
       (click)="clearFiles()"
     ></p-button>
   </div>
-  @if(files.length === 0 || isDragging){
+  @if(vm().files.length === 0 || vm().isDragging){
   <div
     class="file-uploader__zone-area"
     [ngClass]="{
-      'file-uploader__zone-area-drag-over': isDragging
+      'file-uploader__zone-area-drag-over': vm().isDragging
     }"
     (click)="fileInput.click()"
   >
@@ -42,7 +42,7 @@
   }
   <h4>Uploaded Files</h4>
   <div class="file-uploader__uploaded-file-list">
-    @for(file of files; track file.name){
+    @for(file of vm().files; track file.name){
       <app-uploaded-file-item @scaleAnimation (removeFile)="removeFile($event)" [fileName]="file.name"></app-uploaded-file-item>
     }
   </div>

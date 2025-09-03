@@ -4,6 +4,7 @@ import { Button } from 'primeng/button';
 import { UploadedFileItemComponent } from './components/uploaded-file-item/uploaded-file-item.component';
 import { animate, style, transition, trigger } from "@angular/animations"
 import { RouterOutlet } from '@angular/router';
+import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
 
 @Component({
   selector: 'app-file-uploader',
@@ -16,76 +17,62 @@ import { RouterOutlet } from '@angular/router';
         animate(
           '150ms ease-in',
           style({ transform: 'scale(0.8)', opacity: 0 })
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class FileUploaderComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
+  public readonly vm;
 
-  isDragging = false;
-  files: File[] = [];
+  constructor(private uploadFileStore: UploadFileStore) {
+    this.vm = this.uploadFileStore.vm;
+  }
 
   onDragOver(event: DragEvent): void {
-    // This is crucial to allow a drop.
-    event.preventDefault();
     event.stopPropagation();
-    this.isDragging = true;
+    event.preventDefault();
+    this.uploadFileStore.setDragging(true);
   }
 
   onDragLeave(event: DragEvent): void {
-    event.preventDefault();
     event.stopPropagation();
-    this.isDragging = false;
+    event.preventDefault();
+    this.uploadFileStore.setDragging(false);
   }
 
   onDrop(event: DragEvent): void {
     event.preventDefault();
     event.stopPropagation();
-    this.isDragging = false;
+    this.uploadFileStore.setDragging(false);
 
     const droppedFiles = event.dataTransfer?.files;
-    console.log(droppedFiles);
+
     if (droppedFiles) {
-      this.handleFiles(Array.from(droppedFiles));
+      const files = Array.from(droppedFiles);
+      files.forEach((file: File) => this.uploadFileStore.addFile(file));
     }
   }
 
-  // --- File Input and Selection Handlers ---
-
-  // Triggers the hidden file input
-  openFilePicker(): void {
-    this.fileInput.nativeElement.click();
-  }
-
-  // Handles files selected via the file dialog
   onFileSelect(event: Event): void {
     const element = event.target as HTMLInputElement;
     const selectedFiles = element.files;
+
     if (selectedFiles) {
-      this.handleFiles(Array.from(selectedFiles));
+      Array.from(selectedFiles).forEach((file) =>
+        this.uploadFileStore.addFile(file)
+      );
     }
-    // Clear the input value to allow selecting the same file again
+
     element.value = '';
   }
 
-  // --- File Management ---
-
-  private handleFiles(newFiles: File[]): void {
-    // You can add validation here (file type, size, etc.)
-    // For example, to prevent duplicates:
-    // const uniqueFiles = newFiles.filter(newFile => 
-    //   !this.files.some(existingFile => existingFile.name === newFile.name)
-    // );
-    this.files.push(...newFiles);
-  }
-
   removeFile(fileName: string): void {
-    this.files = this.files.filter(file => file.name !== fileName);
+    this.uploadFileStore.removeFile(fileName);
   }
 
   clearFiles(): void {
-    this.files = [];
+    this.uploadFileStore.clearFiles();
   }
 }
