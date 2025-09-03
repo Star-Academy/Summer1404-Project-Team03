@@ -1,25 +1,50 @@
-<div class="upload-card">
+<!-- <div class="card">
   <h3>Upload New Dataset</h3>
-  <p>Select one or more CSV files. The first file will be used to generate a column preview.</p>
+  <p>Select or Simply drag and drop one or more CSV files.</p>
+
+  <div class="upload-trigger">
+<div 
+  class="dropzone"
+  (click)="openFilePicker()"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  [class.drag-over]="isDragging">
   
-  <p-fileUpload
-    name="files[]"
-    (onSelect)="onFileSelect($event)"
-    (onClear)="clearSelection()"
-    [multiple]="true"
-    accept=".csv"
-    [showUploadButton]="false"
-    [showCancelButton]="false"
-    chooseLabel="Choose Files"
-  >
-    <ng-template pTemplate="content">
-      <ul *ngIf="selectedFiles.length > 0" class="p-fileupload-files">
-        <li *ngFor="let file of selectedFiles">
-          <div>{{ file.name }} - {{ file.size | number }} bytes</div>
+  <input 
+    type="file" 
+    #fileInput 
+    (change)="onFileSelect($event)" 
+    multiple 
+    hidden>
+
+  <div class="dropzone-content">
+    <i class="pi pi-cloud-upload"></i>
+    <span>Drag & drop files here, or click to select</span>
+    <span class="dropzone-hint">Maximum file size: 50MB</span>
+  </div>
+</div>
+
+@if (selectedFiles.length > 0) {
+  <div class="file-list">
+    <h4>Selected Files ({{ selectedFiles.length }})</h4>
+    <ul>
+      @for(file of selectedFiles; track file.name + file.size) {
+        <li>
+          <div class="file-details">
+            <span class="file-name">{{ file.name }}</span>
+            <span class="file-size">{{ (file.size / 1024 / 1024) | number:'1.2-2' }} MB</span>
+          </div>
+          <button  class="remove-btn" title="Remove file">
+            <i class="pi pi-times"></i>
+          </button>
         </li>
-      </ul>
-    </ng-template>
-  </p-fileUpload>
+      }
+    </ul>
+    <button class="clear-all-btn">Clear All</button>
+  </div>
+}
+  </div>
 
   <div *ngIf="columnConfigurations.length > 0" class="preview-container">
     <h4>Configure Columns</h4>
@@ -35,7 +60,12 @@
         <tr>
           <td>{{ col.originalHeader }}</td>
           <td>
-            <input pInputText type="text" [(ngModel)]="col.newHeader" class="p-inputtext-sm" />
+            <input
+              pInputText
+              type="text"
+              [(ngModel)]="col.newHeader"
+              class="p-inputtext-sm"
+            />
           </td>
           <td>
             <p-dropdown
@@ -51,7 +81,7 @@
       </ng-template>
     </p-table>
   </div>
-  
+
   <div class="action-buttons">
     <button
       pButton
@@ -72,4 +102,4 @@
       [disabled]="selectedFiles.length === 0"
     ></button>
   </div>
-</div>
+</div> -->

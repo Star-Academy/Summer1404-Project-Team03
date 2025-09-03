@@ -1,0 +1,42 @@
+<div
+  class="file-uploader"
+  class="dropzone"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <input
+    type="file"
+    #fileInput
+    (change)="onFileSelect($event)"
+    multiple
+    hidden
+  />
+  <div class="file-uploader__actions">
+    <p-button
+      label="Upload New File"
+      icon="pi pi-upload"
+      (click)="fileInput.click()"
+      styleClass="p-button-sm p-button-rounded p-button-outlined"
+    ></p-button>
+
+    <p-button
+      label="Clear All"
+      icon="pi pi-times"
+      severity="danger"
+      outlined
+      styleClass="p-button-sm p-button-rounded"
+      (click)="clearFiles()"
+    ></p-button>
+  </div>
+  <div
+    class="file-uploader__zone-area"
+    [class.file-uploader__zone-area-drag-over]="isDragging"
+  >
+    <i class="pi pi-cloud-upload"></i>
+    <span>Drop files here to upload</span>
+  </div>
+  <div class="file-uploader__uploaded-file-list">
+    <div class="file-uploader__uploaded-file-list__item"></div>
+  </div>
+</div>

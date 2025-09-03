@@ -1,18 +1,31 @@
 :host {
   display: block;
-  font-family: var(--font-family);
+  block-size: calc(90vh - var(--header-height));
 }
 
 .upload-card {
   padding: 1.5rem;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  // background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.205);
+
+  &__upload-container {
+    // height: 100%;
+
+    &__files-list {
+      // height: 100%;
+
+      &__file {
+        max-width: 1rem;
+        background-color: red;
+      }
+    }
+  }
+
+  
 }
 
 .preview-container {
   margin-top: 2rem;
-  // border-top: 1px solid #dee2e6;
   padding-top: 1.5rem;
 }
 

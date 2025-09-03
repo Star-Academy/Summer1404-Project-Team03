@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { ManageFilesComponent } from "./manage-files.component";
-import { UploadFileComponent } from "./upload-file/upload-file.component";
+import { AddNewFileComponent } from "./components/add-new-file/add-new-file.component";
 
 
 export const manageFilesRoutes: Routes = [
@@ -14,7 +14,7 @@ export const manageFilesRoutes: Routes = [
         component: ManageFilesComponent,
     },
     {
-        path: 'upload-file',
-        component: UploadFileComponent
+        path: 'new-file',
+        component: AddNewFileComponent
     }
 ]
