@@ -26,16 +26,22 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
 
   readonly addFile = this.updater<File>((state, file) => {
     if (!file.name.toLowerCase().endsWith('.csv')) {
-      console.log('file is not valid');
       return { ...state, error: 'Only .csv files are allowed' };
     }
 
-    console.log('file is valid and added');
     return {
       ...state,
       files: [...state.files, file],
       error: null
     };
+  });
+
+  readonly replaceFile = this.updater<File>((state, file) => {
+    const files = state.files.map(f =>
+      f.name === file.name
+        ? file : f
+    );
+    return { ...state, files };
   });
 
   public readonly removeFile = this.updater<string>((state, fileName) => ({

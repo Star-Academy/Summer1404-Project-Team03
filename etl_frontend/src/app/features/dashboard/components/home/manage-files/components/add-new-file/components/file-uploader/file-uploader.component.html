@@ -28,6 +28,7 @@
       (click)="clearFiles()"
     ></p-button>
   </div>
+  <h4 style="color: red; margin: 0">{{ vm().error }}</h4>
   @if(vm().files.length === 0 || vm().isDragging){
   <div
     class="file-uploader__zone-area"
@@ -43,7 +44,11 @@
   <h4>Uploaded Files</h4>
   <div class="file-uploader__uploaded-file-list">
     @for(file of vm().files; track file.name){
-      <app-uploaded-file-item @scaleAnimation (removeFile)="removeFile($event)" [fileName]="file.name"></app-uploaded-file-item>
+    <app-uploaded-file-item
+      @scaleAnimation
+      (removeFile)="removeFile($event)"
+      [fileName]="file.name"
+    ></app-uploaded-file-item>
     }
   </div>
 

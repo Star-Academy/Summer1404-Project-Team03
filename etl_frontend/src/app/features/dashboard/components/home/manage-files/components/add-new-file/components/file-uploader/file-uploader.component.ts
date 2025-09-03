@@ -5,6 +5,7 @@ import { UploadedFileItemComponent } from './components/uploaded-file-item/uploa
 import { animate, style, transition, trigger } from "@angular/animations"
 import { RouterOutlet } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-file-uploader',
@@ -26,7 +27,9 @@ export class FileUploaderComponent {
   @ViewChild('fileInput') fileInput!: ElementRef;
   public readonly vm;
 
-  constructor(private uploadFileStore: UploadFileStore) {
+  constructor(
+    private readonly uploadFileStore: UploadFileStore,
+    private readonly confirmationService: ConfirmationService) {
     this.vm = this.uploadFileStore.vm;
   }
 
@@ -51,7 +54,7 @@ export class FileUploaderComponent {
 
     if (droppedFiles) {
       const files = Array.from(droppedFiles);
-      files.forEach((file: File) => this.uploadFileStore.addFile(file));
+      files.forEach((file: File) => this.handleFile(file));
     }
   }
 
@@ -61,7 +64,7 @@ export class FileUploaderComponent {
 
     if (selectedFiles) {
       Array.from(selectedFiles).forEach((file) =>
-        this.uploadFileStore.addFile(file)
+        this.handleFile(file)
       );
     }
 
@@ -74,5 +77,28 @@ export class FileUploaderComponent {
 
   clearFiles(): void {
     this.uploadFileStore.clearFiles();
+  }
+
+  handleFile(file: File) {
+    const currentFiles = this.uploadFileStore.vm().files;
+    const exists = currentFiles.some(f => f.name === file.name);
+
+    if (exists) {
+      this.showReplacFileConfirmation(file);
+    } else {
+      this.uploadFileStore.addFile(file);
+    }
+  }
+
+  showReplacFileConfirmation(file: File): void {
+    this.confirmationService.confirm({
+      message: `File "${file.name}" already exists. Replace it?`,
+      header: 'Duplicate File',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Replace',
+      rejectLabel: 'Ignore',
+      accept: () => this.uploadFileStore.replaceFile(file),
+      reject: () => { }
+    });
   }
 }
