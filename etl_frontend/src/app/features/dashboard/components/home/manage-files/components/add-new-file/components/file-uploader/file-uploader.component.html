@@ -41,6 +41,10 @@
   </div>
   }
   <div class="file-uploader__uploaded-file-list">
-    <div class="file-uploader__uploaded-file-list__item"></div>
+    @for(file of files; track file.name){
+      <app-uploaded-file-item @scaleAnimation (removeFile)="removeFile($event)" [fileName]="file.name"></app-uploaded-file-item>
+    }
   </div>
+
+  <router-outlet></router-outlet>
 </div>
