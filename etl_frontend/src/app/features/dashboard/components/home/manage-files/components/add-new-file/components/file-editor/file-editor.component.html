@@ -1,1 +1,34 @@
-<p>file-editor works!</p>
+<h4>file name to edit</h4>
+<p-table [value]="columnConfigurations" styleClass="p-datatable-sm">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Original Column Name</th>
+      <th>New Column Name (Editable)</th>
+      <th>Data Type</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-col>
+    <tr>
+      <td>{{ col.originalHeader }}</td>
+      <td>
+        <input
+          pInputText
+          type="text"
+          [(ngModel)]="col.newHeader"
+          class="p-inputtext-sm"
+        />
+      </td>
+      <td>
+        <p-select
+          [options]="dbTypes"
+          [(ngModel)]="col.selectedType"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select Type"
+          appendTo="body"
+          fluid="true"
+        ></p-select>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

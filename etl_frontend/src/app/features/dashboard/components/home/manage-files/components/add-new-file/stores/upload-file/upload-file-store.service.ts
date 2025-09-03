@@ -44,6 +44,11 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
     return { ...state, files };
   });
 
+  public getFile(fileName: string): File | undefined {
+    const state = this.get();
+    return state.files.find(f => f.name === fileName);
+  }
+
   public readonly removeFile = this.updater<string>((state, fileName) => ({
     ...state,
     files: state.files.filter((f) => f.name !== fileName),
