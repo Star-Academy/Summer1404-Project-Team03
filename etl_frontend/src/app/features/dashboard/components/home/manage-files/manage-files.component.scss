@@ -1,7 +1,7 @@
 // Use ::ng-deep for component-specific overrides if needed, but PrimeNG's styleClass is often better.
 // Example: Add margin to the card for spacing
 :host {
-  display: block;
+  // display: block;
   padding: 1.5rem;
   overflow-y: auto;
 }

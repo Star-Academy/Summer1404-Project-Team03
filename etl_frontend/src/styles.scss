@@ -2,6 +2,10 @@ html {
   overflow: hidden;
 }
 
+:root {
+  --header-height: 3rem;
+}
+
 p-toolbar .p-toolbar {
   padding: 1rem;
   border-inline: none;
