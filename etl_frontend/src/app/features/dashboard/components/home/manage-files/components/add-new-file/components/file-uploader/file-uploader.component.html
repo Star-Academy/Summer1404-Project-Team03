@@ -1,6 +1,5 @@
 <div
   class="file-uploader"
-  class="dropzone"
   (dragover)="onDragOver($event)"
   (dragleave)="onDragLeave($event)"
   (drop)="onDrop($event)"
@@ -29,13 +28,18 @@
       (click)="clearFiles()"
     ></p-button>
   </div>
+  @if(files.length === 0 || isDragging){
   <div
     class="file-uploader__zone-area"
-    [class.file-uploader__zone-area-drag-over]="isDragging"
+    [ngClass]="{
+      'file-uploader__zone-area-drag-over': isDragging
+    }"
+    (click)="fileInput.click()"
   >
     <i class="pi pi-cloud-upload"></i>
     <span>Drop files here to upload</span>
   </div>
+  }
   <div class="file-uploader__uploaded-file-list">
     <div class="file-uploader__uploaded-file-list__item"></div>
   </div>

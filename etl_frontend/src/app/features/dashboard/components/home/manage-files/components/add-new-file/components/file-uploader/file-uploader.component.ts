@@ -1,9 +1,10 @@
+import { NgClass } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-file-uploader',
-  imports: [Button],
+  imports: [Button, NgClass],
   templateUrl: './file-uploader.component.html',
   styleUrl: './file-uploader.component.scss'
 })
