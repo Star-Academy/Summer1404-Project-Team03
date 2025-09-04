@@ -31,21 +31,20 @@ public sealed class TableManagementService : ITableManagementService
         _defaultSchema = store.Value.DefaultSchema ?? "public";
     }
 
-    public async Task<IReadOnlyList<DataTableSchema>> ListAsync(bool onlyPhysical = false, CancellationToken ct = default)
+    public async Task<IReadOnlyList<DataTableSchema>> ListAsync(CancellationToken ct = default)
     {
         var all = await _schemas.ListAsync(ct);
-        if (!onlyPhysical) return all;
 
-        var filtered = new List<DataTableSchema>(all.Count);
+        var physical = new List<DataTableSchema>(all.Count);
         await using var conn = await _ds.OpenConnectionAsync(ct);
         var npg = (NpgsqlConnection)conn;
 
         foreach (var s in all)
         {
-            var exists = await _catalog.TableExistsAsync(npg, _defaultSchema, s.TableName, ct);
-            if (exists) filtered.Add(s);
+            if (await _catalog.TableExistsAsync(npg, _defaultSchema, s.TableName, ct))
+                physical.Add(s);
         }
-        return filtered;
+        return physical;
     }
 
     public async Task DeleteAsync(int schemaId, CancellationToken ct = default)

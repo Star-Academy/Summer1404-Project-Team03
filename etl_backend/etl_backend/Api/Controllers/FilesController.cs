@@ -35,35 +35,35 @@ public class FilesController : ControllerBase
         _schemaReg = schemaReg;
     }
 
-    [HttpPost]
-    [AllowAnonymous]
-    [Consumes("multipart/form-data")]
-    [RequestFormLimits(MultipartBodyLengthLimit = 512_000_000)]
-    public async Task<ActionResult<StageFileResponse>> Stage(
-        [FromForm] StageFileRequest request,
-        [FromQuery] string? subdir = "uploads",
-        CancellationToken ct = default)
-    {
-        if (request.File is null || request.File.Length == 0)
-            return BadRequest("file is missing or empty.");
-
-        await using var stream = request.File.OpenReadStream();
-        var staged = await _staging.StageAsync(stream, request.File.FileName, subdir, ct);
-
-        var dto = new StageFileResponse
-        {
-            Id = staged.Id,
-            OriginalFileName = staged.OriginalFileName,
-            StoredFilePath = staged.StoredFilePath,
-            FileSize = staged.FileSize,
-            UploadedAt = staged.UploadedAt,
-            Stage = staged.Stage.ToString(),
-            Status = staged.Status.ToString(),
-            ErrorCode = staged.ErrorCode.ToString(),
-            ErrorMessage = staged.ErrorMessage
-        };
-        return Ok(dto);
-    }
+    // [HttpPost]
+    // [AllowAnonymous]
+    // [Consumes("multipart/form-data")]
+    // [RequestFormLimits(MultipartBodyLengthLimit = 512_000_000)]
+    // public async Task<ActionResult<StageFileResponse>> Stage(
+    //     [FromForm] StageFileRequest request,
+    //     [FromQuery] string? subdir = "uploads",
+    //     CancellationToken ct = default)
+    // {
+    //     if (request.File is null || request.File.Length == 0)
+    //         return BadRequest("file is missing or empty.");
+    //
+    //     await using var stream = request.File.OpenReadStream();
+    //     var staged = await _staging.StageAsync(stream, request.File.FileName, subdir, ct);
+    //
+    //     var dto = new StageFileResponse
+    //     {
+    //         Id = staged.Id,
+    //         OriginalFileName = staged.OriginalFileName,
+    //         StoredFilePath = staged.StoredFilePath,
+    //         FileSize = staged.FileSize,
+    //         UploadedAt = staged.UploadedAt,
+    //         Stage = staged.Stage.ToString(),
+    //         Status = staged.Status.ToString(),
+    //         ErrorCode = staged.ErrorCode.ToString(),
+    //         ErrorMessage = staged.ErrorMessage
+    //     };
+    //     return Ok(dto);
+    // }
 
     [HttpGet("{id:int}/schema/preview")]
     [AllowAnonymous]
@@ -153,4 +153,72 @@ public class FilesController : ControllerBase
 
         return Ok(result);
     }
+    
+    [HttpPost]
+    [AllowAnonymous]
+    [Consumes("multipart/form-data")]
+    public async Task<ActionResult<List<StageFileBatchItem>>> StageMany(
+        [FromForm] StageFilesRequest request,
+        [FromQuery] string? subdir = "uploads",
+        CancellationToken ct = default)
+    {
+        if (request?.Files == null || request.Files.Count == 0)
+            return BadRequest(new { error = "At least one file is required (form field name: Files)." });
+
+        var results = new List<StageFileBatchItem>(request.Files.Count);
+
+        foreach (var file in request.Files)
+        {
+            if (file is null || file.Length == 0)
+            {
+                results.Add(new StageFileBatchItem
+                {
+                    FileName = file?.FileName ?? "(null)",
+                    Success = false,
+                    Error = "Empty file."
+                });
+                continue;
+            }
+
+            try
+            {
+                await using var stream = file.OpenReadStream();
+                var staged = await _staging.StageAsync(stream, file.FileName, subdir, ct);
+
+                results.Add(new StageFileBatchItem
+                {
+                    FileName = file.FileName,
+                    Success  = true,
+                    Data     = Map(staged)
+                });
+            }
+            catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                results.Add(new StageFileBatchItem
+                {
+                    FileName = file.FileName,
+                    Success  = false,
+                    Error    = ex.Message
+                });
+            }
+        }
+
+        return Ok(results);
+    }
+    private static StageFileResponse Map(StagedFile s) => new()
+    {
+        Id               = s.Id,
+        OriginalFileName = s.OriginalFileName,
+        StoredFilePath   = s.StoredFilePath,
+        FileSize         = s.FileSize,
+        UploadedAt       = s.UploadedAt,
+        Stage            = s.Stage.ToString(),
+        Status           = s.Status.ToString(),
+        ErrorCode        = s.ErrorCode == ProcessingErrorCode.None ? null : s.ErrorCode.ToString(),
+        ErrorMessage     = s.ErrorMessage
+    };
 }

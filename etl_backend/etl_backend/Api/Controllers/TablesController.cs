@@ -17,11 +17,9 @@ public class TablesController : ControllerBase
 
     [HttpGet]
     [AllowAnonymous]
-    public async Task<ActionResult<IReadOnlyList<TableListItem>>> List(
-        [FromQuery] bool onlyPhysical = false,
-        CancellationToken ct = default)
+    public async Task<ActionResult<IReadOnlyList<TableListItem>>> List(CancellationToken ct = default)
     {
-        var data = await _svc.ListAsync(onlyPhysical, ct);
+        var data = await _svc.ListAsync(ct);
         var result = data
             .OrderByDescending(s => s.Id)
             .Select(s => new TableListItem

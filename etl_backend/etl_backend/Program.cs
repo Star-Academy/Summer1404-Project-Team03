@@ -151,6 +151,8 @@ builder.Services.AddScoped<ITableManagementService, TableManagementService>();
 builder.Services.AddScoped<IColumnAdmin, PostgresColumnAdmin>();
 builder.Services.AddScoped<IColumnManagementService, ColumnManagementService>();
 builder.Services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
+builder.Services.AddScoped<ITableManagementService, TableManagementService>();
+builder.Services.AddScoped<ITableInfoService, TableInfoService>();
 
 // --- Load policy (pick a default; prefer overriding per-call) ---
 builder.Services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
