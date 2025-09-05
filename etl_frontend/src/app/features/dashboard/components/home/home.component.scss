@@ -1,15 +1,15 @@
 :host {
-  padding: 1.5rem;
   display: flex;
-  gap: 1rem;
-  block-size: calc(100vh - var(--header-height));
-  
+  gap: 0.5rem;
+
   .sidebar {
-    inline-size: 100vh;
-    max-inline-size: 20rem;
+    inline-size: 15vw;
+
   }
   .dynamic-content {
+    inline-size: 85vw;
     flex: 1;
+    padding: 1.5rem;
     overflow-y: auto;
   }
 }
