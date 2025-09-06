@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { manageFilesRoutes } from './manage-files.routing';
 import { FilesManagementStore } from './stores/files-management/files-management.service';
 import { FilesManagementService } from './services/files-management/files-management.service';
+import { TooltipModule } from 'primeng/tooltip';
 
 
 
@@ -23,6 +24,7 @@ import { FilesManagementService } from './services/files-management/files-manage
     ButtonModule,
     DropdownModule,
     RouterModule,
+    TooltipModule,
     RouterModule.forChild(manageFilesRoutes)
   ],
   providers: [FilesManagementStore, FilesManagementService]

@@ -1,3 +1,33 @@
+  <!-- <div *ngIf="selectedFileContent">
+    <h4>Viewing File Content</h4>
+    <p-table
+      [value]="selectedFileContent.data"
+      [columns]="selectedFileContent.headers"
+      styleClass="p-datatable-gridlines"
+    >
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns">{{ col }}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <td *ngFor="let col of columns">
+            {{ rowData[col] }}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div> -->
+
+    <!-- <p-button
+    icon="pi pi-arrow-right"
+    label="Back to File List"
+    (click)="goBack()"
+    styleClass="p-button-text"
+  ></p-button> -->
+
+
 <!-- <div class="card">
   <h3>Upload New Dataset</h3>
   <p>Select or Simply drag and drop one or more CSV files.</p>
