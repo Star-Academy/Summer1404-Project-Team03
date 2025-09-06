@@ -9,6 +9,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
 import { manageFilesRoutes } from './manage-files.routing';
 import { FilesManagementStore } from './stores/files-management/files-management.service';
+import { FilesManagementService } from './services/files-management/files-management.service';
 
 
 
@@ -24,6 +25,6 @@ import { FilesManagementStore } from './stores/files-management/files-management
     RouterModule,
     RouterModule.forChild(manageFilesRoutes)
   ],
-  providers: [FilesManagementStore]
+  providers: [FilesManagementStore, FilesManagementService]
 })
 export class ManageFilesModule { }
