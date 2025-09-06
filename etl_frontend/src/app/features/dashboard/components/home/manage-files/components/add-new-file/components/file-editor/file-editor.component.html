@@ -1,4 +1,4 @@
-<h4>file name to edit</h4>
+<h4>Create table from file : {{ file?.name }}</h4>
 <p-table [value]="columnConfigurations" styleClass="p-datatable-sm">
   <ng-template pTemplate="header">
     <tr>
@@ -32,3 +32,16 @@
     </tr>
   </ng-template>
 </p-table>
+
+@if (parsingErrors.length > 0) {
+<div class="error-panel">
+  <h5 class="error-panel__title">Problems in Parsing file</h5>
+  <ul class="error-panel__list">
+    @for (error of parsingErrors; track error) {
+    <li class="error-panel__item">
+      {{ error }}
+    </li>
+    }
+  </ul>
+</div>
+}

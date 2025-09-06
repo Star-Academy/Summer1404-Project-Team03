@@ -1,0 +1,37 @@
+// Define theme variables at the component's host level for encapsulation.
+:host {
+  --error-text-color: #58151c;
+  --error-bg-color: #fdeded;
+  --error-border-color: #f14668; // A strong but not overly bright red
+  --error-border-radius: 4px;
+}
+
+.error-panel {
+  background-color: var(--error-bg-color);
+  border-left: 5px solid var(--error-border-color);
+  border-radius: var(--error-border-radius);
+  color: var(--error-text-color);
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+
+  // BEM-style nested selectors for clarity
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+  }
+
+  &__list {
+    margin: 0;
+    padding-left: 1.25rem; // Standard indentation for list items
+  }
+
+  &__item {
+    line-height: 1.5;
+    padding: 0.25rem 0; // Vertical spacing for readability
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+  }
+}
