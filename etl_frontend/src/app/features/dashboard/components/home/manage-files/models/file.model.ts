@@ -1,0 +1,14 @@
+export interface FileManagmentState {
+  fileItems: FileItem[];
+  isLoadingFiles: boolean;
+  error: string | null;
+}
+
+export interface FileItem {
+    id: number
+    originalFileName: string,
+    stage: string,
+    status: string,
+    schemaId: number,
+    uploadedAt: string;
+}

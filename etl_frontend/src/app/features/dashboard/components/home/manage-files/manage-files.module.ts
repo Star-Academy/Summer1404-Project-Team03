@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { RouterModule } from '@angular/router';
 import { manageFilesRoutes } from './manage-files.routing';
+import { FilesManagementStore } from './stores/files-management/files-management.service';
 
 
 
@@ -22,6 +23,7 @@ import { manageFilesRoutes } from './manage-files.routing';
     DropdownModule,
     RouterModule,
     RouterModule.forChild(manageFilesRoutes)
-  ]
+  ],
+  providers: [FilesManagementStore]
 })
 export class ManageFilesModule { }
