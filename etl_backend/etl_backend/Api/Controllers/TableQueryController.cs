@@ -25,32 +25,7 @@ public class TablesQueryController : ControllerBase
         public string OriginalFileName { get; set; } = "";
         public int ColumnCount { get; set; }
     }
-
-    // [HttpGet]
-    // [AllowAnonymous]
-    // public async Task<ActionResult<List<TableListItem>>> List(CancellationToken ct = default)
-    // {
-    //     try
-    //     {
-    //         var physical = await _mgmt.ListAsync(ct);
-    //         var result = physical
-    //             .OrderByDescending(s => s.Id)
-    //             .Select(s => new TableListItem
-    //             {
-    //                 SchemaId = s.Id,
-    //                 TableName = s.TableName,
-    //                 OriginalFileName = s.OriginalFileName ?? "",
-    //                 ColumnCount = s.Columns?.Count ?? 0
-    //             })
-    //             .ToList();
-    //
-    //         return Ok(result);
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         return Problem(statusCode: 500, title: "List tables failed.", detail: ex.Message);
-    //     }
-    // }
+    
 
     [HttpGet("{schemaId:int}/details")]
     [AllowAnonymous]
