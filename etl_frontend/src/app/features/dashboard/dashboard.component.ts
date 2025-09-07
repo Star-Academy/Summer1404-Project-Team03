@@ -1,7 +1,6 @@
 import {Component, computed, OnInit} from '@angular/core';
 import {UserStoreService} from "../../shared/stores/user-store.service"
-import { MenuItem } from 'primeng/api';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',

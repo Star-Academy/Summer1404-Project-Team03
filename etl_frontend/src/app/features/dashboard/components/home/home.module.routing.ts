@@ -1,8 +1,6 @@
 import { Routes } from "@angular/router";
 import { HomeComponent } from "./home.component";
 import { ManageWorkflowsComponent } from "./manage-workflows/manage-workflows.component";
-import { ManageFilesComponent } from "./manage-files/manage-files.component";
-
 
 export const homeRoutes: Routes = [
     {
@@ -16,8 +14,10 @@ export const homeRoutes: Routes = [
             },
             {
                 path: 'workflows',
-                component: ManageWorkflowsComponent,
-                // loadComponent: () => import('./manage-workflows/manage-workflows.component').then(m => m.ManageWorkflowsComponent)
+                loadChildren: () =>
+                  import('./manage-workflows/manage-workflows.module').then(
+                    (m) => m.ManageWorkflowsModule
+                  )
             },
             {
                 path: 'files',

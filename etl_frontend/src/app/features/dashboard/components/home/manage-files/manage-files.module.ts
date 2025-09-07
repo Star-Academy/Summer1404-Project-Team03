@@ -13,7 +13,6 @@ import { FilesManagementService } from './services/files-management/files-manage
 import { TooltipModule } from 'primeng/tooltip';
 
 
-
 @NgModule({
   declarations: [ManageFilesComponent],
   imports: [

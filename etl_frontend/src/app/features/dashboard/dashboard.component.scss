@@ -21,8 +21,8 @@
     }
 
     &__end {
-      display: block;
-      flex-shrink: 1;
+      display: flex;
+      gap: 1rem;
     }
   }
 }
