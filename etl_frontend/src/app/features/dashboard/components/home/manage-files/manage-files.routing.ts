@@ -2,6 +2,7 @@ import { Routes } from "@angular/router";
 import { ManageFilesComponent } from "./manage-files.component";
 import { AddNewFileComponent } from "./components/add-new-file/add-new-file.component";
 import { SchemaEditorComponent } from "./components/schema-editor/schema-editor.component";
+import { FileProcessStepperComponent } from "./components/add-new-file/components/file-process-stepper/file-process-stepper.component";
 
 
 export const manageFilesRoutes: Routes = [
@@ -19,8 +20,8 @@ export const manageFilesRoutes: Routes = [
         component: AddNewFileComponent,
         children: [
             {
-                path: ':file-id',
-                component: SchemaEditorComponent
+                path: ':file-name/process',
+                component: FileProcessStepperComponent
             }
         ]
     },

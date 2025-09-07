@@ -1,0 +1,21 @@
+.file-process-stepper {
+  .p-stepper {
+    @apply bg-white rounded-xl shadow p-4;
+
+    .p-step {
+      @apply text-sm font-medium;
+    }
+  }
+
+  .step-content {
+    @apply bg-gray-50 p-6 rounded-lg border border-gray-200;
+  }
+
+  h3 {
+    @apply text-xl font-semibold text-gray-800;
+  }
+
+  p {
+    @apply text-gray-600;
+  }
+}

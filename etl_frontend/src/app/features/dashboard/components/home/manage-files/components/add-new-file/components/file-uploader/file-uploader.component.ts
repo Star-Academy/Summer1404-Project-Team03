@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Button } from 'primeng/button';
 import { UploadedFileItemComponent } from './components/uploaded-file-item/uploaded-file-item.component';
 import { animate, style, transition, trigger } from "@angular/animations"
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
 import { ConfirmationService } from 'primeng/api';
 import { ProgressBarModule } from 'primeng/progressbar';
@@ -11,7 +11,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
   selector: 'app-file-uploader',
-  imports: [Button, NgClass, UploadedFileItemComponent, RouterOutlet, RouterLink, ProgressBarModule],
+  imports: [Button, NgClass, UploadedFileItemComponent, RouterLink, ProgressBarModule],
   templateUrl: './file-uploader.component.html',
   styleUrl: './file-uploader.component.scss',
   animations: [

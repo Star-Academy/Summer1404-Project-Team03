@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { UploadFileState } from '../../models/file.model';
-import { delay, exhaustMap, tap } from 'rxjs';
+import { delay, exhaustMap, Subject, tap } from 'rxjs';
 import { FilesManagementService } from '../../../../services/files-management/files-management.service';
 
 const initialState: UploadFileState = {
@@ -21,6 +21,8 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
   }
 
   public readonly vm = this.selectSignal((s) => s);
+  private readonly uploadResultSubject = new Subject<'success' | 'error'>();
+  public readonly uploadResult$ = this.uploadResultSubject.asObservable();
 
   public readonly setDragging = this.updater<boolean>((state, isDragging) => ({
     ...state,
@@ -82,6 +84,7 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
               this.setSending(false);
               this.setError(null);
               this.get().files.forEach(file => this.removeFile(file.name))
+              this.uploadResultSubject.next('success');
               console.log(res);
             },
             error: (err) => {
@@ -106,6 +109,7 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
             next: (res) => {
               this.setSending(false);
               this.setError(null);
+              this.uploadResultSubject.next('success');
               // this.getFile() //TODO remove the file
               console.log(res);
             },

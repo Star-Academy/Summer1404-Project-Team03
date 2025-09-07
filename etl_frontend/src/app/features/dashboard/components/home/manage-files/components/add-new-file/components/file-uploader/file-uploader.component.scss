@@ -1,6 +1,6 @@
 :host {
   display: block;
-  height: calc(90vh - var(--header-height));
+  // height: calc(90vh - var(--header-height));
   position: relative;
 }
 
@@ -69,6 +69,7 @@
   &__uploaded-file-list {
     display: flex;
     gap: 0.5rem;
+    min-block-size: 5rem;
   }
 }
 
