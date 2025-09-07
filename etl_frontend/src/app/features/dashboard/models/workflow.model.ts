@@ -1,4 +1,4 @@
-export interface WorkflowInfo {
+export type WorkflowInfo = {
     id: string;
     name: string;
     description?: string;
@@ -7,7 +7,7 @@ export interface WorkflowInfo {
     status?: 'draft' | 'running' | 'completed' | 'failed';
 }
 
-export interface WorkflowsListState {
+export type WorkflowsListState = {
     workflows: WorkflowInfo[];
     openedWorkflowsId: string[];
     selectedWorkflowId: string | null;

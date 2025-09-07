@@ -1,15 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { RouterModule } from '@angular/router';
-import { homeRoutes } from './home.module.routing';
-import { ManageWorkflowsComponent } from './manage-workflows/manage-workflows.component';
-import { MenuModule } from 'primeng/menu';
-
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {HomeComponent} from './home.component';
+import {RouterModule} from '@angular/router';
+import {homeRoutes} from './home.module.routing';
+import {MenuModule} from 'primeng/menu';
 
 @NgModule({
-  declarations: [HomeComponent, ManageWorkflowsComponent],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(homeRoutes),
@@ -17,4 +14,5 @@ import { MenuModule } from 'primeng/menu';
     MenuModule,
   ]
 })
-export class HomeModule { }
+export class HomeModule {
+}

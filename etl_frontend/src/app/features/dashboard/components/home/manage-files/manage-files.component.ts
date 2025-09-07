@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 
-
 interface CsvColumn {
   header: string;
   selectedType: string;

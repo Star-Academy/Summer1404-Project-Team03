@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
 import { manageFilesRoutes } from './manage-files.routing';
 
 
-
 @NgModule({
   declarations: [ManageFilesComponent],
   imports: [

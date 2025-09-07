@@ -20,6 +20,7 @@ import { PopoverModule } from 'primeng/popover';
 import { ListboxModule } from 'primeng/listbox';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { InputTextModule } from 'primeng/inputtext';
+import { CheckRoutePipe } from '../../shared/pipe/check-route.pipe';
 
 @NgModule({
   declarations: [DashboardComponent, WorkflowsTabsManagementComponent, WorkflowTabComponent, WorkflowSelectorComponent],
@@ -38,6 +39,7 @@ import { InputTextModule } from 'primeng/inputtext';
     ListboxModule,
     ButtonGroupModule,
     InputTextModule,
+    CheckRoutePipe
   ],
   providers: [WorkflowsListStore]
 })
