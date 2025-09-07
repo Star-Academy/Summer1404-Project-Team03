@@ -35,21 +35,18 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
     return {
       ...state,
       files: [...state.files, file],
-      error: null
+      error: null,
     };
   });
 
   readonly replaceFile = this.updater<File>((state, file) => {
-    const files = state.files.map(f =>
-      f.name === file.name
-        ? file : f
-    );
+    const files = state.files.map((f) => (f.name === file.name ? file : f));
     return { ...state, files };
   });
 
   public getFile(fileName: string): File | undefined {
     const state = this.get();
-    return state.files.find(f => f.name === fileName);
+    return state.files.find((f) => f.name === fileName);
   }
 
   public readonly removeFile = this.updater<string>((state, fileName) => ({
@@ -60,7 +57,7 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
   public readonly clearFiles = this.updater<void>((state) => ({
     ...state,
     files: [],
-    error: null
+    error: null,
   }));
 
   public readonly setError = this.updater<string | null>((state, error) => ({
@@ -70,35 +67,61 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
 
   public readonly setSending = this.updater<boolean>((state, isSending) => ({
     ...state,
-    isSending
+    isSending,
   }));
 
-  public readonly uploadFiles = this.effect<void>($trigger =>
+  public readonly uploadFiles = this.effect<void>(($trigger) =>
     $trigger.pipe(
       tap(() => this.setSending(true)),
       exhaustMap(() => {
-        const files = this.getFilesFormData();
+        const files = this.getFilesFormData(this.get().files);
         return this.filesManagementService.uploadFiles(files).pipe(
           delay(3000),
           tap({
             next: (res) => {
               this.setSending(false);
               this.setError(null);
+              this.get().files.forEach(file => this.removeFile(file.name))
               console.log(res);
             },
             error: (err) => {
               this.setSending(false);
               this.setError(err.message || 'Upload failed');
-            }
+            },
           })
         );
       })
     )
   );
 
-  getFilesFormData(): FormData {
-    const formData: FormData = new FormData;
-    this.get().files.forEach(file => formData.append("Files", file));
+  public readonly uploadFileWithName = this.effect<{ fileName: string }>($trigger => {
+    return $trigger.pipe(
+      tap(() => this.setSending(true)),
+      exhaustMap((data: { fileName: string }) => {
+        const file = this.get().files.filter(file => file.name === data.fileName);
+
+        const fileFormData = this.getFilesFormData(file);
+        return this.filesManagementService.uploadFiles(fileFormData).pipe(
+          tap({
+            next: (res) => {
+              this.setSending(false);
+              this.setError(null);
+              // this.getFile() //TODO remove the file
+              console.log(res);
+            },
+            error: (err) => {
+              this.setSending(false);
+              this.setError(err.message || 'Upload failed');
+            },
+          })
+        );
+      })
+    )
+  })
+
+  getFilesFormData(files: File[]): FormData {
+    const formData: FormData = new FormData();
+    files.forEach((file) => formData.append('Files', file));
     return formData;
   }
 }
