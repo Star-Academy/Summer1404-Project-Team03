@@ -14,7 +14,7 @@
       }
     </div>
     <div class="header__end">
-      @if ('/dashboard/home/workflows' | checkRoute) {
+      @if ('/dashboard/home/' | checkRoute) {
         <app-workflow-selector></app-workflow-selector>
       }
       @if (user(); as currentUser) {
