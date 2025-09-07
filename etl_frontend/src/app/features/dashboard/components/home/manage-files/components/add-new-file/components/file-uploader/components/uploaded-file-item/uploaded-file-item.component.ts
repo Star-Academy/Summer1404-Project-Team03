@@ -1,10 +1,11 @@
 import { Component, input, output } from '@angular/core';
 import { animate, style, transition, trigger } from "@angular/animations"
 import { RouterLink } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-uploaded-file-item',
-  imports: [RouterLink],
+  imports: [RouterLink, TooltipModule],
   templateUrl: './uploaded-file-item.component.html',
   styleUrl: './uploaded-file-item.component.scss',
   animations: [

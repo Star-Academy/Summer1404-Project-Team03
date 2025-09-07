@@ -2,9 +2,16 @@
   <p class="item__name"><i class="pi pi-file"></i>{{ fileName() }}</p>
   <div class="item__actions">
     <i
+      pTooltip="Remove File"
+      tooltipPosition="bottom"
       class="pi pi-trash item__actions__action item__actions__remove"
       (click)="removeFile.emit(fileName())"
     ></i>
-    <i class="pi pi-eye item__actions__action item__actions__view" [routerLink]="['/', 'dashboard', 'home', 'files', 'new-file', fileName()]"></i>
+    <i
+      pTooltip="Process File"
+      tooltipPosition="bottom"
+      class="pi pi-eye item__actions__action item__actions__view"
+      [routerLink]="['/', 'dashboard', 'home', 'files', 'new-file', fileName()]"
+    ></i>
   </div>
 </div>
