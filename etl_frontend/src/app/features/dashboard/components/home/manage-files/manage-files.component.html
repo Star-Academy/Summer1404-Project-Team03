@@ -1,8 +1,17 @@
 <p-card header="Manage Saved CSV Files">
+  <ng-template pTemplate="header">
+    <div class="header">
+      <p-button
+        label="Upload Files"
+        rounded
+        [routerLink]="['/', 'dashboard', 'home', 'files', 'new-file']"
+      ></p-button>
+    </div>
+  </ng-template>
   <ng-template pTemplate="body">
     <p-table
       [value]="vm().fileItems"
-      styleClass="p-datatable-striped p-mt-50"
+      styleClass="p-datatable-striped"
       [tableStyle]="{ 'min-width': '50rem' }"
     >
       <ng-template pTemplate="header">
@@ -35,6 +44,7 @@
               pTooltip="Edit Scheme"
               [tooltipPosition]="'top'"
             ></p-button>
+            @if(file.stage === "Uploaded") {
             <p-button
               icon="pi pi-table"
               styleClass="p-button-rounded p-button-secondary p-button-text"
@@ -42,6 +52,15 @@
               pTooltip="Create Table"
               [tooltipPosition]="'top'"
             ></p-button>
+            } @else if(file.stage === "TableCreated") {
+            <p-button
+              icon="pi pi-eye"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              (click)="onShowTable(file.schemaId)"
+              pTooltip="Show Table"
+              [tooltipPosition]="'top'"
+            ></p-button>
+            }
           </td>
         </tr>
       </ng-template>

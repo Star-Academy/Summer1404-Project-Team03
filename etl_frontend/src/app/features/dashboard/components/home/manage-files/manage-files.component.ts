@@ -26,4 +26,8 @@ export class ManageFilesComponent {
 
   }
 
+  onShowTable(schemaId: string): void {
+
+  }
+
 }
