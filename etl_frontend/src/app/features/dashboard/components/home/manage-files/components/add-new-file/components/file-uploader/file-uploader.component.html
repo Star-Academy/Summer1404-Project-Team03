@@ -1,9 +1,3 @@
-<p-button
-  icon="pi pi-arrow-left"
-  label="Back to Files List"
-  [routerLink]="['/', 'dashboard','home', 'files']"
-  styleClass="p-button-text"
-></p-button>
 <div
   class="file-uploader"
   (dragover)="onDragOver($event)"
@@ -18,21 +12,39 @@
     hidden
   />
   <div class="file-uploader__actions">
-    <p-button
-      label="Upload New File"
-      icon="pi pi-upload"
-      (click)="fileInput.click()"
-      styleClass="p-button-sm p-button-rounded p-button-outlined"
-    ></p-button>
+    <div class="file-uploader__actions__left">
+      <p-button
+        icon="pi pi-arrow-left"
+        label="Back to Files List"
+        [routerLink]="['/', 'dashboard', 'home', 'files']"
+        styleClass="p-button-text p-button-sm"
+      ></p-button>
+    </div>
+    <div class="file-uploader__actions__right">
+      <p-button
+        label="Select Files"
+        icon="pi pi-folder-open"
+        (click)="fileInput.click()"
+        styleClass="p-button-sm p-button-rounded p-button-outlined"
+      ></p-button>
 
-    <p-button
-      label="Clear All"
-      icon="pi pi-times"
-      severity="danger"
-      outlined
-      styleClass="p-button-sm p-button-rounded"
-      (click)="clearFiles()"
-    ></p-button>
+      <p-button
+        label="Clear All"
+        icon="pi pi-trash"
+        severity="danger"
+        outlined
+        styleClass="p-button-sm p-button-rounded"
+        (click)="clearFiles()"
+      ></p-button>
+
+      <p-button
+        label="Upload to Server"
+        icon="pi pi-cloud-upload"
+        (click)="onUploadAllFiles()"
+        [disabled]="vm().files.length === 0"
+        styleClass="p-button-sm p-button-rounded"
+      ></p-button>
+    </div>
   </div>
   <h4 style="color: red; margin: 0">{{ vm().error }}</h4>
   @if(vm().files.length === 0 || vm().isDragging){
@@ -59,4 +71,13 @@
   </div>
 
   <router-outlet></router-outlet>
+  @if (vm().isSending) {
+  <div class="sending-overlay"></div>
+  <p-progressBar
+    mode="indeterminate"
+    class="sending-spinner"
+    [style]="{ height: '0.5rem' }"
+  ></p-progressBar>
+
+  }
 </div>

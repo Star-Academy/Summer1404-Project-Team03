@@ -18,4 +18,8 @@ export class FilesManagementService {
   fetchFileSchema(fileId: string): Observable<Schema> {
     return this.http.get<Schema>(this.filesApi.previewSchema(fileId));
   }
+
+  uploadFiles(files: FormData): Observable<any> { //TODO fix type
+    return this.http.post(this.filesApi.root, files);
+  }
 }

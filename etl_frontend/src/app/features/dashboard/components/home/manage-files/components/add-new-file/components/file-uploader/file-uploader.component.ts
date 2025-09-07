@@ -6,11 +6,12 @@ import { animate, style, transition, trigger } from "@angular/animations"
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
 import { ConfirmationService } from 'primeng/api';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 
 @Component({
   selector: 'app-file-uploader',
-  imports: [Button, NgClass, UploadedFileItemComponent, RouterOutlet, RouterLink],
+  imports: [Button, NgClass, UploadedFileItemComponent, RouterOutlet, RouterLink, ProgressBarModule],
   templateUrl: './file-uploader.component.html',
   styleUrl: './file-uploader.component.scss',
   animations: [
@@ -101,5 +102,9 @@ export class FileUploaderComponent {
       accept: () => this.uploadFileStore.replaceFile(file),
       reject: () => { }
     });
+  }
+
+  onUploadAllFiles(): void {
+    this.uploadFileStore.uploadFiles();
   }
 }

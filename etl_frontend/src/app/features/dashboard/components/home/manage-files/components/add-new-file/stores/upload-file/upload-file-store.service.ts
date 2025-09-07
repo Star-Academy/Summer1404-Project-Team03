@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { UploadFileState } from '../../models/file.model';
+import { delay, exhaustMap, tap } from 'rxjs';
+import { FilesManagementService } from '../../../../services/files-management/files-management.service';
 
 const initialState: UploadFileState = {
   files: [],
   isDragging: false,
   isUploading: false,
+  isSending: false,
   error: null,
   selectedFile: undefined
 };
@@ -13,7 +16,7 @@ const initialState: UploadFileState = {
 
 @Injectable()
 export class UploadFileStore extends ComponentStore<UploadFileState> {
-  constructor() {
+  constructor(private readonly filesManagementService: FilesManagementService) {
     super(initialState);
   }
 
@@ -64,4 +67,38 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
     ...state,
     error,
   }));
+
+  public readonly setSending = this.updater<boolean>((state, isSending) => ({
+    ...state,
+    isSending
+  }));
+
+  public readonly uploadFiles = this.effect<void>($trigger =>
+    $trigger.pipe(
+      tap(() => this.setSending(true)),
+      exhaustMap(() => {
+        const files = this.getFilesFormData();
+        return this.filesManagementService.uploadFiles(files).pipe(
+          delay(3000),
+          tap({
+            next: (res) => {
+              this.setSending(false);
+              this.setError(null);
+              console.log(res);
+            },
+            error: (err) => {
+              this.setSending(false);
+              this.setError(err.message || 'Upload failed');
+            }
+          })
+        );
+      })
+    )
+  );
+
+  getFilesFormData(): FormData {
+    const formData: FormData = new FormData;
+    this.get().files.forEach(file => formData.append("Files", file));
+    return formData;
+  }
 }

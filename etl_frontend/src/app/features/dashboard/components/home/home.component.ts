@@ -16,7 +16,7 @@ export class HomeComponent {
           label: 'Workflow History',
           icon: 'pi pi-file-plus',
           routerLink: ['/dashboard/home/workflows'],
-          routerLinkActiveOptions: { exact: true },
+          routerLinkActivate: true,
         },
         {
           label: 'Data Management',
