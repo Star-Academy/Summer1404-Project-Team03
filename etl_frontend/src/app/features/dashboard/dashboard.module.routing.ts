@@ -1,16 +1,30 @@
-import { Routes } from "@angular/router";
-import { DashboardComponent } from "./dashboard.component";
+import {Routes} from "@angular/router";
+import {DashboardComponent} from "./dashboard.component";
 
 export const dashboardRoutes: Routes = [
-    {
+  {
+    path: '',
+    component: DashboardComponent,
+    children: [
+      {
         path: '',
-        component: DashboardComponent,
-        children: [
-            {
-                path: 'home',
-                loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule)
-            },
-            // main layout phase 3
-        ]
-    },
+        pathMatch: 'full',
+        redirectTo: 'workflows',
+      },
+      {
+        path: 'workflows',
+        loadChildren: () =>
+          import('./components/manage-workflows/manage-workflows.module').then(
+            (m) => m.ManageWorkflowsModule
+          )
+      },
+      {
+        path: 'files',
+        loadChildren: () =>
+          import('./components/manage-files/manage-files.module').then(
+            (m) => m.ManageFilesModule
+          ),
+      },
+    ],
+  },
 ]

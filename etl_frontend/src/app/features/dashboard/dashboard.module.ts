@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Button, ButtonModule } from 'primeng/button';
+import { Button } from 'primeng/button';
 import { Toolbar } from 'primeng/toolbar';
 import { Avatar } from 'primeng/avatar';
-import { Menu, MenuModule } from 'primeng/menu';
+import { MenuModule } from 'primeng/menu';
 import { DashboardComponent } from './dashboard.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { RouterModule } from '@angular/router';
@@ -39,7 +39,8 @@ import { CheckRoutePipe } from '../../shared/pipe/check-route.pipe';
     ListboxModule,
     ButtonGroupModule,
     InputTextModule,
-    CheckRoutePipe
+    CheckRoutePipe,
+    MenuModule,
   ],
   providers: [WorkflowsListStore]
 })

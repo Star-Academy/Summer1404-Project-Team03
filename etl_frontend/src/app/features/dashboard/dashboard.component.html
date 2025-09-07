@@ -7,14 +7,14 @@
         text
         rounded
         size="large"
-        [routerLink]="['/', 'dashboard', 'home']"
+        [routerLink]="['/', 'dashboard']"
       />
-      @if ('/workflow' | checkRoute) {
+      @if ('/dashboard/workflow' | checkRoute) {
         <app-workflows-tabs-management></app-workflows-tabs-management>
       }
     </div>
     <div class="header__end">
-      @if ('/dashboard/home/' | checkRoute) {
+      @if ('/dashboard' | checkRoute) {
         <app-workflow-selector></app-workflow-selector>
       }
       @if (user(); as currentUser) {
@@ -27,4 +27,13 @@
   </div>
 </app-header>
 
-<router-outlet></router-outlet>
+<div class="dashboard-content">
+  <div class="dashboard-content__sidebar">
+    <p-menu [model]="menuItems" />
+  </div>
+
+  <div class="dynamic-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

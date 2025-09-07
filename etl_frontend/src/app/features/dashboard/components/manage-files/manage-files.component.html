@@ -4,7 +4,7 @@
       <p-button
         label="Upload Files"
         rounded
-        [routerLink]="['/', 'dashboard', 'home', 'files', 'new-file']"
+        [routerLink]="['/', 'dashboard', 'files', 'new-file']"
       ></p-button>
     </div>
   </ng-template>
@@ -25,14 +25,14 @@
       </ng-template>
       <ng-template pTemplate="body" let-file>
         <tr>
-          <td><i class="pi pi-file p-mr-2"></i>{{ file.originalFileName }}</td>
+          <td><i class="pi pi-file"></i>{{ file.originalFileName }}</td>
           <td>{{ file.size }}</td>
           <td>{{ file.lastModified }}</td>
           <td>{{ file.stage }}</td>
           <td>
             <p-button
               icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-danger p-mr-2 p-button-text"
+              styleClass="p-button-rounded p-button-danger p-button-text"
               (click)="onDeleteFile(file)"
               pTooltip="Delete File"
               [tooltipPosition]="'top'"
