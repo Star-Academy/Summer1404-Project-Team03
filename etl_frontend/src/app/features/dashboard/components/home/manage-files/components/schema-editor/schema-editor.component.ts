@@ -5,9 +5,7 @@ import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { Select } from 'primeng/select';
 
-import { UploadFileStore } from '../add-new-file/stores/upload-file/upload-file-store.service';
-import { CsvParserService } from '../../../../../../../shared/services/csv-parser/csv-parser.service';
-import { ParsedCsvData } from '../../../../../../../shared/models/csv-parser.model';
+import { SchemaEditorStore } from './stores/schema-editor/schema-editor-store.service';
 
 export interface CsvColumnConfig {
   originalHeader: string;
@@ -18,6 +16,7 @@ export interface CsvColumnConfig {
 @Component({
   selector: 'app-schema-editor',
   imports: [TableModule, FormsModule, Select, PanelModule],
+  providers: [SchemaEditorStore],
   templateUrl: './schema-editor.component.html',
   styleUrl: './schema-editor.component.scss'
 })
@@ -34,10 +33,9 @@ export class SchemaEditorComponent implements OnInit {
   ];
 
   constructor(
-    private activatRoute: ActivatedRoute,
-    private readonly uploadFileStore: UploadFileStore,
-    private csvParser: CsvParserService
-  ) { }
+    private readonly activatRoute: ActivatedRoute,
+    private readonly schemaEditorStore: SchemaEditorStore
+  ) {}
 
   ngOnInit(): void {
     this.activatRoute.params.subscribe((params) => {
@@ -49,7 +47,7 @@ export class SchemaEditorComponent implements OnInit {
   }
 
   getFile(fileName: string): void {
-    this.file = this.uploadFileStore.getFile(fileName);
+    // this.file = this.uploadFileStore.getFile(fileName);
     // this.parseCsvForPreview();
   }
 

@@ -25,7 +25,7 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
 
   public readonly setFiles = this.updater((state, files: FileItem[]) => ({
     ...state,
-    fileItems: files,
+    fileItems: files, 
   }));
 
   public readonly getFiles = this.effect<void>(($trigger) => {
