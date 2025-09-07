@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { homeRoutes } from './home.module.routing';
 import { ManageWorkflowsComponent } from './manage-workflows/manage-workflows.component';
 import { MenuModule } from 'primeng/menu';
+import { TablesManagementService } from './manage-tables/services/tables-management/tables-management.service';
 
 
 
@@ -15,6 +16,7 @@ import { MenuModule } from 'primeng/menu';
     RouterModule.forChild(homeRoutes),
     RouterModule,
     MenuModule,
-  ]
+  ],
+  providers: [TablesManagementService]
 })
 export class HomeModule { }

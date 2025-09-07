@@ -1,5 +1,6 @@
-<h4>{{ file?.name }}</h4>
-<p-table [value]="columnConfigurations" styleClass="p-datatable-sm">
+<!-- <h4>{{ vm().schema. }}</h4> -->
+@if(vm().schema?.columns) {
+<p-table [value]="vm().schema!.columns" styleClass="p-datatable-sm">
   <ng-template pTemplate="header">
     <tr>
       <th>Original Column Name</th>
@@ -19,21 +20,22 @@
         />
       </td>
       <td>
-        <p-select
-          [options]="dbTypes"
+        <!-- <p-select
+          [options]="vm().columns"
           [(ngModel)]="col.selectedType"
           optionLabel="label"
           optionValue="value"
           placeholder="Select Type"
           appendTo="body"
           fluid="true"
-        ></p-select>
+        ></p-select> -->
       </td>
     </tr>
   </ng-template>
 </p-table>
+}
 
-@if (parsingErrors.length > 0) {
+<!-- @if (parsingErrors.length > 0) {
 <div class="error-panel">
   <h5 class="error-panel__title">Problems in Parsing file</h5>
   <ul class="error-panel__list">
@@ -44,4 +46,4 @@
     }
   </ul>
 </div>
-}
+} -->

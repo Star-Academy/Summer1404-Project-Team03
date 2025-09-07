@@ -43,6 +43,7 @@
               (click)="onEditFileScheme(file.name)"
               pTooltip="Edit Scheme"
               [tooltipPosition]="'top'"
+              [routerLink]="['/', 'dashboard', 'home', 'files', file.schemaId, 'edit-schema']"
             ></p-button>
             @if(file.stage === "Uploaded") {
             <p-button
