@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FileEditorComponent } from './file-editor.component';
+import { SchemaEditorComponent } from './schema-editor.component';
 
-describe('FileEditorComponent', () => {
-  let component: FileEditorComponent;
-  let fixture: ComponentFixture<FileEditorComponent>;
+describe('SchemaEditorComponent', () => {
+  let component: SchemaEditorComponent;
+  let fixture: ComponentFixture<SchemaEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FileEditorComponent]
+      imports: [SchemaEditorComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FileEditorComponent);
+    fixture = TestBed.createComponent(SchemaEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
