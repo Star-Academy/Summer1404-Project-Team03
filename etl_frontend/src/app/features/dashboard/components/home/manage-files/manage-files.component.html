@@ -10,14 +10,16 @@
           <th>File Name</th>
           <th>Size</th>
           <th>Upload Time</th>
+          <th>state</th>
           <th>Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-file>
         <tr>
-          <td><i class="pi pi-file p-mr-2"></i>{{ file.name }}</td>
+          <td><i class="pi pi-file p-mr-2"></i>{{ file.originalFileName }}</td>
           <td>{{ file.size }}</td>
           <td>{{ file.lastModified }}</td>
+          <td>{{ file.stage }}</td>
           <td>
             <p-button
               icon="pi pi-trash"
