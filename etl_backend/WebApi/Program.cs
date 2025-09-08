@@ -19,11 +19,28 @@ builder.Services.AddFastEndpoints()
 builder.Services.AddSwaggerGen();
 
 
+
 // ✅ Add services: Application → Infrastructure → Web
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
     .AddWebServices();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://localhost:4200", "http://localhost:7252", "https://localhost:7252",
+                "http://192.168.25.195:4200", "https://192.168.25.178:7252"
+            )
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+            ;
+    });
+});
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
