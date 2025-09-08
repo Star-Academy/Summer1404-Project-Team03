@@ -24,7 +24,7 @@ export const manageFilesRoutes: Routes = [
                 component: FileProcessStepperComponent
             }
         ]
-    },
+    }, 
     {
         path: ':file-id/edit-schema',
         component: SchemaEditorComponent
