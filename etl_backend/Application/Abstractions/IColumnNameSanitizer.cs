@@ -1,4 +1,4 @@
-namespace Infrastructure.Files.Abstractions;
+namespace Application.Abstractions;
 
 public interface IColumnNameSanitizer
 {

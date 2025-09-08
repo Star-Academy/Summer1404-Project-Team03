@@ -1,3 +1,4 @@
+using Application.Abstractions;
 using Infrastructure.Files.Abstractions;
 
 namespace Infrastructure.Files.PostgresTableServices.HelperServices;

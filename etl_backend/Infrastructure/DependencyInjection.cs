@@ -1,5 +1,6 @@
 using Application.Abstractions;
 using Application.Files.Commands;
+using Application.Repositories;
 using Application.Repositories.Abstractions;
 using Domain.AccessControl.Ports;
 using etl_backend.Application.DataFile.Abstraction;
@@ -48,6 +49,7 @@ public static class DependencyInjection
         services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
         services.AddSingleton<INpgsqlDataSourceFactory, NpgsqlDataSourceFactory>();
         services.AddScoped<ITableRepository, TableRepository>();
+        services.AddScoped<IColumnRepository, ColumnRepository>();
         // --- Cross-cutting ---
         // services.AddSingleton<IClock, SystemClockAdapter>();
 
