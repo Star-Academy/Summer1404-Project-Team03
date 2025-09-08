@@ -1,5 +1,5 @@
 ﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER $APP_UID
+#USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
@@ -25,11 +25,11 @@ WORKDIR /app
 # Create non-root user 'app'
 RUN adduser --disabled-password --gecos '' app
 
-# Create storage directory and assign ownership
+# ➤➤➤ Create storage directory and set ownership
 RUN mkdir -p /app/storage && \
     chown -R app:app /app/storage
 
-# Switch to non-root user
+# ➤➤➤ NOW switch to non-root user
 USER app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "WebApi.dll"]
