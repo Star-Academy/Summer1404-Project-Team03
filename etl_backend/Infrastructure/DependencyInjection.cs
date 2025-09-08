@@ -12,6 +12,7 @@ using Infrastructure.Files.Abstractions;
 using Infrastructure.Files.PostgresTableServices;
 using Infrastructure.Files.PostgresTableServices.HelperServices;
 using Infrastructure.Repositories;
+using Infrastructure.Tables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Options;
@@ -89,11 +90,11 @@ public static class DependencyInjection
         services.AddScoped<ILoadPreconditionsService, LoadPreconditionsService>();
         services.AddScoped<IStagedFileStateService, StagedFileStateService>();
         services.AddScoped<ITableLoadService, TableLoadService>();
-        // services.AddScoped<ITableManagementService, TableManagementService>();
+        services.AddScoped<ITableManagementService, TableManagementService>();
         services.AddScoped<IColumnAdmin, PostgresColumnAdmin>();
-        // services.AddScoped<IColumnManagementService, ColumnManagementService>();
+        services.AddScoped<IColumnManagementService, ColumnManagementService>();
         services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
-        // services.AddScoped<ITableInfoService, TableInfoService>();
+        services.AddScoped<ITableInfoService, TableInfoService>();
 
         // --- Load policy (pick a default; prefer overriding per-call) ---
         services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
