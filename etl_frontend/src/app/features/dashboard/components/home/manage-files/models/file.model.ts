@@ -5,10 +5,11 @@ export interface FileManagmentState {
 }
 
 export interface FileItem {
-    id: number
-    originalFileName: string,
-    stage: string,
-    status: string,
-    schemaId: number,
+    id: number;
+    originalFileName: string;
+    stage: string;
+    status: string;
+    schemaId: number;
+    fileSize: number;
     uploadedAt: string;
 }

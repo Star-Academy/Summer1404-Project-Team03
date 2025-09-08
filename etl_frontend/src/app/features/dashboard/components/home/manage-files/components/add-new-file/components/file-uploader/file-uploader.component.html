@@ -18,6 +18,7 @@
         label="Back to Files List"
         [routerLink]="['/', 'dashboard', 'files']"
         styleClass="p-button-text p-button-sm"
+        rounded
       ></p-button>
     </div>
     <div class="file-uploader__actions__right">
@@ -58,8 +59,9 @@
     <i class="pi pi-cloud-upload"></i>
     <span>Drop files here to upload</span>
   </div>
-  }
+  } @if(vm().files.length > 0){
   <h4>Uploaded Files</h4>
+  }
   <div class="file-uploader__uploaded-file-list">
     @for(file of vm().files; track file.name){
     <app-uploaded-file-item
@@ -70,7 +72,12 @@
     }
   </div>
 
-  @if (vm().isSending) {
+  @if(vm().files.length > 0){
+  <h5 style="letter-spacing: 0.08rem; font-weight: bold;">
+    You Can Select An Uploaded File To Process It Or Just Upload It To Server
+    And Process it Later.
+  </h5>
+  } @if (vm().isSending) {
   <div class="sending-overlay"></div>
   <p-progressBar
     mode="indeterminate"

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../../../environments/environment';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { FileItem } from '../../models/file.model';
 import { HttpClient } from '@angular/common/http';
 import { Schema } from '../../components/schema-editor/models/schema.model';
@@ -12,7 +12,9 @@ export class FilesManagementService {
   constructor(private readonly http: HttpClient) { }
 
   fetchFiles(): Observable<FileItem[]> {
-    return this.http.get<FileItem[]>(this.filesApi.root)
+    return this.http.get<{ items: FileItem[] }>(this.filesApi.root).pipe(
+      map((res) => res.items)
+    )
   }
 
   fetchFileSchema(fileId: string): Observable<Schema> {
