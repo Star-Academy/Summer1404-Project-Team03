@@ -44,6 +44,7 @@ export const environment = {
     // ===================== FILES =====================
     files: {
       root: `${baseUrl}/files`, // GET
+      delete: (id: number) => `${baseUrl}/files/${id}`, // GET
       upload: `${baseUrl}/files/stage-many`, // POST
       previewSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/preview`, // GET
       registerSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/register`, // POST

@@ -15,7 +15,8 @@ export class ManageFilesComponent {
     this.manageFilesStore.getFiles();
   }
 
-  onDeleteFile(fileId: string): void {
+  onDeleteFile(fileId: number): void {
+    this.manageFilesStore.deleteFile({fileId});
   }
 
   onEditFileScheme(fileId: string): void {

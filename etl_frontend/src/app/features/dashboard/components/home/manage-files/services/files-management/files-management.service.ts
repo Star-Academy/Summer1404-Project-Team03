@@ -24,4 +24,8 @@ export class FilesManagementService {
   uploadFiles(files: FormData): Observable<any> { //TODO fix type
     return this.http.post(this.filesApi.upload, files);
   }
+
+  deleteFile(fileId: number): Observable<void> {
+    return this.http.delete<void>(this.filesApi.delete(fileId));
+  }
 }
