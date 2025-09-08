@@ -43,7 +43,8 @@ export const environment = {
 
     // ===================== FILES =====================
     files: {
-      root: `${baseUrl}/files`, // POST, GET
+      root: `${baseUrl}/files`, // GET
+      upload: `${baseUrl}/files/stage-many`, // POST
       previewSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/preview`, // GET
       registerSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/register`, // POST
       load: (id: string | number) => `${baseUrl}/files/${id}/load`, // POST

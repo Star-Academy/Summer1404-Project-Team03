@@ -20,6 +20,6 @@ export class FilesManagementService {
   }
 
   uploadFiles(files: FormData): Observable<any> { //TODO fix type
-    return this.http.post(this.filesApi.root, files);
+    return this.http.post(this.filesApi.upload, files);
   }
 }
