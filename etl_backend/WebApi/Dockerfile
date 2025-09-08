@@ -22,8 +22,6 @@ RUN dotnet publish "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:
 
 FROM base AS final
 WORKDIR /app
-# Create non-root user 'app'
-RUN adduser --disabled-password --gecos '' app
 
 # ➤➤➤ Create storage directory and set ownership
 RUN mkdir -p /app/storage && \
