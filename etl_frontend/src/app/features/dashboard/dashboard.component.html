@@ -27,13 +27,4 @@
   </div>
 </app-header>
 
-<div class="dashboard-content">
-  <div class="dashboard-content__sidebar">
-    <p-menu [model]="menuItems" />
-  </div>
-
-  <div class="dynamic-content">
-    <router-outlet></router-outlet>
-  </div>
-
-</div>
+<router-outlet></router-outlet>

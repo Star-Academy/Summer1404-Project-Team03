@@ -1,0 +1,13 @@
+:host {
+  display: flex;
+  gap: 1rem;
+  padding-block-start: 1rem ;
+
+  .sidebar {
+    inline-size: 15vw;
+  }
+
+  .dynamic-content {
+    inline-size: 85vw;
+  }
+}

@@ -25,18 +25,4 @@
       gap: 1rem;
     }
   }
-
-  .dashboard-content {
-    display: flex;
-    gap: 1rem;
-    padding-block-start: 1rem ;
-
-    &__sidebar {
-      inline-size: 15vw;
-    }
-
-    &__dynamic-content {
-      inline-size: 85vw;
-    }
-  }
 }

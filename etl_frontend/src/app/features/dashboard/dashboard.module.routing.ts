@@ -8,23 +8,8 @@ export const dashboardRoutes: Routes = [
     children: [
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'workflows',
-      },
-      {
-        path: 'workflows',
-        loadChildren: () =>
-          import('./components/manage-workflows/manage-workflows.module').then(
-            (m) => m.ManageWorkflowsModule
-          )
-      },
-      {
-        path: 'files',
-        loadChildren: () =>
-          import('./components/manage-files/manage-files.module').then(
-            (m) => m.ManageFilesModule
-          ),
-      },
+        loadChildren: () => import('./components/home/home.module').then((m) => m.HomeModule)
+      }
     ],
   },
 ]
