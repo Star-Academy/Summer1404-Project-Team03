@@ -26,7 +26,7 @@ WORKDIR /app
 RUN adduser --disabled-password --gecos '' app
 
 # Create storage directory and assign ownership
-RUN mkdir -p /app/storage/uploads && \
+RUN mkdir -p /app/storage && \
     chown -R app:app /app/storage
 
 # Switch to non-root user
