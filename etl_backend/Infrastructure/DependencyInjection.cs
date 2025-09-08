@@ -13,6 +13,7 @@ using Infrastructure.Files.PostgresTableServices;
 using Infrastructure.Files.PostgresTableServices.HelperServices;
 using Infrastructure.Repositories;
 using Infrastructure.Tables;
+using Infrastructure.Tables.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Options;
@@ -45,7 +46,8 @@ public static class DependencyInjection
         services.AddScoped<IStagedFileRepository, StagedFileRepository>();
         services.AddScoped<IDataTableSchemaRepository, DataTableSchemaRepository>();
         services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
-
+        services.AddSingleton<INpgsqlDataSourceFactory, NpgsqlDataSourceFactory>();
+        services.AddScoped<ITableRepository, TableRepository>();
         // --- Cross-cutting ---
         // services.AddSingleton<IClock, SystemClockAdapter>();
 

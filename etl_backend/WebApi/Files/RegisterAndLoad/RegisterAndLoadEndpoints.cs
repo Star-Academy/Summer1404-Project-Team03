@@ -17,7 +17,13 @@ public class RegisterAndLoadEndpoint : Endpoint<RegisterAndLoadRequest, Register
     {
         Post("api/files/{Id}/register-and-load");
         AllowAnonymous();
-        Summary(s => { /* ... */ });
+        Summary(s =>
+        {
+            s.Summary = "Get row count for a table";
+            s.Description = "Returns approximate or exact row count.";
+            // s.Params(p => p.SchemaId, "The schema ID of the table");
+            s.ExampleRequest = new RegisterAndLoadRequest { LoadMode = "Append", DropOnFailure = true};
+        });
     }
 
     public override async Task HandleAsync(RegisterAndLoadRequest req, CancellationToken ct)
