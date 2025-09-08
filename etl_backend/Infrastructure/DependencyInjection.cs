@@ -94,7 +94,7 @@ public static class DependencyInjection
         services.AddScoped<IColumnAdmin, PostgresColumnAdmin>();
         services.AddScoped<IColumnManagementService, ColumnManagementService>();
         services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
-        services.AddScoped<ITableInfoService, TableInfoService>();
+        // services.AddScoped<ITableInfoService, TableInfoService>();
 
         // --- Load policy (pick a default; prefer overriding per-call) ---
         services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(

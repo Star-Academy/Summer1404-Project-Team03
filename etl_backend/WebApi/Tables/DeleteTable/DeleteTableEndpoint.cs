@@ -28,6 +28,6 @@ public class DeleteTableEndpoint : EndpointWithoutRequest
     {
         var id = Route<int>("schemaId");
         await _mediator.Send(new DeleteTableCommand(id), ct);
-        await SendAsync(ct);
+        // await SendAsync(ct);
     }
 }

@@ -19,8 +19,6 @@ services:
       - storage_data:/app/storage
     networks:
       - internal
-
-  
   postgres:
     image: postgres:16-alpine
     environment:

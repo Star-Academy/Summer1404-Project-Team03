@@ -38,7 +38,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DataManagement\" />
       <Folder Include="Migrations\" />
       <Folder Include="Repositories\" />
     </ItemGroup>
