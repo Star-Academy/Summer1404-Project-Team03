@@ -1,14 +1,10 @@
 :host {
-  display: block;
+  display: flex;
   padding: 1.5rem;
-  overflow-y: auto;
-}
-
-.p-mr-2 {
-  margin-right: 0.5rem;
 }
 
 .header {
   display: flex;
   justify-content: end;
+  padding: 1rem;
 }

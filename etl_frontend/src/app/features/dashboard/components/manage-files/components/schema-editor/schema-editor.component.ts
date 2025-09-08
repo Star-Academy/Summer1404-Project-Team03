@@ -3,14 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
-import { Select } from 'primeng/select';
-
 import { SchemaEditorStore } from './stores/schema-editor/schema-editor-store.service';
 import { of } from 'rxjs';
 
 @Component({
   selector: 'app-schema-editor',
-  imports: [TableModule, FormsModule, Select, PanelModule],
+  imports: [TableModule, FormsModule, PanelModule],
   providers: [SchemaEditorStore],
   templateUrl: './schema-editor.component.html',
   styleUrl: './schema-editor.component.scss'
