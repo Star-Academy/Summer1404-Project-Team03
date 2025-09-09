@@ -5,7 +5,7 @@ export interface FileManagmentState {
   deletingFileIds: number[];
 }
 
-export interface FileItem {
+export type FileItem = {
   id: number;
   originalFileName: string;
   stage: string;
@@ -13,4 +13,11 @@ export interface FileItem {
   schemaId: number;
   fileSize: number;
   uploadedAt: string;
+}
+
+export interface UploadFileResponse {
+  fileName: string;
+  success: true;
+  error: string;
+  data: FileItem;
 }

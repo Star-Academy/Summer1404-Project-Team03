@@ -19,28 +19,26 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
 
   public readonly vm = this.selectSignal(s => s);
 
-  public readonly setLoadinFiles = this.updater((state, value: boolean) => ({
+  public readonly setLoadinFiles = this.updater<boolean>((state, value: boolean) => ({
     ...state,
     isLoadingFiles: value,
   }));
 
-  public readonly setFiles = this.updater((state, files: FileItem[]) => ({
+  public readonly setFiles = this.updater<FileItem[]>((state, files: FileItem[]) => ({
     ...state,
     fileItems: files,
   }));
 
-  readonly addDeletingFileId = this.updater<FileManagmentState, number>(
-    (state, fileId) => ({
-      ...state,
-      deletingFileIds: [...state.deletingFileIds, fileId],
-    })
+  readonly addDeletingFileId = this.updater<number>((state, fileId) => ({
+    ...state,
+    deletingFileIds: [...state.deletingFileIds, fileId],
+  })
   );
 
-  readonly removeDeletingFileId = this.updater<FileManagmentState, number>(
-    (state, fileId) => ({
-      ...state,
-      deletingFileIds: state.deletingFileIds.filter((id) => id !== fileId),
-    })
+  readonly removeDeletingFileId = this.updater<number>((state, fileId) => ({
+    ...state,
+    deletingFileIds: state.deletingFileIds.filter((id) => id !== fileId),
+  })
   );
 
   public readonly getFiles = this.effect<void>(($trigger) => {
@@ -48,7 +46,7 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
       tap(() => this.setLoadinFiles(true)),
       switchMap(() => this.fileManagementService.fetchFiles().pipe(
         tap((files: FileItem[]) => this.setFiles(files)),
-        finalize(() => { this.setLoadinFiles(false); this.getFiles() }),
+        finalize(() => { this.setLoadinFiles(false); }),
       )),
     )
   }
@@ -60,6 +58,7 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
       tap((data) => { this.addDeletingFileId(data.fileId); fileId = data.fileId; }),
       mergeMap((data: { fileId: number }) => this.fileManagementService.deleteFile(data.fileId).pipe(
         delay(3000),
+        tap(() => this.getFiles()),
         finalize(() => this.removeDeletingFileId(fileId))
       ))
     )

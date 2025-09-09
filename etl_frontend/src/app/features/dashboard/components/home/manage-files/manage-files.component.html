@@ -32,8 +32,8 @@
             <i class="pi pi-spin pi-spinner"></i>
             }
           </td>
-          <td>{{ file.size }}</td>
-          <td>{{ file.lastModified }}</td>
+          <td>{{ file.fileSize }}</td>
+          <td>{{ file.uploadedAt | date:'short' }}</td>
           <td>{{ file.stage }}</td>
           <td>
             <p-button
@@ -63,7 +63,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
         <tr style="height: 10rem; font-size: 1.1rem">
-          <td colspan="4">No files found. Please upload a CSV file.</td>
+          <td colspan="5">No files found. Please upload a CSV file.</td>
         </tr>
       </ng-template>
     </p-table>
