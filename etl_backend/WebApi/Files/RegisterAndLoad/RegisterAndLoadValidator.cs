@@ -9,7 +9,7 @@ public class RegisterAndLoadValidator : Validator<RegisterAndLoadRequest>
     public RegisterAndLoadValidator()
     {
         RuleFor(x => x.Id)
-            .GreaterThanOrEqualTo(0)
+            .GreaterThan(0)
             .WithMessage("Staged file ID must be greater than 0.");
 
         // RuleFor(x => x.Columns)
@@ -17,7 +17,7 @@ public class RegisterAndLoadValidator : Validator<RegisterAndLoadRequest>
         //     .WithMessage("At least one column is required.");
 
         RuleForEach(x => x.Columns)
-            .Must(c => c.OrdinalPosition > 0)
+            .Must(c => c.OrdinalPosition >= 0)
             .WithMessage("OrdinalPosition must be > 0.");
 
         RuleForEach(x => x.Columns)
