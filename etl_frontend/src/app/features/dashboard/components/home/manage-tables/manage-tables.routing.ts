@@ -13,18 +13,8 @@ export const manageTablesRoutes: Routes = [
         path: 'list',
         component: ManageTablesComponent,
     },
-    // {
-    //     path: 'new-file',
-    //     component: AddNewFileComponent,
-    //     children: [
-    //         {
-    //             path: ':file-name/process',
-    //             component: FileProcessStepperComponent
-    //         }
-    //     ]
-    // },
-    // {
-    //     path: ':file-id/edit-schema',
-    //     component: SchemaEditorComponent
-    // }
+    {
+        path: ':table-id',
+        // component:
+    }
 ]

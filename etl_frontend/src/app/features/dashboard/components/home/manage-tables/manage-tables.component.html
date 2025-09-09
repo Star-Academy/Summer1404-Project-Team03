@@ -1,0 +1,54 @@
+<p-card header="Manage Tables">
+  <ng-template pTemplate="body">
+    <p-table
+      [value]="tables()"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Table Name</th>
+          <th>Original File Name</th>
+          <th>Column Count</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-table>
+        <tr [class.deleting-row]="onDeleteTable(table.schemaId)">
+          <td>
+            <i class="pi pi-file"></i>
+            {{ table.tableName }}
+<!--            @if(vm().deletingFileIds.includes(file.id)){-->
+<!--              <i class="pi pi-spin pi-spinner"></i>-->
+<!--            }-->
+          </td>
+          <td>{{ table.originalFileName}}</td>
+          <td>{{ table.columnCount }}</td>
+          <td>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-rounded p-button-danger p-button-text"
+              (click)="onDeleteTable(table.schemaId)"
+              pTooltip="Delete File"
+              [tooltipPosition]="'top'"
+              [disabled]=""
+            ></p-button>
+            <p-button
+              icon="pi pi-eye"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              pTooltip="Delete File"
+              [tooltipPosition]="'top'"
+              [disabled]=""
+              [routerLink]="['/', 'dashboard', 'tables', table.schemaId]"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr style="height: 10rem; font-size: 1.1rem">
+          <td colspan="4">No table found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+</p-card>

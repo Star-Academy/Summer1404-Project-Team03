@@ -26,7 +26,7 @@ export class TableStoreService extends ComponentStore<TableStore>{
   public readonly vm = this.selectSignal(
     this.tables,
     this.isLoading,
-    (user, isLoading) => ({user, isLoading})
+    (tables, isLoading) => ({tables, isLoading})
   );
 
   public loadTables(): void {
