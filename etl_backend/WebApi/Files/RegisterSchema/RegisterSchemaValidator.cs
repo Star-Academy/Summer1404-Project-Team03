@@ -8,7 +8,7 @@ public class RegisterSchemaValidator : Validator<RegisterSchemaRequest>
     public RegisterSchemaValidator()
     {
         RuleFor(x => x.Id)
-            .GreaterThan(0)
+            .GreaterThanOrEqualTo(0)
             .WithMessage("Staged file ID must be greater than 0.");
 
         RuleFor(x => x.Columns)

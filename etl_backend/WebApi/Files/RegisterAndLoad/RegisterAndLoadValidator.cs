@@ -9,7 +9,7 @@ public class RegisterAndLoadValidator : Validator<RegisterAndLoadRequest>
     public RegisterAndLoadValidator()
     {
         RuleFor(x => x.Id)
-            .GreaterThan(0)
+            .GreaterThanOrEqualTo(0)
             .WithMessage("Staged file ID must be greater than 0.");
 
         // RuleFor(x => x.Columns)
