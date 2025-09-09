@@ -32,8 +32,8 @@
             <i class="pi pi-spin pi-spinner"></i>
             }
           </td>
-          <td>{{ file.size }}</td>
-          <td>{{ file.lastModified }}</td>
+          <td>{{ file.fileSize }}</td>
+          <td>{{ file.uploadedAt | date:'short' }}</td>
           <td>{{ file.stage }}</td>
           <td>
             <p-button
