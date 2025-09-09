@@ -28,4 +28,8 @@ export class FilesManagementService {
   deleteFile(fileId: number): Observable<void> {
     return this.http.delete<void>(this.filesApi.delete(fileId));
   }
+
+  updateSchema(schema: Schema): Observable<void> {
+    return this.http.post<void>(this.filesApi.registerSchema(schema.stagedFileId), { columns: schema.columns})
+  }
 }

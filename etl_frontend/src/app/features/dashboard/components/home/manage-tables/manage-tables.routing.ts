@@ -13,8 +13,8 @@ export const manageTablesRoutes: Routes = [
         path: 'list',
         component: ManageTablesComponent,
     },
-    {
-        path: ':table-id',
-        // component:
-    }
+    // {
+    //     // path: ':table-id',
+    //     // component:
+    // }
 ]
