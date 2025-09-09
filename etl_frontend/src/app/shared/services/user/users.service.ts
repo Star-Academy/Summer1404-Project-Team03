@@ -15,8 +15,7 @@ export type ChangePasswordResponse = {
 export class UsersService {
   private readonly usersApi = environment.api.users;
 
-  constructor(private readonly http: HttpClient) {
-  }
+  constructor(private readonly http: HttpClient) {}
 
   public changePassword(): Observable<ChangePasswordResponse> {
     return this.http.get<ChangePasswordResponse>(this.usersApi.password);
