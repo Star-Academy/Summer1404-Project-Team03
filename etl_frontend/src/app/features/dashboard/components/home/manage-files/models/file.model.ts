@@ -14,3 +14,10 @@ export interface FileItem {
   fileSize: number;
   uploadedAt: string;
 }
+
+export interface UploadFileResponse {
+  fileName: string;
+  success: true;
+  error: string;
+  data: FileItem;
+}

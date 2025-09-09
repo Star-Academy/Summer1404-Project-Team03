@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../../../environments/environment';
 import { map, Observable } from 'rxjs';
-import { FileItem } from '../../models/file.model';
+import { FileItem, UploadFileResponse } from '../../models/file.model';
 import { HttpClient } from '@angular/common/http';
 import { Schema } from '../../components/schema-editor/models/schema.model';
 
@@ -21,8 +21,8 @@ export class FilesManagementService {
     return this.http.get<Schema>(this.filesApi.previewSchema(fileId));
   }
 
-  uploadFiles(files: FormData): Observable<any> { //TODO fix type
-    return this.http.post(this.filesApi.upload, files);
+  uploadFiles(files: FormData): Observable<UploadFileResponse> {
+    return this.http.post<UploadFileResponse>(this.filesApi.upload, files);
   }
 
   deleteFile(fileId: number): Observable<void> {
