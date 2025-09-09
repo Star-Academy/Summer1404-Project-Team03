@@ -19,9 +19,14 @@ export class HomeComponent {
           routerLinkActivate: true,
         },
         {
-          label: 'Data Management',
+          label: 'File Management',
           icon: 'pi pi-file-import',
           routerLink: ['/dashboard/files'],
+        },
+        {
+          label: 'Table Management',
+          icon: 'pi pi-table',
+          routerLink: ['/dashboard/tables'],
         },
       ],
     },

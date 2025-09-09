@@ -25,6 +25,13 @@ export const homeRoutes: Routes = [
             (m) => m.ManageFilesModule
           ),
       },
+      {
+        path: 'tables',
+        loadChildren: () =>
+          import('./manage-tables/manage-tables.module').then(
+            (m) => m.ManageTablesModule
+          ),
+      },
     ],
   },
 ]
