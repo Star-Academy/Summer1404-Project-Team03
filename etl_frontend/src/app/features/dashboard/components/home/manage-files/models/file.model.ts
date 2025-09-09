@@ -5,7 +5,7 @@ export interface FileManagmentState {
   deletingFileIds: number[];
 }
 
-export interface FileItem {
+export type FileItem = {
   id: number;
   originalFileName: string;
   stage: string;

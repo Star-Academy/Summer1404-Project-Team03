@@ -21,8 +21,8 @@ export class FilesManagementService {
     return this.http.get<Schema>(this.filesApi.previewSchema(fileId));
   }
 
-  uploadFiles(files: FormData): Observable<UploadFileResponse> {
-    return this.http.post<UploadFileResponse>(this.filesApi.upload, files);
+  uploadFiles(files: FormData): Observable<UploadFileResponse[]> {
+    return this.http.post<UploadFileResponse[]>(this.filesApi.upload, files);
   }
 
   deleteFile(fileId: number): Observable<void> {

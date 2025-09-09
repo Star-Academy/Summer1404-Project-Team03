@@ -3,6 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { UploadFileState } from '../../models/file.model';
 import { delay, exhaustMap, Subject, tap } from 'rxjs';
 import { FilesManagementService } from '../../../../services/files-management/files-management.service';
+import { FileItem } from '../../../../models/file.model';
 
 const initialState: UploadFileState = {
   files: [],
@@ -21,7 +22,7 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
   }
 
   public readonly vm = this.selectSignal((s) => s);
-  private readonly uploadResultSubject = new Subject<'success' | 'error'>();
+  private readonly uploadResultSubject = new Subject<FileItem[] | "error">();
   public readonly uploadResult$ = this.uploadResultSubject.asObservable();
 
   public readonly setDragging = this.updater<boolean>((state, isDragging) => ({
@@ -84,11 +85,12 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
               this.setSending(false);
               this.setError(null);
               this.get().files.forEach(file => this.removeFile(file.name))
-              this.uploadResultSubject.next('success');
-              console.log(res);
+              const fileItems = res.map(item => item.data)
+              this.uploadResultSubject.next(fileItems);
             },
             error: (err) => {
               this.setSending(false);
+              this.uploadResultSubject.next(err.message)
               this.setError(err.message || 'Upload failed');
             },
           })
@@ -109,12 +111,13 @@ export class UploadFileStore extends ComponentStore<UploadFileState> {
             next: (res) => {
               this.setSending(false);
               this.setError(null);
-              this.uploadResultSubject.next('success');
-              // this.getFile() //TODO remove the file
               console.log(res);
+              this.uploadResultSubject.next([res[0].data]);
+              this.removeFile(res[0].data.originalFileName)
             },
             error: (err) => {
               this.setSending(false);
+              this.uploadResultSubject.next(err.message)
               this.setError(err.message || 'Upload failed');
             },
           })
