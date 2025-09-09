@@ -12,9 +12,9 @@ public class RegisterAndLoadValidator : Validator<RegisterAndLoadRequest>
             .GreaterThan(0)
             .WithMessage("Staged file ID must be greater than 0.");
 
-        RuleFor(x => x.Columns)
-            .NotEmpty()
-            .WithMessage("At least one column is required.");
+        // RuleFor(x => x.Columns)
+        //     .NotEmpty()
+        //     .WithMessage("At least one column is required.");
 
         RuleForEach(x => x.Columns)
             .Must(c => c.OrdinalPosition > 0)

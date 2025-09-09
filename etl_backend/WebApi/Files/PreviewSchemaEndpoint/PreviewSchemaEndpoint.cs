@@ -44,7 +44,8 @@ public class PreviewSchemaEndpoint : Endpoint<PreviewSchemaRequest, PreviewSchem
             {
                 OrdinalPosition = c.OrdinalPosition,
                 ColumnName = c.ColumnName,
-                OriginalColumnName = c.OriginalColumnName
+                OriginalColumnName = c.OriginalColumnName,
+                ColumnType =  c.ColumnType
             }).ToList()
         };
     }

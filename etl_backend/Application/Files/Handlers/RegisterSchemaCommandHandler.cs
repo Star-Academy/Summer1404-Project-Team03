@@ -22,8 +22,8 @@ public class RegisterSchemaCommandHandler : IRequestHandler<RegisterSchemaComman
 
     public async Task<RegisterSchemaResult> Handle(RegisterSchemaCommand request, CancellationToken ct)
     {
-        if (request.ColumnTypeMap == null || request.ColumnTypeMap.Count == 0)
-            throw new ArgumentException("Columns are required.");
+        // if (request.ColumnTypeMap == null || request.ColumnTypeMap.Count == 0)
+        //     throw new ArgumentException("Columns are required.");
 
         var staged = await _stagedRepo.GetByIdAsync(request.StagedFileId, ct);
         if (staged is null)

@@ -12,5 +12,6 @@ public record ColumnPreviewResponse(
 public record ColumnPreviewItem(
     int OrdinalPosition,
     string ColumnName,
-    string OriginalColumnName
+    string OriginalColumnName, 
+    string ColumnType
 );

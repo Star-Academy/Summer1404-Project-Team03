@@ -43,7 +43,8 @@ public class PreviewSchemaQueryHandler : IRequestHandler<PreviewSchemaQuery, Col
             .Select(c => new ColumnPreviewItem(
                 c.OrdinalPosition,
                 c.ColumnName,
-                c.OriginalColumnName
+                c.OriginalColumnName,
+                c.ColumnType
             ))
             .ToList();
 
