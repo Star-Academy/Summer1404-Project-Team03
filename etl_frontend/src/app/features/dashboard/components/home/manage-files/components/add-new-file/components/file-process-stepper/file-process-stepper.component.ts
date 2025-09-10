@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { SchemaEditorComponent } from '../../../schema-editor/schema-editor.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
 import { FileItem } from '../../../../models/file.model';
 import { TableService } from '../../../../../manage-tables/services/table.service';
@@ -25,10 +25,12 @@ export class FileProcessStepperComponent {
     private route: ActivatedRoute,
     public uploadFileStore: UploadFileStore,
     private readonly tableService: TableService,
-    private readonly messageService: MessageService
+    private readonly messageService: MessageService,
+    private readonly router: Router
   ) {
     this.route.paramMap.subscribe((params) => {
       this.fileName = params.get('file-name');
+      this.stepperActivateCallback?.(1);
     });
     this.vm = this.uploadFileStore.vm;
     this.uploadFileStore.uploadResult$.subscribe((res) => {
@@ -60,6 +62,7 @@ export class FileProcessStepperComponent {
             summary: 'Success',
             detail: 'Table created successfully',
           });
+          this.router.navigateByUrl('/dashboard/files/new-file')
         },
         error: () => {
           this.messageService.add({
