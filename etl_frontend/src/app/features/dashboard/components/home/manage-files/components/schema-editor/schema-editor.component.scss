@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
 }
 
 .schema-table {
@@ -16,31 +17,42 @@
 }
 
 .actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  margin-inline-end: 4rem;
-
-  .save-button {
-    font-weight: 500;
-    min-width: 18rem;
-  }
+  padding-top: 1rem;
 }
-
-// schema-editor.component.scss
 
 .loading-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 1rem;
   gap: 1rem;
   text-align: center;
+  background-color: rgba(255, 255, 255, 0.6);
+
+  &.full {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+  }
+
+  &.overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+  }
+}
+
+.table-wrapper {
+  position: relative;
 }
 
 .loading-text {
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-color-secondary);
+}
+
+.error-text {
+  color: var(--red-500);
+  margin: 0.5rem 0;
 }

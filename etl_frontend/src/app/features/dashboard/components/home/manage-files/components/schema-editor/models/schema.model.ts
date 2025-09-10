@@ -12,7 +12,8 @@ export interface ShemaColumn {
 
 export interface SchemaEditorState {
     schema: Schema | null;
-    isLoading: boolean;
+    isFetching: boolean;
+    isSaving: boolean;
     dbTypes: string[];
     error: null | string;
     isSaveSuccess: null | boolean;

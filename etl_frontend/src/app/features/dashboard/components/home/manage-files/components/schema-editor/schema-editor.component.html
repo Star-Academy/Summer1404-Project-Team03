@@ -8,9 +8,11 @@
   class="back-button"
 ></p-button>
 
-@if (vm().isLoading) {
-<div class="loading-container">
-  <p-progressSpinner [style]="{ width: '50px', height: '50px' }" strokeWidth="4" animationDuration="1s"></p-progressSpinner>
+@if(vm().error) {
+<p style="color: rgba(255, 0, 0, 0.726)">{{ vm().error }}</p>
+} @if (vm().isFetching) {
+<div class="loading-container full">
+  <p-progressSpinner strokeWidth="4" animationDuration="1s"></p-progressSpinner>
   <span class="loading-text">Loading schema...</span>
 </div>
 } @if (vm().schema?.columns) {
@@ -39,15 +41,27 @@
         ></p-select>
       </td>
     </tr>
+    @if (vm().isSaving) {
+    <div class="loading-container overlay">
+      <p-progressSpinner
+        strokeWidth="4"
+        animationDuration="1s"
+      ></p-progressSpinner>
+      <span class="loading-text">Saving schema...</span>
+    </div>
+    }
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <div class="actions">
+      <p-button
+        rounded
+        (click)="onSaveSchema()"
+        label="Save"
+        styleClass="save-button"
+      ></p-button>
+    </div>
   </ng-template>
 </p-table>
 
-<div class="actions">
-  <p-button
-    rounded
-    (click)="onSaveSchema()"
-    label="Save"
-    styleClass="save-button"
-  ></p-button>
-</div>
 }

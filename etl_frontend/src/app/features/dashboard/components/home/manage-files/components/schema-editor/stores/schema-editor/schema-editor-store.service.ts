@@ -6,7 +6,8 @@ import { FilesManagementService } from '../../../../services/files-management/fi
 
 const initialState: SchemaEditorState = {
   error: null,
-  isLoading: false,
+  isFetching: false,
+  isSaving: false,
   schema: null,
   dbTypes: [],
   isSaveSuccess: null
@@ -22,9 +23,14 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
 
   public readonly isSaveSuccess$ = this.select((s) => s.isSaveSuccess);
 
-  public readonly setLoading = this.updater((state, value: boolean) => ({
+  public readonly setFetching = this.updater((state, value: boolean) => ({
     ...state,
-    isLoading: value,
+    isFetching: value,
+  }));
+  
+  public readonly setSaving = this.updater((state, value: boolean) => ({
+    ...state,
+    isSaving: value,
   }));
 
   public readonly setSchema = this.updater<Schema>((state, value: Schema) => ({
@@ -35,7 +41,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
   public readonly getDbTypes = this.effect<void>(($trigger) => {
     return $trigger.pipe(
       tap(() => {
-        this.setLoading(true);
+        this.setFetching(true);
         this.patchState({ dbTypes: ['string', 'number', 'float', 'boolean'] });
       })
     );
@@ -44,14 +50,14 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
   public readonly getFileSchema = this.effect<{ fileId: string }>(
     ($trigger) => {
       return $trigger.pipe(
-        tap(() => this.setLoading(true)),
+        tap(() => this.setFetching(true)),
         exhaustMap((data: { fileId: string }) =>
           this.filesManagementService.fetchFileSchema(data.fileId).pipe(
             delay(3000),
             tap((res) => {
               this.setSchema(res);
             }),
-            finalize(() => this.setLoading(false))
+            finalize(() => this.setFetching(false))
           )
         )
       );
@@ -60,7 +66,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
 
   public readonly updateSchema = this.effect<void>(($trigger) => {
     return $trigger.pipe(
-      tap(() => this.setLoading(true)),
+      tap(() => this.setSaving(true)),
       exhaustMap(() => {
         const schema = this.get().schema;
         if (!schema) return of();
@@ -68,6 +74,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
         return this.filesManagementService
           .updateSchema(schema)
           .pipe(
+            delay(3000),
             tap({
               next: () => {
                 this.patchState({ isSaveSuccess: true, error: null });
@@ -76,7 +83,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
                 this.patchState({ isSaveSuccess: false, error: err });
               }
             }),
-            finalize(() => this.setLoading(false))
+            finalize(() => this.setSaving(false))
           );
       })
     );
