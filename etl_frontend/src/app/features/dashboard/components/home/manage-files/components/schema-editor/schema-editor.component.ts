@@ -9,10 +9,11 @@ import { SelectModule } from 'primeng/select';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'app-schema-editor',
-  imports: [TableModule, FormsModule, PanelModule, SelectModule, InputTextModule, ButtonModule, RouterLink],
+  imports: [TableModule, FormsModule, PanelModule, SelectModule, InputTextModule, ButtonModule, RouterLink, ProgressSpinnerModule],
   providers: [SchemaEditorStore],
   templateUrl: './schema-editor.component.html',
   styleUrl: './schema-editor.component.scss'
@@ -45,10 +46,11 @@ export class SchemaEditorComponent implements OnInit {
     });
 
     this.schemaEditorStore.isSaveSuccess$.subscribe((isSaveSuccess) => {
-      if (isSaveSuccess) {
+      if (isSaveSuccess === null) return;
+      if (isSaveSuccess === true) {
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Schema updated successfully' });
         this.router.navigate(['/dashboard/files']);
-      } else {
+      } else if (isSaveSuccess === false) {
         this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update schema' });
       }
     });

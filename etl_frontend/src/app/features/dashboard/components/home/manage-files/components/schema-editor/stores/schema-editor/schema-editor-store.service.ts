@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Schema, SchemaEditorState } from '../../models/schema.model';
 import { ComponentStore } from '@ngrx/component-store';
-import { exhaustMap, finalize, map, of, tap } from 'rxjs';
+import { delay, exhaustMap, finalize, map, of, tap } from 'rxjs';
 import { FilesManagementService } from '../../../../services/files-management/files-management.service';
 
 const initialState: SchemaEditorState = {
@@ -47,6 +47,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
         tap(() => this.setLoading(true)),
         exhaustMap((data: { fileId: string }) =>
           this.filesManagementService.fetchFileSchema(data.fileId).pipe(
+            delay(3000),
             tap((res) => {
               this.setSchema(res);
             }),

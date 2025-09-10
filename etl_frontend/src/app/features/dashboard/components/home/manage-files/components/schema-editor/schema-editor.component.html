@@ -8,7 +8,12 @@
   class="back-button"
 ></p-button>
 
-@if (vm().schema?.columns) {
+@if (vm().isLoading) {
+<div class="loading-container">
+  <p-progressSpinner [style]="{ width: '50px', height: '50px' }" strokeWidth="4" animationDuration="1s"></p-progressSpinner>
+  <span class="loading-text">Loading schema...</span>
+</div>
+} @if (vm().schema?.columns) {
 <p-table [value]="vm().schema!.columns" class="schema-table">
   <ng-template pTemplate="header">
     <tr>
