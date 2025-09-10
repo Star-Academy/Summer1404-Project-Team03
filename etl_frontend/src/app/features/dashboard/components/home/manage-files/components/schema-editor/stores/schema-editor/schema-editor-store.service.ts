@@ -59,13 +59,11 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
       exhaustMap(() => {
         const schema = this.get().schema;
         if (schema) {
-          console.log('sending request: ', schema);
           return this.filesManagementService.updateSchema(schema).pipe(
-            tap(() => this.setLoading(false)),
-            tap((res) => console.log('res is: ', res))
+            finalize(() => this.setLoading(false)),
           )
         }
-        return of(void 0)
+        return of(new Error('No schema to save'));
       }
       )
     );
