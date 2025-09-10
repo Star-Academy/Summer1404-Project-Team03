@@ -4,7 +4,7 @@ import { Button } from 'primeng/button';
 import { animate, style, transition, trigger } from "@angular/animations"
 import { RouterLink } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
-import { ConfirmationService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { UploadedFileItemComponent } from './components/uploaded-file-item/uploaded-file-item.component';
 
@@ -31,8 +31,17 @@ export class FileUploaderComponent {
 
   constructor(
     private readonly uploadFileStore: UploadFileStore,
-    private readonly confirmationService: ConfirmationService) {
+    private readonly confirmationService: ConfirmationService,
+    private readonly messageService: MessageService) {
     this.vm = this.uploadFileStore.vm;
+
+    this.uploadFileStore.uploadResult$.subscribe(res => {
+      if (Array.isArray(res) && res.length > 0) {
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File(s) uploaded successfully' });
+      } else if (res === 'error') {
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Fail to upload File(s)' });
+      }
+    })
   }
 
   onDragOver(event: DragEvent): void {
