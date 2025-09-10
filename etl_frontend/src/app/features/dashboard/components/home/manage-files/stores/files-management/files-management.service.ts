@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { FileItem, FileManagmentState } from '../../models/file.model';
-import { catchError, delay, exhaustMap, finalize, mergeMap, switchMap, tap, throwError } from 'rxjs';
+import { catchError, delay, exhaustMap, finalize, mergeMap, Subject, switchMap, tap, throwError } from 'rxjs';
 import { FilesManagementService } from '../../services/files-management/files-management.service';
 import { TableService } from '../../../manage-tables/services/table.service';
 
@@ -21,6 +21,9 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
     super(initialState);
   }
 
+  tableCreateResultSubject = new Subject<boolean>();
+  tableCreateResult$ = this.tableCreateResultSubject.asObservable();
+
   public readonly vm = this.selectSignal(s => s);
 
   public readonly setLoadinFiles = this.updater<boolean>((state, value: boolean) => ({
@@ -38,14 +41,15 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
     fileItems: files,
   }));
 
-  public readonly setFileStage = this.updater<{ fileId: number, stage: string }>((state, data) => {
-    const file = state.fileItems.filter(file => file.id === data.fileId)[0];
-    file.stage = data.stage;
-    return ({
+  public readonly setFileStage = this.updater<{ fileId: number, stage: string }>((state, { fileId, stage }) => {
+    return {
       ...state,
-      fileItems: [...state.fileItems, file],
-    })
+      fileItems: state.fileItems.map(file =>
+        file.id === fileId ? { ...file, stage } : file
+      ),
+    };
   });
+
 
   readonly addDeletingFileId = this.updater<number>((state, fileId) => ({
     ...state,
@@ -86,8 +90,15 @@ export class FilesManagementStore extends ComponentStore<FileManagmentState> {
     return trigger$.pipe(
       tap(() => this.setCreatingTable(true)),
       exhaustMap((fileId: number) => this.tableManagementService.createTable(fileId).pipe(
-        tap((res) => console.log(res)),
-        tap((res) => this.setFileStage({ fileId: fileId, stage: 'Loaded' })),
+        tap({
+          next: () => {
+            this.setFileStage({ fileId: fileId, stage: 'Loaded' });
+            this.tableCreateResultSubject.next(true);
+          },
+          error: () => {
+            this.tableCreateResultSubject.next(false);
+          }
+        }),
         finalize(() => { this.setCreatingTable(false); }),
       ))
     )

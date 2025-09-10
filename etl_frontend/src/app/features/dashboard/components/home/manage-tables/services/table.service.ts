@@ -24,6 +24,6 @@ export class TableService {
   }
 
   public createTable(fileId: number) {
-    return this.http.post(this.fileApi.registerAndLoad(fileId), { mode: "Append", dropOnFailure: false });
+    return this.http.post(this.fileApi.registerAndLoad(fileId), { mode: 'Append', dropOnFailure: false });
   }
 }
