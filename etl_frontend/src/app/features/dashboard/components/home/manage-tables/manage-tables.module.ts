@@ -25,6 +25,6 @@ import { TableService } from './services/table.service';
     TooltipModule,
     RouterModule.forChild(manageTablesRoutes)
   ],
-providers:[TableStoreService, TableService]
+providers:[TableStoreService]
 })
 export class ManageTablesModule { }

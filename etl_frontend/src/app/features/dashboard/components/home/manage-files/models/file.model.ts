@@ -1,6 +1,7 @@
 export interface FileManagmentState {
   fileItems: FileItem[];
   isLoadingFiles: boolean;
+  isCreatingTable: boolean;
   error: string | null;
   deletingFileIds: number[];
 }

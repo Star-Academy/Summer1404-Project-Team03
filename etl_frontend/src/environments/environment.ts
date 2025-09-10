@@ -49,6 +49,7 @@ export const environment = {
       previewSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/preview`, // GET
       registerSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/register`, // POST
       load: (id: string | number) => `${baseUrl}/files/${id}/load`, // POST
+      registerAndLoad: (id: string | number) => `${baseUrl}/files/${id}/register-and-load`, // POST
     },
   },
 };

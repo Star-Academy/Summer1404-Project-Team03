@@ -7,6 +7,7 @@ import { TableType } from '../models/tables.model';
 @Injectable()
 export class TableService {
   private readonly tableApi = environment.api.tables;
+  private readonly fileApi = environment.api.files;
 
   constructor(private readonly http: HttpClient) { }
 
@@ -20,5 +21,9 @@ export class TableService {
 
   public renameTable(schemaId: number, newTableName: string) {
     return this.http.post(this.tableApi.rename(schemaId), newTableName);
+  }
+
+  public createTable(fileId: number) {
+    return this.http.post(this.fileApi.registerAndLoad(fileId), { mode: "Append", dropOnFailure: false });
   }
 }

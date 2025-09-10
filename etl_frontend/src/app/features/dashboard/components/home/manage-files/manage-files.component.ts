@@ -20,12 +20,8 @@ export class ManageFilesComponent {
     this.manageFilesStore.deleteFile({fileId});
   }
 
-  onCreateTable(fileId: string): void {
-
-  }
-
-  onShowTable(schemaId: string): void {
-
+  onCreateTable(fileId: number): void {
+    this.manageFilesStore.createTable(fileId);
   }
 
 }
