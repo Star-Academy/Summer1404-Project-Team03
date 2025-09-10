@@ -33,7 +33,7 @@
             }
           </td>
           <td>{{ file.fileSize }}</td>
-          <td>{{ file.uploadedAt | date:'short' }}</td>
+          <td>{{ file.uploadedAt | date : "short" }}</td>
           <td>{{ file.stage }}</td>
           <td>
             <p-button
@@ -50,14 +50,25 @@
               [disabled]="vm().deletingFileIds.includes(file.id)"
               pTooltip="Edit File Schema"
               [tooltipPosition]="'top'"
-              [routerLink]="[
-                '/',
-                'dashboard',
-                'files',
-                file.id,
-                'edit-schema'
-              ]"
+              [routerLink]="['/', 'dashboard', 'files', file.id, 'edit-schema']"
             ></p-button>
+            @if(file.stage === "Uploaded" || "SchemaRegistered") {
+            <p-button
+              icon="pi pi-table"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              (click)="onCreateTable(file.id)"
+              pTooltip="Create Table"
+              [tooltipPosition]="'top'"
+            ></p-button>
+            } @else if(file.stage === "TableCreated") {
+            <p-button
+              icon="pi pi-eye"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              (click)="onShowTable(file.schemaId)"
+              pTooltip="Show Table"
+              [tooltipPosition]="'top'"
+            ></p-button>
+            }
           </td>
         </tr>
       </ng-template>
