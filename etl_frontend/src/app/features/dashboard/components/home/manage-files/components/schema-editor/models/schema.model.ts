@@ -15,4 +15,5 @@ export interface SchemaEditorState {
     isLoading: boolean;
     dbTypes: string[];
     error: null | string;
+    isSaveSuccess: null | boolean;
 }
