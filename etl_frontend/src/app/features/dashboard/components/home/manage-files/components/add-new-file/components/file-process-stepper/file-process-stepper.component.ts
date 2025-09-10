@@ -5,6 +5,8 @@ import { SchemaEditorComponent } from '../../../schema-editor/schema-editor.comp
 import { ActivatedRoute } from '@angular/router';
 import { UploadFileStore } from '../../stores/upload-file/upload-file-store.service';
 import { FileItem } from '../../../../models/file.model';
+import { TableService } from '../../../../../manage-tables/services/table.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-file-process-stepper',
@@ -16,23 +18,25 @@ export class FileProcessStepperComponent {
   public activeStep = 1;
   public fileName: string | null = null;
   public fileId = signal<number | undefined>(undefined);
-  stepperActivateCallback: ((step: number) => void) | undefined = undefined
+  stepperActivateCallback: ((step: number) => void) | undefined = undefined;
   public readonly vm;
 
   constructor(
     private route: ActivatedRoute,
-    public uploadFileStore: UploadFileStore
+    public uploadFileStore: UploadFileStore,
+    private readonly tableService: TableService,
+    private readonly messageService: MessageService
   ) {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.fileName = params.get('file-name');
-    })
+    });
     this.vm = this.uploadFileStore.vm;
-    this.uploadFileStore.uploadResult$.subscribe(res => {
+    this.uploadFileStore.uploadResult$.subscribe((res) => {
       if (Array.isArray(res) && res.length > 0) {
         this.fileId.set(res[0].id);
         this.stepperActivateCallback?.(2);
       }
-    })
+    });
   }
 
   onUpload(activateCallback: (val: number) => void) {
@@ -43,10 +47,27 @@ export class FileProcessStepperComponent {
   }
 
   onSchemaEdited(config: any) {
-    console.log('Schema configured:', config);
+    this.stepperActivateCallback?.(3);
   }
 
   onCreateTable() {
-    console.log(`Creating table for ${this.fileName}`);
+    const fileId = this.fileId();
+    if (fileId)
+      this.tableService.createTable(fileId).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Table created successfully',
+          });
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Table creation failed',
+          });
+        },
+      });
   }
 }

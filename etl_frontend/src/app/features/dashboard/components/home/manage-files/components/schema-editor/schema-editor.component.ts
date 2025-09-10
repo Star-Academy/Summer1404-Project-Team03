@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TableModule } from 'primeng/table';
@@ -20,6 +20,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 })
 export class SchemaEditorComponent implements OnInit {
   public readonly vm;
+  onSave = output<void>();
+  fileId = input<number | undefined>(undefined);
   constructor(
     private readonly activatRoute: ActivatedRoute,
     private readonly schemaEditorStore: SchemaEditorStore,
@@ -37,13 +39,16 @@ export class SchemaEditorComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.activatRoute.params.subscribe((params) => {
-      const fileId = params['file-id'];
-      if (fileId) {
-        this.schemaEditorStore.getFileSchema(of({ fileId }));
-        this.schemaEditorStore.getDbTypes();
-      }
-    });
+    if (this.fileId()) {
+      this.getSchema(String(this.fileId()))
+    } else {
+      this.activatRoute.params.subscribe((params) => {
+        const fileId = params['file-id'];
+        if (fileId) {
+          this.getSchema(fileId)
+        }
+      });
+    }
 
     this.schemaEditorStore.isSaveSuccess$.subscribe((isSaveSuccess) => {
       if (isSaveSuccess === null) return;
@@ -56,7 +61,13 @@ export class SchemaEditorComponent implements OnInit {
     });
   }
 
+  getSchema(fileId: string): void {
+    this.schemaEditorStore.getFileSchema(of({ fileId: fileId }));
+    this.schemaEditorStore.getDbTypes();
+  }
+
   onSaveSchema(): void {
+    this.onSave.emit();
     this.schemaEditorStore.updateSchema();
   }
 }

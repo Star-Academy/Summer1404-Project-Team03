@@ -36,7 +36,8 @@
             </p>
 
             <app-schema-editor
-              (edited)="onSchemaEdited($event)"
+              (onSave)="onSchemaEdited($event)"
+              [fileId]="fileId()"
             ></app-schema-editor>
             </div>
         </ng-template>
