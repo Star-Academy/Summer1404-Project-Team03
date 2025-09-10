@@ -1,1 +1,58 @@
-<p>table-schema works!</p>
+@if (isRenameColumnModal) {
+  <app-rename-column [visible]="isRenameColumnModal"
+                     (close)="changeRenameColumnModalStatus()"
+                     [columnName]="columnName"
+                     [columnId]="columnId"
+  />
+}
+<p-card header="Column table">
+  <ng-template pTemplate="body">
+    <p-table
+      [value]="columns()"
+      styleClass="p-datatable-striped"
+      [tableStyle]="{ 'min-width': '50rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Name</th>
+          <th>Ordinal Position</th>
+          <th>Type</th>
+          <th>Original Name</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-column>
+        <tr [class.deleting-row]="onDeleteTable(column.id)">
+          <td>
+            <i class="pi pi-file"></i>
+            {{ column.name }}
+            <!--            @if(vm().deletingFileIds.includes(file.id)){-->
+            <!--              <i class="pi pi-spin pi-spinner"></i>-->
+            <!--            }-->
+          </td>
+          <td>{{ column.ordinalPosition}}</td>
+          <td>{{ column.type}}</td>
+          <td>{{ column.originalName }}</td>
+          <td>
+            <p-button
+              icon="pi pi-trash"
+              styleClass="p-button-rounded p-button-danger p-button-text"
+              (click)="onDeleteColumn(column.id)"
+              pTooltip="Delete File"
+              [tooltipPosition]="'top'"
+              [disabled]=""
+            ></p-button>
+            <p-button
+              icon="pi pi-pencil"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              pTooltip="Delete File"
+              [tooltipPosition]="'top'"
+              [disabled]=""
+              (click)="changeRenameColumnModalStatus(column.name, column.id)"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </ng-template>
+</p-card>

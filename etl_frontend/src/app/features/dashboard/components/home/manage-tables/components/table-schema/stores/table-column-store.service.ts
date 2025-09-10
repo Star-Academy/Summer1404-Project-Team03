@@ -9,7 +9,7 @@ const initialTables = {
   isLoading: false,
 }
 @Injectable()
-export class TableStoreService extends ComponentStore<ColumnStore>{
+export class TableColumnStoreService extends ComponentStore<ColumnStore>{
   constructor(private readonly http: TableColumnService) {
     super(initialTables);
   }
@@ -29,7 +29,7 @@ export class TableStoreService extends ComponentStore<ColumnStore>{
     (columns, isLoading) => ({columns, isLoading})
   );
 
-  public loadTables(schemaId: number): void {
+  public loadColumn(schemaId: number): void {
     this.setLoading(true);
 
     this.http.getTableColumns(schemaId).pipe(
