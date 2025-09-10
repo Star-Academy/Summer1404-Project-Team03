@@ -4,13 +4,16 @@ export interface Schema {
 }
 
 export interface ShemaColumn {
-    ordinalPosition: number,
-    columnName: string,
-    originalColumnName: string
+    ordinalPosition: number;
+    columnName: string;
+    originalColumnName: string;
+    columnType: string;
 }
 
 export interface SchemaEditorState {
     schema: Schema | null;
     isLoading: boolean;
+    dbTypes: string[];
     error: null | string;
+    isSaveSuccess: null | boolean;
 }
