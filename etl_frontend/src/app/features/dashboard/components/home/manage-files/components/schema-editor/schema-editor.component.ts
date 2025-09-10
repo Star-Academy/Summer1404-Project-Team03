@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { PanelModule } from 'primeng/panel';
 import { SchemaEditorStore } from './stores/schema-editor/schema-editor-store.service';
@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-schema-editor',
-  imports: [TableModule, FormsModule, PanelModule, SelectModule, InputTextModule, ButtonModule],
+  imports: [TableModule, FormsModule, PanelModule, SelectModule, InputTextModule, ButtonModule, RouterLink],
   providers: [SchemaEditorStore],
   templateUrl: './schema-editor.component.html',
   styleUrl: './schema-editor.component.scss'
