@@ -35,9 +35,9 @@ export const environment = {
 
     // ===================== COLUMNS =====================
     columns: {
-      list: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/columns`, // GET
-      delete: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/columns`, // DELETE
-      rename: (schemaId: string | number, columnId: string | number) =>
+      list: (schemaId: number) => `${baseUrl}/tables/${schemaId}/columns`, // GET
+      delete: (schemaId: number) => `${baseUrl}/tables/${schemaId}/columns`, // DELETE
+      rename: (schemaId: number, columnId: number) =>
         `${baseUrl}/tables/${schemaId}/columns/${columnId}/rename`, // POST
     },
 
