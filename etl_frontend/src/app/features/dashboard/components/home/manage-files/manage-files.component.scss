@@ -3,12 +3,23 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  width: 100%;
 }
 
 .header {
   display: flex;
   justify-content: end;
   padding: 1rem;
+}
+
+.table-wrapper {
+  width: 100%;
+  max-height: 70vh;
+  overflow-x: auto;
+  padding-block-end: 3rem;
+  overflow-y: auto;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
 }
 
 ::ng-deep .deleting-row {

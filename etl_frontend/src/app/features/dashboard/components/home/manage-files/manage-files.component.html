@@ -9,74 +9,84 @@
     </div>
   </ng-template>
   <ng-template pTemplate="body">
-    <p-table
-      [value]="vm().fileItems"
-      styleClass="p-datatable-striped"
-      [tableStyle]="{ 'min-width': '50rem' }"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>File Name</th>
-          <th>Size</th>
-          <th>Upload Time</th>
-          <th>state</th>
-          <th>Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-file>
-        <tr [class.deleting-row]="vm().deletingFileIds.includes(file.id)">
-          <td>
-            <i class="pi pi-file"></i>
-            {{ file.originalFileName }}
-            @if(vm().deletingFileIds.includes(file.id)){
-            <i class="pi pi-spin pi-spinner"></i>
-            }
-          </td>
-          <td>{{ file.fileSize }}</td>
-          <td>{{ file.uploadedAt | date : "short" }}</td>
-          <td>{{ file.stage }}</td>
-          <td>
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-danger p-button-text"
-              (click)="onDeleteFile(file.id)"
-              pTooltip="Delete File"
-              [tooltipPosition]="'top'"
-              [disabled]="vm().deletingFileIds.includes(file.id)"
-            ></p-button>
-            <p-button
-              icon="pi pi-file-edit"
-              styleClass="p-button-rounded p-button-secondary p-button-text"
-              [disabled]="vm().deletingFileIds.includes(file.id)"
-              pTooltip="Edit File Schema"
-              [tooltipPosition]="'top'"
-              [routerLink]="['/', 'dashboard', 'files', file.id, 'edit-schema']"
-            ></p-button>
-            @if(file.stage === "Uploaded" || file.stage === "SchemaRegistered")
-            {
-            <p-button
-              icon="pi pi-table"
-              styleClass="p-button-rounded p-button-secondary p-button-text"
-              (click)="onCreateTable(file.id)"
-              pTooltip="Create Table"
-              [tooltipPosition]="'top'"
-            ></p-button>
-            } @else if(file.stage === "Loaded") {
-            <p-button
-              icon="pi pi-eye"
-              styleClass="p-button-rounded p-button-secondary p-button-text"
-              pTooltip="Show Table"
-              [tooltipPosition]="'top'"
-            ></p-button>
-            }
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr style="height: 10rem; font-size: 1.1rem">
-          <td colspan="5">No files found. Please upload a CSV file.</td>
-        </tr>
-      </ng-template>
-    </p-table>
+    <div class="table-wrapper">
+      <p-table
+        [value]="vm().fileItems"
+        styleClass="p-datatable-striped"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr id="table-header">
+            <th>File Name</th>
+            <th>Size</th>
+            <th>Upload Time</th>
+            <th>State</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-file>
+          <tr [class.deleting-row]="vm().deletingFileIds.includes(file.id)">
+            <td>
+              <i class="pi pi-file"></i>
+              {{ file.originalFileName }}
+              @if(vm().deletingFileIds.includes(file.id)){
+              <i class="pi pi-spin pi-spinner"></i>
+              }
+            </td>
+            <td>{{ file.fileSize }}</td>
+            <td>{{ file.uploadedAt | date : "short" }}</td>
+            <td>{{ file.stage }}</td>
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger p-button-text"
+                (click)="onDeleteFile(file.id)"
+                pTooltip="Delete File"
+                [tooltipPosition]="'top'"
+                [disabled]="vm().deletingFileIds.includes(file.id)"
+              ></p-button>
+              <p-button
+                icon="pi pi-file-edit"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                [disabled]="vm().deletingFileIds.includes(file.id)"
+                pTooltip="Edit File Schema"
+                [tooltipPosition]="'top'"
+                [routerLink]="[
+                  '/',
+                  'dashboard',
+                  'files',
+                  file.id,
+                  'edit-schema'
+                ]"
+              ></p-button>
+              @if(file.stage === "Uploaded" || file.stage ===
+              "SchemaRegistered") {
+              <p-button
+                icon="pi pi-table"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                (click)="onCreateTable(file.id)"
+                pTooltip="Create Table"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              } @else if(file.stage === "Loaded") {
+              <p-button
+                icon="pi pi-eye"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                pTooltip="Show Table"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              }
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr style="height: 10rem; font-size: 1.1rem">
+            <td colspan="5">No files found. Please upload a CSV file.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
   </ng-template>
 </p-card>
