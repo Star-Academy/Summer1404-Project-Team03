@@ -22,9 +22,6 @@ public class RegisterSchemaCommandHandler : IRequestHandler<RegisterSchemaComman
 
     public async Task<RegisterSchemaResult> Handle(RegisterSchemaCommand request, CancellationToken ct)
     {
-        // if (request.ColumnTypeMap == null || request.ColumnTypeMap.Count == 0)
-        //     throw new ArgumentException("Columns are required.");
-
         var staged = await _stagedRepo.GetByIdAsync(request.StagedFileId, ct);
         if (staged is null)
             throw new NotFoundException("StagedFile", request.StagedFileId);
@@ -32,7 +29,7 @@ public class RegisterSchemaCommandHandler : IRequestHandler<RegisterSchemaComman
         if (staged.Stage == ProcessingStage.TableCreated || staged.Stage == ProcessingStage.Loaded)
             throw new ConflictException("Columns cannot be modified after the table has been created.");
 
-        var (schema, updatedStaged) = await _schemaReg.RegisterAsync(request.StagedFileId, request.ColumnTypeMap, ct);
+        var (schema, updatedStaged) = await _schemaReg.RegisterAsync(request.StagedFileId, request.ColumnTypeMap,request.ColumnNameMap, ct);
 
         var columns = schema.Columns
             .OrderBy(c => c.OrdinalPosition)

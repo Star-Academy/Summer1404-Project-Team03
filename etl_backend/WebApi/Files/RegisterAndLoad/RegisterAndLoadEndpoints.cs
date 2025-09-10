@@ -19,7 +19,7 @@ public class RegisterAndLoadEndpoint : Endpoint<RegisterAndLoadRequest, Register
         AllowAnonymous();
         Summary(s =>
         {
-            s.Summary = "Get row count for a table";
+            s.Summary = "Register Schema and load the data into database table";
             s.Description = "Returns approximate or exact row count.";
             // s.Params(p => p.SchemaId, "The schema ID of the table");
             s.ExampleRequest = new RegisterAndLoadRequest { LoadMode = "Append", DropOnFailure = true};
@@ -30,10 +30,12 @@ public class RegisterAndLoadEndpoint : Endpoint<RegisterAndLoadRequest, Register
     {
         var columnMap = req.Columns
             .ToDictionary(c => c.OrdinalPosition, c =>  c.ColumnType);
-
+        var columnNameMap = req.Columns
+            .ToDictionary(c => c.OrdinalPosition, c =>  c.ColumnType);
         var result = await _service.ExecuteAsync(
             req.Id,
             columnMap,
+            columnNameMap,
             (LoadMode)Enum.Parse(typeof(LoadMode), req.LoadMode, true),
             req.DropOnFailure,
             ct

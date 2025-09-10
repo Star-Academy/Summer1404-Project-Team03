@@ -2,6 +2,7 @@ using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Files.Queries;
 using Application.Repositories.Abstractions;
+using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 
@@ -12,15 +13,18 @@ public class PreviewSchemaQueryHandler : IRequestHandler<PreviewSchemaQuery, Col
     private readonly IStagedFileRepository _stagedRepo;
     private readonly IHeaderProvider _headerProvider;
     private readonly IColumnDefinitionBuilder _columnDefinitionBuilder;
+    private readonly IDataTableSchemaRepository _schemaRepo; // ✅ Added
 
     public PreviewSchemaQueryHandler(
         IStagedFileRepository stagedRepo,
         IHeaderProvider headerProvider,
-        IColumnDefinitionBuilder columnDefinitionBuilder)
+        IColumnDefinitionBuilder columnDefinitionBuilder,
+        IDataTableSchemaRepository schemaRepo) // ✅ Injected
     {
         _stagedRepo = stagedRepo;
         _headerProvider = headerProvider;
         _columnDefinitionBuilder = columnDefinitionBuilder;
+        _schemaRepo = schemaRepo;
     }
 
     public async Task<ColumnPreviewResponse> Handle(PreviewSchemaQuery request, CancellationToken ct)
@@ -32,21 +36,45 @@ public class PreviewSchemaQueryHandler : IRequestHandler<PreviewSchemaQuery, Col
         if (staged.Status == ProcessingStatus.Failed)
             throw new ConflictException("Staged file is in failed state.");
 
-        var headerNames = await _headerProvider.GetAsync(staged, ct);
-        if (headerNames.Count == 0)
-            throw new UnprocessableEntityException("Header row not found or empty.");
+        // ✅ Try to fetch existing schema
+        DataTableSchema? existingSchema = null;
+        if (staged.SchemaId.HasValue)
+        {
+            existingSchema = await _schemaRepo.GetByIdWithColumnsAsync(staged.SchemaId.Value, ct);
+        }
 
-        var columnEntities = _columnDefinitionBuilder.Build(headerNames);
+        List<ColumnPreviewItem> columns;
 
-        var columns = columnEntities
-            .OrderBy(c => c.OrdinalPosition)
-            .Select(c => new ColumnPreviewItem(
-                c.OrdinalPosition,
-                c.ColumnName,
-                c.OriginalColumnName,
-                c.ColumnType
-            ))
-            .ToList();
+        if (existingSchema != null && existingSchema.Columns.Any())
+        {
+            columns = existingSchema.Columns
+                .OrderBy(c => c.OrdinalPosition)
+                .Select(c => new ColumnPreviewItem(
+                    c.OrdinalPosition,
+                    c.ColumnName,
+                    c.OriginalColumnName ?? c.ColumnName, 
+                    c.ColumnType.ToString()
+                ))
+                .ToList();
+        }
+        else
+        {
+            var headerNames = await _headerProvider.GetAsync(staged, ct);
+            if (headerNames.Count == 0)
+                throw new UnprocessableEntityException("Header row not found or empty.");
+
+            var columnEntities = _columnDefinitionBuilder.Build(headerNames);
+
+            columns = columnEntities
+                .OrderBy(c => c.OrdinalPosition)
+                .Select(c => new ColumnPreviewItem(
+                    c.OrdinalPosition,
+                    c.ColumnName,
+                    c.OriginalColumnName,
+                    c.ColumnType.ToString() 
+                ))
+                .ToList();
+        }
 
         return new ColumnPreviewResponse(request.StagedFileId, columns);
     }

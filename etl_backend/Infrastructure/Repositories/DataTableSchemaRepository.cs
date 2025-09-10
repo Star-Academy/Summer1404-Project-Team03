@@ -46,7 +46,6 @@ public sealed class DataTableSchemaRepository : IDataTableSchemaRepository
 
     public async Task UpdateAsync(DataTableSchema schema, CancellationToken ct = default)
     {
-        // your existing implementation that replaces columns in a transaction
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
         var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
 

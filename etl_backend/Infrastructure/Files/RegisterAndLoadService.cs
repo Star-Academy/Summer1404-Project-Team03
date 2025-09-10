@@ -28,6 +28,7 @@ public class RegisterAndLoadService : IRegisterAndLoadService
     public async Task<RegisterAndLoadResult> ExecuteAsync(
         int stagedFileId,
         Dictionary<int, string> columnTypeMap,
+        Dictionary<int, string> columnNameMap,
         LoadMode mode = LoadMode.Append,
         bool dropOnFailure = false,
         CancellationToken ct = default)
@@ -36,7 +37,7 @@ public class RegisterAndLoadService : IRegisterAndLoadService
 
         try
         {
-            registerResult = await _mediator.Send(new RegisterSchemaCommand(stagedFileId, columnTypeMap), ct);
+            registerResult = await _mediator.Send(new RegisterSchemaCommand(stagedFileId, columnTypeMap, columnNameMap), ct);
             
             var loadResult = await _mediator.Send(new LoadFileIntoTableCommand(stagedFileId, mode, dropOnFailure), ct);
 

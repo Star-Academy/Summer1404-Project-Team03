@@ -16,6 +16,7 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
     private readonly ITableNameGenerator _names;
     private readonly IStagedFileStateService _state;
     private readonly IColumnTypeValidator _typeValidator;
+    private readonly IColumnNameSanitizer _nameSanitizer; // ✅ Optional: add if you want to sanitize
 
     public SchemaRegistrationService(
         IStagedFileRepository stagedRepo,
@@ -24,7 +25,8 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
         IColumnDefinitionBuilder cols,
         ITableNameGenerator names,
         IStagedFileStateService state,
-        IColumnTypeValidator typeValidator)
+        IColumnTypeValidator typeValidator,
+        IColumnNameSanitizer? nameSanitizer = null) // ✅ Optional dependency
     {
         _stagedRepo = stagedRepo;
         _schemaRepo = schemaRepo;
@@ -33,19 +35,17 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
         _names = names;
         _state = state;
         _typeValidator = typeValidator;
+        _nameSanitizer = nameSanitizer;
     }
-    
 
     public async Task<(DataTableSchema Schema, StagedFile Staged)> RegisterAsync(
         int stagedFileId,
         IReadOnlyDictionary<int, string> columnTypesByOrdinal,
+        IReadOnlyDictionary<int, string> columnNamesByOrdinal,
         CancellationToken ct = default)
     {
         var staged = await _stagedRepo.GetByIdAsync(stagedFileId, ct)
                     ?? throw new InvalidOperationException($"Staged file {stagedFileId} not found.");
-
-        // if (staged.Status == ProcessingStatus.Failed)
-        //     throw new InvalidOperationException("Staged file is in failed state.");
 
         if (staged.Stage == ProcessingStage.TableCreated || staged.Stage == ProcessingStage.Loaded)
             throw new InvalidOperationException("Columns cannot be modified after the table has been created.");
@@ -70,22 +70,29 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
                 columns.Select(c =>
                 {
                     var t = "string";
-                    if (!(columnTypesByOrdinal == null))
+                    if (columnTypesByOrdinal != null)
                         columnTypesByOrdinal.TryGetValue(c.OrdinalPosition, out t);
                     return (c.OrdinalPosition, t ?? "string");
                 }));
-            
 
             foreach (var col in columns)
             {
-                var t = columnTypesByOrdinal.TryGetValue(col.OrdinalPosition, out var raw)
-                    ? raw
+                var rawType = columnTypesByOrdinal != null && columnTypesByOrdinal.TryGetValue(col.OrdinalPosition, out var t)
+                    ? t
                     : "string";
 
-                if (!_typeValidator.TryNormalize(t, out var norm))
-                    throw new ArgumentException($"Invalid column type at ordinal {col.OrdinalPosition}: '{t}'");
+                if (!_typeValidator.TryNormalize(rawType, out var norm))
+                    throw new ArgumentException($"Invalid column type at ordinal {col.OrdinalPosition}: '{rawType}'");
 
                 col.ColumnType = norm;
+                if (columnNamesByOrdinal != null && columnNamesByOrdinal.TryGetValue(col.OrdinalPosition, out var newName))
+                {
+                    var finalName = _nameSanitizer?.Sanitize(newName, col.OrdinalPosition) ?? newName.Trim();
+                    if (string.IsNullOrWhiteSpace(finalName))
+                        throw new ArgumentException($"Invalid column name at ordinal {col.OrdinalPosition}: '{newName}'");
+
+                    col.ColumnName = finalName;
+                }
             }
 
             DataTableSchema schema;
@@ -113,6 +120,7 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
                 await _schemaRepo.UpdateAsync(schema, ct);
                 await _state.MarkSchemaRegisteredAsync(staged, schema.Id, ct);
             }
+
             return (schema, staged);
         }
         catch (Exception ex)

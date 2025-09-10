@@ -32,7 +32,7 @@ public class RegisterSchemaEndpoint : Endpoint<RegisterSchemaRequest, RegisterSc
                 Id = 1,
                 Columns = new List<RegisterSchemaColumnItem>
                 {
-                    new() { OrdinalPosition = 1, ColumnType = "TEXT" }
+                    new() { OrdinalPosition = 1, ColumnType = "string", ColumnName = "new_name"}
                 }
             };
         });
@@ -42,8 +42,9 @@ public class RegisterSchemaEndpoint : Endpoint<RegisterSchemaRequest, RegisterSc
     {
         var columnMap = req.Columns
             .ToDictionary(c => c.OrdinalPosition, c => c.ColumnType);
-
-        var result = await _mediator.Send(new RegisterSchemaCommand(req.Id, columnMap), ct);
+        var columnNameMap = req.Columns
+            .ToDictionary(c => c.OrdinalPosition, c => c.ColumnName);
+        var result = await _mediator.Send(new RegisterSchemaCommand(req.Id, columnMap, columnNameMap), ct);
 
         Response = new RegisterSchemaResponse
         {

@@ -10,4 +10,5 @@ public class RegisterSchemaColumnItem
 {
     public int OrdinalPosition { get; set; }
     public string ColumnType { get; set; } = string.Empty;
+    public string ColumnName { get; set; } = string.Empty;
 }

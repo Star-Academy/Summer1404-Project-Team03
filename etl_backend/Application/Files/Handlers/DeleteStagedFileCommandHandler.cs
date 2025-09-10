@@ -25,15 +25,10 @@ public class DeleteStagedFileCommandHandler : IRequestHandler<DeleteStagedFileCo
         var staged = await _stagedRepo.GetByIdAsync(request.StagedFileId, ct);
         if (staged is null)
             throw new NotFoundException("StagedFile", request.StagedFileId);
-
-        // Optional: prevent deletion if already loaded or in progress
         if (staged.Stage == ProcessingStage.Loaded)
             throw new ConflictException("Cannot delete file after it has been loaded.");
 
-        // Delete physical file
         await _fileStagingService.DeleteAsync(staged.StoredFilePath, ct);
-
-        // Delete from DB
         await _stagedRepo.DeleteAsync(request.StagedFileId, ct);
     }
 }

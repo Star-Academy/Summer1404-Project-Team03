@@ -7,6 +7,7 @@ public interface IRegisterAndLoadService
     Task<RegisterAndLoadResult> ExecuteAsync(
         int stagedFileId,
         Dictionary<int, string> columnTypeMap,
+        Dictionary<int, string> columnNameMap,
         LoadMode mode = LoadMode.Append,
         bool dropOnFailure = false,
         CancellationToken ct = default);

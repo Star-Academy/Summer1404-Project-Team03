@@ -4,7 +4,8 @@ namespace Application.Files.Commands;
 
 public record RegisterSchemaCommand(
     int StagedFileId,
-    Dictionary<int, String> ColumnTypeMap
+    Dictionary<int, String> ColumnTypeMap,
+    Dictionary<int, String> ColumnNameMap
 ) : IRequest<RegisterSchemaResult>;
 
 public record RegisterSchemaResult(
@@ -17,7 +18,7 @@ public record RegisterSchemaResult(
 public record SchemaColumnDto(
     int OrdinalPosition,
     string ColumnName,
-    String ColumnType
+    string ColumnType
 );
 
 public record StagedFileStatusDto(
