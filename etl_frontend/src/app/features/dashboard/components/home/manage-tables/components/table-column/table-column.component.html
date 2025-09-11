@@ -1,8 +1,8 @@
-@if (isRenameColumnModal) {
-  <app-rename-column [visible]="isRenameColumnModal"
+@if (isRenameColumnModal()) {
+  <app-rename-column [visible]="isRenameColumnModal()"
                      (close)="changeRenameColumnModalStatus()"
-                     [columnName]="columnName"
-                     [columnId]="columnId"
+                     [columnName]="columnName()"
+                     [columnId]="columnId()"
   />
 }
 <p-card header="Column table">
@@ -22,7 +22,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-column>
-        <tr [class.deleting-row]="onDeleteTable(column.id)">
+        <tr [class.deleting-row]="onDeleteColumn(column.id)">
           <td>
             <i class="pi pi-file"></i>
             {{ column.name }}
@@ -40,15 +40,13 @@
               (click)="onDeleteColumn(column.id)"
               pTooltip="Delete File"
               [tooltipPosition]="'top'"
-              [disabled]=""
             ></p-button>
             <p-button
               icon="pi pi-pencil"
               styleClass="p-button-rounded p-button-secondary p-button-text"
-              pTooltip="Delete File"
+              pTooltip="Edit Name"
               [tooltipPosition]="'top'"
-              [disabled]=""
-              (click)="changeRenameColumnModalStatus(column.name, column.id)"
+              (click)="setColumnId(column.name, column.id)"
             ></p-button>
           </td>
         </tr>

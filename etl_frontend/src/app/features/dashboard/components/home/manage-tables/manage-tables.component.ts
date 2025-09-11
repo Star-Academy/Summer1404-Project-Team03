@@ -1,4 +1,4 @@
-import {Component, computed, OnInit} from '@angular/core';
+import {Component, computed, OnInit, signal} from '@angular/core';
 import {TableStoreService} from './stores/table-store.service';
 import { TableService } from './services/table.service';
 import { MessageService } from 'primeng/api';
@@ -13,6 +13,10 @@ import { MessageService } from 'primeng/api';
 export class ManageTablesComponent implements OnInit {
   public readonly tables = computed(() => this.tableStore.vm().tables);
   public readonly isLoading = computed(() => this.tableStore.vm().isLoading);
+
+  public isRenameTabelModal = signal<boolean>(false);
+  public schemaId = signal<string>('');
+  public tableName = signal<string>('');
 
   constructor(
     private readonly tableStore: TableStoreService,
@@ -32,7 +36,20 @@ export class ManageTablesComponent implements OnInit {
     })
   }
 
+  public onRenameTable(tableId: number, tableName: string) {
+    console.log(tableId, tableName);
+    this.schemaId.set(tableId.toString());
+    this.tableName.set(tableName);
+    this.changeTableRenameModalStatus();
+  }
+
+  public changeTableRenameModalStatus() {
+    this.isRenameTabelModal.update(currentValue => !currentValue);
+  }
+
   ngOnInit() {
     this.tableStore.loadTables();
   }
 }
+
+

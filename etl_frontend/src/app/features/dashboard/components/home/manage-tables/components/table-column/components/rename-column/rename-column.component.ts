@@ -1,18 +1,21 @@
-import { Component, computed, input, output, WritableSignal } from '@angular/core';
-import {FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserStoreService } from '../../../../../../../../../shared/stores/user-store.service';
-import { UsersService } from '../../../../../../../../../shared/services/user/users.service';
+import { Component, input, OnInit, output, WritableSignal } from '@angular/core';
+import {FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TableColumnService } from '../../services/table-column.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ButtonModule } from 'primeng/button';
+import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog'
 
 @Component({
   selector: 'app-rename-column',
-  imports: [],
+  imports: [CommonModule, MessageModule, ButtonModule, DialogModule, ReactiveFormsModule],
   templateUrl: './rename-column.component.html',
   styleUrl: './rename-column.component.scss'
 })
-export class RenameColumnComponent {
+
+export class RenameColumnComponent implements OnInit {
   public visible = input.required<boolean>();
   public columnName = input.required<string>();
   public columnId = input.required<string>();
