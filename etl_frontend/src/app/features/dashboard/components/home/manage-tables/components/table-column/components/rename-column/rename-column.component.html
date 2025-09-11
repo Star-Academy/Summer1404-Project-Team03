@@ -1,17 +1,16 @@
 <p-dialog
-  header="Edit profile"
+  header="Edit column bane"
   [modal]="true"
   [visible]="visible()"
   [draggable]="false"
   (onHide)="onClose()"
-  class="edit-profile-card"
 >
   <div class="modal">
     <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="modal__form">
       <div class="modal__inputs">
         <div class="modal__input">
-          <input pInputText formControlName="firstName" [ngClass]="{ 'p-invalid': isInvalid('firstName') }" fluid />
-          @if (isInvalid('firstName')) {
+          <input pInputText formControlName="columnName" [ngClass]="{ 'p-invalid': isInvalid('columnName') }" fluid />
+          @if (isInvalid('columnName')) {
             <p-message severity="error" size="small" variant="simple">
               Name is required
             </p-message>

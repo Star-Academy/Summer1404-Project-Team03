@@ -1,3 +1,10 @@
+@if (isRenameTabelModal()) {
+  <app-rename-table [visible]="isRenameTabelModal()"
+                     (close)="changeTableRenameModalStatus()"
+                     [tableName]="tableName()"
+                     [schemaId]="schemaId()"
+  />
+}
 <p-card header="Manage Tables">
   <ng-template pTemplate="body">
     <p-table
@@ -34,9 +41,17 @@
               [disabled]=""
             ></p-button>
             <p-button
+              icon="pi pi-pencil"
+              styleClass="p-button-rounded p-button-secondary p-button-text"
+              (click)="onRenameTable(table.schemaId, table.tableName)"
+              pTooltip="Edit Name"
+              [tooltipPosition]="'top'"
+              [disabled]=""
+            ></p-button>
+            <p-button
               icon="pi pi-eye"
               styleClass="p-button-rounded p-button-secondary p-button-text"
-              pTooltip="Delete File"
+              pTooltip="Show Column"
               [tooltipPosition]="'top'"
               [disabled]=""
               [routerLink]="['/', 'dashboard', 'tables', table.schemaId]"

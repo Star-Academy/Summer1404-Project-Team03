@@ -1,0 +1,44 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  inline-size: 75vh;
+  block-size: 37vh;
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+
+    &__input {
+      display: flex;
+      justify-content: space-between;
+
+      inline-size: 40vh;
+    }
+  }
+  &__btn {
+    display: flex;
+    gap: 0.5rem;
+    align-self: end;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.5rem;
+    align-self: end;
+  }
+}

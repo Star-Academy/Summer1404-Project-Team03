@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableStoreService } from './stores/table-store.service';
 import { TableService } from './services/table.service';
+import { RenameTableComponent } from './components/rename-table/rename-table.component';
 
 @NgModule({
   declarations: [ManageTablesComponent],
@@ -23,8 +24,9 @@ import { TableService } from './services/table.service';
     ButtonModule,
     DropdownModule,
     TooltipModule,
+    RenameTableComponent,
     RouterModule.forChild(manageTablesRoutes)
   ],
-providers:[TableStoreService]
+providers:[TableStoreService, ]
 })
 export class ManageTablesModule { }
