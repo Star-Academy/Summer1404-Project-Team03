@@ -1,9 +1,10 @@
 @if (isRenameTabelModal()) {
-  <app-rename-table [visible]="isRenameTabelModal()"
-                     (close)="changeTableRenameModalStatus()"
-                     [tableName]="tableName()"
-                     [schemaId]="schemaId()"
-  />
+<app-rename-table
+  [visible]="isRenameTabelModal()"
+  (close)="changeTableRenameModalStatus()"
+  [tableName]="tableName()"
+  [schemaId]="schemaId()"
+/>
 }
 <p-card header="Manage Tables">
   <ng-template pTemplate="body">
@@ -25,11 +26,11 @@
           <td>
             <i class="pi pi-file"></i>
             {{ table.tableName }}
-<!--            @if(vm().deletingFileIds.includes(file.id)){-->
-<!--              <i class="pi pi-spin pi-spinner"></i>-->
-<!--            }-->
+            <!--            @if(vm().deletingFileIds.includes(file.id)){-->
+            <!--              <i class="pi pi-spin pi-spinner"></i>-->
+            <!--            }-->
           </td>
-          <td>{{ table.originalFileName}}</td>
+          <td>{{ table.originalFileName }}</td>
           <td>{{ table.columnCount }}</td>
           <td>
             <p-button
@@ -51,7 +52,12 @@
               styleClass="p-button-rounded p-button-secondary p-button-text"
               pTooltip="Show Column"
               [tooltipPosition]="'top'"
-              [routerLink]="['/', 'dashboard', 'tables', table.schemaId]"
+              [routerLink]="[
+                '/',
+                'dashboard',
+                'tables',
+                table.schemaId
+              ]"
             ></p-button>
           </td>
         </tr>
