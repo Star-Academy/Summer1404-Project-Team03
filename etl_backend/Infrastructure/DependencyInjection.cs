@@ -1,4 +1,5 @@
 using Application.Abstractions;
+using Application.Common.Configurations;
 using Application.Files.Commands;
 using Application.Repositories;
 using Application.Repositories.Abstractions;
@@ -100,22 +101,20 @@ public static class DependencyInjection
         services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
         // services.AddScoped<ITableInfoService, TableInfoService>();
 
-        // --- Load policy (pick a default; prefer overriding per-call) ---
         services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
             mode: LoadMode.Append,
             dropOnFailure: false
         ));
         
-        // Add this — for migrations at startup
         services.AddDbContext<EtlDbContext>(options =>
         {
             var cs = configuration.GetConnectionString("DefaultConnection");
             options.UseNpgsql(cs);
-            // Add this if migrations are in another assembly:
             // options.UseNpgsql(cs, o => o.MigrationsAssembly("etl_backend.Infrastructure"));
         });
-
-        
+        services.Configure<ColumnTypeConfiguration>(configuration.GetSection("ColumnTypeConfiguration"));
+        services.AddSingleton<ITypeCatalogService, TypeCatalogService>();
+        services.AddSingleton<IColumnTypeValidator, DefaultColumnTypeValidator>();
 
         services.AddScoped<IRegisterAndLoadService, RegisterAndLoadService>();
 

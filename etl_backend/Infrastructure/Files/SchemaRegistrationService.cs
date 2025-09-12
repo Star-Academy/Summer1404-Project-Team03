@@ -16,7 +16,7 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
     private readonly ITableNameGenerator _names;
     private readonly IStagedFileStateService _state;
     private readonly IColumnTypeValidator _typeValidator;
-    private readonly IColumnNameSanitizer _nameSanitizer; // ✅ Optional: add if you want to sanitize
+    private readonly IColumnNameSanitizer _nameSanitizer; 
 
     public SchemaRegistrationService(
         IStagedFileRepository stagedRepo,
@@ -26,7 +26,7 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
         ITableNameGenerator names,
         IStagedFileStateService state,
         IColumnTypeValidator typeValidator,
-        IColumnNameSanitizer? nameSanitizer = null) // ✅ Optional dependency
+        IColumnNameSanitizer? nameSanitizer = null) 
     {
         _stagedRepo = stagedRepo;
         _schemaRepo = schemaRepo;

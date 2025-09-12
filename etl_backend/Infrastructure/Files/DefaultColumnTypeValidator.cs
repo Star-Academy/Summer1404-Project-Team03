@@ -1,56 +1,22 @@
+using Application.Abstractions;
 using Infrastructure.Files.Abstractions;
 
 namespace Infrastructure.Files;
 
 public sealed class DefaultColumnTypeValidator : IColumnTypeValidator
 {
-    // Canonical logical types
-    private static readonly HashSet<string> Canonical =
-        new(StringComparer.OrdinalIgnoreCase)
-        { "string", "int", "long", "decimal", "bool", "datetime" };
+    private readonly ITypeCatalogService _typeCatalog;
 
-    // Aliases map to canonical
-    private static readonly Dictionary<string, string> Aliases =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            ["integer"] = "int",
-            ["int32"] = "int",
-            ["int64"] = "long",
-            ["number"] = "decimal",
-            ["numeric"] = "decimal",
-            ["boolean"] = "bool",
-            ["date"] = "datetime",
-            ["datetimeoffset"] = "datetime",
-            ["timestamp"] = "datetime",
-            ["date-time"] = "datetime"
-        };
+    public DefaultColumnTypeValidator(ITypeCatalogService typeCatalog)
+    {
+        _typeCatalog = typeCatalog;
+    }
 
-    public IReadOnlyCollection<string> AllowedTypes => Canonical;
+    public IReadOnlyCollection<string> AllowedTypes => _typeCatalog.GetAllowedTypes();
 
     public bool TryNormalize(string? input, out string normalized)
     {
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            normalized = "string";
-            return true;
-        }
-
-        // direct canonical
-        if (Canonical.Contains(input))
-        {
-            normalized = input.Trim().ToLowerInvariant();
-            return true;
-        }
-
-        // alias
-        if (Aliases.TryGetValue(input.Trim(), out var canon))
-        {
-            normalized = canon;
-            return true;
-        }
-
-        normalized = string.Empty;
-        return false;
+        return _typeCatalog.TryNormalize(input, out normalized);
     }
 
     public void ValidateOrThrow(IEnumerable<(int OrdinalPosition, string? Type)> items)
