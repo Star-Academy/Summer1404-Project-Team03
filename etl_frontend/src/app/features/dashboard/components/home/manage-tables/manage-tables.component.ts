@@ -15,7 +15,7 @@ export class ManageTablesComponent implements OnInit {
   public readonly isLoading = computed(() => this.tableStore.vm().isLoading);
 
   public isRenameTabelModal = signal<boolean>(false);
-  public schemaId = signal<string>('');
+  public schemaId = signal<number>(0);
   public tableName = signal<string>('');
 
   constructor(
@@ -37,13 +37,14 @@ export class ManageTablesComponent implements OnInit {
   }
 
   public onRenameTable(tableId: number, tableName: string) {
-    console.log(tableId, tableName);
-    this.schemaId.set(tableId.toString());
-    this.tableName.set(tableName);
+    this.schemaId.update(() => tableId);
+    this.tableName.update(() => tableName);
     this.changeTableRenameModalStatus();
   }
 
   public changeTableRenameModalStatus() {
+    console.log(this.tableName())
+    console.log(this.schemaId())
     this.isRenameTabelModal.update(currentValue => !currentValue);
   }
 

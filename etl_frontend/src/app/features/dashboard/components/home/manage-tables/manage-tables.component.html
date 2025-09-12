@@ -1,8 +1,9 @@
 @if (isRenameTabelModal()) {
-  <app-rename-table [visible]="isRenameTabelModal()"
-                     (close)="changeTableRenameModalStatus()"
-                     [tableName]="tableName()"
-                     [schemaId]="schemaId()"
+  <app-rename-table
+    (close)="changeTableRenameModalStatus()"
+    [visible]="isRenameTabelModal()"
+    [name]="tableName()"
+    [id]="schemaId()"
   />
 }
 <p-card header="Manage Tables">

@@ -27,6 +27,6 @@ import { RenameTableComponent } from './components/rename-table/rename-table.com
     RenameTableComponent,
     RouterModule.forChild(manageTablesRoutes)
   ],
-providers:[TableStoreService, ]
+providers:[TableStoreService]
 })
 export class ManageTablesModule { }
