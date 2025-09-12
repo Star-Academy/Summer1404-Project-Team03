@@ -17,7 +17,7 @@ export class TableColumnStoreService extends ComponentStore<ColumnStore>{
   private readonly columns = this.selectSignal((state) => state.columns);
   private readonly isLoading = this.selectSignal((state) => state.isLoading);
 
-  private readonly setTables = this.updater((state, tables: ColumnType[]) => ({...state, tables}));
+  private readonly setColumns = this.updater((state, columns: ColumnType[]) => ({...state, columns}));
   private readonly setLoading = this.updater((state, value: boolean) => ({
     ...state,
     isLoading: value
@@ -34,7 +34,9 @@ export class TableColumnStoreService extends ComponentStore<ColumnStore>{
 
     this.http.getTableColumns(schemaId).pipe(
       tap({
-        next: (column: ColumnType[]) => this.setTables(column),
+        next: (column:{ items: ColumnType[] }) => {
+          this.setColumns(column.items)
+        },
       }),
       finalize(() => this.setLoading(false)),
     ).subscribe();

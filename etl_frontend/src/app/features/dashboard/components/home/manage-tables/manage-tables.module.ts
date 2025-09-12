@@ -12,6 +12,8 @@ import { TooltipModule } from 'primeng/tooltip';
 import { TableStoreService } from './stores/table-store.service';
 import { TableService } from './services/table.service';
 import { RenameTableComponent } from './components/rename-table/rename-table.component';
+import { TableColumnStoreService } from './components/table-column/stores/table-column-store.service';
+import { TableColumnService } from './components/table-column/services/table-column.service';
 
 @NgModule({
   declarations: [ManageTablesComponent],

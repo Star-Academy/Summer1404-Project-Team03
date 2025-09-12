@@ -2,14 +2,17 @@ import { Component, input, OnInit, output } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TableService } from '../../services/table.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog'
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { TableStoreService } from '../../stores/table-store.service';
 
 @Component({
   selector: 'app-rename-table',
-  imports: [ReactiveFormsModule, CommonModule, ButtonModule, MessageModule, DialogModule],
+  imports: [ReactiveFormsModule, CommonModule, ButtonModule, MessageModule, DialogModule, InputTextModule, PasswordModule, NgClass],
   templateUrl: './rename-table.component.html',
   styleUrl: './rename-table.component.scss'
 })
@@ -25,6 +28,7 @@ export class RenameTableComponent implements OnInit{
   constructor(
     private readonly fb: FormBuilder,
     private readonly tableService: TableService,
+    private readonly tableStore: TableStoreService,
     private readonly messageService: MessageService
   ) {}
 
@@ -34,12 +38,13 @@ export class RenameTableComponent implements OnInit{
       this.exampleForm.markAllAsTouched();
       console.log(this.exampleForm.value)
 
-      this.tableService.renameTable(+this.id(), {newName: this.exampleForm.value.name}).subscribe({
+      this.tableService.renameTable(+this.id(), {newTableName: this.exampleForm.value.name}).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Table name updated successfully',
           });
+          this.tableStore.loadTables();
           this.onClose();
         }
       });
