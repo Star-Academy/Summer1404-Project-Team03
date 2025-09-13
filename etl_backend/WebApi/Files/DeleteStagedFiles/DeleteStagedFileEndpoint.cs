@@ -23,11 +23,7 @@ public class DeleteStagedFileEndpoint : Endpoint<DeleteStagedFileRequest>
 
     public override void Configure()
     {
-        // Route that expects 'id' in the URL
         Delete("api/files/{id}");
-
-        AllowAnonymous();
-        
         Summary(s =>
         {
             s.Summary = "Delete staged file";

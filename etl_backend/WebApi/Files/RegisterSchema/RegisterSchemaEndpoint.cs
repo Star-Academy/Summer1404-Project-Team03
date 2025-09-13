@@ -22,7 +22,6 @@ public class RegisterSchemaEndpoint : Endpoint<RegisterSchemaRequest, RegisterSc
     public override void Configure()
     {
         Post("api/files/{Id}/schema/register");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Register schema for staged file";

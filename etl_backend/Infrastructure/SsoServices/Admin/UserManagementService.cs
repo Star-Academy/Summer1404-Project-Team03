@@ -1,16 +1,18 @@
+using Application.Services.Abstractions;
+using Application.ValueObjects;
 using Infrastructure.Dtos;
 using Infrastructure.SsoServices.Admin.Abstractions;
 using Infrastructure.SsoServices.User.Abstractions;
 
 namespace Infrastructure.SsoServices.Admin;
 
-public class KeycloakAdminClient : IKeycloakAdminClient
+public class UserManagementService : IUserManagementService
 {
     private readonly ISsoClient _ssoClient;
     private readonly IRoleManagerService _roleManager;
     private readonly IKeycloakServiceAccountTokenProvider _accountTokenProvider;
 
-    public KeycloakAdminClient(
+    public UserManagementService(
         ISsoClient ssoClient,
         IRoleManagerService roleManager, IKeycloakServiceAccountTokenProvider accountTokenProvider)
     {
@@ -137,7 +139,7 @@ public class KeycloakAdminClient : IKeycloakAdminClient
     
     public async Task AddRolesToUserAsync(
         string userId,
-        IEnumerable<RoleDto> roles,
+        RoleDto[] roles,
         CancellationToken cancellationToken)
     {
         if (!roles.Any()) return;
@@ -145,8 +147,7 @@ public class KeycloakAdminClient : IKeycloakAdminClient
         var accessToken = await _accountTokenProvider.GetServiceAccountTokenAsync();
         await _roleManager.AssignRolesToUserAsync(userId, roles, accessToken!, cancellationToken);
     }
-
-
+    
     public async Task RemoveRolesFromUserAsync(
         string userId,
         IEnumerable<RoleDto> roles,

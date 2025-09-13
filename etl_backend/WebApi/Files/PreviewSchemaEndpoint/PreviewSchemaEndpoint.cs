@@ -24,7 +24,6 @@ public class PreviewSchemaEndpoint : Endpoint<PreviewSchemaRequest, PreviewSchem
     public override void Configure()
     {
         Get("api/files/{Id}/schema/preview");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Preview schema from staged file";

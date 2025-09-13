@@ -16,7 +16,6 @@ public class RegisterAndLoadEndpoint : Endpoint<RegisterAndLoadRequest, Register
     public override void Configure()
     {
         Post("api/files/{Id}/register-and-load");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Register Schema and load the data into database table";

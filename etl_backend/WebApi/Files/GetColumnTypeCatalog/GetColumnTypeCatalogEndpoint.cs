@@ -16,7 +16,6 @@ public class GetColumnTypeCatalogEndpoint : EndpointWithoutRequest<GetColumnType
     public override void Configure()
     {
         Get("api/types/columns");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Get supported column data types and aliases";

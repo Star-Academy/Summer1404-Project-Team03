@@ -1,8 +1,8 @@
-using Infrastructure.Dtos;
+using Application.ValueObjects;
 
-namespace Infrastructure.SsoServices.Admin.Abstractions;
+namespace Application.Services.Abstractions;
 
-public interface IKeycloakAdminClient
+public interface IUserManagementService
 {
     Task<IEnumerable<UserWithRolesDto>> GetAllUsersAsync(CancellationToken cancellationToken);
     Task<UserWithRolesDto> GetUserByIdAsync(string userId, CancellationToken cancellationToken);
@@ -10,7 +10,7 @@ public interface IKeycloakAdminClient
     Task<UserDto> EditUserAsync(string userId, EditUserRequestDto userToUpdate, CancellationToken cancellationToken);
     Task DeleteUserAsync(string userId, CancellationToken cancellationToken);
     
-    Task AddRolesToUserAsync(string userId, IEnumerable<RoleDto> roles, CancellationToken cancellationToken);
+    Task AddRolesToUserAsync(string userId, RoleDto[] roles, CancellationToken cancellationToken);
     Task RemoveRolesFromUserAsync(string userId, IEnumerable<RoleDto> roles, CancellationToken cancellationToken);
     
     Task<IEnumerable<RoleDto>> GetAllRolesAsync(CancellationToken cancellationToken);

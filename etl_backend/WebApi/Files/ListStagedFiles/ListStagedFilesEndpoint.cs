@@ -22,7 +22,6 @@ public class ListStagedFilesEndpoint : EndpointWithoutRequest<ListStagedFilesRes
     public override void Configure()
     {
         Get("api/files");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "List all staged files";

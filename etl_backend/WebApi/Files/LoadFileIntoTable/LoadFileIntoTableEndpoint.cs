@@ -22,7 +22,6 @@ public class LoadFileIntoTableEndpoint : Endpoint<LoadFileIntoTableRequest, Load
     public override void Configure()
     {
         Post("api/files/{Id}/load");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Load staged file into database table";

@@ -16,7 +16,6 @@ public class DropColumnsEndpoint : Endpoint<DropColumnsRequest>
     public override void Configure()
     {
         Delete("api/tables/{SchemaId:int}/columns");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Drop one or more columns";

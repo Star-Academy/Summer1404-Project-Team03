@@ -1,4 +1,4 @@
-namespace Infrastructure.Dtos;
+namespace Application.ValueObjects;
 
 public class EditUserRequestDto: BaseUserDto
 {

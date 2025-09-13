@@ -16,7 +16,6 @@ public class GetTableRowCountEndpoint : Endpoint<GetTableRowCountRequest, GetTab
     public override void Configure()
     {
         Get("api/tables/{SchemaId:int}/count");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Get row count for a table";

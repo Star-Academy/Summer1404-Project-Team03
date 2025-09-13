@@ -16,7 +16,6 @@ public class ListColumnsEndpoint : Endpoint<ListColumnsRequest, ListColumnsRespo
     public override void Configure()
     {
         Get("api/tables/{SchemaId:int}/columns");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "List columns for a table";

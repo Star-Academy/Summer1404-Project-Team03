@@ -16,7 +16,6 @@ public class PreviewTableRowsEndpoint : Endpoint<PreviewTableRowsRequest, Previe
     public override void Configure()
     {
         Get("api/tables/{SchemaId:int}/rows");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Preview rows from a table";

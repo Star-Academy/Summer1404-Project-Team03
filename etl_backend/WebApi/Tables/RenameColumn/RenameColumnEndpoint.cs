@@ -16,7 +16,6 @@ public class RenameColumnEndpoint : Endpoint<RenameColumnRequest>
     public override void Configure()
     {
         Post("api/tables/{SchemaId:int}/columns/{ColumnId:int}/rename");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Rename a column";

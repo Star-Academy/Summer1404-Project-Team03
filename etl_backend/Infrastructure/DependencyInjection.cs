@@ -146,7 +146,7 @@ public static class DependencyInjection
 
         
         // --- Admin ---
-        services.AddSingleton<IKeycloakAdminClient,  KeycloakAdminClient>();
+        services.AddSingleton<IUserManagementService,  SsoServices.Admin.UserManagementService>();
         services.AddSingleton<ITokenProfileExtractor, KeycloakTokenProfileExtractor>();
         // services.AddSingleton<IGetAllUsersService, GetAllUsersService>();
         // services.AddSingleton<ICreateUserService, CreateUserService>();

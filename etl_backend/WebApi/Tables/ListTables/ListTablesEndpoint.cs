@@ -16,7 +16,6 @@ public class ListTablesEndpoint : EndpointWithoutRequest<List<TableListItem>>
     public override void Configure()
     {
         Get("api/tables");
-        AllowAnonymous();
         Summary(s => s.Summary = "List all registered tables");
     }
 

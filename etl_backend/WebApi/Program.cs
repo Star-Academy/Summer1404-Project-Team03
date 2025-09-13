@@ -1,4 +1,5 @@
 using Application;
+using Application.Common.Exceptions;
 using FastEndpoints;
 using FastEndpoints.Swagger;
 using Infrastructure;
@@ -65,6 +66,7 @@ using (var scope = app.Services.CreateScope())
 
 
 app.UseFastEndpoints().UseSwaggerGen();
+
 app.UseAuthentication();   
 app.UseAuthorization();
 app.UseSwagger();

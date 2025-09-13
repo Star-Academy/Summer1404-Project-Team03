@@ -16,7 +16,6 @@ public class GetTableDetailsEndpoint : Endpoint<GetTableDetailsRequest, GetTable
     public override void Configure()
     {
         Get("api/tables/{SchemaId:int}/details");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Get detailed information about a table";

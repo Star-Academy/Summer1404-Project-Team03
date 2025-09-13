@@ -16,7 +16,6 @@ public class DeleteTableEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Delete("api/tables/{schemaId}");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Delete a table";

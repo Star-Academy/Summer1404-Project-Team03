@@ -20,7 +20,6 @@ public class StageManyFilesEndpoint : Endpoint<StageManyFilesRequest, List<Stage
     public override void Configure()
     {
         Post("api/files/stage-many");
-        AllowAnonymous();
         AllowFormData();
         Summary(s =>
         {

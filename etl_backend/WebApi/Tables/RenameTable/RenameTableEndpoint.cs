@@ -16,7 +16,6 @@ public class RenameTableEndpoint : Endpoint<RenameTableRequest>
     public override void Configure()
     {
         Post("api/tables/{SchemaId}/rename");
-        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Rename a table";
