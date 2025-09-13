@@ -14,6 +14,7 @@ export type ChangePasswordResponse = {
 
 export class UsersService {
   private readonly usersApi = environment.api.users;
+  private readonly usersAuthApi = environment.api.auth;
 
   constructor(private readonly http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class UsersService {
   }
 
   public getUserInformation(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(this.usersApi.me);
+    return this.http.get<UserInfo>(this.usersAuthApi.me);
   }
 
   public updateUserInformation(newUserInfo: UserUpdate) {
