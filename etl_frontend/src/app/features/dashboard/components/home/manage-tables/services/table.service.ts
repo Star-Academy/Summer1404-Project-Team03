@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../../environments/environment';
 import { Observable } from 'rxjs';
-import { TableType } from '../models/tables.model';
+import { TableType, TableValidTypes } from '../models/tables.model';
 
 @Injectable()
 export class TableService {
@@ -13,6 +13,10 @@ export class TableService {
 
   public getTable(): Observable<TableType[]> {
     return this.http.get<TableType[]>(this.tableApi.list);
+  }
+
+  public getTableTypes(): Observable<TableValidTypes> {
+    return this.http.get<TableValidTypes>(this.tableApi.types)
   }
 
   public deleteTable(schemaId: string) {

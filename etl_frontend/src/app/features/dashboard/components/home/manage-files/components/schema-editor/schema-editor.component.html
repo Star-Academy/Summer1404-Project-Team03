@@ -32,7 +32,7 @@
       </td>
       <td>
         <p-select
-          [options]="dbTypes"
+          [options]="dbTypes()"
           [(ngModel)]="col.columnType"
           optionLabel="label"
           optionValue="value"

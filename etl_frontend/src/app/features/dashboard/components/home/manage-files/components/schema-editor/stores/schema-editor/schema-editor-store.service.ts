@@ -3,6 +3,7 @@ import { Schema, SchemaEditorState } from '../../models/schema.model';
 import { ComponentStore } from '@ngrx/component-store';
 import { delay, exhaustMap, finalize, map, of, tap } from 'rxjs';
 import { FilesManagementService } from '../../../../services/files-management/files-management.service';
+import { TableService } from '../../../../../manage-tables/services/table.service';
 
 const initialState: SchemaEditorState = {
   error: null,
@@ -15,7 +16,9 @@ const initialState: SchemaEditorState = {
 
 @Injectable()
 export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
-  constructor(private readonly filesManagementService: FilesManagementService) {
+  constructor(
+    private readonly filesManagementService: FilesManagementService,
+    private readonly tableService: TableService) {
     super(initialState);
   }
 
@@ -27,7 +30,7 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
     ...state,
     isFetching: value,
   }));
-  
+
   public readonly setSaving = this.updater((state, value: boolean) => ({
     ...state,
     isSaving: value,
@@ -38,14 +41,28 @@ export class SchemaEditorStore extends ComponentStore<SchemaEditorState> {
     schema: value,
   }));
 
-  public readonly getDbTypes = this.effect<void>(($trigger) => {
-    return $trigger.pipe(
-      tap(() => {
-        this.setFetching(true);
-        this.patchState({ dbTypes: ['string', 'number', 'float', 'boolean'] });
-      })
-    );
-  });
+  public readonly setDbTypes = this.updater<string[]>((state, value: string[]) => ({
+    ...state,
+    dbTypes: value,
+  }));
+
+  public readonly getDbTypes = this.effect<void>($trigger =>
+    $trigger.pipe(
+      tap(() => this.setFetching(true)),
+      exhaustMap(() =>
+        this.tableService.getTableTypes().pipe(
+          map(res => res.allowedTypes),
+          tap({
+            next: res => {
+              this.setDbTypes(res);
+            },
+            error: error => this.patchState({ error: error.message }),
+          }),
+          finalize(() => this.setFetching(false))
+        )
+      )
+    )
+  );
 
   public readonly getFileSchema = this.effect<{ fileId: string }>(
     ($trigger) => {

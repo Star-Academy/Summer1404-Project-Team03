@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, computed, input, OnInit, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TableModule } from 'primeng/table';
@@ -22,6 +22,9 @@ export class SchemaEditorComponent implements OnInit {
   public readonly vm;
   onSave = output<void>();
   fileId = input<number | undefined>(undefined);
+  dbTypes = computed(() => {
+    return this.vm().dbTypes.map(type => ({ label: type, value: type }))
+  });
   constructor(
     private readonly activatRoute: ActivatedRoute,
     private readonly schemaEditorStore: SchemaEditorStore,
@@ -30,13 +33,6 @@ export class SchemaEditorComponent implements OnInit {
   ) {
     this.vm = this.schemaEditorStore.vm;
   }
-
-  dbTypes = [
-    { label: 'string', value: 'string' },
-    { label: 'number', value: 'number' },
-    { label: 'boolean', value: 'boolean' },
-    { label: 'float', value: 'float' },
-  ]
 
   ngOnInit(): void {
     if (this.fileId()) {

@@ -1,4 +1,4 @@
-export type TableType ={
+export type TableType = {
   schemaId: number;
   tableName: string;
   originalFileName: string;
@@ -8,4 +8,11 @@ export type TableType ={
 export type TableStore = {
   tables: TableType[];
   isLoading: boolean;
+}
+
+export type TableValidTypes = {
+  allowedTypes: string[];
+  typeAliases: {
+    [key: string]: string
+  };
 }
