@@ -47,22 +47,21 @@
                 [disabled]="vm().deletingFileIds.includes(file.id)"
               ></p-button>
               @if(file.stage !== 'Loaded') {
-                <p-button
-                  icon="pi pi-file-edit"
-                  styleClass="p-button-rounded p-button-secondary p-button-text"
-                  [disabled]="vm().deletingFileIds.includes(file.id)"
-                  pTooltip="Edit File Schema"
-                  [tooltipPosition]="'top'"
-                  [routerLink]="[
-                    '/',
-                    'dashboard',
-                    'files',
-                    file.id,
-                    'edit-schema'
-                  ]"
-                ></p-button>
-              }
-              @if(file.stage === "Uploaded" || file.stage ===
+              <p-button
+                icon="pi pi-file-edit"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                [disabled]="vm().deletingFileIds.includes(file.id)"
+                pTooltip="Edit File Schema"
+                [tooltipPosition]="'top'"
+                [routerLink]="[
+                  '/',
+                  'dashboard',
+                  'files',
+                  file.id,
+                  'edit-schema'
+                ]"
+              ></p-button>
+              } @if(file.stage === "Uploaded" || file.stage ===
               "SchemaRegistered") {
               <p-button
                 icon="pi pi-table"
@@ -76,6 +75,7 @@
                 icon="pi pi-eye"
                 styleClass="p-button-rounded p-button-secondary p-button-text"
                 pTooltip="Show Table"
+                [routerLink]="['/', 'dashboard', 'tables', file.schemaId]"
                 [tooltipPosition]="'top'"
               ></p-button>
               }
