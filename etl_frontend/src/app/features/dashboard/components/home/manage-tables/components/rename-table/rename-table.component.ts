@@ -36,7 +36,6 @@ export class RenameTableComponent implements OnInit{
     this.formSubmitted = true;
     if (!this.exampleForm.invalid) {
       this.exampleForm.markAllAsTouched();
-      console.log(this.exampleForm.value)
 
       this.tableService.renameTable(+this.id(), {newTableName: this.exampleForm.value.name}).subscribe({
         next: () => {

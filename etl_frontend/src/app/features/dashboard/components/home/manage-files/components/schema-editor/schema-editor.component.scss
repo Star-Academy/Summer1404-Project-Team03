@@ -43,7 +43,9 @@
 }
 
 .table-wrapper {
-  position: relative;
+  inline-size: 100%;
+  max-block-size: 80vh;
+  overflow-x: auto;
 }
 
 .loading-text {

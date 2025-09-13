@@ -43,8 +43,6 @@ export class ManageTablesComponent implements OnInit {
   }
 
   public changeTableRenameModalStatus() {
-    console.log(this.tableName())
-    console.log(this.schemaId())
     this.isRenameTabelModal.update(currentValue => !currentValue);
   }
 
