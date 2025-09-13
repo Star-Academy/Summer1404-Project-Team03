@@ -1,7 +1,8 @@
+using Application.Common.Authorization;
 using MediatR;
 
 namespace Application.Files.Queries;
-
+[RequireRole(AppRoles.Analyst, AppRoles.DataAdmin, AppRoles.SysAdmin)]
 public record ListStagedFilesQuery : IRequest<List<ListFilesItem>>;
 
 public record ListFilesItem(

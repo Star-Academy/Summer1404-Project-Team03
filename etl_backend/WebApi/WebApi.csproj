@@ -8,11 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FastEndpoints" Version="7.1.0-beta.10" />
-        <PackageReference Include="FastEndpoints.Attributes" Version="7.1.0-beta.10" />
-        <PackageReference Include="FastEndpoints.ClientGen" Version="7.1.0-beta.10" />
-        <PackageReference Include="FastEndpoints.Swagger" Version="7.1.0-beta.10" />
+        <PackageReference Include="Bonyan.AspNetCore.FastEndpoints.Swagger" Version="1.0.9" />
         <PackageReference Include="FastEndpoints.Swagger.Swashbuckle" Version="2.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.4" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
     </ItemGroup>

@@ -42,10 +42,10 @@ public class TokenCookieService : ITokenCookieService
         response.Cookies.Append(_keycloakOptions.AccessCookieName, tokenResponse.AccessToken, options);
         response.Cookies.Append(_keycloakOptions.RefreshCookieName, tokenResponse.RefreshToken, options);
     }
-
-    public void RemoveTokens(HttpResponse response)
+    
+    public void ClearTokens(HttpResponse response)
     {
-        response.Cookies.Delete(_keycloakOptions.AccessCookieName);
-        response.Cookies.Delete(_keycloakOptions.RefreshCookieName);
+        response.Cookies.Delete("access_token");
+        response.Cookies.Delete("refresh_token");
     }
 }

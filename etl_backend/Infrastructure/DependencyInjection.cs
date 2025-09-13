@@ -3,21 +3,29 @@ using Application.Common.Configurations;
 using Application.Files.Commands;
 using Application.Repositories;
 using Application.Repositories.Abstractions;
+using Application.Services.Abstractions;
 using Domain.AccessControl.Ports;
 using etl_backend.Application.DataFile.Abstraction;
 using etl_backend.Application.DataFile.Services;
 using Infrastructure.Configurations;
 using Infrastructure.DbConfig;
 using Infrastructure.DbConfig.Abstraction;
+using Infrastructure.Dtos;
 using Infrastructure.Files;
 using Infrastructure.Files.Abstractions;
 using Infrastructure.Files.PostgresTableServices;
 using Infrastructure.Files.PostgresTableServices.HelperServices;
+using Infrastructure.Identity;
+using Infrastructure.Identity.Abstractions;
 using Infrastructure.Repositories;
+using Infrastructure.SsoServices.Admin;
+using Infrastructure.SsoServices.Admin.Abstractions;
+using Infrastructure.SsoServices.User;
+using Infrastructure.SsoServices.User.Abstractions;
 using Infrastructure.Tables;
 using Infrastructure.Tables.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Internal;
 using Microsoft.Extensions.Options;
 using Npgsql;
 using IColumnDefinitionBuilder = Application.Abstractions.IColumnDefinitionBuilder;
@@ -90,6 +98,7 @@ public static class DependencyInjection
         services.AddSingleton<IDataWrite, PostgresBulkWriter>();
 
         // --- Use-cases / orchestrators ---
+        services.AddScoped<IRegisterAndLoadService, RegisterAndLoadService>();
         services.AddScoped<IFileStagingService, FileStagingService>();
         services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService>();
         services.AddScoped<ILoadPreconditionsService, LoadPreconditionsService>();
@@ -115,8 +124,37 @@ public static class DependencyInjection
         services.Configure<ColumnTypeConfiguration>(configuration.GetSection("ColumnTypeConfiguration"));
         services.AddSingleton<ITypeCatalogService, TypeCatalogService>();
         services.AddSingleton<IColumnTypeValidator, DefaultColumnTypeValidator>();
+        
+        // --- Auth ---
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddSingleton<IKeycloakAuthService, KeycloakAuthService>();
+        services.AddSingleton<ITokenExtractor, TokenCookieExtractor>();
+        services.AddSingleton<ITokenCookieService, TokenCookieService>();
+        services.AddSingleton<ITokenExpirationChecker, KeycloakTokenExpirationChecker>();
+        services.AddSingleton<IAccessTokenRefreshable, KeycloakAccessTokenRefresher>();
+        services.AddSingleton<IKeycloakAuthService, KeycloakAuthService>();
+        services.AddSingleton<IParseTokenResponse, KeycloakTokenResponseParser>();
+        services.AddSingleton<IKeycloakLogOutUser, KeycloakLogOutUser>();
+        services.AddSingleton<IKeycloakTokenHandler, KeycloakTokenHandler>();
+        services.AddSingleton<IRoleExtractor, KeycloakRoleExtractor>();
+        services.AddSingleton<ISsoClient, KeycloakSsoClient>();
+        services.AddSingleton<IRoleManagerService, KeycloakClientRoleManagerService>();
+        services.AddSingleton<IKeycloakServiceAccountTokenProvider, KeycloakServiceAccountTokenProvider>();
+        services.Configure<KeycloakOptions>(
+            configuration.GetSection("Keycloak"));
 
-        services.AddScoped<IRegisterAndLoadService, RegisterAndLoadService>();
+        
+        // --- Admin ---
+        services.AddSingleton<IKeycloakAdminClient,  KeycloakAdminClient>();
+        services.AddSingleton<ITokenProfileExtractor, KeycloakTokenProfileExtractor>();
+        // services.AddSingleton<IGetAllUsersService, GetAllUsersService>();
+        // services.AddSingleton<ICreateUserService, CreateUserService>();
+        // services.AddSingleton<IEditUserService, EditUserService>();
+        // services.AddSingleton<IDeleteUserService, DeleteUserService>();
+        // services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
+        // services.AddSingleton<IEditUserRolesService, EditUserRolesService>();
+        // services.AddSingleton<IGetRolesList, GetAllRolesService>();
 
         return services;
     }

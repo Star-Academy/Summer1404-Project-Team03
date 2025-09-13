@@ -48,7 +48,7 @@ public class KeycloakAuthService : IKeycloakAuthService
         var content = await res.Content.ReadAsStringAsync(ct);
         if (!res.IsSuccessStatusCode)
         {
-            throw new ApiException($"{res.RequestMessage?.Method} {tokenEndpoint} failed",
+            throw new ApiException($"{res.RequestMessage?.Method} {tokenEndpoint} failed" + content,
                 (int)res.StatusCode,
                 content);
         }

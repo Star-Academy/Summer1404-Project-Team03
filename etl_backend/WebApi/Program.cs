@@ -6,6 +6,7 @@ using Infrastructure.Configurations;
 using Infrastructure.DbConfig;
 using Microsoft.EntityFrameworkCore;
 using WebApi;
+using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,9 +19,9 @@ builder.Services.AddFastEndpoints()
     });
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
 
-// ✅ Add services: Application → Infrastructure → Web
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
@@ -64,7 +65,8 @@ using (var scope = app.Services.CreateScope())
 
 
 app.UseFastEndpoints().UseSwaggerGen();
-
+app.UseAuthentication();   
+app.UseAuthorization();
 app.UseSwagger();
 app.UseSwaggerUI();
 
