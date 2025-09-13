@@ -1,4 +1,5 @@
 using Application.Users.Queries;
+using Application.ValueObjects;
 using FastEndpoints;
 using MediatR;
 
@@ -37,7 +38,7 @@ public class GetUserEndpoint : EndpointWithoutRequest<GetUserResponse>
             Email = result.Email,
             FirstName = result.FirstName,
             LastName = result.LastName,
-            Roles = result.Roles.Select(r => r.Name).ToList()
+            Roles = (List<RoleDto>)result.Roles,
         };
     }
 }

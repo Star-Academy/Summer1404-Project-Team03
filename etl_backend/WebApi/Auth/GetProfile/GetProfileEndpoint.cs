@@ -1,4 +1,5 @@
 using Application.Services.Abstractions;
+using Application.ValueObjects;
 using FastEndpoints;
 
 namespace WebApi.Auth.GetProfile;
@@ -31,15 +32,15 @@ public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
             await SendUnauthorizedAsync(ct);
             return;
         }
-        var UserDto = _userManagementService.GetUserByIdAsync(_currentUser.UserId, ct); 
+        var UserDto = await _userManagementService.GetUserByIdAsync(_currentUser.UserId, ct); 
         Response = new GetProfileResponse
         {
             Id = _currentUser.UserId ?? "unknown",
             Name = _currentUser.UserName ?? "Unknown User",
-            Roles = _currentUser.Roles.ToList(),
-            FirstName = UserDto.Result.FirstName?.Trim() ?? string.Empty,
-            LastName = UserDto.Result.LastName?.Trim() ?? string.Empty, 
-            Email = UserDto.Result.Email
+            Roles = (List<RoleDto>)UserDto.Roles,
+            FirstName = UserDto.FirstName?.Trim() ?? string.Empty,
+            LastName = UserDto.LastName?.Trim() ?? string.Empty, 
+            Email = UserDto.Email
         };
     }
 }
