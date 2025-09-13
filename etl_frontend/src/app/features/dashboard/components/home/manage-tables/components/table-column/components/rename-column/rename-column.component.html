@@ -9,8 +9,8 @@
     <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="modal__form">
       <div class="modal__inputs">
         <div class="modal__input">
-          <input pInputText formControlName="columnName" [ngClass]="{ 'p-invalid': isInvalid('columnName') }" fluid />
-          @if (isInvalid('columnName')) {
+          <input pInputText formControlName="name" [ngClass]="{ 'p-invalid': isInvalid('name') }" fluid />
+          @if (isInvalid('name')) {
             <p-message severity="error" size="small" variant="simple">
               Name is required
             </p-message>

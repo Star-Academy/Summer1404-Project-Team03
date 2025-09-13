@@ -1,7 +1,5 @@
-import { Routes } from "@angular/router";
-import { ManageTablesComponent } from "./manage-tables.component";
-import { TableColumnComponent } from "./components/table-column/table-column.component";
-
+import {Routes} from "@angular/router";
+import {ManageTablesComponent} from "./manage-tables.component";
 
 
 export const manageTablesRoutes: Routes = [

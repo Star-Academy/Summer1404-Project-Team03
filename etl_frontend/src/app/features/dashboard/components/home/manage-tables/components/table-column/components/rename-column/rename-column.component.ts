@@ -1,52 +1,53 @@
-import { Component, input, OnInit, output, WritableSignal } from '@angular/core';
+import { Component, input, OnInit, output, signal, WritableSignal } from '@angular/core';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TableColumnService } from '../../services/table-column.service';
-import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule, NgClass } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog'
+import { TableColumnStoreService } from '../../stores/table-column-store.service';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-rename-column',
-  imports: [CommonModule, MessageModule, ButtonModule, DialogModule, ReactiveFormsModule],
+  imports: [CommonModule, MessageModule, ButtonModule, DialogModule, ReactiveFormsModule, NgClass, InputTextModule],
   templateUrl: './rename-column.component.html',
   styleUrl: './rename-column.component.scss'
 })
 
 export class RenameColumnComponent implements OnInit {
   public visible = input.required<boolean>();
-  public columnName = input.required<string>();
-  public columnId = input.required<string>();
+  public name = input.required<string>();
+  public columnId = input.required<number>();
   public close = output<void>();
-  private schemaId!: WritableSignal<string> ;
+  private schemaId= signal<number>(0);
 
   public exampleForm!: FormGroup;
   public formSubmitted = false;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly route: ActivatedRoute,
+    private readonly activatRoute: ActivatedRoute,
+    private readonly router: Router,
     private readonly columnService: TableColumnService,
+    private readonly columnStore: TableColumnStoreService,
     private readonly messageService: MessageService
-  ) {
-    this.exampleForm = this.fb.group({
-      name: [this.columnName(), Validators.required],
-    });
-  }
+  ) {}
 
   public onSubmit() {
     this.formSubmitted = true;
     if (!this.exampleForm.invalid) {
       this.exampleForm.markAllAsTouched();
 
-      this.columnService.renameTableColumn(+this.schemaId(), +this.columnId(), this.exampleForm.value ).subscribe({
+      this.columnService.renameTableColumn(this.schemaId(), this.columnId(), {newName: this.exampleForm.value.name} ).subscribe({
         next: () => {
           this.messageService.add({
             severity: 'success',
             summary: 'Column name updated successfully',
           });
+          this.columnStore.loadColumn(this.schemaId())
           this.onClose();
         }
       });
@@ -64,6 +65,15 @@ export class RenameColumnComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.schemaId.set(this.route.snapshot.paramMap.get('table-id')!)
+    this.exampleForm = this.fb.group({
+      name: [this.name(), Validators.required],
+    });
+    this.activatRoute.params.subscribe((params) => {
+      const tableId = params['table-id'];
+      if (tableId) {
+        this.schemaId.set(tableId);
+      }
+      else this.router.navigateByUrl('/dashboard/tables/list');
+    });
   }
 }

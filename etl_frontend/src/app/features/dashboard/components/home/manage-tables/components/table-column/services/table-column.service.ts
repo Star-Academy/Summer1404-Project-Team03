@@ -9,8 +9,8 @@ export class TableColumnService {
   private readonly columnApi = environment.api.columns;
   constructor(private readonly http: HttpClient) { }
 
-  public getTableColumns(schemaId: number): Observable<ColumnType[]> {
-    return this.http.get<ColumnType[]>(this.columnApi.list(schemaId));
+  public getTableColumns(schemaId: number): Observable<{ items: ColumnType[] }> {
+    return this.http.get<{ items: ColumnType[] }>(this.columnApi.list(schemaId));
   }
 
   public deleteTableColumn(schemaId: number, columnIds: number[]) {
@@ -19,7 +19,7 @@ export class TableColumnService {
     });
   }
 
-  public renameTableColumn(schemaId: number, columnId: number, newName: string) {
+  public renameTableColumn(schemaId: number, columnId: number, newName: object) {
     return this.http.post(this.columnApi.rename(schemaId, columnId), newName);
   }
 }

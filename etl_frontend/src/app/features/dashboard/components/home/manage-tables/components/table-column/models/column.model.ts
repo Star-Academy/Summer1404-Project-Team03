@@ -1,4 +1,4 @@
-export type ColumnType =  {
+export type ColumnType = {
   id: number;
   ordinalPosition: number;
   name: string;

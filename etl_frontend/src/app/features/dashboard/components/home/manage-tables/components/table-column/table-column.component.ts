@@ -1,15 +1,15 @@
-import {Component, computed, OnInit, signal, WritableSignal} from '@angular/core';
+import {Component, computed, effect, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TableColumnStoreService} from './stores/table-column-store.service';
 import {TableColumnService} from './services/table-column.service';
 import {MessageService} from 'primeng/api';
 import {RenameColumnComponent} from './components/rename-column/rename-column.component';
-import { TooltipModule } from 'primeng/tooltip';
-import { TableModule } from 'primeng/table';
-import { CardModule } from 'primeng/card';
-import { CommonModule } from '@angular/common';
-import { ButtonModule } from 'primeng/button';
-import { MessageModule } from 'primeng/message';
+import {TooltipModule} from 'primeng/tooltip';
+import {TableModule} from 'primeng/table';
+import {CardModule} from 'primeng/card';
+import {CommonModule} from '@angular/common';
+import {ButtonModule} from 'primeng/button';
+import {MessageModule} from 'primeng/message';
 
 @Component({
   selector: 'app-table-schema',
@@ -23,16 +23,16 @@ import { MessageModule } from 'primeng/message';
     MessageModule
   ],
   templateUrl: './table-column.component.html',
-  styleUrls: ['./table-column.component.scss'],
+  styleUrl: './table-column.component.scss',
   providers: [TableColumnStoreService, TableColumnService]
 })
 
 export class TableColumnComponent implements OnInit {
-  private tableId!: WritableSignal<string>;
+  private tableId = signal<string>('');
   public readonly columns = computed(() => this.columnStore.vm().columns);
   public readonly isLoading = computed(() => this.columnStore.vm().isLoading);
-  public readonly columnId!: WritableSignal<string>;
-  public readonly columnName!: WritableSignal<string>;
+  public readonly columnId = signal<number>(0);
+  public readonly columnName = signal<string>('');
   public isRenameColumnModal = signal<boolean>(false);
 
   constructor(
@@ -41,10 +41,9 @@ export class TableColumnComponent implements OnInit {
     private readonly messageService: MessageService,
     private readonly activatRoute: ActivatedRoute,
     private readonly router: Router
-  ) {
-  }
+  ) {}
 
-  public setColumnId(name: string, id: string) {
+  public setColumnId(name: string, id: number) {
     this.columnName.set(name);
     this.columnId.set(id);
     this.changeRenameColumnModalStatus();
@@ -71,9 +70,8 @@ export class TableColumnComponent implements OnInit {
       const tableId = params['table-id'];
       if (tableId) {
         this.tableId.set(tableId);
-        this.columnStore.loadColumn(tableId)
-      }
-      // else this.router.navigateByUrl('/dashboard/tables/list');
+        this.columnStore.loadColumn(+tableId)
+      } else this.router.navigateByUrl('/dashboard/tables/list');
     });
   }
 }

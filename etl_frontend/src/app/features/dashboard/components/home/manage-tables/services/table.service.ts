@@ -19,7 +19,7 @@ export class TableService {
     return this.http.delete(this.tableApi.delete(schemaId));
   }
 
-  public renameTable(schemaId: number, newTableName: string) {
+  public renameTable(schemaId: number, newTableName: object) {
     return this.http.post(this.tableApi.rename(schemaId), newTableName);
   }
 
