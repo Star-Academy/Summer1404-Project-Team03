@@ -6,10 +6,12 @@ namespace WebApi.Auth.GetProfile;
 public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
 {
     private readonly ICurrentUserService _currentUser;
+    private readonly IUserManagementService _userManagementService;
 
-    public GetProfileEndpoint(ICurrentUserService currentUser)
+    public GetProfileEndpoint(ICurrentUserService currentUser, IUserManagementService userManagementService)
     {
         _currentUser = currentUser;
+        _userManagementService = userManagementService;
     }
 
     public override void Configure()
@@ -29,12 +31,15 @@ public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
             await SendUnauthorizedAsync(ct);
             return;
         }
-
+        var UserDto = _userManagementService.GetUserByIdAsync(_currentUser.UserId, ct); 
         Response = new GetProfileResponse
         {
             Id = _currentUser.UserId ?? "unknown",
             Name = _currentUser.UserName ?? "Unknown User",
-            Roles = _currentUser.Roles.ToList()
+            Roles = _currentUser.Roles.ToList(),
+            FirstName = UserDto.Result.FirstName?.Trim() ?? string.Empty,
+            LastName = UserDto.Result.LastName?.Trim() ?? string.Empty, 
+            Email = UserDto.Result.Email
         };
     }
 }

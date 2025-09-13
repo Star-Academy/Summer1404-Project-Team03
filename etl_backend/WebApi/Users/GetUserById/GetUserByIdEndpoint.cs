@@ -15,7 +15,7 @@ public class GetUserEndpoint : EndpointWithoutRequest<GetUserResponse>
 
     public override void Configure()
     {
-        Get("api/users/{UserId}");
+        Get("api/admin/users/{userId}");
         Summary(s =>
         {
             s.Summary = "Get user by ID";
@@ -26,7 +26,8 @@ public class GetUserEndpoint : EndpointWithoutRequest<GetUserResponse>
 
     public override async Task HandleAsync(CancellationToken ct)
     {
-        var userId = Route<string>("UserId");
+        var userId = Route<string>("userId");
+        Console.WriteLine(userId);
         var result = await _mediator.Send(new GetUserByIdQuery(userId), ct);
 
         Response = new GetUserResponse

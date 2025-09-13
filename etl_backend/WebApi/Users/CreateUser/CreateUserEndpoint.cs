@@ -15,7 +15,7 @@ public class CreateUserEndpoint : Endpoint<CreateUserRequest, CreateUserResponse
 
     public override void Configure()
     {
-        Post("api/users");
+        Post("api/admin/users");
         Summary(s =>
         {
             s.Summary = "Create a new user";

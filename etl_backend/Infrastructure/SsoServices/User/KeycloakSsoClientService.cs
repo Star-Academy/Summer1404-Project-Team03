@@ -48,7 +48,7 @@ public class KeycloakSsoClient : ISsoClient
         {
             var errorContent = await response.Content.ReadAsStringAsync();
             throw new ApiException(
-                $"{response.RequestMessage?.Method} {endpoint} failed",
+                $"{response.RequestMessage?.Method} {endpoint} failed"+ errorContent,
                 (int)response.StatusCode,
                 errorContent
             );

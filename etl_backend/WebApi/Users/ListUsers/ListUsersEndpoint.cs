@@ -15,8 +15,7 @@ public class ListUsersEndpoint : EndpointWithoutRequest<ListUsersResponse>
 
     public override void Configure()
     {
-        Get("api/users");
-        // ✅ Pipeline enforces sys_admin role via [RequireRole]
+        Get("api/admin/users");
         Summary(s =>
         {
             s.Summary = "List all users";
