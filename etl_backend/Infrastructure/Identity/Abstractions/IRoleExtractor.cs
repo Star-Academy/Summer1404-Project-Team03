@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using Application.ValueObjects;
+using Application.Dtos;
 using Infrastructure.Dtos;
 
 namespace Infrastructure.Identity.Abstractions;

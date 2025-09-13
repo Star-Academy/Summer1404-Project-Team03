@@ -1,7 +1,6 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
-using Application.Repositories;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Application.Tables.Commands;
 using MediatR;
 
@@ -59,7 +58,7 @@ public class RenameColumnCommandHandler : IRequestHandler<RenameColumnCommand>
             {
                 await _physicalColumnRepo.RenameColumnAsync("public", schema.TableName, sanitized, oldName, ct);
             }
-            catch { /* ignored */ }
+            catch { }
             throw;
         }
     }

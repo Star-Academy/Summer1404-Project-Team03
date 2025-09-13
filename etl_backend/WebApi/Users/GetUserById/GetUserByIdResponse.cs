@@ -1,4 +1,4 @@
-using Application.ValueObjects;
+using Application.Dtos;
 
 namespace WebApi.Users.GetUserById;
 

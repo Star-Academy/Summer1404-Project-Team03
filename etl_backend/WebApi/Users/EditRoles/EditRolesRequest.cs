@@ -1,5 +1,5 @@
 using System.Text.Json.Serialization;
-using Application.ValueObjects;
+using Application.Dtos;
 using FastEndpoints;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 

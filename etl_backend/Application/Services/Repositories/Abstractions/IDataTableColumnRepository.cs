@@ -1,6 +1,6 @@
 using Domain.Entities;
 
-namespace Application.Repositories.Abstractions;
+namespace Application.Services.Repositories.Abstractions;
 
 public interface IDataTableColumnRepository
 {

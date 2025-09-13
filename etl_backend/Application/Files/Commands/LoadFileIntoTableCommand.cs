@@ -1,4 +1,6 @@
 using Application.Common.Authorization;
+using Application.Dtos;
+using Application.Enums;
 using MediatR;
 
 namespace Application.Files.Commands;
@@ -9,13 +11,4 @@ public record LoadFileIntoTableCommand(
     bool DropOnFailure = false
 ) : IRequest<LoadResult>;
 
-public record LoadResult(
-    long RowsInserted,
-    double ElapsedMs
-);
-public enum LoadMode
-{
-    FailIfExists,
-    Replace,
-    Append
-}
+

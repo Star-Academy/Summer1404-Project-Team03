@@ -1,4 +1,4 @@
-using Application.Files.Commands;
+using Application.Enums;
 using Infrastructure.Files.Dtos;
 
 namespace Infrastructure.Files.Abstractions;

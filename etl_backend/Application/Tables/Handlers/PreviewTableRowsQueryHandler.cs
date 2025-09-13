@@ -1,7 +1,7 @@
 using Application.Common.Exceptions;
-using Application.Repositories.Abstractions;
+using Application.Dtos;
+using Application.Services.Repositories.Abstractions;
 using Application.Tables.Queries;
-using Application.ValueObjects;
 using MediatR;
 
 namespace Application.Tables.Handlers;
@@ -28,7 +28,6 @@ public class PreviewTableRowsQueryHandler : IRequestHandler<PreviewTableRowsQuer
         if (!exists)
             throw new ConflictException("Physical table does not exist.");
 
-        // Clamp limits
         var limit = Math.Clamp(request.Limit, 1, 200);
         var offset = Math.Max(request.Offset, 0);
 

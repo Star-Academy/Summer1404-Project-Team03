@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Application.ValueObjects;
+namespace Application.Dtos;
 
 public class BaseUserDto
 {

@@ -1,7 +1,7 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Files.Commands;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Domain.Enums;
 using MediatR;
 

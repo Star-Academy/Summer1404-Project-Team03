@@ -1,7 +1,7 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Files.Queries;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Domain.Entities;
 using Domain.Enums;
 using MediatR;
@@ -13,13 +13,13 @@ public class PreviewSchemaQueryHandler : IRequestHandler<PreviewSchemaQuery, Col
     private readonly IStagedFileRepository _stagedRepo;
     private readonly IHeaderProvider _headerProvider;
     private readonly IColumnDefinitionBuilder _columnDefinitionBuilder;
-    private readonly IDataTableSchemaRepository _schemaRepo; // ✅ Added
+    private readonly IDataTableSchemaRepository _schemaRepo; 
 
     public PreviewSchemaQueryHandler(
         IStagedFileRepository stagedRepo,
         IHeaderProvider headerProvider,
         IColumnDefinitionBuilder columnDefinitionBuilder,
-        IDataTableSchemaRepository schemaRepo) // ✅ Injected
+        IDataTableSchemaRepository schemaRepo) 
     {
         _stagedRepo = stagedRepo;
         _headerProvider = headerProvider;
@@ -36,7 +36,6 @@ public class PreviewSchemaQueryHandler : IRequestHandler<PreviewSchemaQuery, Col
         if (staged.Status == ProcessingStatus.Failed)
             throw new ConflictException("Staged file is in failed state.");
 
-        // ✅ Try to fetch existing schema
         DataTableSchema? existingSchema = null;
         if (staged.SchemaId.HasValue)
         {

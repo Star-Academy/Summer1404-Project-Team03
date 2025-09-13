@@ -1,4 +1,4 @@
-using Domain.AccessControl.Ports;
+using Domain.Entities;
 
 namespace Infrastructure.Configurations;
 

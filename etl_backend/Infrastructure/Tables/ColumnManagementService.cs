@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 using Application.Abstractions;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Domain.Entities;
 using etl_backend.Application.DataFile.Abstraction;
 using Infrastructure.Configurations;

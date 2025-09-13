@@ -1,5 +1,5 @@
 using Application.Abstractions;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Domain.Entities;
 using Domain.Enums;
 using Infrastructure.Files.Abstractions;

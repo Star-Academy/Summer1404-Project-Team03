@@ -1,7 +1,8 @@
 using Application.Abstractions;
+using Application.Dtos;
+using Application.Enums;
 using Application.Files.Commands;
-using Application.Files.Services;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using MediatR;
 
 namespace Infrastructure.Files;

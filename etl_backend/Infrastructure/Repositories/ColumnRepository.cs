@@ -1,4 +1,4 @@
-using Application.Repositories;
+using Application.Services.Repositories.Abstractions;
 using etl_backend.Application.DataFile.Abstraction;
 using Infrastructure.Files.Abstractions;
 using Npgsql;

@@ -1,4 +1,4 @@
-namespace Domain.AccessControl.Ports;
+namespace Domain.Entities;
 
 public interface IClock
 {

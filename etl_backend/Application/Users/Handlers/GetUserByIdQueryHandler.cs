@@ -1,8 +1,8 @@
 using Application.Common.Authorization;
 using Application.Common.Exceptions;
+using Application.Dtos;
 using Application.Services.Abstractions;
 using Application.Users.Queries;
-using Application.ValueObjects;
 using MediatR;
 
 namespace Application.Users.Handlers;

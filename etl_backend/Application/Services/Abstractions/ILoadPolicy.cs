@@ -1,6 +1,6 @@
-using Application.Files.Commands;
+using Application.Enums;
 
-namespace Application.Abstractions;
+namespace Application.Services.Abstractions;
 
 public interface ILoadPolicy
 {

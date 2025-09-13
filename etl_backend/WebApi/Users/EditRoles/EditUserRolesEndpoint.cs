@@ -1,5 +1,5 @@
+using Application.Dtos;
 using Application.Users.Commands;
-using Application.ValueObjects;
 using FastEndpoints;
 using Infrastructure.Dtos;
 using MediatR;

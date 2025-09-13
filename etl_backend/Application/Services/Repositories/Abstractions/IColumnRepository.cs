@@ -1,4 +1,4 @@
-namespace Application.Repositories;
+namespace Application.Services.Repositories.Abstractions;
 
 public interface IColumnRepository
 {

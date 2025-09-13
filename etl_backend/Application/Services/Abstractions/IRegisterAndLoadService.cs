@@ -1,5 +1,6 @@
+using Application.Dtos;
+using Application.Enums;
 using Application.Files.Commands;
-using Application.Files.Services;
 
 namespace Application.Abstractions;
 public interface IRegisterAndLoadService

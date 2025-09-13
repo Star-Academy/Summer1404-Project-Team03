@@ -1,6 +1,6 @@
 using Application.Files.Commands;
 
-namespace Application.Files.Services;
+namespace Application.Dtos;
 
 public record RegisterAndLoadResult(
     int SchemaId,

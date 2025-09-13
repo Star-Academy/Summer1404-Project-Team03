@@ -1,3 +1,4 @@
+using Application.Enums;
 using Application.Files.Commands;
 using FastEndpoints;
 using FluentValidation;
@@ -11,10 +12,6 @@ public class RegisterAndLoadValidator : Validator<RegisterAndLoadRequest>
         RuleFor(x => x.Id)
             .GreaterThan(0)
             .WithMessage("Staged file ID must be greater than 0.");
-
-        // RuleFor(x => x.Columns)
-        //     .NotEmpty()
-        //     .WithMessage("At least one column is required.");
 
         RuleForEach(x => x.Columns)
             .Must(c => c.OrdinalPosition >= 0)

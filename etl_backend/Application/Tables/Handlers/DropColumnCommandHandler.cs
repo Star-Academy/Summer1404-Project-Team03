@@ -1,6 +1,5 @@
 using Application.Common.Exceptions;
-using Application.Repositories;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Application.Tables.Commands;
 using MediatR;
 

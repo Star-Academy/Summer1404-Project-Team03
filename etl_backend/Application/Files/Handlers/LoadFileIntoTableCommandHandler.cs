@@ -1,5 +1,6 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
+using Application.Dtos;
 using Application.Files.Commands;
 using MediatR;
 

@@ -1,5 +1,5 @@
+using Application.Dtos;
 using Application.Services.Abstractions;
-using Application.ValueObjects;
 using FastEndpoints;
 
 namespace WebApi.Auth.GetProfile;

@@ -1,5 +1,5 @@
 using Application.Common.Authorization;
-using Application.ValueObjects;
+using Application.Dtos;
 using MediatR;
 
 namespace Application.Tables.Queries;

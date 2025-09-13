@@ -1,7 +1,7 @@
-using Application.ValueObjects;
+using Application.Dtos;
 using Domain.Entities;
 
-namespace Application.Repositories.Abstractions;
+namespace Application.Services.Repositories.Abstractions;
 
 public interface ITableRepository
 {

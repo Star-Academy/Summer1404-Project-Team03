@@ -1,4 +1,4 @@
-namespace Application.ValueObjects;
+namespace Application.Dtos;
 
 public sealed class TableDetailsDto
 {

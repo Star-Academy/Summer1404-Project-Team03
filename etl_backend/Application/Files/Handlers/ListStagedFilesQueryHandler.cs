@@ -1,5 +1,5 @@
 using Application.Files.Queries;
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using MediatR;
 
 namespace Application.Files.Handlers;

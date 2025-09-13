@@ -1,4 +1,4 @@
-using Application.ValueObjects;
+using Application.Dtos;
 using Infrastructure.Dtos;
 
 namespace Infrastructure.SsoServices.Admin.Abstractions;

@@ -1,4 +1,4 @@
-using Application.Repositories.Abstractions;
+using Application.Services.Repositories.Abstractions;
 using Domain.Entities;
 using Infrastructure.DbConfig.Abstraction;
 using Microsoft.EntityFrameworkCore;
