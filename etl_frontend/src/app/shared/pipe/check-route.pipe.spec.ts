@@ -1,7 +1,7 @@
 import { CheckRoutePipe } from './check-route.pipe';
 import { Router } from '@angular/router';
 
-fdescribe('CheckRoutePipe', () => {
+describe('CheckRoutePipe', () => {
   let currentUrl: string;
   let mockRouter: Partial<Router>;
   let pipe: CheckRoutePipe;
