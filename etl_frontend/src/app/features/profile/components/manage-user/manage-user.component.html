@@ -8,6 +8,7 @@
   [visible]="isEditUserModal()"
   (close)="changeEditUserModalStatus()"
   [userInfo]="selectedUserToEdit()"
+  (userUpdated)="onRefetchUsers()"
 />
 } @if (isDeleteUserDialog() && selectedUserToDelete()) {
 <app-delete-user-dialog

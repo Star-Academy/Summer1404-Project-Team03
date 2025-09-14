@@ -45,4 +45,8 @@ export class ManageUserComponent {
       this.selectedUserToDelete.set('');
     }
   }
+
+  public onRefetchUsers(): void {
+    this.usersListStore.getUsers();
+  }
 }

@@ -10,7 +10,9 @@ export interface User extends baseUser {
     roles: string[];
 }
 
-export interface UserState extends baseState, User { }
+export interface UserState extends baseState {
+    user: User;
+}
 
 export interface NewUser extends baseUser {
     password: string;
@@ -38,4 +40,8 @@ export interface EditUser {
     email: string;
     firstName: string;
     lastName: string;
+}
+
+export interface EditUserResponse extends User {
+
 }
