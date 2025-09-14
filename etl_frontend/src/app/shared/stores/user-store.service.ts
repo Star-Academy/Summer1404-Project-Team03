@@ -17,7 +17,7 @@ const initialUser = {
     id: '',
     lastName: '',
     roles: [],
-    username: '',
+    name: '',
   },
   isLoading: false,
   isSysAdmin: false,

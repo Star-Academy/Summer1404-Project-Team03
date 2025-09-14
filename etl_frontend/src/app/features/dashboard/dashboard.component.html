@@ -19,7 +19,7 @@
       }
       @if (user(); as currentUser) {
       <app-profile-popover
-        [username]="currentUser.username"
+        [username]="currentUser.name"
         [isLoading]="isLoading()"
       />
       }
