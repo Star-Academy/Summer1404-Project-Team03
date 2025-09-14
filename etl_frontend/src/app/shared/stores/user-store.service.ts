@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ComponentStore} from "@ngrx/component-store";
 import {finalize, tap} from 'rxjs';
 import {UsersService} from "../services/user/users.service"
-import {UserInfo} from '../types/UserType';
+import { UserInfo } from '../models/user.model';
 
 type UserStore = {
   user: UserInfo;

@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Directive, effect, Host, HostListener, signal } from '@angular/core';
-import {UsersService } from '../../services/user/users.service';
+import { ChangeDetectorRef, Directive, effect, Host, HostListener, signal } from '@angular/core';
+import { UsersService } from '../../services/user/users.service';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { take } from 'rxjs';
@@ -28,8 +28,8 @@ export class ChangePasswordDirective {
 
     this.isLoading.set(true);
 
-    this.usersService.changePassword().pipe(take(1)).subscribe({
-      next: ({changePasswordUrl}) => {
+    this.usersService.getChangePasswordUrl().pipe(take(1)).subscribe({
+      next: ({ changePasswordUrl }) => {
         this.isLoading.set(false);
         this.redirect(changePasswordUrl);
       },

@@ -14,7 +14,6 @@ export const environment = {
 
     // ===================== USERS / PROFILE =====================
     users: {
-      me: `${baseUrl}/users/me`, // GET, PUT
       password: `${baseUrl}/password/change-password-url`, // GET
     },
 

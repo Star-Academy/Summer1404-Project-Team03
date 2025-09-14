@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Directive, effect, Host, HostListener, signal } from '@angular/core';
+import { ChangeDetectorRef, Directive, effect, Host, HostListener, signal } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
@@ -30,9 +30,9 @@ export class SignInDirective {
     this.isLoading.set(true);
 
     this.authService.getSignInUrl().pipe(take(1)).subscribe({
-      next: ({ signInUrl }) => {
+      next: ({ redirectUrl }) => {
         this.isLoading.set(false);
-        this.redirect(signInUrl);
+        this.redirect(redirectUrl);
       },
       error: () => {
         this.isLoading.set(false);

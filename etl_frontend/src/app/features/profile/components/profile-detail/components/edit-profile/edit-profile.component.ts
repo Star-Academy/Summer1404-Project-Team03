@@ -7,9 +7,9 @@ import { UserStoreService } from '../../../../../../shared/stores/user-store.ser
 import { UsersService } from '../../../../../../shared/services/user/users.service';
 import { MessageService } from 'primeng/api';
 import { InputTextModule } from 'primeng/inputtext';
-import { UserUpdate } from '../../../../../../shared/types/UserType';
 import { MessageModule } from 'primeng/message';
 import { NgClass } from '@angular/common';
+import { updateUserInfoBody } from '../../../../../../shared/models/user.model';
 
 @Component({
   selector: 'app-edit-profile',
@@ -45,7 +45,7 @@ export class EditProfileComponent {
     if (!this.exampleForm.invalid) {
       console.log(this.exampleForm.value)
       this.exampleForm.markAllAsTouched();
-      const newUserInfo: UserUpdate = this.exampleForm.value;
+      const newUserInfo: updateUserInfoBody = this.exampleForm.value;
 
       this.userService.updateUserInformation(newUserInfo).subscribe({
         next: () => {

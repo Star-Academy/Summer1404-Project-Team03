@@ -14,7 +14,7 @@ export class UsersService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public getChnagePasswordUrl(): Observable<ChangePasswordResponse> {
+  public getChangePasswordUrl(): Observable<ChangePasswordResponse> {
     return this.http.get<ChangePasswordResponse>(this.usersApi.password);
   }
 
@@ -23,6 +23,6 @@ export class UsersService {
   }
 
   public updateUserInformation(newUserInfo: updateUserInfoBody): Observable<updateUserInfoResponse> {
-    return this.http.put<updateUserInfoResponse>(this.usersApi.me, newUserInfo);
+    return this.http.put<updateUserInfoResponse>(this.usersAuthApi.me, newUserInfo);
   }
 }
