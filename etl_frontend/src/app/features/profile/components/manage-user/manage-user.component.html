@@ -2,6 +2,7 @@
 <app-create-user-modal
   [visible]="isCreateUserModal()"
   (close)="changeCreateUserModalStatus()"
+  (userCreated)="onRefetchUsers()"
 />
 } @if (isEditUserModal()) {
 <app-edit-user-modal

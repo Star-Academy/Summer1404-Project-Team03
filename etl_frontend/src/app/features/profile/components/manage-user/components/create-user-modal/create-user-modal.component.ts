@@ -19,6 +19,7 @@ import { NgIf } from '@angular/common';
 export class CreateUserModalComponent implements OnInit {
   public visible = input.required<boolean>();
   public close = output<void>();
+  public userCreated = output<void>();
   public readonly vm;
   userForm!: FormGroup;
 
@@ -62,6 +63,7 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   onSuccessCreation(): void {
+    this.userCreated.emit();
     this.close.emit()
   }
 }
