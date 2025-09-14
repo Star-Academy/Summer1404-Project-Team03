@@ -11,5 +11,4 @@ export class CheckRoutePipe implements PipeTransform {
   transform(expectedRoute: string): boolean {
     return this.router.url === expectedRoute;
   }
-
 }

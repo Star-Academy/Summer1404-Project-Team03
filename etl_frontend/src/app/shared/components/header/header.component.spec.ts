@@ -20,4 +20,10 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render p-toolbar', () => {
+    const compiled: HTMLElement = fixture.nativeElement;
+    const toolbar = compiled.querySelector('p-toolbar');
+    expect(toolbar).toBeTruthy();
+  });
 });
