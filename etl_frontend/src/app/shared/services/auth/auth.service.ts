@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Observable } from 'rxjs';
-
-export type SignInResponse = {
-  redirectUrl: string;
-}
-
-export type TokenResponse = {
-  redirectUrl: string;
-}
+import { SendTokenCodeBody, SendTokenCodeResponse, SignInResponse } from '../../models/auth.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +11,7 @@ export class AuthService {
   private readonly authApi = environment.api.auth;
   private readonly redirectUrl = environment.redirectUrl;
 
-  constructor(private readonly http: HttpClient) {}
+  constructor(private readonly http: HttpClient) { }
 
   public getSignInUrl(): Observable<SignInResponse> {
     return this.http.post<SignInResponse>(this.authApi.signIn, {
@@ -26,11 +19,9 @@ export class AuthService {
     });
   }
 
-  exchangeToken(code: string): Observable<TokenResponse> {
-    return this.http.post<TokenResponse>(this.authApi.token, {
-      code,
-      redirectUrl: this.redirectUrl
-    });
+  sendTokenCode(code: string): Observable<SendTokenCodeResponse> {
+    const body: SendTokenCodeBody = { code: code, redirectUrl: this.redirectUrl }
+    return this.http.post<SendTokenCodeResponse>(this.authApi.token, body);
   }
 
   signOut() {
