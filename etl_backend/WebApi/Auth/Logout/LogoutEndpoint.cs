@@ -27,6 +27,7 @@ public class LogoutEndpoint : EndpointWithoutRequest
     public override void Configure()
     {
         Post("api/auth/logout");
+        AllowAnonymous();
         Summary(s =>
         {
             s.Summary = "Logout current user";
