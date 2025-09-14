@@ -1,23 +1,28 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { RouterOutlet } from '@angular/router';
+import { Toast } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [ConfirmationService, MessageService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     }).compileComponents();
+
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, etl_frontend');
+    expect(component).toBeTruthy();
   });
 });

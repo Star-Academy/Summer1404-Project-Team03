@@ -23,7 +23,7 @@ export class ChangePasswordDirective {
   }
 
   @HostListener('click')
-  handleClick(): void {
+  public handleClick(): void {
     if (this.isLoading()) return;
 
     this.isLoading.set(true);
