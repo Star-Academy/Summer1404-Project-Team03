@@ -39,7 +39,8 @@ export const environment = {
     tables: {
       list: `${baseUrl}/tables`, // GET
       details: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/details`, // GET
-      rows: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/rows`, // GET
+      rows: (schemaId: number, offset: number, limit: number) =>
+        `${baseUrl}/tables/${schemaId}/rows?offset${offset}$limit=${limit}`,
       count: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/count`, // GET
       rename: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/rename`, // POST
       delete: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}`, // DELETE

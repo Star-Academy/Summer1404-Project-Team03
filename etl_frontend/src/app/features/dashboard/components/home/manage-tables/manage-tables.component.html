@@ -46,7 +46,7 @@
                 [tooltipPosition]="'top'"
               ></p-button>
               <p-button
-                icon="pi pi-eye"
+                icon="pi pi-objects-column"
                 styleClass="p-button-rounded p-button-secondary p-button-text"
                 pTooltip="Show Columns"
                 [tooltipPosition]="'top'"
@@ -54,7 +54,21 @@
                 '/',
                 'dashboard',
                 'tables',
-                table.schemaId
+                table.schemaId,
+                'columns'
+              ]"
+              ></p-button>
+              <p-button
+                icon="pi pi-table"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                pTooltip="Show Rows"
+                [tooltipPosition]="'top'"
+                [routerLink]="[
+                '/',
+                'dashboard',
+                'tables',
+                table.schemaId,
+                'rows'
               ]"
               ></p-button>
             </td>
