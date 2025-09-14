@@ -1,4 +1,4 @@
-import {Component, computed, effect, OnInit, signal} from '@angular/core';
+import {Component, computed, OnInit, signal} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TableColumnStoreService} from './stores/table-column-store.service';
 import {TableColumnService} from './services/table-column.service';

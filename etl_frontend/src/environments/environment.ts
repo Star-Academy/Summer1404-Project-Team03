@@ -38,6 +38,13 @@ export const environment = {
         `${baseUrl}/tables/${schemaId}/columns/${columnId}/rename`, // POST
     },
 
+    // ===================== COLUMNS =====================
+    rows: {
+      list:  (schemaId: number, offset: number, limit: number) =>
+        `${baseUrl}/tables/${schemaId}/rows?offset${offset}$limit=${limit}`,
+    },
+
+
     // ===================== FILES =====================
     files: {
       root: `${baseUrl}/files`, // GET

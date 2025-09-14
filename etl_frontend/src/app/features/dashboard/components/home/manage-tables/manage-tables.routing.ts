@@ -13,8 +13,13 @@ export const manageTablesRoutes: Routes = [
     component: ManageTablesComponent,
   },
   {
-    path: ':table-id',
+    path: ':table-id/columns',
     loadComponent: () =>
       import('./components/table-column/table-column.component').then(c => c.TableColumnComponent)
+  },
+  {
+    path: ':table-id/rows',
+    loadComponent: () =>
+      import('./components/table-rows/table-rows.component').then(c => c.TableRowsComponent)
   }
 ]
