@@ -37,7 +37,7 @@ public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
         {
             Id = _currentUser.UserId ?? "unknown",
             Name = _currentUser.UserName ?? "Unknown User",
-            Roles = (List<RoleDto>)UserDto.Roles,
+            Roles = new List<RoleDto>(UserDto.Roles),
             FirstName = UserDto.FirstName?.Trim() ?? string.Empty,
             LastName = UserDto.LastName?.Trim() ?? string.Empty, 
             Email = UserDto.Email

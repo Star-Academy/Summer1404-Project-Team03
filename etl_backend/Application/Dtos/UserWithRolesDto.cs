@@ -4,7 +4,6 @@ namespace Application.Dtos;
 
 public class UserWithRolesDto: UserDto
 {
-    [JsonPropertyName("roles")]
     public IEnumerable<RoleDto> Roles { get; set; } = Enumerable.Empty<RoleDto>();
 
     public UserWithRolesDto() { }
@@ -18,4 +17,5 @@ public class UserWithRolesDto: UserDto
         LastName = user.LastName;
         Roles = roles;
     }
+    public UserDto ToUserDto() => this;
 }
