@@ -13,20 +13,19 @@ export type ChangePasswordResponse = {
 })
 
 export class UsersService {
-  private readonly usersApi = environment.api.users;
-  private readonly usersAuthApi = environment.api.auth;
+  private readonly authApi = environment.api.auth;
 
   constructor(private readonly http: HttpClient) {}
 
   public changePassword(): Observable<ChangePasswordResponse> {
-    return this.http.get<ChangePasswordResponse>(this.usersAuthApi.password);
+    return this.http.get<ChangePasswordResponse>(this.authApi.password);
   }
 
   public getUserInformation(): Observable<UserInfo> {
-    return this.http.get<UserInfo>(this.usersAuthApi.me);
+    return this.http.get<UserInfo>(this.authApi.me);
   }
 
   public updateUserInformation(newUserInfo: UserUpdate) {
-    return this.http.put<UserUpdate>(this.usersApi.me, newUserInfo);
+    return this.http.put<UserUpdate>(this.authApi.me, newUserInfo);
   }
 }

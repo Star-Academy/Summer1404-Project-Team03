@@ -4,7 +4,7 @@ export const environment = {
   production: false,
   redirectUrl: `http://localhost:4200/send-token-code`,
   api: {
-    // ===================== AUTH =====================
+    // ===================== AUTH / PROFILE =====================
     auth: {
       signIn: `${baseUrl}/auth/login`,
       token: `${baseUrl}/auth/token`,
@@ -13,10 +13,6 @@ export const environment = {
       password: `${baseUrl}/auth/change-password-url`, // GET
     },
 
-    // ===================== USERS / PROFILE =====================
-    users: {
-      me: `${baseUrl}/users/me`, // GET, PUT
-    },
 
     // ===================== ADMIN =====================
     admin: {
