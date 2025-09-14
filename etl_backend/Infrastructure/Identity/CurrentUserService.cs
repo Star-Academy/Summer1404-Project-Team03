@@ -20,7 +20,6 @@ public class CurrentUserService : ICurrentUserService
             var user = _httpContextAccessor.HttpContext?.User;
             if (user == null) return null;
 
-            // ✅ Match logic from KeycloakTokenProfileExtractor
             return user.FindFirst("id")?.Value
                    ?? user.FindFirst(c => c.Type.EndsWith("nameidentifier", StringComparison.OrdinalIgnoreCase))?.Value;
         }

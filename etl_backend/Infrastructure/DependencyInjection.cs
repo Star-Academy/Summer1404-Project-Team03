@@ -148,13 +148,6 @@ public static class DependencyInjection
         // --- Admin ---
         services.AddSingleton<IUserManagementService,  SsoServices.Admin.UserManagementService>();
         services.AddSingleton<ITokenProfileExtractor, KeycloakTokenProfileExtractor>();
-        // services.AddSingleton<IGetAllUsersService, GetAllUsersService>();
-        // services.AddSingleton<ICreateUserService, CreateUserService>();
-        // services.AddSingleton<IEditUserService, EditUserService>();
-        // services.AddSingleton<IDeleteUserService, DeleteUserService>();
-        // services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
-        // services.AddSingleton<IEditUserRolesService, EditUserRolesService>();
-        // services.AddSingleton<IGetRolesList, GetAllRolesService>();
 
         return services;
     }

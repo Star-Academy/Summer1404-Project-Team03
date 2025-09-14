@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Files\Services\" />
+      <Folder Include="Common\Services\Files\" />
     </ItemGroup>
 
 </Project>

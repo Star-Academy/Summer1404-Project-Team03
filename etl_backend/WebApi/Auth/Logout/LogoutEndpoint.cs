@@ -5,8 +5,6 @@ using Infrastructure.SsoServices.User.Abstractions;
 
 namespace WebApi.Auth.Logout;
 
-
-// public class LogoutEndpoint : EndpointWithoutRequest
 public class LogoutEndpoint : EndpointWithoutRequest
 {
     
