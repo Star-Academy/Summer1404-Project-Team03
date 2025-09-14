@@ -19,7 +19,7 @@ export class UsersService {
   constructor(private readonly http: HttpClient) {}
 
   public changePassword(): Observable<ChangePasswordResponse> {
-    return this.http.get<ChangePasswordResponse>(this.usersApi.password);
+    return this.http.get<ChangePasswordResponse>(this.usersAuthApi.password);
   }
 
   public getUserInformation(): Observable<UserInfo> {

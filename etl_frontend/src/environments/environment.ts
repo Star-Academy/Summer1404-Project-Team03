@@ -10,12 +10,12 @@ export const environment = {
       token: `${baseUrl}/auth/token`,
       signOut: `${baseUrl}/auth/logout`,
       me: `${baseUrl}/auth/me`,
+      password: `${baseUrl}/auth/change-password-url`, // GET
     },
 
     // ===================== USERS / PROFILE =====================
     users: {
       me: `${baseUrl}/users/me`, // GET, PUT
-      password: `${baseUrl}/password/change-password-url`, // GET
     },
 
     // ===================== ADMIN =====================

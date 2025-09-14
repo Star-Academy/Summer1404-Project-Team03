@@ -1,4 +1,4 @@
-import {Component, computed, effect} from '@angular/core';
+import {Component, computed} from '@angular/core';
 import {UserStoreService} from '../../shared/stores/user-store.service';
 
 @Component({
