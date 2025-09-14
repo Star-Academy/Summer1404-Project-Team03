@@ -2,12 +2,8 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs';
-import {UserInfo} from '../../types/UserType';
-import { UserUpdate } from '../../types/UserType';
+import { ChangePasswordResponse, updateUserInfoBody, updateUserInfoResponse, UserInfo } from '../../models/user.model';
 
-export type ChangePasswordResponse = {
-  changePasswordUrl: string;
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +13,7 @@ export class UsersService {
 
   constructor(private readonly http: HttpClient) {}
 
-  public changePassword(): Observable<ChangePasswordResponse> {
+  public getChnagePasswordUrl(): Observable<ChangePasswordResponse> {
     return this.http.get<ChangePasswordResponse>(this.authApi.password);
   }
 
@@ -25,7 +21,7 @@ export class UsersService {
     return this.http.get<UserInfo>(this.authApi.me);
   }
 
-  public updateUserInformation(newUserInfo: UserUpdate) {
-    return this.http.put<UserUpdate>(this.authApi.me, newUserInfo);
+  public updateUserInformation(newUserInfo: updateUserInfoBody): Observable<updateUserInfoResponse> {
+    return this.http.put<updateUserInfoResponse>(this.authApi.me, newUserInfo);
   }
 }
