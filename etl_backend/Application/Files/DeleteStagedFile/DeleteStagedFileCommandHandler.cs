@@ -1,6 +1,7 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Files.Commands;
+using Application.Files.DeleteStagedFile.ServiceAbstractions;
 using Application.Services.Repositories.Abstractions;
 using Domain.Enums;
 using MediatR;
@@ -10,11 +11,11 @@ namespace Application.Files.Handlers;
 public class DeleteStagedFileCommandHandler : IRequestHandler<DeleteStagedFileCommand>
 {
     private readonly IStagedFileRepository _stagedRepo;
-    private readonly IFileStagingService _fileStagingService;
+    private readonly IDeleteStagedFile _fileStagingService;
 
     public DeleteStagedFileCommandHandler(
         IStagedFileRepository stagedRepo,
-        IFileStagingService fileStagingService)
+        IDeleteStagedFile fileStagingService)
     {
         _stagedRepo = stagedRepo;
         _fileStagingService = fileStagingService;

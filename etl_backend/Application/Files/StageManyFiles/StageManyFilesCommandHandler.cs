@@ -1,16 +1,13 @@
-using Application.Abstractions;
+using Application.Common.Mappers;
 using Application.Files.Commands;
-using Domain.Entities;
-using Domain.Enums;
+using Application.Files.StageManyFiles.ServiceAbstractions;
 using MediatR;
 
-namespace Application.Files.Handlers;
-
+namespace Application.Files.StageManyFiles;
 public class StageManyFilesCommandHandler : IRequestHandler<StageManyFilesCommand, List<StageFileBatchItem>>
 {
-    private readonly IFileStagingService _staging;
-
-    public StageManyFilesCommandHandler(IFileStagingService staging)
+    private readonly IAddStageFileService _staging;
+    public StageManyFilesCommandHandler(IAddStageFileService staging)
     {
         _staging = staging;
     }
@@ -38,7 +35,7 @@ public class StageManyFilesCommandHandler : IRequestHandler<StageManyFilesComman
                 results.Add(new StageFileBatchItem(
                     FileName: file.FileName,
                     Success: true,
-                    Data: Map(staged)
+                    Data: StageFileMapper.Map(staged)
                 ));
             }
             catch (OperationCanceledException)
@@ -54,19 +51,6 @@ public class StageManyFilesCommandHandler : IRequestHandler<StageManyFilesComman
                 ));
             }
         }
-
         return results;
     }
-
-    private static StageFileResponse Map(StagedFile s) => new(
-        Id: s.Id,
-        OriginalFileName: s.OriginalFileName,
-        StoredFilePath: s.StoredFilePath,
-        FileSize: s.FileSize,
-        UploadedAt: s.UploadedAt,
-        Stage: s.Stage.ToString(),
-        Status: s.Status.ToString(),
-        ErrorCode: s.ErrorCode == ProcessingErrorCode.None ? null : s.ErrorCode.ToString(),
-        ErrorMessage: s.ErrorMessage
-    );
 }

@@ -1,4 +1,5 @@
 using Application.Abstractions;
+using Application.Tables.ListTables.ServiceAbstractions;
 using Application.Tables.Queries;
 using MediatR;
 
@@ -6,9 +7,9 @@ namespace Application.Tables.Handlers;
 
 public class ListTablesQueryHandler : IRequestHandler<ListTablesQuery, List<TableListItem>>
 {
-    private readonly ITableManagementService _svc;
+    private readonly ITablesListService _svc;
 
-    public ListTablesQueryHandler(ITableManagementService svc)
+    public ListTablesQueryHandler(ITablesListService svc)
     {
         _svc = svc;
     }

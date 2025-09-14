@@ -2,17 +2,21 @@ using Application.Common.Exceptions;
 using Application.Dtos;
 using Application.Services.Abstractions;
 using Application.Users.Commands;
+using Application.Users.EditUser.ServiceAbstractions;
+using Application.Users.GetUserById.ServiceAbstractions;
 using MediatR;
 
 namespace Application.Users.Handlers;
 
 public class EditUserCommandHandler : IRequestHandler<EditUserCommand, UserDto>
 {
-    private readonly IUserManagementService _userManagementService;
+    private readonly IAdminEditUserService _adminEditUserService;
+    private readonly IGetUserByIdService _getUserByIdService;
 
-    public EditUserCommandHandler(IUserManagementService userManagementService)
+    public EditUserCommandHandler(IAdminEditUserService adminEditUserService, IGetUserByIdService getUserByIdService)
     {
-        _userManagementService = userManagementService;
+        _adminEditUserService = adminEditUserService;
+        _getUserByIdService = getUserByIdService;
     }
 
     public async Task<UserDto> Handle(EditUserCommand request, CancellationToken ct)
@@ -21,7 +25,7 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand, UserDto>
             throw new UnprocessableEntityException("UserId is required.");
 
         // Optional: Validate user exists
-        var existingUser = await _userManagementService.GetUserByIdAsync(request.UserId, ct);
+        var existingUser = await _getUserByIdService.GetUserByIdAsync(request.UserId, ct);
         if (existingUser == null)
             throw new NotFoundException("User", request.UserId);
 
@@ -32,7 +36,7 @@ public class EditUserCommandHandler : IRequestHandler<EditUserCommand, UserDto>
             LastName = request.LastName
         };
 
-        var updatedUser = await _userManagementService.EditUserAsync(request.UserId, editRequest, ct);
+        var updatedUser = await _adminEditUserService.EditUserAsync(request.UserId, editRequest, ct);
         return updatedUser;
     }
 }

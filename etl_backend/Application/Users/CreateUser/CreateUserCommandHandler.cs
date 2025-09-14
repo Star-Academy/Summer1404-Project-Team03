@@ -2,17 +2,18 @@ using Application.Common.Exceptions;
 using Application.Dtos;
 using Application.Services.Abstractions;
 using Application.Users.Commands;
+using Application.Users.CreateUser.ServiceAbstractions;
 using MediatR;
 
 namespace Application.Users.Handlers;
 
 public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>
 {
-    private readonly IUserManagementService _userManagementService;
+    private readonly ICreateUser _createUser;
 
-    public CreateUserCommandHandler(IUserManagementService userManagementService)
+    public CreateUserCommandHandler(ICreateUser createUser)
     {
-        _userManagementService = userManagementService;
+        _createUser = createUser;
     }
 
     public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken ct)
@@ -29,7 +30,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
             Password = request.Password
         };
 
-        var createdUser = await _userManagementService.CreateUserAsync(newUser, ct);
+        var createdUser = await _createUser.CreateUserAsync(newUser, ct);
         return createdUser;
     }
 }

@@ -1,5 +1,6 @@
 using Application.Dtos;
 using Application.Services.Abstractions;
+using Application.Users.GetUserById.ServiceAbstractions;
 using FastEndpoints;
 
 namespace WebApi.Auth.GetProfile;
@@ -7,12 +8,12 @@ namespace WebApi.Auth.GetProfile;
 public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
 {
     private readonly ICurrentUserService _currentUser;
-    private readonly IUserManagementService _userManagementService;
+    private readonly IGetUserByIdService _getUserByIdService;
 
-    public GetProfileEndpoint(ICurrentUserService currentUser, IUserManagementService userManagementService)
+    public GetProfileEndpoint(ICurrentUserService currentUser, IGetUserByIdService getUserByIdService)
     {
         _currentUser = currentUser;
-        _userManagementService = userManagementService;
+        _getUserByIdService = getUserByIdService;
     }
 
     public override void Configure()
@@ -32,7 +33,7 @@ public class GetProfileEndpoint : EndpointWithoutRequest<GetProfileResponse>
             await SendUnauthorizedAsync(ct);
             return;
         }
-        var UserDto = await _userManagementService.GetUserByIdAsync(_currentUser.UserId, ct); 
+        var UserDto = await _getUserByIdService.GetUserByIdAsync(_currentUser.UserId, ct); 
         Response = new GetProfileResponse
         {
             Id = _currentUser.UserId ?? "unknown",

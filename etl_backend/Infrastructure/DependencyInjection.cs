@@ -1,9 +1,20 @@
 using Application.Abstractions;
 using Application.Common.Configurations;
+using Application.Common.Services.Abstractions;
 using Application.Enums;
-using Application.Files.Commands;
+using Application.Files.DeleteStagedFile.ServiceAbstractions;
+using Application.Files.StageManyFiles.ServiceAbstractions;
 using Application.Services.Abstractions;
 using Application.Services.Repositories.Abstractions;
+using Application.Tables.DeleteTable.ServiceAbstractions;
+using Application.Tables.ListTables.ServiceAbstractions;
+using Application.Tables.RenameTable.ServiceAbstractions;
+using Application.Users.CreateUser.ServiceAbstractions;
+using Application.Users.DeleteUser.ServiceAbstractions;
+using Application.Users.EditUser.ServiceAbstractions;
+using Application.Users.GetAllRoles.ServiceAbstractions;
+using Application.Users.GetUserById.ServiceAbstractions;
+using Application.Users.ListUsers;
 using Domain.Entities;
 using etl_backend.Application.DataFile.Abstraction;
 using etl_backend.Application.DataFile.Services;
@@ -37,15 +48,13 @@ namespace Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-
-
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContextFactory<EtlDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-        services.AddScoped<IEtlDbContextFactory, EtlDbContextFactory>();
+        services.AddSingleton<IEtlDbContextFactory, EtlDbContextFactory>();
         services.Configure<StorageSettings>(configuration.GetSection("Storage"));
         services.Configure<CsvStagingOptions>(configuration.GetSection("CsvStaging"));
         services.Configure<PostgresStoreOptions>(configuration.GetSection("PostgresStore"));
@@ -53,31 +62,31 @@ public static class DependencyInjection
         services.AddSingleton(sp => new NpgsqlDataSourceBuilder(cs).Build());
 
         // --- Repositories ---
-        services.AddScoped<IStagedFileRepository, StagedFileRepository>();
-        services.AddScoped<IDataTableSchemaRepository, DataTableSchemaRepository>();
-        services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
+        services.AddSingleton<IStagedFileRepository, StagedFileRepository>();
+        services.AddSingleton<IDataTableSchemaRepository, DataTableSchemaRepository>();
+        services.AddSingleton<IDataTableColumnRepository, DataTableColumnRepository>();
         services.AddSingleton<INpgsqlDataSourceFactory, NpgsqlDataSourceFactory>();
-        services.AddScoped<ITableRepository, TableRepository>();
-        services.AddScoped<IColumnRepository, ColumnRepository>();
+        services.AddSingleton<ITableRepository, TableRepository>();
+        services.AddSingleton<IColumnRepository, ColumnRepository>();
         // --- Cross-cutting ---
         // services.AddSingleton<IClock, SystemClockAdapter>();
 
         services.AddSingleton<IClock, SystemClock>();
 
         // --- Storage + CSV header/rows ---
-        services.AddScoped<IFileStorage, LocalFileStorageService>();
+        services.AddSingleton<IFileStorage, LocalFileStorageService>();
         services.AddSingleton<ICsvHeaderReader, CsvHeaderReader>();
-        services.AddScoped<IRowSourceFactory, StorageCsvRowSourceFactory>();
+        services.AddSingleton<IRowSourceFactory, StorageCsvRowSourceFactory>();
         // services.AddScoped<IRowSource, CsvRowSource>();
 
 
         // --- Components / helpers ---
-        services.AddScoped<IColumnNameSanitizer, PostgresColumnNameSanitizer>();
-        services.AddScoped<IColumnDefinitionBuilder, DefaultColumnDefinitionBuilder>();
-        services.AddScoped<IColumnTypeValidator, DefaultColumnTypeValidator>();
-        services.AddScoped<ITableNameGenerator, DefaultTableNameGenerator>();
-        services.AddScoped<IHeaderProvider, StorageHeaderProvider>();
-        services.AddScoped<ITableSpecFactory, DefaultTableSpecFactory>();
+        services.AddSingleton<IColumnNameSanitizer, PostgresColumnNameSanitizer>();
+        services.AddSingleton<IColumnDefinitionBuilder, DefaultColumnDefinitionBuilder>();
+        services.AddSingleton<IColumnTypeValidator, DefaultColumnTypeValidator>();
+        services.AddSingleton<ITableNameGenerator, DefaultTableNameGenerator>();
+        services.AddSingleton<IHeaderProvider, StorageHeaderProvider>();
+        services.AddSingleton<ITableSpecFactory, DefaultTableSpecFactory>();
         services.AddSingleton<ILoadPolicyFactory, LoadPolicyFactory>();
 
         services.AddSingleton<IIdentifierPolicy, PostgresIdentifierPolicy>();
@@ -98,17 +107,17 @@ public static class DependencyInjection
         services.AddSingleton<IDataWrite, PostgresBulkWriter>();
 
         // --- Use-cases / orchestrators ---
-        services.AddScoped<IRegisterAndLoadService, RegisterAndLoadService>();
-        services.AddScoped<IFileStagingService, FileStagingService>();
-        services.AddScoped<ISchemaRegistrationService, SchemaRegistrationService>();
-        services.AddScoped<ILoadPreconditionsService, LoadPreconditionsService>();
-        services.AddScoped<IStagedFileStateService, StagedFileStateService>();
-        services.AddScoped<ITableLoadService, TableLoadService>();
-        services.AddScoped<ITableManagementService, TableManagementService>();
-        services.AddScoped<IColumnAdmin, PostgresColumnAdmin>();
-        services.AddScoped<IColumnManagementService, ColumnManagementService>();
-        services.AddScoped<IDataTableColumnRepository, DataTableColumnRepository>();
-        // services.AddScoped<ITableInfoService, TableInfoService>();
+        services.AddSingleton<IRegisterAndLoadService, RegisterAndLoadService>();
+        services.AddSingleton<ISchemaRegistrationService, SchemaRegistrationService>();
+        services.AddSingleton<ILoadPreconditionsService, LoadPreconditionsService>();
+        services.AddSingleton<IStagedFileStateService, StagedFileStateService>();
+        services.AddSingleton<ITableLoadService, TableLoadService>();
+        services.AddSingleton<IDataTableColumnRepository, DataTableColumnRepository>();
+        services.AddSingleton<ITableDeleteService, PostgresTableDeleteService>();
+        services.AddSingleton<ITableRenameService, PostgresTableRenameService>();
+        services.AddSingleton<ITablesListService, PostgresTablesListService>();
+        services.AddSingleton<IAddStageFileService, AddStageFile>();
+        services.AddSingleton<IDeleteStagedFile, DeleteStagedFileService>();
 
         services.AddSingleton<ILoadPolicy>(_ => new LoadPolicy(
             mode: LoadMode.Append,
@@ -126,8 +135,8 @@ public static class DependencyInjection
         services.AddSingleton<IColumnTypeValidator, DefaultColumnTypeValidator>();
         
         // --- Auth ---
-        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddScoped<ICurrentUserService, CurrentUserService>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         services.AddSingleton<IKeycloakAuthService, KeycloakAuthService>();
         services.AddSingleton<ITokenExtractor, TokenCookieExtractor>();
         services.AddSingleton<ITokenCookieService, TokenCookieService>();
@@ -146,8 +155,14 @@ public static class DependencyInjection
 
         
         // --- Admin ---
-        services.AddSingleton<IUserManagementService,  SsoServices.Admin.UserManagementService>();
+        services.AddSingleton<IUserRoleManagementService,  SsoServices.Admin.UserRoleManagementService>();
         services.AddSingleton<ITokenProfileExtractor, KeycloakTokenProfileExtractor>();
+        services.AddSingleton<ICreateUser, CreateUserService>();
+        services.AddSingleton<IAdminEditUserService, EditUserService>();
+        services.AddSingleton<IDeleteUserService, DeleteUserService>();
+        services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
+        services.AddSingleton<IListUsersService, GetAllUsersService>();
+        services.AddSingleton<IGetAllRoles, GetAllRolesService>();
 
         return services;
     }

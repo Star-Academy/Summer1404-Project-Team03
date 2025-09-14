@@ -1,5 +1,6 @@
 using Application.Dtos;
 using Application.Services.Abstractions;
+using Application.Users.ListUsers;
 using Application.Users.Queries;
 using MediatR;
 
@@ -7,9 +8,9 @@ namespace Application.Users.Handlers;
 
 public class ListUsersQueryHandler : IRequestHandler<ListUsersQuery, List<UserWithRolesDto>>
 {
-    private readonly IUserManagementService _userManagementService;
+    private readonly IListUsersService _userManagementService;
 
-    public ListUsersQueryHandler(IUserManagementService userManagementService)
+    public ListUsersQueryHandler(IListUsersService userManagementService)
     {
         _userManagementService = userManagementService;
     }

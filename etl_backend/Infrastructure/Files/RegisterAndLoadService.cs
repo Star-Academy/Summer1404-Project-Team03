@@ -2,6 +2,8 @@ using Application.Abstractions;
 using Application.Dtos;
 using Application.Enums;
 using Application.Files.Commands;
+using Application.Files.DeleteStagedFile.ServiceAbstractions;
+using Application.Files.StageManyFiles.ServiceAbstractions;
 using Application.Services.Repositories.Abstractions;
 using MediatR;
 
@@ -12,18 +14,18 @@ public class RegisterAndLoadService : IRegisterAndLoadService
     private readonly IMediator _mediator;
     private readonly IDataTableSchemaRepository _schemaRepo;
     private readonly IStagedFileRepository _stagedRepo;
-    private readonly IFileStagingService _fileStagingService;
+    private readonly IDeleteStagedFile _deleteFileStagingService;
 
     public RegisterAndLoadService(
         IMediator mediator,
         IDataTableSchemaRepository schemaRepo,
         IStagedFileRepository stagedRepo,
-        IFileStagingService fileStagingService)
+        IDeleteStagedFile fileStagingService)
     {
         _mediator = mediator;
         _schemaRepo = schemaRepo;
         _stagedRepo = stagedRepo;
-        _fileStagingService = fileStagingService;
+        _deleteFileStagingService = fileStagingService;
     }
 
     public async Task<RegisterAndLoadResult> ExecuteAsync(
@@ -73,7 +75,7 @@ public class RegisterAndLoadService : IRegisterAndLoadService
             await _stagedRepo.DeleteAsync(stagedFileId, ct);
             if (!string.IsNullOrEmpty(filePath))
             {
-                await _fileStagingService.DeleteAsync(filePath, ct);
+                await _deleteFileStagingService.DeleteAsync(filePath, ct);
             }
         }
         catch (Exception compensationEx)

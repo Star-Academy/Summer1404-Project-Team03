@@ -1,6 +1,6 @@
 using Application.Enums;
 
-namespace Application.Services.Abstractions;
+namespace Application.Common.Services.Abstractions;
 
 public interface ILoadPolicy
 {

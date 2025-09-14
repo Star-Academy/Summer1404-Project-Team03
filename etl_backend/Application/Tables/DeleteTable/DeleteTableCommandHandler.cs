@@ -1,15 +1,15 @@
-using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Tables.Commands;
+using Application.Tables.DeleteTable.ServiceAbstractions;
 using MediatR;
 
-namespace Application.Tables.Handlers;
+namespace Application.Tables.DeleteTable;
 
 public class DeleteTableCommandHandler : IRequestHandler<DeleteTableCommand>
 {
-    private readonly ITableManagementService _svc;
+    private readonly ITableDeleteService _svc;
 
-    public DeleteTableCommandHandler(ITableManagementService svc)
+    public DeleteTableCommandHandler(ITableDeleteService svc)
     {
         _svc = svc;
     }

@@ -10,100 +10,63 @@ public sealed class DataTableSchemaRepository : IDataTableSchemaRepository
 
     public DataTableSchemaRepository(IEtlDbContextFactory ctxFactory)
     {
-        _ctxFactory = ctxFactory;
+        _ctxFactory = ctxFactory ?? throw new ArgumentNullException(nameof(ctxFactory));
     }
 
     public async Task<List<DataTableSchema>> ListAsync(CancellationToken ct = default)
     {
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
-
-        return await ef.Set<DataTableSchema>()
-            .Include(s => s.Columns)
-            .AsNoTracking()
-            .ToListAsync(ct);
+        return await ctx.DataTableSchemas
+                        .AsNoTracking()
+                        .ToListAsync(ct);
     }
 
     public async Task<DataTableSchema?> GetByIdWithColumnsAsync(int id, CancellationToken ct = default)
     {
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
-
-        return await ef.Set<DataTableSchema>()
-            .Include(s => s.Columns)
-            .AsNoTracking()
-            .FirstOrDefaultAsync(s => s.Id == id, ct);
+        return await ctx.DataTableSchemas
+                        .Include(s => s.Columns) 
+                        .FirstOrDefaultAsync(s => s.Id == id, ct);
     }
 
     public async Task AddAsync(DataTableSchema schema, CancellationToken ct = default)
     {
+        if (schema == null) throw new ArgumentNullException(nameof(schema));
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
-
-        await ef.Set<DataTableSchema>().AddAsync(schema, ct);
-        await ef.SaveChangesAsync(ct);
+        ctx.DataTableSchemas.Add(schema);
+        await ctx.SaveChangesAsync(ct);
     }
 
     public async Task UpdateAsync(DataTableSchema schema, CancellationToken ct = default)
     {
+        if (schema == null) throw new ArgumentNullException(nameof(schema));
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
-
-        await using var tx = await ef.Database.BeginTransactionAsync(ct);
-
-        var tracked = await ef.Set<DataTableSchema>()
-            .Include(s => s.Columns)
-            .FirstOrDefaultAsync(s => s.Id == schema.Id, ct)
-            ?? throw new InvalidOperationException($"Schema {schema.Id} not found.");
-
-        tracked.OriginalFileName = schema.OriginalFileName ?? tracked.OriginalFileName;
-
-        if (tracked.Columns.Count > 0)
-        {
-            ef.Set<DataTableColumn>().RemoveRange(tracked.Columns);
-            await ef.SaveChangesAsync(ct);
-        }
-
-        foreach (var col in schema.Columns.OrderBy(c => c.OrdinalPosition))
-        {
-            col.Id = 0;
-            col.DataTableSchemaId = tracked.Id;
-        }
-        await ef.Set<DataTableColumn>().AddRangeAsync(schema.Columns, ct);
-
-        await ef.SaveChangesAsync(ct);
-        await tx.CommitAsync(ct);
+        ctx.DataTableSchemas.Update(schema);
+        await ctx.SaveChangesAsync(ct);
     }
 
     public async Task UpdateTableNameAsync(int id, string newTableName, CancellationToken ct = default)
     {
+        if (string.IsNullOrWhiteSpace(newTableName))
+            throw new ArgumentException("New table name cannot be empty.", nameof(newTableName));
+
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
 
-        var stub = new DataTableSchema { Id = id };
-        ef.Attach(stub);
-        stub.TableName = newTableName.Trim();
-        ef.Entry(stub).Property(x => x.TableName).IsModified = true;
+        var entity = await ctx.DataTableSchemas.FirstOrDefaultAsync(s => s.Id == id, ct);
+        if (entity == null) return; 
 
-        await ef.SaveChangesAsync(ct);
+        entity.TableName = newTableName;
+        await ctx.SaveChangesAsync(ct);
     }
 
     public async Task DeleteAsync(int id, CancellationToken ct = default)
     {
         await using var ctx = _ctxFactory.CreateSchemaDbContext();
-        var ef = ctx as DbContext ?? throw new InvalidOperationException("Concrete DbContext is required.");
 
-        var exists = await ef.Set<DataTableSchema>()
-            .AsNoTracking()
-            .AnyAsync(s => s.Id == id, ct);
+        var entity = await ctx.DataTableSchemas.FindAsync(new object?[] { id }, ct);
+        if (entity == null) return; 
 
-        if (!exists)
-            throw new InvalidOperationException($"Schema {id} not found.");
-
-        var stub = new DataTableSchema { Id = id };
-        ef.Attach(stub);
-        ef.Remove(stub);
-
-        await ef.SaveChangesAsync(ct);
+        ctx.DataTableSchemas.Remove(entity);
+        await ctx.SaveChangesAsync(ct);
     }
 }

@@ -1,15 +1,16 @@
 using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Tables.Commands;
+using Application.Tables.RenameTable.ServiceAbstractions;
 using MediatR;
 
 namespace Application.Tables.Handlers;
 
 public class RenameTableCommandHandler : IRequestHandler<RenameTableCommand>
 {
-    private readonly ITableManagementService _svc;
+    private readonly ITableRenameService _svc;
 
-    public RenameTableCommandHandler(ITableManagementService svc)
+    public RenameTableCommandHandler(ITableRenameService svc)
     {
         _svc = svc;
     }

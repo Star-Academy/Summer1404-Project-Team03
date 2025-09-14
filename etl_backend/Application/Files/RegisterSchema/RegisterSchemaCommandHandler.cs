@@ -10,24 +10,15 @@ namespace Application.Files.Handlers;
 public class RegisterSchemaCommandHandler : IRequestHandler<RegisterSchemaCommand, RegisterSchemaResult>
 {
     private readonly ISchemaRegistrationService _schemaReg;
-    private readonly IStagedFileRepository _stagedRepo;
 
     public RegisterSchemaCommandHandler(
-        ISchemaRegistrationService schemaReg,
-        IStagedFileRepository stagedRepo)
+        ISchemaRegistrationService schemaReg)
     {
         _schemaReg = schemaReg;
-        _stagedRepo = stagedRepo;
     }
 
     public async Task<RegisterSchemaResult> Handle(RegisterSchemaCommand request, CancellationToken ct)
     {
-        var staged = await _stagedRepo.GetByIdAsync(request.StagedFileId, ct);
-        if (staged is null)
-            throw new NotFoundException("StagedFile", request.StagedFileId);
-
-        if (staged.Stage == ProcessingStage.TableCreated || staged.Stage == ProcessingStage.Loaded)
-            throw new ConflictException("Columns cannot be modified after the table has been created.");
 
         var (schema, updatedStaged) = await _schemaReg.RegisterAsync(request.StagedFileId, request.ColumnTypeMap,request.ColumnNameMap, ct);
 

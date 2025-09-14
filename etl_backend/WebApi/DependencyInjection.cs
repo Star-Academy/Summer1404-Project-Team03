@@ -13,7 +13,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebServices(this IServiceCollection services)
     {
-        services.AddScoped<IStorageAppEnvironment, StorageAppEnvironment>();
+        services.AddSingleton<IStorageAppEnvironment, StorageAppEnvironment>();
         // services.AddSingleton<SystemClock>();
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));

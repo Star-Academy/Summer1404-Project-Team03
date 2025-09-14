@@ -2,6 +2,7 @@ using Application.Common.Authorization;
 using Application.Common.Exceptions;
 using Application.Dtos;
 using Application.Services.Abstractions;
+using Application.Users.GetUserById.ServiceAbstractions;
 using Application.Users.Queries;
 using MediatR;
 
@@ -9,9 +10,9 @@ namespace Application.Users.Handlers;
 
 public class GetUserByIdQueryHandler : IRequestHandler<GetUserByIdQuery, UserWithRolesDto>
 {
-    private readonly IUserManagementService _userManagementService;
+    private readonly IGetUserByIdService _userManagementService;
 
-    public GetUserByIdQueryHandler(IUserManagementService userManagementService)
+    public GetUserByIdQueryHandler(IGetUserByIdService userManagementService)
     {
         _userManagementService = userManagementService;
     }

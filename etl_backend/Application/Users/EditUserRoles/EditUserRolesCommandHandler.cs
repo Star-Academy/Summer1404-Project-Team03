@@ -1,17 +1,23 @@
 using Application.Common.Exceptions;
 using Application.Services.Abstractions;
 using Application.Users.Commands;
+using Application.Users.GetAllRoles.ServiceAbstractions;
+using Application.Users.GetUserById.ServiceAbstractions;
 using MediatR;
 
 namespace Application.Users.Handlers;
 
 public class EditUserRolesCommandHandler : IRequestHandler<EditUserRolesCommand>
 {
-    private readonly IUserManagementService _userManagementService;
+    private readonly IUserRoleManagementService _userRoleManagementService;
+    private readonly IGetUserByIdService _getUserByIdService;
+    private readonly IGetAllRoles _getAllRolesService;
 
-    public EditUserRolesCommandHandler(IUserManagementService userManagementService)
+    public EditUserRolesCommandHandler(IUserRoleManagementService userRoleManagementService, IGetUserByIdService getUserByIdService, IGetAllRoles getAllRolesService)
     {
-        _userManagementService = userManagementService;
+        _userRoleManagementService = userRoleManagementService;
+        _getUserByIdService = getUserByIdService;
+        _getAllRolesService = getAllRolesService;
     }
 
     public async Task Handle(EditUserRolesCommand request, CancellationToken ct)
@@ -19,13 +25,13 @@ public class EditUserRolesCommandHandler : IRequestHandler<EditUserRolesCommand>
         if (string.IsNullOrWhiteSpace(request.UserId))
             throw new UnprocessableEntityException("UserId is required.");
 
-        var currentUser = await _userManagementService.GetUserByIdAsync(request.UserId, ct);
+        var currentUser = await _getUserByIdService.GetUserByIdAsync(request.UserId, ct);
         if (currentUser == null)
             throw new NotFoundException("User", request.UserId);
 
         if (request.RolesToAdd.Any())
         {
-            var allRoles = await _userManagementService.GetAllRolesAsync(ct);
+            var allRoles = await _getAllRolesService.GetAllRolesAsync(ct);
             var allRoleNames = allRoles.Select(r => r.Name).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
             var invalidRoles = request.RolesToAdd
@@ -39,12 +45,12 @@ public class EditUserRolesCommandHandler : IRequestHandler<EditUserRolesCommand>
 
         if (request.RolesToAdd.Any())
         {
-            await _userManagementService.AddRolesToUserAsync(request.UserId, request.RolesToAdd.ToArray(), ct);
+            await _userRoleManagementService.AddRolesToUserAsync(request.UserId, request.RolesToAdd.ToArray(), ct);
         }
 
         if (request.RolesToRemove.Any())
         {
-            await _userManagementService.RemoveRolesFromUserAsync(request.UserId, request.RolesToRemove, ct);
+            await _userRoleManagementService.RemoveRolesFromUserAsync(request.UserId, request.RolesToRemove, ct);
         }
     }
 }
