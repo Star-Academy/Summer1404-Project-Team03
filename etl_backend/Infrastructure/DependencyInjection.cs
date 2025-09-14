@@ -107,7 +107,7 @@ public static class DependencyInjection
         services.AddSingleton<IDataWrite, PostgresBulkWriter>();
 
         // --- Use-cases / orchestrators ---
-        services.AddSingleton<IRegisterAndLoadService, RegisterAndLoadService>();
+        services.AddScoped<IRegisterAndLoadService, RegisterAndLoadService>();
         services.AddSingleton<ISchemaRegistrationService, SchemaRegistrationService>();
         services.AddSingleton<ILoadPreconditionsService, LoadPreconditionsService>();
         services.AddSingleton<IStagedFileStateService, StagedFileStateService>();
