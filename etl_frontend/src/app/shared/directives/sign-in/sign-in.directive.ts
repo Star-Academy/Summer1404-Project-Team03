@@ -30,9 +30,9 @@ export class SignInDirective {
     this.isLoading.set(true);
 
     this.authService.getSignInUrl().pipe(take(1)).subscribe({
-      next: ({ redirectUrl }) => {
+      next: ({ signInUrl }) => {
         this.isLoading.set(false);
-        this.redirect(redirectUrl);
+        this.redirect(signInUrl);
       },
       error: () => {
         this.isLoading.set(false);

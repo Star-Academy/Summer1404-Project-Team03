@@ -21,7 +21,7 @@ export class SendTokenCodeComponent implements OnInit {
   ngOnInit() {
     const tokenCode = this.getTokenCode();
     if (tokenCode) {
-      this.sendToken(tokenCode);
+      this.sendTokenCode(tokenCode);
     } else {
       this.router.navigate(['/landing']);
     }
@@ -31,8 +31,8 @@ export class SendTokenCodeComponent implements OnInit {
     return this.route.snapshot.queryParams['code'];
   }
 
-  sendToken(tokenCode: string): void {
-    this.authService.exchangeToken(tokenCode).subscribe({
+  sendTokenCode(tokenCode: string): void {
+    this.authService.sendTokenCode(tokenCode).subscribe({
       next: () => {
         this.showSigninSuccess();
         this.router.navigate(['/dashboard'])
