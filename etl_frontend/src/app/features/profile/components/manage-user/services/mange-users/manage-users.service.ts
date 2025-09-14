@@ -10,8 +10,8 @@ export class ManageUsersService {
 
   constructor(private readonly http: HttpClient) { }
 
-  fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersApi);
+  fetchUsers(): Observable<{users: User[]}> {
+    return this.http.get<{users: User[]}>(this.usersApi);
   }
 
   createUser(newUser: NewUser): Observable<NewUser> {

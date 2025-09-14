@@ -18,7 +18,7 @@ export class FilesManagementService {
   }
 
   fetchFileSchema(fileId: string): Observable<Schema> {
-    return this.http.get<Schema>(this.filesApi.previewSchema(fileId));
+    return this.http.get<Schema>(this.filesApi.schema.preview(fileId));
   }
 
   uploadFiles(files: FormData): Observable<UploadFileResponse[]> {
@@ -30,6 +30,6 @@ export class FilesManagementService {
   }
 
   updateSchema(schema: Schema): Observable<void> {
-    return this.http.post<void>(this.filesApi.registerSchema(schema.stagedFileId), { columns: schema.columns})
+    return this.http.post<void>(this.filesApi.schema.register(schema.stagedFileId), { columns: schema.columns})
   }
 }

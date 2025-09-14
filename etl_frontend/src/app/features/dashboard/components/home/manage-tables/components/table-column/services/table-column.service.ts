@@ -6,7 +6,7 @@ import { ColumnType } from '../models/column.model';
 
 @Injectable()
 export class TableColumnService {
-  private readonly columnApi = environment.api.columns;
+  private readonly columnApi = environment.api.tables.columns;
   constructor(private readonly http: HttpClient) { }
 
   public getTableColumns(schemaId: number): Observable<{ items: ColumnType[] }> {

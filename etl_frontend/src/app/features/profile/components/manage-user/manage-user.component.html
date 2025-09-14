@@ -27,7 +27,7 @@
 
 <div class="table-container">
   <p-table
-    [value]="user"
+    [value]="vm().users"
     [scrollable]="true"
     scrollHeight="70vh"
     [virtualScrollItemSize]="46"
@@ -48,11 +48,11 @@
         <td>{{ user.email }}</td>
         <td>
           <div class="roles">
-            <p-chip
-              *ngFor="let role of user.roles"
-              [label]="role.name"
-              class="roles__chip"
-            ></p-chip>
+            @for(role of user.roles; track $index) {
+            <p-chip [label]="role" class="roles__chip"></p-chip>
+            }@empty {
+            <p-chip label="'no-role'" class="roles__chip"></p-chip>
+            }
           </div>
         </td>
         <td class="table-container__action">

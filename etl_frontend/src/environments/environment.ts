@@ -6,13 +6,12 @@ export const environment = {
   api: {
     // ===================== AUTH / PROFILE =====================
     auth: {
-      signIn: `${baseUrl}/auth/login`,
-      token: `${baseUrl}/auth/token`,
-      signOut: `${baseUrl}/auth/logout`,
-      me: `${baseUrl}/auth/me`,
+      signIn: `${baseUrl}/auth/login`, // POST
+      token: `${baseUrl}/auth/token`, // POST
+      signOut: `${baseUrl}/auth/logout`, // POST
+      me: `${baseUrl}/auth/me`, // GET, PUT
       password: `${baseUrl}/auth/change-password-url`, // GET
     },
-
 
     // ===================== ADMIN =====================
     admin: {
@@ -22,31 +21,35 @@ export const environment = {
       roles: `${baseUrl}/admin/roles`, // GET
     },
 
-    // ===================== TABLES =====================
-    tables: {
-      list: `${baseUrl}/tables`, // GET
-      rename: (schemaId: number) => `${baseUrl}/tables/${schemaId}/rename`, // POST
-      delete: (schemaId: string) => `${baseUrl}/tables/${schemaId}`, // DELETE
-      types: `${baseUrl}/types/columns`
-    },
-
-    // ===================== COLUMNS =====================
-    columns: {
-      list: (schemaId: number) => `${baseUrl}/tables/${schemaId}/columns`, // GET
-      delete: (schemaId: number) => `${baseUrl}/tables/${schemaId}/columns`, // DELETE
-      rename: (schemaId: number, columnId: number) =>
-        `${baseUrl}/tables/${schemaId}/columns/${columnId}/rename`, // POST
-    },
-
     // ===================== FILES =====================
     files: {
       root: `${baseUrl}/files`, // GET
-      delete: (id: number) => `${baseUrl}/files/${id}`, // GET
       upload: `${baseUrl}/files/stage-many`, // POST
-      previewSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/preview`, // GET
-      registerSchema: (id: string | number) => `${baseUrl}/files/${id}/schema/register`, // POST
+      details: (id: string | number) => `${baseUrl}/files/${id}`, // Base for file-specific actions
+      delete: (id: string | number) => `${baseUrl}/files/${id}`, // DELETE
       load: (id: string | number) => `${baseUrl}/files/${id}/load`, // POST
       registerAndLoad: (id: string | number) => `${baseUrl}/files/${id}/register-and-load`, // POST
+      schema: {
+        preview: (id: string | number) => `${baseUrl}/files/${id}/schema/preview`, // GET
+        register: (id: string | number) => `${baseUrl}/files/${id}/schema/register`, // POST
+      },
+    },
+
+    // ===================== TABLES & COLUMNS =====================
+    tables: {
+      list: `${baseUrl}/tables`, // GET
+      details: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/details`, // GET
+      rows: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/rows`, // GET
+      count: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/count`, // GET
+      rename: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/rename`, // POST
+      delete: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}`, // DELETE
+      columns: {
+        list: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/columns`, // GET
+        delete: (schemaId: string | number) => `${baseUrl}/tables/${schemaId}/columns`, // DELETE
+        rename: (schemaId: string | number, columnId: string | number) =>
+          `${baseUrl}/tables/${schemaId}/columns/${columnId}/rename`, // POST
+        types: `${baseUrl}/types/columns`,
+      },
     },
   },
 };

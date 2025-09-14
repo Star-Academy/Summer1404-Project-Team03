@@ -16,7 +16,7 @@ export class TableService {
   }
 
   public getTableTypes(): Observable<TableValidTypes> {
-    return this.http.get<TableValidTypes>(this.tableApi.types)
+    return this.http.get<TableValidTypes>(this.tableApi.columns.types)
   }
 
   public deleteTable(schemaId: string) {

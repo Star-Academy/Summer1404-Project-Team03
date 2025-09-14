@@ -6,7 +6,8 @@ interface baseUser {
 }
 export interface User extends baseUser {
     id: string;
-    roles: UserRole[];
+    // roles: UserRole[];
+    roles: string[];
 }
 
 export interface UserState extends baseState, User { }
