@@ -1,16 +1,83 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { AuthService } from './auth.service';
+import { provideHttpClient } from '@angular/common/http';
+import { SendTokenCodeBody, SendTokenCodeResponse, SignInResponse } from '../../models/auth.model';
+
+const environment = {
+  auth: {
+    signIn: 'http://localhost:5000/api/auth/login',
+    token: 'http://localhost:5000/api/auth/token',
+    signOut: 'http://localhost:5000/api/auth/logout'
+  },
+  redirectUrl: 'http://localhost:4200/send-token-code'
+}
 
 describe('AuthService', () => {
   let service: AuthService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        AuthService,
+      ]
+    });
+    httpMock = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AuthService);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should send a POST request to the sign-in endpoint and return the response', () => {
+    const expectedRes: SignInResponse = { signInUrl: 'http://auth.datawave.ir/?user=someone' }
+    const expectedBody = { redirectUrl: environment.redirectUrl };
+
+    service.getSignInUrl().subscribe(res => expect(res).toEqual(expectedRes));
+
+    const req = httpMock.expectOne(environment.auth.signIn);
+
+    expect(req.request.method).toBe("POST");
+    expect(req.request.body).toEqual(expectedBody);
+
+    req.flush(expectedRes);
+  });
+
+  it('SHOULD send a POST request to the sign-out endpoint and RETURN the response', () => {
+    const expectedBody = {}
+    const expectedRes = "you are signed out"
+
+    service.signOut().subscribe(res => expect(res).toEqual(expectedRes))
+
+    const req = httpMock.expectOne(environment.auth.signOut);
+
+    expect(req.request.method).toBe("POST");
+    expect(req.request.body).toEqual(expectedBody);
+
+    req.flush(expectedRes)
+  });
+
+  it('SHOULD send a POST request to the token endpoint and ', () => {
+    const expectedCode: string = "public code...";
+    const expectedBody: SendTokenCodeBody = { code: "public code...", redirectUrl: environment.redirectUrl };
+    const expectedRes: SendTokenCodeResponse = { redirectUrl: environment.redirectUrl };
+
+    service.sendTokenCode(expectedCode).subscribe(res => expect(res).toEqual(expectedRes));
+
+    const req = httpMock.expectOne(environment.auth.token);
+
+    expect(req.request.method).toBe("POST");
+    expect(req.request.body).toEqual(expectedBody);
+
+    req.flush(expectedRes);
+  })
 });
