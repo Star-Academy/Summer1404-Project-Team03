@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
+import { TableColumnStoreService } from './table-column-store.service';
 
-import { TableSchemaStoreService } from './table-schema-store.service';
-
-describe('TableSchemaStoreService', () => {
-  let service: TableSchemaStoreService;
+describe('TableColumnStoreService', () => {
+  let service: TableColumnStoreService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TableSchemaStoreService);
+    service = TestBed.inject(TableColumnStoreService);
   });
 
   it('should be created', () => {

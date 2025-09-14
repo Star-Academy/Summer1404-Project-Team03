@@ -20,4 +20,6 @@ describe('SendTokenCodeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('')
 });

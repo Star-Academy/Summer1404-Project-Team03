@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RenameTableComponent } from './rename-table.component';
 
-import { RenameColumnComponent } from './rename-column.component';
 
-describe('RenameColumnComponent', () => {
-  let component: RenameColumnComponent;
-  let fixture: ComponentFixture<RenameColumnComponent>;
+describe('RenameTableComponent', () => {
+  let component: RenameTableComponent;
+  let fixture: ComponentFixture<RenameTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RenameColumnComponent]
+      imports: [RenameTableComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RenameColumnComponent);
+    fixture = TestBed.createComponent(RenameTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
