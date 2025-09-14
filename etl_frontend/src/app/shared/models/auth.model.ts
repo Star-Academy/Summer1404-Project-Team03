@@ -1,5 +1,5 @@
 export type SignInResponse = {
-  signInUrl: string;
+  redirectUrl: string;
 }
 
 export type SendTokenCodeResponse = {

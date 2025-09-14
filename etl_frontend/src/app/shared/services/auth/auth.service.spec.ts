@@ -4,15 +4,7 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { AuthService } from './auth.service';
 import { provideHttpClient } from '@angular/common/http';
 import { SendTokenCodeBody, SendTokenCodeResponse, SignInResponse } from '../../models/auth.model';
-
-const environment = {
-  auth: {
-    signIn: 'http://localhost:5000/api/auth/login',
-    token: 'http://localhost:5000/api/auth/token',
-    signOut: 'http://localhost:5000/api/auth/logout'
-  },
-  redirectUrl: 'http://localhost:4200/send-token-code'
-}
+import { environment } from '../../../../environments/environment';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -39,12 +31,12 @@ describe('AuthService', () => {
   });
 
   it('should send a POST request to the sign-in endpoint and return the response', () => {
-    const expectedRes: SignInResponse = { signInUrl: 'http://auth.datawave.ir/?user=someone' }
+    const expectedRes: SignInResponse = { redirectUrl: 'http://auth.datawave.ir/?user=someone' }
     const expectedBody = { redirectUrl: environment.redirectUrl };
 
     service.getSignInUrl().subscribe(res => expect(res).toEqual(expectedRes));
 
-    const req = httpMock.expectOne(environment.auth.signIn);
+    const req = httpMock.expectOne(environment.api.auth.signIn);
 
     expect(req.request.method).toBe("POST");
     expect(req.request.body).toEqual(expectedBody);
@@ -58,7 +50,7 @@ describe('AuthService', () => {
 
     service.signOut().subscribe(res => expect(res).toEqual(expectedRes))
 
-    const req = httpMock.expectOne(environment.auth.signOut);
+    const req = httpMock.expectOne(environment.api.auth.signOut);
 
     expect(req.request.method).toBe("POST");
     expect(req.request.body).toEqual(expectedBody);
@@ -73,7 +65,7 @@ describe('AuthService', () => {
 
     service.sendTokenCode(expectedCode).subscribe(res => expect(res).toEqual(expectedRes));
 
-    const req = httpMock.expectOne(environment.auth.token);
+    const req = httpMock.expectOne(environment.api.auth.token);
 
     expect(req.request.method).toBe("POST");
     expect(req.request.body).toEqual(expectedBody);
