@@ -1,5 +1,26 @@
 <div class="sidebar">
-  <p-menu [model]="menuItems" />
+  <!-- <p-menu [model]="menuItems" /> -->
+  <p-button
+    label="Workflow History"
+    icon="pi pi-file-plus"
+    [routerLink]="['/', 'dashboard', 'workflows']"
+    routerLinkActive="active-link"
+    text
+  ></p-button>
+  <p-button
+    label="File Management"
+    icon="pi pi-file-import"
+    [routerLink]="['/', 'dashboard', 'files']"
+    routerLinkActive="active-link"
+    text
+  ></p-button>
+  <p-button
+    label="Table Management"
+    icon="pi pi-table"
+    [routerLink]="['/', 'dashboard', 'tables']"
+    routerLinkActive="active-link"
+    text
+  ></p-button>
 </div>
 
 <div class="dynamic-content">

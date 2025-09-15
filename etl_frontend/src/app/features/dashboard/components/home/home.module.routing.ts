@@ -39,7 +39,7 @@ export const homeRoutes: Routes = [
       },
       {
         path: '**',
-        redirectTo: ''
+        redirectTo: 'workflows'
       }
     ],
   },
