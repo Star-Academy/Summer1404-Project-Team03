@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, computed, effect, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
+import { WorkflowsListStore } from '../../../stores/workflows-list/workflows-list-store.service';
+import { WorkflowService } from './service/workflow.service';
 
 interface FlowsColumn {
   header: string;
@@ -11,116 +13,51 @@ interface FlowsColumn {
   templateUrl: './manage-workflows.component.html',
   styleUrl: './manage-workflows.component.scss'
 })
-export class ManageWorkflowsComponent {
-  files: any[] = []; // List of all uploaded files
-  selectedFileContent: { headers: string[], data: any[] } | null = null;
-  uploadedFileColumns: FlowsColumn[] = [];
+export class ManageWorkflowsComponent implements OnInit{
+  public readonly workflows = computed(() => this.workflowListStore.vm().workflows);
+  public readonly isLoading = computed(() => this.workflowListStore.vm().isLoadingWorkflows);
 
-  // Available database types for column mapping
-  dbTypes = [
-    { label: 'Text', value: 'TEXT' },
-    { label: 'Integer', value: 'INTEGER' },
-    { label: 'Decimal', value: 'DECIMAL' },
-    { label: 'Date', value: 'DATE' },
-    { label: 'Boolean', value: 'BOOLEAN' }
-  ];
+  constructor(
+    private readonly workflowListStore: WorkflowsListStore,
+    private readonly workflowService: WorkflowService,
+    private readonly messageService: MessageService,
+  ) {
+    effect(() => {
+      console.log(this.workflowListStore.vm())
+    });
+  }
 
-  constructor(private messageService: MessageService) { }
+  public onDeleteWorkflow(workflowId: string, workflowStatus: string) {
+    if (workflowStatus === 'Running') {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Workflow is Running. first you need to close it.',
+      })
+
+      return;
+    }
+
+    this.workflowService.deleteWorkflowById(workflowId).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Workflow deleted successfully.',
+        })
+        this.workflowListStore.loadWorkflows();
+      },
+      error: () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Workflow deleted failed',
+        })
+      }
+    })
+  }
+
+  public onEditWorkflow(workflowId: string) {}
 
   ngOnInit() {
-    // Mock initial file list (in a real app, you'd fetch this from a server)
-    this.files = [
-      { name: 'flow1', lastModified: '2025-08-15' },
-      { name: 'flow2', lastModified: '2025-08-20' },
-    ];
+    this.workflowListStore.loadWorkflows();
   }
-
-  // --- FILE LIST ACTIONS ---
-
-  /**
-   * Deletes a file from the list.
-   * @param fileName The name of the file to delete.
-   */
-  deleteFile(fileName: string) {
-    this.files = this.files.filter(f => f.name !== fileName);
-    this.messageService.add({ severity: 'warn', summary: 'Deleted', detail: `File '${fileName}' removed.` });
-    // If the deleted file was being viewed, clear the view
-    if (this.selectedFileContent && fileName === 'currently_viewed_file.csv') { // Mock logic
-      this.selectedFileContent = null;
-    }
-  }
-
-  /**
-   * Displays the content of a selected CSV file as a table.
-   * @param file The file object to view.
-   */
-  viewFile(file: any) {
-    // In a real app, you would fetch and parse the file content from your server.
-    // Here we'll just mock the data for demonstration.
-    this.selectedFileContent = {
-      headers: ['ID', 'ProductName', 'Price', 'Stock'],
-      data: [
-        { ID: 1, ProductName: 'Laptop', Price: 1200, Stock: 50 },
-        { ID: 2, ProductName: 'Mouse', Price: 25, Stock: 300 },
-        { ID: 3, ProductName: 'Keyboard', Price: 75, Stock: 150 }
-      ]
-    };
-    this.uploadedFileColumns = []; // Hide the upload view
-  }
-
-  // --- FILE UPLOAD AND PROCESSING ---
-
-  /**
-   * Handles the file upload event. Reads the CSV and prepares it for type mapping.
-   * @param event The upload event containing the file.
-   */
-  onFileUpload(event: any) {
-    const file = event.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      const text = reader.result as string;
-      const lines = text.split(/\r\n|\n/).filter(line => line.trim() !== ''); // Split lines and remove empty ones
-
-      if (lines.length > 0) {
-        const headers = lines[0].split(',');
-        this.uploadedFileColumns = headers.map(header => ({
-          header: header.trim(),
-          selectedType: 'TEXT' // Default to TEXT
-        }));
-
-        // Add the new file to our list
-        this.files.push({
-          name: file.name,
-          size: `${(file.size / 1024).toFixed(2)} KB`,
-          lastModified: new Date().toISOString().split('T')[0]
-        });
-
-        this.selectedFileContent = null; // Hide file view
-        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'File uploaded and parsed.' });
-      } else {
-        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'The uploaded file is empty.' });
-      }
-    };
-
-    reader.onerror = () => {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to read file.' });
-    };
-
-    reader.readAsText(file);
-  }
-
-  /**
-   * Finalizes the column type selection.
-   */
-  confirmColumnTypes() {
-    // In a real app, you would send `this.uploadedFileColumns` to your backend
-    // to save the mapping and process the data.
-    console.log('Final column mapping:', this.uploadedFileColumns);
-    this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Column types have been set.' });
-
-    // Clear the view after confirming
-    this.uploadedFileColumns = [];
-  }
-
 }
+
