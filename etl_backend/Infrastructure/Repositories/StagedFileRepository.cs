@@ -18,7 +18,7 @@ public sealed class StagedFileRepository : IStagedFileRepository
         return entity;
     }
 
-    public async Task<StagedFile?> GetByIdAsync(int id, CancellationToken ct = default)
+    public async Task<StagedFile?> GetByIdAsync(Guid id, CancellationToken ct = default)
     {
         await using var ctx = _ctxFactory.CreateStagingDbContext();
         return await ctx.StagedFiles.FindAsync(new object?[] { id }, ct);
@@ -36,7 +36,7 @@ public sealed class StagedFileRepository : IStagedFileRepository
         await using var ctx = _ctxFactory.CreateStagingDbContext();
         return await ctx.StagedFiles.AsNoTracking().OrderByDescending(x => x.UploadedAt).ToListAsync(ct);
     }
-    public async Task DeleteAsync(int id, CancellationToken ct = default)
+    public async Task DeleteAsync(Guid id, CancellationToken ct = default)
     {
         await using var ctx = _ctxFactory.CreateStagingDbContext();
 

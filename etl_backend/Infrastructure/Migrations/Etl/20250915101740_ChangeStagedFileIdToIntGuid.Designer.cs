@@ -3,17 +3,21 @@ using System;
 using Infrastructure.DbConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace etl_backend.Migrations.Etl
+namespace Infrastructure.Migrations.Etl
 {
     [DbContext(typeof(EtlDbContext))]
-    partial class EtlDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250915101740_ChangeStagedFileIdToIntGuid")]
+    partial class ChangeStagedFileIdToIntGuid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

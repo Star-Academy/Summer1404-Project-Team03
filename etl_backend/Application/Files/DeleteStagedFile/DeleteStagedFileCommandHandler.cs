@@ -1,4 +1,3 @@
-using Application.Abstractions;
 using Application.Common.Exceptions;
 using Application.Files.Commands;
 using Application.Files.DeleteStagedFile.ServiceAbstractions;
@@ -6,7 +5,7 @@ using Application.Services.Repositories.Abstractions;
 using Domain.Enums;
 using MediatR;
 
-namespace Application.Files.Handlers;
+namespace Application.Files.DeleteStagedFile;
 
 public class DeleteStagedFileCommandHandler : IRequestHandler<DeleteStagedFileCommand>
 {

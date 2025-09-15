@@ -39,7 +39,7 @@ public sealed class SchemaRegistrationService : ISchemaRegistrationService
     }
 
     public async Task<(DataTableSchema Schema, StagedFile Staged)> RegisterAsync(
-        int stagedFileId,
+        Guid stagedFileId,
         IReadOnlyDictionary<int, string> columnTypesByOrdinal,
         IReadOnlyDictionary<int, string> columnNamesByOrdinal,
         CancellationToken ct = default)

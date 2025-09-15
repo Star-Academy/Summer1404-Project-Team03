@@ -7,8 +7,8 @@ public class DeleteStagedFileValidator : Validator<DeleteStagedFileRequest>
 {
     public DeleteStagedFileValidator()
     {
-        RuleFor(x => x.Id)
-            .GreaterThan(0)
-            .WithMessage("Staged file ID must be greater than 0.");
+        // RuleFor(x => x.Id)
+        //     .GreaterThan(0)
+        //     .WithMessage("Staged file ID must be greater than 0.");
     }
 }

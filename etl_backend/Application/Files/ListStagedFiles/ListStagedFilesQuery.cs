@@ -6,7 +6,7 @@ namespace Application.Files.Queries;
 public record ListStagedFilesQuery : IRequest<List<ListFilesItem>>;
 
 public record ListFilesItem(
-    int Id,
+    Guid Id,
     string OriginalFileName,
     string Stage,
     string Status,

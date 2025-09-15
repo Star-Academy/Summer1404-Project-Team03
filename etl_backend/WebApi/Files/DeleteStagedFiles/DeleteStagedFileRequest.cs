@@ -8,6 +8,5 @@ public class DeleteStagedFileRequest
 {
     [BindFrom("id")]
     [FromRoute]
-    public int Id { get; set; }
-
+    public Guid Id { get; set; }
 }

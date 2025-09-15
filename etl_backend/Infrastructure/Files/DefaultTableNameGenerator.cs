@@ -4,7 +4,7 @@ namespace Infrastructure.Files;
 
 public sealed class DefaultTableNameGenerator : ITableNameGenerator
 {
-    public string Generate(int stagedFileId, string originalFileName)
+    public string Generate(Guid stagedFileId, string originalFileName)
     {
         var baseName = Path.GetFileNameWithoutExtension(originalFileName);
         var slug = new string(baseName.ToLowerInvariant().Select(ch => char.IsLetterOrDigit(ch) ? ch : '_').ToArray());

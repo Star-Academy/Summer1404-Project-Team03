@@ -4,7 +4,7 @@ using MediatR;
 namespace Application.Files.Commands;
 [RequireRole(AppRoles.DataAdmin, AppRoles.SysAdmin)]
 public record RegisterSchemaCommand(
-    int StagedFileId,
+    Guid StagedFileId,
     Dictionary<int, String> ColumnTypeMap,
     Dictionary<int, String> ColumnNameMap
 ) : IRequest<RegisterSchemaResult>;
@@ -23,7 +23,7 @@ public record SchemaColumnDto(
 );
 
 public record StagedFileStatusDto(
-    int Id,
+    Guid Id,
     string Stage,
     string Status,
     string? ErrorCode

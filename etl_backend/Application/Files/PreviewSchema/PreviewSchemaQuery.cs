@@ -3,10 +3,10 @@ using MediatR;
 
 namespace Application.Files.Queries;
 [RequireRole(AppRoles.Analyst, AppRoles.DataAdmin, AppRoles.SysAdmin)]
-public record PreviewSchemaQuery(int StagedFileId) : IRequest<ColumnPreviewResponse>;
+public record PreviewSchemaQuery(Guid StagedFileId) : IRequest<ColumnPreviewResponse>;
 
 public record ColumnPreviewResponse(
-    int StagedFileId,
+    Guid StagedFileId,
     List<ColumnPreviewItem> Columns
 );
 

@@ -2,7 +2,7 @@ namespace WebApi.Files;
 
 public class RegisterSchemaRequest
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public List<RegisterSchemaColumnItem> Columns { get; set; } = new();
 }
 

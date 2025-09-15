@@ -11,6 +11,7 @@ public class StagedFileConfig : IEntityTypeConfiguration<StagedFile>
         builder.ToTable("staged_files");
 
         builder.HasKey(f => f.Id);
+        builder.Property(f => f.Id).ValueGeneratedOnAdd();
 
         builder.Property(f => f.OriginalFileName)
             .IsRequired()

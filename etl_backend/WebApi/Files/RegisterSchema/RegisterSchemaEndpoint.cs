@@ -28,7 +28,7 @@ public class RegisterSchemaEndpoint : Endpoint<RegisterSchemaRequest, RegisterSc
             s.Description = "Assigns column types and registers schema. Cannot be modified after table creation.";
             s.ExampleRequest = new RegisterSchemaRequest
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Columns = new List<RegisterSchemaColumnItem>
                 {
                     new() { OrdinalPosition = 1, ColumnType = "string", ColumnName = "new_name"}

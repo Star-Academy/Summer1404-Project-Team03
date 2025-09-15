@@ -21,7 +21,7 @@ public record StageFileBatchItem(
 );
 
 public record StageFileResponse(
-    int Id,
+    Guid Id,
     string OriginalFileName,
     string StoredFilePath,
     long FileSize,

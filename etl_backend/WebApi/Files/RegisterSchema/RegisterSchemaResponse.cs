@@ -17,7 +17,7 @@ public class RegisterSchemaColumnResponse
 
 public class StagedFileStatusResponse
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Stage { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;
     public string? ErrorCode { get; set; }

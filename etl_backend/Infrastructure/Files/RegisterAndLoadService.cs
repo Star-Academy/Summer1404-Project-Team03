@@ -29,7 +29,7 @@ public class RegisterAndLoadService : IRegisterAndLoadService
     }
 
     public async Task<RegisterAndLoadResult> ExecuteAsync(
-        int stagedFileId,
+        Guid stagedFileId,
         Dictionary<int, string> columnTypeMap,
         Dictionary<int, string> columnNameMap,
         LoadMode mode = LoadMode.Append,
@@ -63,7 +63,7 @@ public class RegisterAndLoadService : IRegisterAndLoadService
         }
     }
 
-    private async Task CompensateAsync(int schemaId, int stagedFileId, CancellationToken ct)
+    private async Task CompensateAsync(int schemaId, Guid stagedFileId, CancellationToken ct)
     {
         try
         {

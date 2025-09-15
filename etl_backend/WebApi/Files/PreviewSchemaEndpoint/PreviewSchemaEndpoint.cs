@@ -28,7 +28,7 @@ public class PreviewSchemaEndpoint : Endpoint<PreviewSchemaRequest, PreviewSchem
         {
             s.Summary = "Preview schema from staged file";
             s.Description = "Returns column schema preview based on header row of the staged file.";
-            s.ExampleRequest = new PreviewSchemaRequest { Id = 1 };
+            s.ExampleRequest = new PreviewSchemaRequest { Id = Guid.NewGuid() };
         });
     }
 

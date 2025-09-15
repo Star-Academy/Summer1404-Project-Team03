@@ -7,7 +7,7 @@ public class ListStagedFilesResponse
 
 public class ListStagedFilesItemResponse
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string OriginalFileName { get; set; } = string.Empty;
     public string Stage { get; set; } = string.Empty;
     public string Status { get; set; } = string.Empty;

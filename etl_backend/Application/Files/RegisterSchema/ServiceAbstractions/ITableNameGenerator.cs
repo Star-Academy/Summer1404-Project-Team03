@@ -2,5 +2,5 @@ namespace Infrastructure.Files.Abstractions;
 
 public interface ITableNameGenerator
 {
-    string Generate(int stagedFileId, string originalFileName);
+    string Generate(Guid stagedFileId, string originalFileName);
 }

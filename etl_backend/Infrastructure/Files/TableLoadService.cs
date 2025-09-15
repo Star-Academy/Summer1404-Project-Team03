@@ -29,7 +29,7 @@ public sealed class TableLoadService : ITableLoadService
         => (_pre, _specFactory, _tableAdmin, _writer, _rows, _state)
          = (preconditions, specFactory, tableAdmin, writer, rows, state);
 
-    public async Task<LoadResult> LoadAsync(int stagedFileId, ILoadPolicy policy, CancellationToken ct = default)
+    public async Task<LoadResult> LoadAsync(Guid stagedFileId, ILoadPolicy policy, CancellationToken ct = default)
     {
         // Preconditions: fetch staged + schema and validate readiness
         var (staged, schema) = await _pre.EnsureLoadableAsync(stagedFileId, ct);

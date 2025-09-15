@@ -29,7 +29,7 @@ public class LoadFileIntoTableEndpoint : Endpoint<LoadFileIntoTableRequest, Load
             s.Description = "Starts data load process. Supports Append or Truncate modes.";
             s.ExampleRequest = new LoadFileIntoTableRequest
             {
-                Id = 1,
+                Id = Guid.NewGuid(),
                 Mode = "Append",
                 DropOnFailure = false
             };

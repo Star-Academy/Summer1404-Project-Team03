@@ -13,7 +13,7 @@ public sealed class LoadPreconditionsService : ILoadPreconditionsService
     public LoadPreconditionsService(IStagedFileRepository stagedRepo, IDataTableSchemaRepository schemaRepo)
         => (_stagedRepo, _schemaRepo) = (stagedRepo, schemaRepo);
 
-    public async Task<(StagedFile staged, DataTableSchema schema)> EnsureLoadableAsync(int stagedFileId, CancellationToken ct = default)
+    public async Task<(StagedFile staged, DataTableSchema schema)> EnsureLoadableAsync(Guid stagedFileId, CancellationToken ct = default)
     {
         var staged = await _stagedRepo.GetByIdAsync(stagedFileId, ct)
                      ?? throw new InvalidOperationException($"Staged file {stagedFileId} not found.");

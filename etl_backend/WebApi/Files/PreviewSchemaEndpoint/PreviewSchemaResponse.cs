@@ -2,7 +2,7 @@ namespace WebApi.Files;
 
 public class PreviewSchemaResponse
 {
-    public int StagedFileId { get; set; }
+    public Guid StagedFileId { get; set; }
     public List<PreviewSchemaColumnItem> Columns { get; set; } = new();
 }
 

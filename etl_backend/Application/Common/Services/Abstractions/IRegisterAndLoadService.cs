@@ -6,7 +6,7 @@ namespace Application.Abstractions;
 public interface IRegisterAndLoadService
 {
     Task<RegisterAndLoadResult> ExecuteAsync(
-        int stagedFileId,
+        Guid stagedFileId,
         Dictionary<int, string> columnTypeMap,
         Dictionary<int, string> columnNameMap,
         LoadMode mode = LoadMode.Append,

@@ -6,7 +6,7 @@ using MediatR;
 namespace Application.Files.Commands;
 [RequireRole(AppRoles.DataAdmin, AppRoles.SysAdmin)]
 public record LoadFileIntoTableCommand(
-    int StagedFileId,
+    Guid StagedFileId,
     LoadMode Mode = LoadMode.Append,
     bool DropOnFailure = false
 ) : IRequest<LoadResult>;
