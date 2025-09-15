@@ -13,7 +13,7 @@ export const homeRoutes: Routes = [
         redirectTo: 'workflows',
       },
       {
-        path: 'workflows',
+        path: 'workflows-list',
         loadChildren: () =>
           import('./manage-workflows/manage-workflows.module').then(
             (m) => m.ManageWorkflowsModule
@@ -39,7 +39,7 @@ export const homeRoutes: Routes = [
       },
       {
         path: '**',
-        redirectTo: 'workflows'
+        redirectTo: 'workflows-list'
       }
     ],
   },
