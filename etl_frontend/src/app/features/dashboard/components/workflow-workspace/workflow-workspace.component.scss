@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+app-workflow-sidebar {
+  width: 14rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  border-right: 1px solid rgba(184, 184, 184, 0.507);
+
+  overflow-y: auto;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}

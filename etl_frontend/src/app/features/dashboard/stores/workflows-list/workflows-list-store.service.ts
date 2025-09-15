@@ -24,7 +24,7 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     private readonly messageService: MessageService,
   ) {
     super(initialState);
-    //TODO handle selected workflowId at begining
+    this.loadWorkflows();
   }
 
   public readonly vm = this.selectSignal(s => {
@@ -41,12 +41,12 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     }
   });
 
-  private readonly addEditingWorkflow = this.updater<string>((state, value) => 
-    ({...state, editingWorkflowsId: [...state.editingWorkflowsId.filter(id => id !== value)]})
+  private readonly addEditingWorkflow = this.updater<string>((state, value) =>
+    ({ ...state, editingWorkflowsId: [...state.editingWorkflowsId.filter(id => id !== value)] })
   )
 
-  private readonly removeEditingWorkflow = this.updater<string>((state, value) => 
-    ({...state, editingWorkflowsId: [...state.editingWorkflowsId, value]})
+  private readonly removeEditingWorkflow = this.updater<string>((state, value) =>
+    ({ ...state, editingWorkflowsId: [...state.editingWorkflowsId, value] })
   )
 
   public createNewWorkflow = this.effect<{ workflowName: string }>(workflow$ => {

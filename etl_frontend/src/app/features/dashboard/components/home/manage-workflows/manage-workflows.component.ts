@@ -9,7 +9,7 @@ import { WorkflowService } from './service/workflow.service';
   templateUrl: './manage-workflows.component.html',
   styleUrl: './manage-workflows.component.scss'
 })
-export class ManageWorkflowsComponent implements OnInit {
+export class ManageWorkflowsComponent {
   public readonly workflows = computed(() => this.workflowListStore.vm().workflows);
   public readonly isLoading = computed(() => this.workflowListStore.vm().isLoadingWorkflows);
   public readonly isEditWorkflowModalVisible = signal<boolean>(false);
@@ -17,7 +17,6 @@ export class ManageWorkflowsComponent implements OnInit {
 
   constructor(
     private readonly workflowListStore: WorkflowsListStore,
-    private readonly workflowService: WorkflowService,
     private readonly messageService: MessageService,
   ) {}
 
@@ -44,10 +43,6 @@ export class ManageWorkflowsComponent implements OnInit {
   public onEditWorkflow(workflowId: string) {
     this.onToggleEditWrokflowModalVisibility();
     this.selectedWorkflowToEdit.set(workflowId);
-  }
-
-  ngOnInit() {
-    this.fetchWorkflows();
   }
 }
 
