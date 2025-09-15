@@ -12,6 +12,7 @@ const initialState: WorkflowsListState = {
   selectedWorkflowId: null,
   loadingWorkflowId: null,
   isCreatingWorkflow: false,
+  editingWorkflowsId: []
 }
 
 @Injectable()
@@ -35,6 +36,14 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
       openWorkflows
     }
   });
+
+  private readonly addEditingWorkflow = this.updater<string>((state, value) => 
+    ({...state, editingWorkflowsId: [...state.editingWorkflowsId.filter(id => id !== value)]})
+  )
+
+  private readonly removeEditingWorkflow = this.updater<string>((state, value) => 
+    ({...state, editingWorkflowsId: [...state.editingWorkflowsId, value]})
+  )
 
   public createNewWorkflow = this.effect<{ workflowName: string }>(workflow$ => {
     return workflow$.pipe(
@@ -157,4 +166,11 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
       )
     )
   );
+
+  public readonly editWorkflow = this.effect<WorkflowInfo>((trigger$) => {
+    return trigger$.pipe(
+      tap((workflow) => this.addEditingWorkflow(workflow.id)),
+      // exhaustMap((editedWorkflow) => this.workflowService.updateWorkflowById(workflow))
+    )
+  })
 }

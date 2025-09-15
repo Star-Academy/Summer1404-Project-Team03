@@ -1,0 +1,97 @@
+<p-dialog
+  header="Edit Workflow"
+  [modal]="true"
+  [visible]="visible()"
+  [draggable]="false"
+  (onHide)="onClose()"
+>
+  <form [formGroup]="workflowForm" (ngSubmit)="onSave()" novalidate>
+    <div class="modal">
+      <div class="modal__inputs">
+        <!-- Name -->
+        <div class="modal__input">
+          <label for="name">Name</label>
+          <input
+            pInputText
+            id="name"
+            type="text"
+            placeholder="Enter workflow name"
+            formControlName="name"
+          />
+          <div
+            *ngIf="f['name'].invalid && (f['name'].dirty || f['name'].touched)"
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['name'].errors?.['required']"
+              >Name is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div class="modal__input">
+          <label for="status">Status</label>
+          <p-select
+            id="status"
+            [options]="statusOptions"
+            formControlName="status"
+            optionLabel="label"
+            optionValue="value"
+            placeholder="Select status"
+            class="modal__select"
+          ></p-select>
+          <div
+            *ngIf="
+              f['status'].invalid && (f['status'].dirty || f['status'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['status'].errors?.['required']"
+              >Status is required.</small
+            >
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="modal__input">
+          <label for="description">Description</label>
+          <input
+            pInputText
+            id="description"
+            type="text"
+            placeholder="Enter description"
+            formControlName="description"
+          />
+          <div
+            *ngIf="
+              f['description'].invalid &&
+              (f['description'].dirty || f['description'].touched)
+            "
+            class="p-error text-xs mt-1"
+          >
+            <small *ngIf="f['description'].errors?.['required']"
+              >Description is required.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="modal__btn">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          (click)="onClose()"
+          rounded
+          type="button"
+        />
+        <p-button
+          label="Edit Workflow"
+          type="submit"
+          [disabled]="workflowForm.invalid"
+          rounded
+          [loading]="vm().isLoading"
+        />
+      </div>
+    </div>
+  </form>
+</p-dialog>

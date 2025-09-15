@@ -1,54 +1,64 @@
+@if(isEditWorkflowModalVisible()) {
+<app-edit-workflow-modal
+  (edited)="fetchWorkflows()"
+  [workflowId]="selectedWorkflowToEdit()"
+  [visible]="isEditWorkflowModalVisible()"
+  (close)="onToggleEditWrokflowModalVisibility()"
+></app-edit-workflow-modal>
+}
+
 <p-card header="Manage Workflows">
   <ng-template pTemplate="body">
-  <div class="table-wrapper">
-    <p-table
-      [value]="workflows()"
-      styleClass="p-datatable-striped"
-      [tableStyle]="{ 'min-width': '50rem' }"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Workflow Name</th>
-          <th>Description</th>
-          <th>Created At</th>
-          <th>Updated At</th>
-          <th>Status</th>
-          <th>Actions</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-workflow>
-        <tr>
-          <td>
-            <i class="pi pi-file-plus"></i>
-            {{ workflow.name }}
-          </td>
-          <td>{{ workflow.description }}</td>
-          <td>{{ workflow.createdAt }}</td>
-          <td>{{ workflow.updatedAt }}</td>
-          <td>{{ workflow.status }}</td>
-          <td>
-            <p-button
-              icon="pi pi-trash"
-              styleClass="p-button-rounded p-button-danger p-button-text"
-              (click)="onDeleteWorkflow(workflow.id, workflow.status)"
-              pTooltip="Delete Workflow"
-              [tooltipPosition]="'top'"
-            ></p-button>
-            <p-button
-              icon="pi pi-pencil"
-              styleClass="p-button-rounded p-button-secondary p-button-text"
-              (click)="onEditWorkflow(workflow.id)"
-              pTooltip="Edit Workflow"
-              [tooltipPosition]="'top'"
-            ></p-button>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr style="height: 10rem; font-size: 1.1rem">
-          <td colspan="4">No Workflow found.</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
-</ng-template></p-card>
+    <div class="table-wrapper">
+      <p-table
+        [value]="workflows()"
+        styleClass="p-datatable-striped"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Workflow Name</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-workflow>
+          <tr>
+            <td>
+              <i class="pi pi-file-plus"></i>
+              {{ workflow.name }}
+            </td>
+            <td>{{ workflow.description }}</td>
+            <td>{{ workflow.createdAt }}</td>
+            <td>{{ workflow.updatedAt }}</td>
+            <td>{{ workflow.status }}</td>
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger p-button-text"
+                (click)="onDeleteWorkflow(workflow.id, workflow.status)"
+                pTooltip="Delete Workflow"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                (click)="onEditWorkflow(workflow.id)"
+                pTooltip="Edit Workflow"
+                [tooltipPosition]="'top'"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr style="height: 10rem; font-size: 1.1rem">
+            <td colspan="4">No Workflow found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template></p-card
+>

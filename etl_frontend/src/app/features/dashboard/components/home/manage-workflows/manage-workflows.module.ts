@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
+import { EditWorkflowModalComponent } from './components/edit-workflow-modal/edit-workflow-modal.component';
 
 @NgModule({
   declarations: [ManageWorkflowsComponent],
@@ -21,7 +22,8 @@ import { TooltipModule } from 'primeng/tooltip';
     DropdownModule,
     FormsModule,
     TooltipModule,
-    RouterModule.forChild(manageWorkflowRoutes)
+    RouterModule.forChild(manageWorkflowRoutes),
+    EditWorkflowModalComponent,
   ]
 })
 export class ManageWorkflowsModule { }

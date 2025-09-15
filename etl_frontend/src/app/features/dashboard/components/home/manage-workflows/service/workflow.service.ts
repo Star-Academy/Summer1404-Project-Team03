@@ -17,12 +17,12 @@ export class WorkflowService {
     return this.http.post<WorkflowInfo>(this.workflowApi.list, newWorkflow);
   }
 
-  public updateWorkflowById(workflowId: string, updatedWorkflow: WorkflowPut) {
-    return this.http.put(this.workflowApi.update(workflowId), updatedWorkflow);
+  public updateWorkflowById(workflowId: string, updatedWorkflow: WorkflowPut): Observable<WorkflowInfo> {
+    return this.http.put<WorkflowInfo>(this.workflowApi.update(workflowId), updatedWorkflow);
   }
 
-  public getWorkflowById(workflowId: string) {
-    return this.http.get(this.workflowApi.item(workflowId));
+  public getWorkflowById(workflowId: string): Observable<WorkflowInfo> {
+    return this.http.get<WorkflowInfo>(this.workflowApi.item(workflowId));
   }
 
   public deleteWorkflowById(workflowId: string) {
