@@ -4,9 +4,10 @@
   padding-block-start: 0.8rem;
 
   .sidebar {
-    inline-size: 15vw;
+    min-inline-size: 15vw;
     display: flex;
     align-items: start;
+    flex-wrap: nowrap;
     flex-direction: column;
     gap: 0.5rem;
 

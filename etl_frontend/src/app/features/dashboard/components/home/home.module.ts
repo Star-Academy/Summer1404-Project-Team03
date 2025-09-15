@@ -6,6 +6,7 @@ import { MenuModule } from 'primeng/menu';
 import { HomeComponent } from './home.component';
 import { TableService } from './manage-tables/services/table.service';
 import { Button } from 'primeng/button';
+import { HasRoleDirective } from '../../../../shared/directives/has-role/has-role.directive';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -14,7 +15,8 @@ import { Button } from 'primeng/button';
     RouterModule,
     MenuModule,
     RouterModule.forChild(homeRoutes),
-    Button
+    Button,
+    HasRoleDirective
   ],
   providers: [TableService]
 })

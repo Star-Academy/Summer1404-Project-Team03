@@ -1,25 +1,31 @@
-<div class="sidebar">
-  <!-- <p-menu [model]="menuItems" /> -->
+<div class="sidebar tabs">
   <p-button
     label="Workflow History"
     icon="pi pi-file-plus"
-    [routerLink]="['/', 'dashboard', 'workflows']"
-    routerLinkActive="active-link"
+    [routerLink]="'/dashboard/workflows'"
+    class="tab"
+    rounded
+    [routerLinkActive]="'active-tab'"
     text
   ></p-button>
   <p-button
+    *hasRole="['sys_admin', 'data_admin']"
     label="File Management"
     icon="pi pi-file-import"
+    class="tab"
+    rounded
     [routerLink]="['/', 'dashboard', 'files']"
-    routerLinkActive="active-link"
+    [routerLinkActive]="'active-tab'"
     text
   ></p-button>
   <p-button
+    *hasRole="['sys_admin', 'data_admin']"
     label="Table Management"
     icon="pi pi-table"
     [routerLink]="['/', 'dashboard', 'tables']"
-    routerLinkActive="active-link"
+    [routerLinkActive]="'active-tab'"
     text
+    rounded
   ></p-button>
 </div>
 

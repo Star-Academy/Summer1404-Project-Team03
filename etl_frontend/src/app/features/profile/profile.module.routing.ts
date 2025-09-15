@@ -21,7 +21,7 @@ export const profileRoutes: Routes = [
         loadChildren: () => import('./components/manage-user/manage-user.module').then(c => c.ManageUsersModule),
         canMatch: [sysAdminGuard],
         data: {
-          roles: 'sys_admin'
+          roles: ['sys_admin']
         }
       }
     ]

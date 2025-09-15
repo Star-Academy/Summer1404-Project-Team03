@@ -12,12 +12,13 @@ p-toolbar .p-toolbar {
   border-block-start: none;
 }
 
-.tabs p-button {
+p-button.tab{
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* This is often needed for PrimeNG's ripple effect */
+  padding-bottom: 5px !important; /* Creates space for the line INSIDE the button */
 }
 
-.tabs p-button.active-tab::after {
+p-button.active-tab::after {
   content: "";
 
   background-color: var(--primary-color, #3b82f6);
