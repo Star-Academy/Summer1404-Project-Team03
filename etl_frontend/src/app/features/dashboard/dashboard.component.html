@@ -9,7 +9,7 @@
         size="large"
         [routerLink]="['/', 'dashboard']"
       />
-      @if ('/dashboard/workflow' | checkRoute) {
+      @if ('/dashboard/workflows' | checkRoute) {
         <app-workflows-tabs-management></app-workflows-tabs-management>
       }
     </div>

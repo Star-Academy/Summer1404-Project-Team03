@@ -59,6 +59,8 @@ export class UserStoreService extends ComponentStore<UserStore> {
     (user, isLoading, isSysAdmin) => ({ user, isLoading, isSysAdmin })
   );
 
+  public readonly vm$ = this.select(s => s);
+
   public loadUser(): void {
     this.setLoading(true);
 

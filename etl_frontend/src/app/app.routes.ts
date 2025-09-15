@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { sysAdminGuard } from './shared/guards/sys-admin.guard';
+import { authGuard } from './shared/guards/auth/auth.guard';
 
 export const routes: Routes = [
   {
@@ -11,6 +12,7 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canMatch: [authGuard],
     loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
