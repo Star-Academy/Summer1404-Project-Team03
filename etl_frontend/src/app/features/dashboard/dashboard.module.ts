@@ -21,6 +21,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { ButtonGroupModule } from 'primeng/buttongroup';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckRoutePipe } from '../../shared/pipe/check-route.pipe';
+import { WorkflowService } from './components/home/manage-workflows/service/workflow.service';
 
 @NgModule({
   declarations: [DashboardComponent, WorkflowsTabsManagementComponent, WorkflowTabComponent, WorkflowSelectorComponent],
@@ -42,6 +43,6 @@ import { CheckRoutePipe } from '../../shared/pipe/check-route.pipe';
     CheckRoutePipe,
     MenuModule,
   ],
-  providers: [WorkflowsListStore]
+  providers: [WorkflowsListStore, WorkflowService]
 })
 export class DashboardModule { }

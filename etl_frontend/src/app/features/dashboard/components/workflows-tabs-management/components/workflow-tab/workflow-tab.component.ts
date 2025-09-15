@@ -1,5 +1,5 @@
 import { Component, input, output } from '@angular/core';
-import { WorkflowInfo } from '../../../../models/workflow.model';
+import { WorkflowInfo } from '../../../home/manage-workflows/models/workflow.model';
 
 @Component({
   selector: 'app-workflow-tab',

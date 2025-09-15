@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { WorkflowsListStore } from '../../stores/workflows-list/workflows-list-store.service';
-import { WorkflowInfo } from '../../models/workflow.model';
 import { of } from 'rxjs';
 import { ListboxChangeEvent } from 'primeng/listbox';
 

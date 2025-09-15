@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [ManageWorkflowsComponent],
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     DropdownModule,
     FormsModule,
+    TooltipModule,
     RouterModule.forChild(manageWorkflowRoutes)
   ]
 })
