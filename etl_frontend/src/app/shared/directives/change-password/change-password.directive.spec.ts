@@ -15,7 +15,7 @@ describe('ChangePasswordDirective', () => {
 
   beforeEach(() => {
     mockButton = {loading: false} as Button;
-    mockUsersService = jasmine.createSpyObj('UsersService', ['changePassword']);
+    mockUsersService = jasmine.createSpyObj('UsersService', ['getChangePasswordUrl']);
     mockMessageService = jasmine.createSpyObj('MessageService', ['add']);
     mockCdr = jasmine.createSpyObj('ChangeDetectorRef', ['detectChanges']);
 
@@ -45,7 +45,7 @@ describe('ChangePasswordDirective', () => {
 
   it('should call changePassword and redirect on success', () => {
     const url = 'https://example.com';
-    mockUsersService.changePassword.and.returnValue(of({changePasswordUrl: url}));
+    mockUsersService.getChangePasswordUrl.and.returnValue(of({changePasswordUrl: url}));
 
     spyOn(directive as any, 'redirect');
     directive.handleClick();
@@ -55,7 +55,7 @@ describe('ChangePasswordDirective', () => {
   });
 
   it('should show error message on failure', () => {
-    mockUsersService.changePassword.and.returnValue(throwError(() => new Error('fail')));
+    mockUsersService.getChangePasswordUrl.and.returnValue(throwError(() => new Error('fail')));
 
     directive.handleClick();
 
@@ -71,6 +71,6 @@ describe('ChangePasswordDirective', () => {
     directive['isLoading'].set(true);
     directive.handleClick();
 
-    expect(mockUsersService.changePassword).not.toHaveBeenCalled();
+    expect(mockUsersService.getChangePasswordUrl).not.toHaveBeenCalled();
   });
 });

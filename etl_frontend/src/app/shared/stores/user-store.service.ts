@@ -71,6 +71,10 @@ export class UserStoreService extends ComponentStore<UserStore> {
           this.setUser(user)
           this.setSysAdmin(isSysAdmin)
         },
+        error: () => {
+          this.setUser(initialUser.user);
+          this.setSysAdmin(false);
+        }
       }),
       finalize(() => this.setLoading(false)),
     ).subscribe();
