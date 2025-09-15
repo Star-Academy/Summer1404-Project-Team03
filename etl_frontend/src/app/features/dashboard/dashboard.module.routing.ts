@@ -12,7 +12,7 @@ export const dashboardRoutes: Routes = [
       },
       {
         path: 'workflow',
-        loadChildren: () => import('./components/workflow-editor/workflow-workspace.module').then(m => m.WorkflowEditorModule)
+        loadChildren: () => import('./components/workflow-workspace/workflow-workspace.module').then(m => m.WorkflowEditorModule)
       }
     ],
   },
