@@ -1,0 +1,23 @@
+:host {
+  display: flex;
+  gap: 1rem;
+  padding-block-start: 0.8rem;
+
+  .sidebar {
+    min-inline-size: 15vw;
+    display: flex;
+    align-items: start;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .active-tab {
+      border-bottom: 1px solid blue;
+      border-radius: 0.3rem;
+    }
+  }
+
+  .dynamic-content {
+    inline-size: 85vw;
+  }
+}

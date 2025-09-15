@@ -1,0 +1,65 @@
+<div class="file-process-stepper flex flex-col items-center gap-6 p-6">
+  <p-stepper [value]="activeStep" class="w-full max-w-4xl" [linear]="true">
+    <p-step-list>
+      <p-step [value]="1">Upload File</p-step>
+      <p-step [value]="2">Configure Schema</p-step>
+      <p-step [value]="3">Create Table</p-step>
+    </p-step-list>
+
+    <p-step-panels>
+      <p-step-panel [value]="1">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="step-content flex flex-col gap-4 items-center">
+            <h3 class="text-lg font-semibold">Step 1: Upload File</h3>
+            <p class="text-gray-600">
+              We will upload your file <strong>{{ fileName }}</strong> to the
+              server.
+            </p>
+
+            <p-button
+              label="Upload & Continue"
+              icon="pi pi-cloud-upload"
+              [loading]="vm().isSending"
+              (onClick)="onUpload(activateCallback)"
+            />
+          </div>
+        </ng-template>
+      </p-step-panel>
+
+      <!-- Step 2 -->
+      <p-step-panel [value]="2">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="step-content flex flex-col gap-4">
+            <h3 class="text-lg font-semibold">Step 2: Configure Schema</h3>
+            <p class="text-gray-600">
+              Configure column names and data types for your uploaded file.
+            </p>
+
+            <app-schema-editor
+              (onSave)="onSchemaEdited($event)"
+              [fileId]="fileId()"
+            ></app-schema-editor>
+            </div>
+        </ng-template>
+      </p-step-panel>
+
+      <!-- Step 3 -->
+      <p-step-panel [value]="3">
+        <ng-template #content let-activateCallback="activateCallback">
+          <div class="step-content flex flex-col gap-4 items-center">
+            <h3 class="text-lg font-semibold">Step 3: Create Table</h3>
+            <p class="text-gray-600">
+              Confirm and create a table from your processed file.
+            </p>
+
+            <p-button
+              label="Create Table"
+              icon="pi pi-database"
+              (onClick)="onCreateTable()"
+            />
+          </div>
+        </ng-template>
+      </p-step-panel>
+    </p-step-panels>
+  </p-stepper>
+</div>

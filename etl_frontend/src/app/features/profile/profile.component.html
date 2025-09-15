@@ -2,6 +2,16 @@
   <div start>
     <div class="tabs">
       <p-button
+        label="Back to dashboard"
+        icon="pi pi-arrow-left"
+        iconPos="left"
+        class="back-button"
+        size="small"
+        text
+        rounded
+        [routerLink]="['/', 'dashboard']"
+      ></p-button>
+      <p-button
         rounded
         text
         label="Your Profile"
@@ -11,27 +21,20 @@
         [routerLinkActiveOptions]="{ exact: true }"
       />
 
-      @if (isSysAdmin()) {
-        <p-button
-          rounded
-          text
-          label="Manage Users"
-          class="tab"
-          [routerLink]="'/profile/admin'"
-          [routerLinkActive]="'active-tab'"
-        />
-      }
+      <p-button
+      *hasRole="['sys_admin']"
+        rounded
+        text
+        label="Manage Users"
+        class="tab"
+        [routerLink]="'/profile/admin'"
+        [routerLinkActive]="'active-tab'"
+      />
     </div>
   </div>
 
   <div end>
-    <p-button
-      icon="pi pi-sign-out"
-      label="Signout"
-      rounded
-      text
-      appSignOut
-    />
+    <p-button icon="pi pi-sign-out" label="Signout" rounded text appSignOut />
   </div>
 </app-header>
 
