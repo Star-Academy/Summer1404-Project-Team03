@@ -15,6 +15,7 @@ using Application.Users.EditUser.ServiceAbstractions;
 using Application.Users.GetAllRoles.ServiceAbstractions;
 using Application.Users.GetUserById.ServiceAbstractions;
 using Application.Users.ListUsers;
+using Application.WorkFlow.Abstractions;
 using Domain.Entities;
 using etl_backend.Application.DataFile.Abstraction;
 using etl_backend.Application.DataFile.Services;
@@ -35,6 +36,7 @@ using Infrastructure.SsoServices.User;
 using Infrastructure.SsoServices.User.Abstractions;
 using Infrastructure.Tables;
 using Infrastructure.Tables.Abstractions;
+using Infrastructure.Workflows;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -163,6 +165,11 @@ public static class DependencyInjection
         services.AddSingleton<IGetUserByIdService, GetUserByIdService>();
         services.AddSingleton<IListUsersService, GetAllUsersService>();
         services.AddSingleton<IGetAllRoles, GetAllRolesService>();
+        
+        // --- Workflow ---
+        services.AddSingleton<IWorkflowReader, WorkflowReader>();
+        services.AddSingleton<IWorkflowWriter, WorkflowWriter>();
+        services.AddSingleton<IWorkflowDeleter, WorkflowDeleter>();
 
         return services;
     }

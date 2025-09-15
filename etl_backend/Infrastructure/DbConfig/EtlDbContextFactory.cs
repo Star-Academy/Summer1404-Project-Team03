@@ -11,4 +11,5 @@ public sealed class EtlDbContextFactory : IEtlDbContextFactory
 
     public IStagingDbContext CreateStagingDbContext() => _dbFactory.CreateDbContext();
     public ISchemaDbContext  CreateSchemaDbContext()  => _dbFactory.CreateDbContext();
+    public IWorkflowDbContext CreateWorkflowDbContext() => _dbFactory.CreateDbContext();
 }
