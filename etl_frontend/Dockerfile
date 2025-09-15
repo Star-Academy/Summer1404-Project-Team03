@@ -8,9 +8,7 @@ RUN npm ci
 
 COPY . .
 
-RUN npm run lint --if-present
-
-RUN npm run build --if-present
+RUN npm run build -- --configuration production
 
 FROM nginx:alpine
 
