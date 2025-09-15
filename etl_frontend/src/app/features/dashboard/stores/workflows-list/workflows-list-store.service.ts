@@ -1,53 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { WorkflowInfo, WorkflowsListState } from '../../models/workflow.model';
 import { catchError, exhaustMap, of, switchMap, tap, throwError } from 'rxjs';
+import {WorkflowInfo, WorkflowsListState } from '../../components/home/manage-workflows/models/workflow.model';
+import { WorkflowService } from '../../components/home/manage-workflows/service/workflow.service';
 
 const initialState: WorkflowsListState = {
-  workflows: [{
-    id: 'wf_001',
-    name: 'Customer Segmentation',
-    description: 'Cluster customers based on purchase history.',
-    createdAt: new Date('2025-07-15T10:30:00Z'),
-    updatedAt: new Date('2025-08-20T14:10:00Z'),
-    status: 'draft'
-  },
-  {
-    id: 'wf_002',
-    name: 'Sales Data Cleaning',
-    description: 'Remove duplicates and fix missing values in sales dataset.',
-    createdAt: new Date('2025-08-01T09:00:00Z'),
-    updatedAt: new Date('2025-08-25T16:45:00Z'),
-    status: 'completed'
-  },
-  {
-    id: 'wf_003',
-    name: 'Churn Prediction',
-    description: 'Predict customer churn using logistic regression.',
-    createdAt: new Date('2025-08-10T11:15:00Z'),
-    updatedAt: new Date('2025-08-29T18:20:00Z'),
-    status: 'running'
-  },
-  {
-    id: 'wf_004',
-    name: 'Marketing Campaign Analysis',
-    description: 'Analyze effectiveness of email campaigns.',
-    createdAt: new Date('2025-07-28T13:00:00Z'),
-    updatedAt: new Date('2025-08-27T09:50:00Z'),
-    status: 'failed'
-  },
-  {
-    id: 'wf_005',
-    name: 'Inventory Forecasting',
-    description: 'Time-series forecasting of inventory demand.',
-    createdAt: new Date('2025-08-05T15:45:00Z'),
-    updatedAt: new Date('2025-08-30T12:00:00Z'),
-    status: 'draft'
-  }],
+  workflows: [],
   error: null,
   isLoadingWorkflows: false,
-  openedWorkflowsId: ['wf_005', 'wf_004', 'wf_001'],
-  selectedWorkflowId: 'wf_005',
+  openedWorkflowsId: [],
+  selectedWorkflowId: null,
   loadingWorkflowId: null,
   isCreatingWorkflow: false,
 }
@@ -55,22 +17,24 @@ const initialState: WorkflowsListState = {
 @Injectable()
 export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
-  constructor() {
+  constructor(private readonly http: WorkflowService) {
     super(initialState);
     //TODO handle selected workflowId at begining
   }
 
   public readonly vm = this.selectSignal(s => {
-    const workflowMap = new Map(s.workflows.map(wf => [wf.id, wf]));
+    const workflowsArray = Array.isArray(s.workflows) ? s.workflows : [];
+    const workflowMap = new Map(workflowsArray.map(wf => [wf.id, wf]));
 
     const openWorkflows = s.openedWorkflowsId
       .map(id => workflowMap.get(id))
       .filter((wf): wf is WorkflowInfo => wf !== undefined);
+
     return {
       ...s,
-      openWorkflows: openWorkflows
+      openWorkflows
     }
-  })
+  });
 
   public createNewWorkflow = this.effect<{ workflowName: string }>(workflow$ => {
     return workflow$.pipe(
@@ -83,7 +47,7 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
           description: 'New workflow created by user.',
           createdAt: new Date(),
           updatedAt: new Date(),
-          status: 'running'
+          status: 'Running'
         } as WorkflowInfo).pipe(
           tap((newWorkflow) => {
             this.patchState({
@@ -180,4 +144,23 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     }
   );
 
+  public loadWorkflows = this.effect<void>(trigger$ =>
+    trigger$.pipe(
+      tap(() => this.patchState({ isLoadingWorkflows: true, error: null })),
+      switchMap(() =>
+        this.http.getAllWorkFlows().pipe(
+          tap((res: {workflows: WorkflowInfo[] }) => {
+            this.patchState({
+              workflows: res.workflows,
+              isLoadingWorkflows: false,
+            });
+          }),
+          catchError((error) => {
+            this.patchState({ isLoadingWorkflows: false, error });
+            return of(error);
+          })
+        )
+      )
+    )
+  );
 }
