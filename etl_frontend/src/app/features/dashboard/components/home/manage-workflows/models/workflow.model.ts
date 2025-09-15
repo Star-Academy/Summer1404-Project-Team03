@@ -9,7 +9,7 @@ export type WorkflowInfo = {
 
 export type WorkflowPost = {
   name: string;
-  description: string;
+  description?: string;
 }
 
 export type WorkflowPut = {

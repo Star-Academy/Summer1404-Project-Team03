@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { catchError, exhaustMap, of, switchMap, tap, throwError } from 'rxjs';
-import {WorkflowInfo, WorkflowsListState } from '../../components/home/manage-workflows/models/workflow.model';
+import { WorkflowInfo, WorkflowPost, WorkflowsListState } from '../../components/home/manage-workflows/models/workflow.model';
 import { WorkflowService } from '../../components/home/manage-workflows/service/workflow.service';
 
 const initialState: WorkflowsListState = {
@@ -17,7 +17,7 @@ const initialState: WorkflowsListState = {
 @Injectable()
 export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
-  constructor(private readonly http: WorkflowService) {
+  constructor(private readonly workflowService: WorkflowService) {
     super(initialState);
     //TODO handle selected workflowId at begining
   }
@@ -40,20 +40,13 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     return workflow$.pipe(
       tap(() => this.patchState({ isCreatingWorkflow: true })),
       exhaustMap(({ workflowName }) => {
-        // TODO: replace with actual service call
-        return of({
-          id: 'wf_' + Math.floor(Math.random() * 10000),
-          name: workflowName,
-          description: 'New workflow created by user.',
-          createdAt: new Date(),
-          updatedAt: new Date(),
-          status: 'Running'
-        } as WorkflowInfo).pipe(
-          tap((newWorkflow) => {
+        const newWorkflow: WorkflowPost = { name: workflowName };
+        return this.workflowService.createWorkflow(newWorkflow).pipe(
+          tap((createdWorkflow) => {
             this.patchState({
-              workflows: [...this.vm().workflows, newWorkflow],
-              openedWorkflowsId: [...this.vm().openedWorkflowsId, newWorkflow.id],
-              selectedWorkflowId: newWorkflow.id,
+              workflows: [...this.get().workflows, createdWorkflow],
+              openedWorkflowsId: [...this.get().openedWorkflowsId, createdWorkflow.id],
+              selectedWorkflowId: createdWorkflow.id,
               isCreatingWorkflow: false
             });
           }),
@@ -148,8 +141,8 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     trigger$.pipe(
       tap(() => this.patchState({ isLoadingWorkflows: true, error: null })),
       switchMap(() =>
-        this.http.getAllWorkFlows().pipe(
-          tap((res: {workflows: WorkflowInfo[] }) => {
+        this.workflowService.getAllWorkFlows().pipe(
+          tap((res: { workflows: WorkflowInfo[] }) => {
             this.patchState({
               workflows: res.workflows,
               isLoadingWorkflows: false,

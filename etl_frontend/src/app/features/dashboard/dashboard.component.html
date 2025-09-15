@@ -9,14 +9,14 @@
         size="large"
         [routerLink]="['/', 'dashboard']"
       />
-      @if ('/dashboard/workflows' | checkRoute) {
+      <!-- @if ('/dashboard/workflows' | checkRoute) { -->
         <app-workflows-tabs-management></app-workflows-tabs-management>
-      }
+      <!-- } -->
     </div>
     <div class="header__end">
-      @if ('/dashboard' | checkRoute) {
+      <!-- @if ('/dashboard' | checkRoute) { -->
         <app-workflow-selector></app-workflow-selector>
-      }
+      <!-- } -->
       @if (user(); as currentUser) {
       <app-profile-popover
         [username]="currentUser.name"
