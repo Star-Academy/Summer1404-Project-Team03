@@ -23,8 +23,8 @@
             {{ workflow.name }}
           </td>
           <td>{{ workflow.description }}</td>
-          <td>{{ workflow.createdAt }}</td>
-          <td>{{ workflow.updatedAt }}</td>
+          <td>{{ workflow.createdAt | date:'short' }}</td>
+          <td>{{ workflow.updatedAt | date:'short' }}</td>
           <td>{{ workflow.status }}</td>
           <td>
             <p-button
