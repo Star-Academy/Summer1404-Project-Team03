@@ -3,6 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { catchError, exhaustMap, of, switchMap, tap, throwError } from 'rxjs';
 import { WorkflowInfo, WorkflowPost, WorkflowsListState } from '../../components/home/manage-workflows/models/workflow.model';
 import { WorkflowService } from '../../components/home/manage-workflows/service/workflow.service';
+import { MessageService } from 'primeng/api';
 
 const initialState: WorkflowsListState = {
   workflows: [],
@@ -17,7 +18,10 @@ const initialState: WorkflowsListState = {
 @Injectable()
 export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
 
-  constructor(private readonly workflowService: WorkflowService) {
+  constructor(
+    private readonly workflowService: WorkflowService,
+    private readonly messageService: MessageService,
+  ) {
     super(initialState);
     //TODO handle selected workflowId at begining
   }
@@ -138,6 +142,54 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
     }
   );
 
+  public readonly deleteWorkflow = this.effect<string>(workflowId$ =>
+    workflowId$.pipe(
+      tap(() => this.patchState({ isLoadingWorkflows: true, error: null })),
+      exhaustMap((workflowId) =>
+        this.workflowService.deleteWorkflowById(workflowId).pipe(
+          tap(() => {
+            this.patchState((state) => {
+              const updatedWorkflows = state.workflows.filter(wf => wf.id !== workflowId);
+              const newOpenedIds = state.openedWorkflowsId.filter(id => id !== workflowId);
+
+              let newSelectedId = state.selectedWorkflowId;
+              if (state.selectedWorkflowId === workflowId) {
+                const idx = state.openedWorkflowsId.indexOf(workflowId);
+                if (newOpenedIds.length > 0) {
+                  newSelectedId = idx < newOpenedIds.length
+                    ? newOpenedIds[idx]
+                    : newOpenedIds[idx - 1];
+                } else {
+                  newSelectedId = null;
+                }
+              }
+
+              return {
+                ...state,
+                workflows: updatedWorkflows,
+                openedWorkflowsId: newOpenedIds,
+                selectedWorkflowId: newSelectedId,
+                isLoadingWorkflows: false
+              };
+            });
+
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Workflow deleted successfully.',
+            });
+          }),
+          catchError((error) => {
+            this.patchState({ isLoadingWorkflows: false, error });
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Workflow delete failed',
+            });
+            return of(error);
+          })
+        )
+      )
+    )
+  );
   public loadWorkflows = this.effect<void>(trigger$ =>
     trigger$.pipe(
       tap(() => this.patchState({ isLoadingWorkflows: true, error: null })),

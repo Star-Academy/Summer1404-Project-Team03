@@ -21,37 +21,18 @@ export class ManageWorkflowsComponent implements OnInit{
     private readonly workflowListStore: WorkflowsListStore,
     private readonly workflowService: WorkflowService,
     private readonly messageService: MessageService,
-  ) {
-    effect(() => {
-      console.log(this.workflowListStore.vm())
-    });
-  }
+  ) {}
 
   public onDeleteWorkflow(workflowId: string, workflowStatus: string) {
     if (workflowStatus === 'Running') {
       this.messageService.add({
         severity: 'error',
-        summary: 'Workflow is Running. first you need to close it.',
-      })
-
+        summary: 'Workflow is Running. First you need to close it.',
+      });
       return;
     }
 
-    this.workflowService.deleteWorkflowById(workflowId).subscribe({
-      next: () => {
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Workflow deleted successfully.',
-        })
-        this.workflowListStore.loadWorkflows();
-      },
-      error: () => {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Workflow deleted failed',
-        })
-      }
-    })
+    this.workflowListStore.deleteWorkflow(workflowId);
   }
 
   public onEditWorkflow(workflowId: string) {}
