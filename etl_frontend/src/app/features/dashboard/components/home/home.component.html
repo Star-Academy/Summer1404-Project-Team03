@@ -1,9 +1,8 @@
-<div class="sidebar tabs">
+<div class="sidebar">
   <p-button
     label="Workflow History"
     icon="pi pi-file-plus"
     [routerLink]="'/dashboard/workflows'"
-    class="tab"
     rounded
     [routerLinkActive]="'active-tab'"
     text
@@ -12,7 +11,6 @@
     *hasRole="['sys_admin', 'data_admin']"
     label="File Management"
     icon="pi pi-file-import"
-    class="tab"
     rounded
     [routerLink]="['/', 'dashboard', 'files']"
     [routerLinkActive]="'active-tab'"

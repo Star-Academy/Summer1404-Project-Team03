@@ -21,8 +21,8 @@
         [routerLinkActiveOptions]="{ exact: true }"
       />
 
-      @if (isSysAdmin()) {
       <p-button
+      *hasRole="['sys_admin']"
         rounded
         text
         label="Manage Users"
@@ -30,7 +30,6 @@
         [routerLink]="'/profile/admin'"
         [routerLinkActive]="'active-tab'"
       />
-      }
     </div>
   </div>
 
