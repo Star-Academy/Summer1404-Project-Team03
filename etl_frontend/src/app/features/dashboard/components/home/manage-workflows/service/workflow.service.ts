@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../../environments/environment';
-import { WorkflowPost, WorkflowPut } from '../models/workflow.model';
+import {WorkflowInfo, WorkflowPost, WorkflowPut } from '../models/workflow.model';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class WorkflowService {
   private readonly workflowApi = environment.api.workflows;
   constructor(private readonly http: HttpClient) { }
 
-  public getAllWorkFlows() {
-    return this.http.get(this.workflowApi.list);
+  public getAllWorkFlows(): Observable<{ workflows: WorkflowInfo[] }> {
+    return this.http.get<{ workflows: WorkflowInfo[] }>(this.workflowApi.list);
   }
 
   public createWorkflow(newWorkflow: WorkflowPost) {

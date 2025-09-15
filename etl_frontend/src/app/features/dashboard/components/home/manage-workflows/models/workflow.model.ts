@@ -1,10 +1,10 @@
 export type WorkflowInfo = {
     id: string;
     name: string;
-    description?: string;
-    createdAt?: Date;
-    updatedAt?: Date;
-    status?: 'draft' | 'running' | 'completed' | 'failed';
+    description: string;
+    createdAt: Date;
+    updatedAt: Date;
+    status: 'Draft' | 'Running' | 'Completed' | 'Failed';
 }
 
 export type WorkflowPost = {
