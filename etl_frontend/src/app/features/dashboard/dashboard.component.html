@@ -1,11 +1,30 @@
 <app-header>
-  <div class="header__toolbar__start" start>
-    <img src="/assets/logo.svg" alt="logo image" class="header__toolbar__start__img">
-    <p-button icon="pi pi-home" text rounded label="home" />
-  </div>
-  <div class="header__toolbar__end" routerLink="" end>
-    @if (user(); as currentUser) {
-      <app-profile-popover [username]="currentUser.username" [isLoading]="isLoading()"/>
-    }
+  <div class="header" free>
+    <div class="header__start">
+      <img src="/assets/logo.svg" alt="logo image" class="header__start__img" />
+      <p-button
+        icon="pi pi-home"
+        text
+        rounded
+        size="large"
+        [routerLink]="['/', 'dashboard']"
+      />
+      @if ('/dashboard/workflows' | checkRoute) {
+        <app-workflows-tabs-management></app-workflows-tabs-management>
+      }
+    </div>
+    <div class="header__end">
+      @if ('/dashboard' | checkRoute) {
+        <app-workflow-selector></app-workflow-selector>
+      }
+      @if (user(); as currentUser) {
+      <app-profile-popover
+        [username]="currentUser.name"
+        [isLoading]="isLoading()"
+      />
+      }
+    </div>
   </div>
 </app-header>
+
+<router-outlet></router-outlet>

@@ -2,18 +2,23 @@ html {
   overflow: hidden;
 }
 
+:root {
+  --header-height: 3rem;
+}
+
 p-toolbar .p-toolbar {
   padding: 1rem;
   border-inline: none;
   border-block-start: none;
 }
 
-.tabs p-button {
+p-button.tab{
   position: relative;
-  overflow: hidden;
+  overflow: hidden; /* This is often needed for PrimeNG's ripple effect */
+  padding-bottom: 5px !important; /* Creates space for the line INSIDE the button */
 }
 
-.tabs p-button.active-tab::after {
+p-button.active-tab::after {
   content: "";
 
   background-color: var(--primary-color, #3b82f6);
@@ -36,4 +41,18 @@ p-toolbar .p-toolbar {
   to {
     transform: scale(1) translateX(-10%);
   }
+}
+
+p-menu .p-menu {
+  padding-inline-start: 0.8rem;
+  border-block: none;
+  border-inline-start: none;
+}
+
+.p-menu-list {
+  block-size: 90.6vh;
+}
+
+.p-paginator-page.p-paginator-page-selected {
+  background-color: #64748b !important;
 }

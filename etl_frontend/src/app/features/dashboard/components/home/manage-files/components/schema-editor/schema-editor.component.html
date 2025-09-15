@@ -1,0 +1,68 @@
+<p-button
+  icon="pi pi-arrow-left"
+  label="Back to Files List"
+  [routerLink]="['/', 'dashboard', 'files']"
+  rounded
+  text
+  size="small"
+  class="back-button"
+></p-button>
+
+@if(vm().error) {
+<p style="color: rgba(255, 0, 0, 0.726)">{{ vm().error }}</p>
+} @if (vm().isFetching) {
+<div class="loading-container full">
+  <p-progressSpinner strokeWidth="4" animationDuration="1s"></p-progressSpinner>
+  <span class="loading-text">Loading schema...</span>
+</div>
+} @if (vm().schema?.columns) {
+  <div class="table-wrapper">
+    <p-table [value]="vm().schema!.columns" class="schema-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Original Column Name</th>
+          <th>New Column Name</th>
+          <th>Data Type</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-col>
+        <tr>
+          <td>{{ col.originalColumnName }}</td>
+          <td>
+            <input pInputText type="text" [(ngModel)]="col.columnName" />
+          </td>
+          <td>
+            <p-select
+              [options]="dbTypes()"
+              [(ngModel)]="col.columnType"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Select Type"
+              appendTo="body"
+            ></p-select>
+          </td>
+        </tr>
+        @if (vm().isSaving) {
+          <div class="loading-container overlay">
+            <p-progressSpinner
+              strokeWidth="4"
+              animationDuration="1s"
+            ></p-progressSpinner>
+            <span class="loading-text">Saving schema...</span>
+          </div>
+        }
+      </ng-template>
+
+      <ng-template pTemplate="footer">
+        <div class="actions">
+          <p-button
+            rounded
+            (click)="onSaveSchema()"
+            label="Save"
+            styleClass="save-button"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-table>
+  </div>
+}

@@ -1,0 +1,24 @@
+<div
+  class="tab"
+  [pTooltip]="workflowInfo().name"
+  tooltipPosition="bottom"
+  showDelay="1000"
+  [ngClass]="{ 'tab-active': isSelected() }"
+>
+  <div
+    class="tab__status"
+    [ngClass]="'tab__status-' + workflowInfo().status"
+  ></div>
+  <div (click)="onOpenWorkflow()"class="tab__name">
+    {{ workflowInfo().name }}
+  </div>
+  <div class="tab__close-icon">
+    <p-button
+      text
+      rounded
+      icon="pi pi-times"
+      size="small"
+      (click)="onCloseWorkflow()"
+    ></p-button>
+  </div>
+</div>

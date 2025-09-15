@@ -17,17 +17,15 @@ export class ManageUserComponent {
   public selectedUserToDelete = signal<string>('');
   public selectedUserToEdit = signal<User>({ email: '', firstName: '', id: '', lastName: '', roles: [], username: '' });
 
-  public readonly user!: User[]
-
   constructor(private usersListStore: UserListStore) {
     this.vm = this.usersListStore.vm;
     this.usersListStore.getUsers();
-    this.user = this.vm().users;
   }
 
   public changeCreateUserModalStatus() {
     this.isCreateUserModal.update((currentValue) => !currentValue);
   }
+
   public changeEditUserModalStatus(user?: User) {
     if (user) {
       this.selectedUserToEdit.set(user);
@@ -37,6 +35,7 @@ export class ManageUserComponent {
       this.selectedUserToEdit.set({ email: '', firstName: '', id: '', lastName: '', roles: [], username: '' });
     }
   }
+
   public changeDeleteUserDialogStatus(userId?: string) {
     if (userId) {
       this.selectedUserToDelete.set(userId);
@@ -45,5 +44,9 @@ export class ManageUserComponent {
       this.isDeleteUserDialog.set(false);
       this.selectedUserToDelete.set('');
     }
+  }
+
+  public onRefetchUsers(): void {
+    this.usersListStore.getUsers();
   }
 }

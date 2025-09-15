@@ -1,0 +1,85 @@
+@if (isRenameTabelModal()) {
+  <app-rename-table
+    (close)="changeTableRenameModalStatus()"
+    [visible]="isRenameTabelModal()"
+    [name]="tableName()"
+    [id]="schemaId()"
+  />
+}
+<p-card header="Manage Tables">
+  <ng-template pTemplate="body">
+    <div class="table-wrapper">
+      <p-table
+        [value]="tables()"
+        styleClass="p-datatable-striped"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Table Name</th>
+            <th>Original File Name</th>
+            <th>Column Count</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-table>
+          <tr>
+            <td>
+              <i class="pi pi-file"></i>
+              {{ table.tableName }}
+            </td>
+            <td>{{ table.originalFileName }}</td>
+            <td>{{ table.columnCount }}</td>
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger p-button-text"
+                (click)="onDeleteTable(table.schemaId)"
+                pTooltip="Delete File"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                (click)="onRenameTable(table.schemaId, table.tableName)"
+                pTooltip="Edit Name"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              <p-button
+                icon="pi pi-objects-column"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                pTooltip="Show Columns"
+                [tooltipPosition]="'top'"
+                [routerLink]="[
+                '/',
+                'dashboard',
+                'tables',
+                table.schemaId,
+                'columns'
+              ]"
+              ></p-button>
+              <p-button
+                icon="pi pi-table"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                pTooltip="Show Rows"
+                [tooltipPosition]="'top'"
+                [routerLink]="[
+                '/',
+                'dashboard',
+                'tables',
+                table.schemaId,
+                'rows'
+              ]"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr style="height: 10rem; font-size: 1.1rem">
+            <td colspan="4">No table found.</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</p-card>

@@ -8,6 +8,7 @@ import { TabsModule } from 'primeng/tabs';
 import { Button } from 'primeng/button';
 import { HeaderComponent } from '../../shared/components/header/header.component';
 import { SignOutDirective } from '../../shared/directives/sign-out/sign-out.directive'
+import { HasRoleDirective } from '../../shared/directives/has-role/has-role.directive';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SignOutDirective } from '../../shared/directives/sign-out/sign-out.dire
     RouterModule,
     HeaderComponent,
     SignOutDirective,
+    HasRoleDirective
   ],
 })
 export class ProfileModule { }

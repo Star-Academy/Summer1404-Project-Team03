@@ -1,5 +1,6 @@
 import {Component, computed, OnInit} from '@angular/core';
 import {UserStoreService} from "../../shared/stores/user-store.service"
+import { MenuItem } from 'primeng/api';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,13 +8,9 @@ import {UserStoreService} from "../../shared/stores/user-store.service"
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   public readonly user = computed(() => this.userStore.vm().user);
   public readonly isLoading = computed(() => this.userStore.vm().isLoading);
 
   constructor(private userStore: UserStoreService) {}
-
-  ngOnInit() {
-    this.userStore.loadUser();
-  }
 }

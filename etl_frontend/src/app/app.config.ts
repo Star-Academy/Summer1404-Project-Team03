@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimationsAsync  } from '@angular/platform-browser/animations/async';
 import { providePrimeNG } from 'primeng/config';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -11,14 +11,14 @@ import { CoreModule } from './core/core.module';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { errorHandlingInterceptor } from './shared/interceptors/error-handling/error-handling.interceptor';
 import { credentialsInterceptor } from './shared/interceptors/credentials/credentials.interceptor';
+import { ConfirmationService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(CoreModule),
     provideAnimationsAsync(),
+    importProvidersFrom(CoreModule),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideAnimationsAsync(),
     providePrimeNG({
       theme: {
         preset: CustomAura,

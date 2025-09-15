@@ -1,0 +1,26 @@
+<p-dialog
+  header="Edit column bane"
+  [modal]="true"
+  [visible]="visible()"
+  [draggable]="false"
+  (onHide)="onClose()"
+>
+  <div class="modal">
+    <form [formGroup]="exampleForm" (ngSubmit)="onSubmit()" class="modal__form">
+      <div class="modal__inputs">
+        <div class="modal__input">
+          <input pInputText formControlName="name" [ngClass]="{ 'p-invalid': isInvalid('name') }" fluid />
+          @if (isInvalid('name')) {
+            <p-message severity="error" size="small" variant="simple">
+              Name is required
+            </p-message>
+          }
+        </div>
+      </div>
+      <div class="modal__actions">
+        <p-button  severity="secondary" label="cancel" (click)="onClose()"/>
+        <p-button  severity="primary" type="submit" label="submit" />
+      </div>
+    </form>
+  </div>
+</p-dialog>

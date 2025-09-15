@@ -1,0 +1,89 @@
+<div
+  class="file-uploader"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+>
+  <input
+    type="file"
+    #fileInput
+    (change)="onFileSelect($event)"
+    multiple
+    hidden
+  />
+  <div class="file-uploader__actions">
+    <div class="file-uploader__actions__left">
+      <p-button
+        icon="pi pi-arrow-left"
+        label="Back to Files List"
+        [routerLink]="['/', 'dashboard', 'files']"
+        styleClass="p-button-text p-button-sm"
+        rounded
+      ></p-button>
+    </div>
+    <div class="file-uploader__actions__right">
+      <p-button
+        label="Select Files"
+        icon="pi pi-folder-open"
+        (click)="fileInput.click()"
+        styleClass="p-button-sm p-button-rounded p-button-outlined"
+      ></p-button>
+
+      <p-button
+        label="Clear All"
+        icon="pi pi-trash"
+        severity="danger"
+        outlined
+        styleClass="p-button-sm p-button-rounded"
+        (click)="clearFiles()"
+      ></p-button>
+
+      <p-button
+        label="Upload to Server"
+        icon="pi pi-cloud-upload"
+        (click)="onUploadAllFiles()"
+        [disabled]="vm().files.length === 0"
+        styleClass="p-button-sm p-button-rounded"
+      ></p-button>
+    </div>
+  </div>
+  <h4 style="color: red; margin: 0">{{ vm().error }}</h4>
+  @if(vm().files.length === 0 || vm().isDragging){
+  <div
+    class="file-uploader__zone-area"
+    [ngClass]="{
+      'file-uploader__zone-area-drag-over': vm().isDragging
+    }"
+    (click)="fileInput.click()"
+  >
+    <i class="pi pi-cloud-upload"></i>
+    <span>Drop files here to upload</span>
+  </div>
+  } @if(vm().files.length > 0){
+  <h4>Uploaded Files</h4>
+  }
+  <div class="file-uploader__uploaded-file-list">
+    @for(file of vm().files; track file.name){
+    <app-uploaded-file-item
+      @scaleAnimation
+      (removeFile)="removeFile($event)"
+      [fileName]="file.name"
+    ></app-uploaded-file-item>
+    }
+  </div>
+
+  @if(vm().files.length > 0){
+  <h5 style="letter-spacing: 0.08rem; font-weight: bold;">
+    You Can Select An Uploaded File To Process It Or Just Upload It To Server
+    And Process it Later.
+  </h5>
+  } @if (vm().isSending) {
+  <div class="sending-overlay"></div>
+  <p-progressBar
+    mode="indeterminate"
+    class="sending-spinner"
+    [style]="{ height: '0.5rem' }"
+  ></p-progressBar>
+
+  }
+</div>
