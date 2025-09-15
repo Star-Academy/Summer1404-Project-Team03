@@ -1,3 +1,4 @@
+using Domain.Enums;
 using Domain.ValueObjects.PluginConfig;
 
 namespace Domain.Entities;
@@ -6,7 +7,7 @@ public class Plugin
 {
     public string Id { get; private set; }
     public string WorkflowId { get; internal set; } 
-    public string PluginType { get; private set; }  
+    public PluginType PluginType { get; private set; }  
     public PluginConfig Config { get; private set; }
     public int Order { get; private set; }
     public DateTime CreatedAt { get; private set; }
@@ -16,7 +17,7 @@ public class Plugin
 
     public Plugin(
         string id,
-        string pluginType,
+        PluginType pluginType,
         PluginConfig config,
         int order)
     {
@@ -28,7 +29,7 @@ public class Plugin
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void Update(string pluginType, PluginConfig config)
+    public void Update(PluginType pluginType, PluginConfig config)
     {
         PluginType = pluginType;
         Config = config;

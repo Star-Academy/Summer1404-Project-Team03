@@ -16,7 +16,9 @@ public class PluginDbConfig : IEntityTypeConfiguration<Plugin>
         builder.Property(p => p.Id).ValueGeneratedNever();
 
         builder.Property(p => p.WorkflowId).IsRequired();
-        builder.Property(p => p.PluginType).IsRequired().HasMaxLength(64);
+        builder.Property(p => p.PluginType) // ✅ Map enum to string (or int)
+            .IsRequired()
+            .HasConversion<string>(); // ✅ Store as string in DB: "Filter", "Aggregate"
         builder.Property(p => p.Config)
             .IsRequired()
             .HasConversion(
