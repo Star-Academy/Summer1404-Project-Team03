@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  inline-size: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: end;
+  padding: 1rem;
+}
+
+.table-wrapper {
+  inline-size: 100%;
+  max-block-size: 62vh;
+  overflow-x: auto;
+  padding-block-end: 3rem;
+  overflow-y: auto;
+  border: 1px solid var(--surface-border);
+  border-radius: 0.5rem;
+}
+
+::ng-deep .deleting-row {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+::ng-deep .pi-spinner {
+  font-size: 0.9rem;
+  color: #f44336;
+}

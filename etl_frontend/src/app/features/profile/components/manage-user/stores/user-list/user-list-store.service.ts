@@ -25,7 +25,7 @@ export class UserListStore extends ComponentStore<UsersListState> {
     return trigger$.pipe(
       tap(() => this.patchState({ isLoading: true, error: null })),
       exhaustMap(() => this.mangeUsersService.fetchUsers().pipe(
-        tap((users) => this.patchState({ users: users, isLoading: false })),
+        tap(({users}) => this.patchState({ users: users, isLoading: false })),
         catchError(err => {
           this.patchState({ error: err.message, isLoading: false });
           return of(err);

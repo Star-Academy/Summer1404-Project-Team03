@@ -1,0 +1,32 @@
+<div class="sidebar">
+  <p-button
+    label="Workflow History"
+    icon="pi pi-file-plus"
+    [routerLink]="'/dashboard/workflows'"
+    rounded
+    [routerLinkActive]="'active-tab'"
+    text
+  ></p-button>
+  <p-button
+    *hasRole="['sys_admin', 'data_admin']"
+    label="File Management"
+    icon="pi pi-file-import"
+    rounded
+    [routerLink]="['/', 'dashboard', 'files']"
+    [routerLinkActive]="'active-tab'"
+    text
+  ></p-button>
+  <p-button
+    *hasRole="['sys_admin', 'data_admin']"
+    label="Table Management"
+    icon="pi pi-table"
+    [routerLink]="['/', 'dashboard', 'tables']"
+    [routerLinkActive]="'active-tab'"
+    text
+    rounded
+  ></p-button>
+</div>
+
+<div class="dynamic-content">
+  <router-outlet></router-outlet>
+</div>

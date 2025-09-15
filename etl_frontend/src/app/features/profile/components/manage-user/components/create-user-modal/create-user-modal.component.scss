@@ -1,3 +1,56 @@
-small {
-    color: red;
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #374151; // neutral gray
+    }
+
+    input {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db; // light gray border
+      font-size: 0.9rem;
+
+      &:focus {
+        outline: none;
+        border-color: #3b82f6; // blue focus
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+      }
+    }
+
+    .p-error {
+      color: #dc2626; // red for errors
+      font-size: 0.8rem;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+
+    p-button {
+      min-width: 110px;
+    }
+  }
+
+  &__select {
+    width: 100%;
+  }
 }

@@ -1,0 +1,33 @@
+<div class="tabs-bar">
+  @if(vm().isLoadingWorkflows) { @for (index of [1, 2, 3, 4,]; track $index) {
+  <div class="tab-skeleton">
+    <p-skeleton
+      width="100px"
+      height="30px"
+      animation="wave"
+      styleClass="tab-skeleton-box"
+    ></p-skeleton>
+  </div>
+  } }@else {
+  <div
+    class="tabs-bar__tabs"
+    cdkDropList
+    cdkDropListOrientation="horizontal"
+    [cdkDropListData]="vm().openWorkflows"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    @for (tab of vm().openWorkflows; track tab.id) {
+    <app-workflow-tab
+      cdkDrag
+      (closeWorkflow)="onCloseWorkflow($event)"
+      (opneWorkflow)="openWorkflow($event)"
+      [workflowInfo]="tab"
+      [isSelected]="vm().selectedWorkflowId === tab.id ? true : false"
+      [@tabAnimation]
+    ></app-workflow-tab>
+    }
+  </div>
+  <div class="tabs-bar__new-tab-btn">
+  </div>
+  }
+</div>

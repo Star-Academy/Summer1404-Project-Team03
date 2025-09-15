@@ -34,6 +34,6 @@ export class AuthService {
   }
 
   signOut() {
-    return this.http.post(this.authApi.singOut, {});
+    return this.http.post(this.authApi.signOut, {});
   }
 }

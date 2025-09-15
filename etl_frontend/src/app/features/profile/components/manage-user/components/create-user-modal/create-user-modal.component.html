@@ -1,7 +1,7 @@
 <p-dialog
   header="Create User"
   [modal]="true"
-  [visible]="this.visible()"
+  [visible]="visible()"
   [draggable]="false"
   (onHide)="onClose()"
 >
@@ -9,11 +9,12 @@
     <div class="modal">
       <div class="modal__inputs">
         <div class="modal__input">
+          <label for="username">Username</label>
           <input
             pInputText
             type="text"
             id="username"
-            placeholder="Username"
+            placeholder="Enter username"
             formControlName="username"
           />
           <div
@@ -30,11 +31,12 @@
         </div>
 
         <div class="modal__input">
+          <label for="email">Email</label>
           <input
             pInputText
             type="email"
             id="email"
-            placeholder="Email"
+            placeholder="Enter email"
             formControlName="email"
           />
           <div
@@ -53,11 +55,12 @@
         </div>
 
         <div class="modal__input">
+          <label for="firstName">First Name</label>
           <input
             pInputText
             type="text"
             id="firstName"
-            placeholder="First Name"
+            placeholder="Enter first name"
             formControlName="firstName"
           />
           <div
@@ -74,11 +77,12 @@
         </div>
 
         <div class="modal__input">
+          <label for="lastName">Last Name</label>
           <input
             pInputText
             type="text"
             id="lastName"
-            placeholder="Last Name"
+            placeholder="Enter last name"
             formControlName="lastName"
           />
           <div
@@ -95,11 +99,12 @@
         </div>
 
         <div class="modal__input">
+          <label for="password">Password</label>
           <input
             pInputText
             type="password"
             id="password"
-            placeholder="Password"
+            placeholder="Enter password"
             formControlName="password"
           />
           <div
@@ -117,6 +122,22 @@
             >
           </div>
         </div>
+
+        <!-- Uncomment this if you want role select -->
+        <!--
+        <div class="modal__input">
+          <label for="role">Role</label>
+          <p-select
+            id="role"
+            [options]="roles"
+            optionLabel="name"
+            [showClear]="true"
+            placeholder="Select a role"
+            class="modal__select"
+            [(ngModel)]="selectedRole"
+          />
+        </div>
+        -->
       </div>
 
       <div class="modal__btn">
@@ -138,14 +159,3 @@
     </div>
   </form>
 </p-dialog>
-
-<!-- <div class="modal__input">
-        <p-select
-          [options]="this.roles"
-          optionLabel="name"
-          [showClear]="true"
-          placeholder="Select a Role"
-          class="modal__select"
-          [(ngModel)]="selectedRole"
-        />
-      </div> -->

@@ -6,16 +6,15 @@ export const sysAdminGuard: CanMatchFn = (route, segments) => {
   const userStore = inject(UserStoreService);
   const router = inject(Router);
 
-  let isSysAdmin: boolean;
+  let isHavePremision: boolean;
+  const neededRoles: string[] = route?.data?.['roles']
 
-  if (route.data && route.data['roles']){
-    // @ts-ignore
-    isSysAdmin = userStore.vm().user.roles.some(role => role.name === route.data['roles']);
-    if (isSysAdmin) {
+  if (neededRoles) {
+    isHavePremision = userStore.vm().user.roles.some(role => neededRoles.some((nRole) => role.name === nRole));
+    if (isHavePremision) {
       return true;
     }
   }
 
-  router.navigateByUrl('/profile')
   return false;
 };

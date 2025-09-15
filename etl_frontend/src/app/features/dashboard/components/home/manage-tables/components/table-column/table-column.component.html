@@ -1,0 +1,57 @@
+@if (isRenameColumnModal()) {
+  <app-rename-column
+    [visible]="isRenameColumnModal()"
+    (close)="changeRenameColumnModalStatus()"
+    [name]="columnName()"
+    [columnId]="columnId()"
+  />
+}
+<p-card header="Table Columns">
+  <ng-template pTemplate="body">
+    <div class="table-wrapper">
+      <p-table
+        [value]="columns()"
+        styleClass="p-datatable-striped"
+        [tableStyle]="{ 'min-width': '50rem' }"
+      >
+        <ng-template pTemplate="header">
+          <div class="table-wrapper"></div>
+          <tr>
+            <th>Name</th>
+            <th>Ordinal Position</th>
+            <th>Type</th>
+            <th>Original Name</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-column>
+          <tr>
+            <td>
+              <i class="pi pi-file"></i>
+              {{ column.name }}
+            </td>
+            <td>{{ column.ordinalPosition}}</td>
+            <td>{{ column.type}}</td>
+            <td>{{ column.originalName }}</td>
+            <td>
+              <p-button
+                icon="pi pi-trash"
+                styleClass="p-button-rounded p-button-danger p-button-text"
+                (click)="onDeleteColumn(column.id)"
+                pTooltip="Delete Column"
+                [tooltipPosition]="'top'"
+              ></p-button>
+              <p-button
+                icon="pi pi-pencil"
+                styleClass="p-button-rounded p-button-secondary p-button-text"
+                pTooltip="Edit Name"
+                [tooltipPosition]="'top'"
+                (click)="setColumnId(column.name, column.id)"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </ng-template>
+</p-card>

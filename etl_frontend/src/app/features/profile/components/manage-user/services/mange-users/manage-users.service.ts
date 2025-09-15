@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { EditUser, NewUser, User } from '../../models/user.model';
+import { EditUser, EditUserResponse, NewUser, User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -10,8 +10,8 @@ export class ManageUsersService {
 
   constructor(private readonly http: HttpClient) { }
 
-  fetchUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.usersApi);
+  fetchUsers(): Observable<{users: User[]}> {
+    return this.http.get<{users: User[]}>(this.usersApi);
   }
 
   createUser(newUser: NewUser): Observable<NewUser> {
@@ -22,7 +22,7 @@ export class ManageUsersService {
     return this.http.delete<any>(`${this.usersApi}/${userId}`);
   }
 
-  editUser(user: EditUser, userId: string): Observable<any> {
-    return this.http.put<any>(`${this.usersApi}/${userId}`, user);
+  editUser(user: EditUser, userId: string): Observable<EditUserResponse> {
+    return this.http.put<EditUserResponse>(`${this.usersApi}/${userId}`, user);
   }
 }
