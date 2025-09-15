@@ -34,4 +34,4 @@ jobs:
 
       - name: Push backend image
         run: docker push registry.dockerize.ir/etlteam3/backend:$(date +%Y%m%d%H%M%S)
-#        run: docker push registry.dockerize.ir/etl_team3/backend:$(date +%Y%m%d%H%M%S)
+      #        run: docker push registry.dockerize.ir/etl_team3/backend:$(date +%Y%m%d%H%M%S)
