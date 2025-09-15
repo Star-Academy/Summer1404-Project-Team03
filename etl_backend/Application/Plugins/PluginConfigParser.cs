@@ -27,8 +27,8 @@ public class PluginConfigParser : IPluginConfigParser
                     dict.TryGetValue("Measures", out var measuresObj)
                         ? (measuresObj as IEnumerable<AggregateSpec>)?.Select(spec => new AggregateColumn(
                               spec.Column,
-                              spec.Func.ToString() // ✅ Map AggregateFunc → string
-                          )).ToList() // ✅ Convert to List<AggregateColumn>
+                              spec.Func.ToString() 
+                          )).ToList() 
                           ?? new List<AggregateColumn>()
                         : new List<AggregateColumn>()
                 ),

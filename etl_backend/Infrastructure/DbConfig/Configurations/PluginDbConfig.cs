@@ -1,13 +1,44 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using Domain.Entities;
 using Domain.ValueObjects.PluginConfig;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using AggregateConfig = Domain.Entities.AggregateConfig;
 
 namespace Infrastructure.DbConfig.Configurations;
 
 public class PluginDbConfig : IEntityTypeConfiguration<Plugin>
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        WriteIndented = false,
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+        {
+            Modifiers =
+            {
+                static typeInfo =>
+                {
+                    if (typeInfo.Type == typeof(PluginConfig))
+                    {
+                        var options = new JsonPolymorphismOptions
+                        {
+                            TypeDiscriminatorPropertyName = "$type",
+                            IgnoreUnrecognizedTypeDiscriminators = false,
+                            UnknownDerivedTypeHandling = JsonUnknownDerivedTypeHandling.FailSerialization
+                        };
+
+                        options.DerivedTypes.Add(new JsonDerivedType(typeof(FilterConfig), "FilterConfig"));
+                        // options.DerivedTypes.Add(new JsonDerivedType(typeof(AggregateConfig), "AggregateConfig")); // ← ADD THIS
+
+                        typeInfo.PolymorphismOptions = options;
+                    }
+                }
+            }
+        }
+    };
     public void Configure(EntityTypeBuilder<Plugin> builder)
     {
         builder.ToTable("Plugins");
@@ -16,14 +47,14 @@ public class PluginDbConfig : IEntityTypeConfiguration<Plugin>
         builder.Property(p => p.Id).ValueGeneratedNever();
 
         builder.Property(p => p.WorkflowId).IsRequired();
-        builder.Property(p => p.PluginType) // ✅ Map enum to string (or int)
+        builder.Property(p => p.PluginType) 
             .IsRequired()
-            .HasConversion<string>(); // ✅ Store as string in DB: "Filter", "Aggregate"
+            .HasConversion<string>(); 
         builder.Property(p => p.Config)
             .IsRequired()
             .HasConversion(
-                v => JsonSerializer.Serialize(v, (JsonSerializerOptions)null!),
-                v => JsonSerializer.Deserialize<PluginConfig>(v, (JsonSerializerOptions)null!)!
+                v => JsonSerializer.Serialize(v, JsonOptions),  
+                v => JsonSerializer.Deserialize<PluginConfig>(v, JsonOptions)!
             );
         builder.Property(p => p.Order).IsRequired();
         builder.Property(p => p.CreatedAt).IsRequired();

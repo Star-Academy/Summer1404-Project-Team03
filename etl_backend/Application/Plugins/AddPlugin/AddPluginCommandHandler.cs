@@ -13,18 +13,18 @@ public class AddPluginCommandHandler : IRequestHandler<AddPluginCommand, PluginD
     private readonly IWorkflowReader _workflowReader;
     private readonly IPluginWriter _pluginWriter;
     private readonly ICurrentUserService _currentUser;
-    private readonly IPluginConfigParser _configParser;
+    private readonly PluginConfigValidationService _configValidationService; 
 
     public AddPluginCommandHandler(
         IWorkflowReader workflowReader,
         IPluginWriter pluginWriter,
         ICurrentUserService currentUser,
-        IPluginConfigParser configParser)
+        PluginConfigValidationService configValidationService) 
     {
         _workflowReader = workflowReader;
         _pluginWriter = pluginWriter;
         _currentUser = currentUser;
-        _configParser = configParser;
+        _configValidationService = configValidationService;
     }
 
     public async Task<PluginDto> Handle(AddPluginCommand request, CancellationToken ct)
@@ -35,7 +35,7 @@ public class AddPluginCommandHandler : IRequestHandler<AddPluginCommand, PluginD
         var workflow = await _workflowReader.GetByIdAsync(request.WorkflowId, _currentUser.UserId!, ct)
                        ?? throw new NotFoundException("Workflow", request.WorkflowId);
 
-        var config = _configParser.Parse(request.PluginType, request.Config);
+        var config = _configValidationService.Validate(request.PluginType, (Dictionary<string, object>)request.Config);
 
         var plugin = new Plugin(
             id: Guid.NewGuid().ToString(),

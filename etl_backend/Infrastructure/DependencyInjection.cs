@@ -4,6 +4,8 @@ using Application.Common.Services.Abstractions;
 using Application.Enums;
 using Application.Files.DeleteStagedFile.ServiceAbstractions;
 using Application.Files.StageManyFiles.ServiceAbstractions;
+using Application.Plugins;
+using Application.Plugins.Abstractions;
 using Application.Services.Abstractions;
 using Application.Services.Repositories.Abstractions;
 using Application.Tables.DeleteTable.ServiceAbstractions;
@@ -29,6 +31,7 @@ using Infrastructure.Files.PostgresTableServices;
 using Infrastructure.Files.PostgresTableServices.HelperServices;
 using Infrastructure.Identity;
 using Infrastructure.Identity.Abstractions;
+using Infrastructure.Plugins;
 using Infrastructure.Repositories;
 using Infrastructure.SsoServices.Admin;
 using Infrastructure.SsoServices.Admin.Abstractions;
@@ -170,6 +173,17 @@ public static class DependencyInjection
         services.AddSingleton<IWorkflowReader, WorkflowReader>();
         services.AddSingleton<IWorkflowWriter, WorkflowWriter>();
         services.AddSingleton<IWorkflowDeleter, WorkflowDeleter>();
+        
+        // --- Plugin ---
+        services.AddSingleton<IPluginConfigValidator, FilterPluginConfigValidator>();
+        services.AddSingleton<IPluginConfigValidator, AggregatePluginConfigValidator>();
+        services.AddSingleton<PluginConfigValidationService>();
+        services.AddSingleton<IPluginSchemaProvider, FilterPluginSchemaProvider>();
+        services.AddSingleton<IPluginSchemaProvider, AggregatePluginSchemaProvider>();
+        services.AddSingleton<IPluginReader, PluginReader>();
+        services.AddSingleton<IPluginWriter, PluginWriter>();
+        services.AddSingleton<IPluginDeleter, PluginDeleter>();
+        services.AddSingleton<IPluginReorderer, PluginReorderer>();
 
         return services;
     }

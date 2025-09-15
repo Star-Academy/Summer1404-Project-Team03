@@ -8,7 +8,8 @@ namespace Application.Plugins.UpdatePlugin;
 
 [RequireRole(AppRoles.Analyst, AppRoles.DataAdmin, AppRoles.SysAdmin)]
 public record UpdatePluginCommand(
+    string WorkflowId,
     string PluginId,
-    PluginType PluginType, 
-    PluginConfig Config
+    PluginType PluginType,
+    Dictionary<string, object> Config 
 ) : IRequest<PluginDto>;

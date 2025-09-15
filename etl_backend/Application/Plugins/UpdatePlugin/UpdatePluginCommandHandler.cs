@@ -13,20 +13,20 @@ public class UpdatePluginCommandHandler : IRequestHandler<UpdatePluginCommand, P
     private readonly IPluginReader _pluginReader;
     private readonly IPluginWriter _pluginWriter;
     private readonly ICurrentUserService _currentUser;
-    private readonly IPluginConfigParser _configParser;
+    private readonly PluginConfigValidationService _configValidationService;
 
     public UpdatePluginCommandHandler(
         IWorkflowReader workflowReader,
         IPluginReader pluginReader,
         IPluginWriter pluginWriter,
         ICurrentUserService currentUser,
-        IPluginConfigParser configParser)
+        PluginConfigValidationService configValidationService)
     {
         _workflowReader = workflowReader;
         _pluginReader = pluginReader;
         _pluginWriter = pluginWriter;
         _currentUser = currentUser;
-        _configParser = configParser;
+        _configValidationService = configValidationService;
     }
 
     public async Task<PluginDto> Handle(UpdatePluginCommand request, CancellationToken ct)
@@ -34,10 +34,13 @@ public class UpdatePluginCommandHandler : IRequestHandler<UpdatePluginCommand, P
         if (!_currentUser.IsAuthenticated || string.IsNullOrWhiteSpace(_currentUser.UserId))
             throw new ForbiddenException("User not authenticated.");
 
+        var workflow = await _workflowReader.GetByIdAsync(request.WorkflowId, _currentUser.UserId!, ct)
+                       ?? throw new NotFoundException("Workflow", request.WorkflowId);
+
         var plugin = await _pluginReader.GetByIdAsync(request.PluginId, _currentUser.UserId!, ct)
                      ?? throw new NotFoundException("Plugin", request.PluginId);
 
-        var config = _configParser.Parse(request.PluginType, request.Config);
+        var config = _configValidationService.Validate(request.PluginType, request.Config);
         plugin.Update(request.PluginType, config);
         await _pluginWriter.UpdateAsync(plugin, ct);
 

@@ -1,3 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace Domain.ValueObjects.PluginConfig;
 
-public abstract class PluginConfig;
+public class PluginConfig 
+{
+    [JsonConstructor]
+    public PluginConfig()
+    {
+    }
+}

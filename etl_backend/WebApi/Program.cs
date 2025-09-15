@@ -1,3 +1,6 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Text.Json.Serialization.Metadata;
 using Application;
 using FastEndpoints;
 using FastEndpoints.Swagger;
@@ -21,6 +24,19 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.TypeInfoResolver = new DefaultJsonTypeInfoResolver
+    {
+        Modifiers = { JsonPolymorphismSetup.ConfigurePluginConfigPolymorphism }
+    };
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+});
+
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services
     .AddApplicationServices()
