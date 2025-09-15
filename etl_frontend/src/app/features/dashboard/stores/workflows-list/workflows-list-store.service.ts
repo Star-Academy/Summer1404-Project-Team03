@@ -43,6 +43,7 @@ export class WorkflowsListStore extends ComponentStore<WorkflowsListState> {
         const newWorkflow: WorkflowPost = { name: workflowName };
         return this.workflowService.createWorkflow(newWorkflow).pipe(
           tap((createdWorkflow) => {
+            createdWorkflow = { ...createdWorkflow, status: "Draft" }
             this.patchState({
               workflows: [...this.get().workflows, createdWorkflow],
               openedWorkflowsId: [...this.get().openedWorkflowsId, createdWorkflow.id],

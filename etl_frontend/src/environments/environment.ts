@@ -56,9 +56,9 @@ export const environment = {
     // ===================== TABLES & COLUMNS =====================
     workflows: {
       list: `${baseUrl}/workflows`, // GET, POST
-      update: (id: string) => `${baseUrl}/workflows${id}`, // PUT
-      delete: (id: string) => `${baseUrl}/workflows${id}`, // DELETE
-      item: (id: string) => `${baseUrl}/workflows${id}`, // GET
+      update: (id: string) => `${baseUrl}/workflows/${id}`, // PUT
+      delete: (id: string) => `${baseUrl}/workflows/${id}`, // DELETE
+      item: (id: string) => `${baseUrl}/workflows/${id}`, // GET
     },
   },
 };
