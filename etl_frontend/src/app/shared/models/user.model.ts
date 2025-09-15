@@ -4,7 +4,7 @@ export type UserInfo = {
     id: string;
     lastName: string;
     roles: { id: string, name: string }[];
-    username: string;
+    name: string;
 }
 
 export type updateUserInfoBody = {

@@ -28,7 +28,7 @@ export class ChangePasswordDirective {
 
     this.isLoading.set(true);
 
-    this.usersService.getChangePasswordUrl().pipe(take(1)).subscribe({
+    this.usersService.getChnagePasswordUrl().pipe(take(1)).subscribe({
       next: ({ changePasswordUrl }) => {
         this.isLoading.set(false);
         this.redirect(changePasswordUrl);
