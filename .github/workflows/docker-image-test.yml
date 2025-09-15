@@ -26,10 +26,12 @@ jobs:
         run: docker build -f etl_frontend/Dockerfile -t registry.dockerize.ir/${{ github.repository }}/frontend:$(date +%Y%m%d%H%M%S) ./frontend
 
       - name: Push frontend image
-        run: docker push registry.dockerize.ir/${{ github.repository }}/frontend:$(date +%Y%m%d%H%M%S)
+        # run: docker push registry.dockerize.ir/${{ github.repository }}/frontend:$(date +%Y%m%d%H%M%S)
+        run: docker push registry.dockerize.ir/etl_team3/frontend:$(date +%Y%m%d%H%M%S)
 
       - name: Build backend image
-        run: docker build -f etl_backend/etl_backend/Dockerfile -t registry.dockerize.ir/${{ github.repository }}/backend:$(date +%Y%m%d%H%M%S) ./backend
+        run: docker build -f etl_backend/WebApi/Dockerfile -t registry.dockerize.ir/${{ github.repository }}/backend:$(date +%Y%m%d%H%M%S) ./backend
 
       - name: Push backend image
-        run: docker push registry.dockerize.ir/${{ github.repository }}/backend:$(date +%Y%m%d%H%M%S)
+        # run: docker push registry.dockerize.ir/${{ github.repository }}/backend:$(date +%Y%m%d%H%M%S)
+        run: docker push registry.dockerize.ir/etl_team3/backend:$(date +%Y%m%d%H%M%S)
