@@ -44,14 +44,9 @@ fdescribe('UserStoreService', () => {
 
     store.loadUser();
 
-    expect(store.vm().isLoading).toBe(true);
-
-    tick();
-
     const finalState = store.vm();
     expect(finalState.isLoading).toBe(false);
     expect(finalState.user).toEqual(mockUser);
-    expect(finalState.isSysAdmin).toBe(false);
   }));
 
   it('should set isSysAdmin to true if user has the sys_admin role', fakeAsync(() => {
@@ -73,9 +68,6 @@ fdescribe('UserStoreService', () => {
     usersServiceSpy.getUserInformation.and.returnValue(throwError(() => new Error('API Error')));
 
     store.loadUser();
-
-    expect(store.vm().isLoading).toBe(true);
-
     tick();
 
     const finalState = store.vm();

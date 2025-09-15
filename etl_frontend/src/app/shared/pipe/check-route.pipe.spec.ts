@@ -7,7 +7,7 @@ describe('CheckRoutePipe', () => {
   let pipe: CheckRoutePipe;
 
   beforeEach(() => {
-    currentUrl = '/home';
+    currentUrl = '/dashboard';
     mockRouter = {
       get url() { return currentUrl; }
     };
@@ -19,11 +19,11 @@ describe('CheckRoutePipe', () => {
   });
 
   it('should return true if route matches', () => {
-    expect(pipe.transform('/home')).toBeTrue();
+    expect(pipe.transform('/dashboard')).toBeTrue();
   });
 
   it('should return false if route does not match', () => {
-    currentUrl = '/about';
-    expect(pipe.transform('/home')).toBeFalse();
+    currentUrl = '/profile';
+    expect(pipe.transform('/dashboard')).toBeFalse();
   });
 });
