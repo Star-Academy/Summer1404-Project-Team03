@@ -4,7 +4,7 @@ export const environment = {
   production: false,
   redirectUrl: `http://localhost:4200/send-token-code`,
   api: {
-    // ===================== AUTH / PROFILE =====================
+    // ===================== AUTH & PROFILE =====================
     auth: {
       signIn: `${baseUrl}/auth/login`, // POST
       token: `${baseUrl}/auth/token`, // POST
@@ -51,6 +51,14 @@ export const environment = {
           `${baseUrl}/tables/${schemaId}/columns/${columnId}/rename`, // POST
         types: `${baseUrl}/types/columns`,
       },
+    },
+
+    // ===================== TABLES & COLUMNS =====================
+    workflows: {
+      list: `${baseUrl}/workflows`, // GET, POST
+      update: (id: string) => `${baseUrl}/workflows${id}`, // PUT
+      delete: (id: string) => `${baseUrl}/workflows${id}`, // DELETE
+      item: (id: string) => `${baseUrl}/workflows${id}`, // GET
     },
   },
 };

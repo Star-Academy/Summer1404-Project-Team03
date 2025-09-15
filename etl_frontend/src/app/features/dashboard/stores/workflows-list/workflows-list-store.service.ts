@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { WorkflowInfo, WorkflowsListState } from '../../models/workflow.model';
 import { catchError, exhaustMap, of, switchMap, tap, throwError } from 'rxjs';
+import {WorkflowInfo, WorkflowsListState } from '../../components/home/manage-workflows/models/workflow.model';
 
 const initialState: WorkflowsListState = {
   workflows: [{

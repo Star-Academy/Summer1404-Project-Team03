@@ -7,6 +7,17 @@ export type WorkflowInfo = {
     status?: 'draft' | 'running' | 'completed' | 'failed';
 }
 
+export type WorkflowPost = {
+  name: string;
+  description: string;
+}
+
+export type WorkflowPut = {
+  name: string;
+  description: string;
+  status: string;
+}
+
 export type WorkflowsListState = {
     workflows: WorkflowInfo[];
     openedWorkflowsId: string[];
