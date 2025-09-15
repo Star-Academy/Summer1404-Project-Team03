@@ -1,6 +1,6 @@
 namespace Domain.ValueObjects.PluginConfig;
 
-public record AggregateConfig(
+public class AggregateConfig(
     List<string> GroupBy,           
     List<AggregateColumn> Aggregates 
 ) : PluginConfig;

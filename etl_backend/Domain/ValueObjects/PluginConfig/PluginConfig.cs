@@ -1,3 +1,3 @@
 namespace Domain.ValueObjects.PluginConfig;
 
-public abstract record PluginConfig;
+public abstract class PluginConfig;
