@@ -9,6 +9,10 @@ export const dashboardRoutes: Routes = [
       {
         path: '',
         loadChildren: () => import('./components/home/home.module').then((m) => m.HomeModule)
+      },
+      {
+        path: 'workflow',
+        loadChildren: () => import('./components/workflow-editor/workflow-workspace.module').then(m => m.WorkflowEditorModule)
       }
     ],
   },
