@@ -10,6 +10,9 @@
     flex-wrap: nowrap;
     flex-direction: column;
     gap: 0.5rem;
+    background-color: rgba(236, 236, 236, 0.185);
+    border-radius: 1rem;
+    border-right: 1px solid rgba(201, 201, 201, 0.507);
 
     .active-tab {
       border-bottom: 1px solid blue;
