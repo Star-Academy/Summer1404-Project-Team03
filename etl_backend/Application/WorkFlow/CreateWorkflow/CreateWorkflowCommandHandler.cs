@@ -29,6 +29,7 @@ public class CreateWorkflowCommandHandler : IRequestHandler<CreateWorkflowComman
         var workflow = new Workflow(
             id: Guid.NewGuid().ToString(),
             userId: _currentUser.UserId!,
+            tableId: request.tableId,
             name: request.Name,
             description: request.Description
         );
@@ -39,6 +40,7 @@ public class CreateWorkflowCommandHandler : IRequestHandler<CreateWorkflowComman
             Id: workflow.Id,
             Name: workflow.Name,
             Description: workflow.Description,
+            TableId: workflow.TableId,
             CreatedAt: workflow.CreatedAt,
             UpdatedAt: workflow.UpdatedAt,
             Status: workflow.Status.ToString()

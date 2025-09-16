@@ -7,5 +7,6 @@ namespace Application.WorkFlow.CreateWorkflow;
 [RequireRole(AppRoles.Analyst, AppRoles.DataAdmin, AppRoles.SysAdmin)]
 public record CreateWorkflowCommand(
     string Name,
+    string tableId,
     string? Description = null
 ) : IRequest<WorkflowDto>;

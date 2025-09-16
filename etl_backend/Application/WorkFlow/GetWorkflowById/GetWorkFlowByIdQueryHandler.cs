@@ -29,6 +29,7 @@ public class GetWorkflowByIdQueryHandler : IRequestHandler<GetWorkflowByIdQuery,
             Id: workflow.Id,
             Name: workflow.Name,
             Description: workflow.Description,
+            TableId: workflow.TableId,
             CreatedAt: workflow.CreatedAt,
             UpdatedAt: workflow.UpdatedAt,
             Status: workflow.Status.ToString()

@@ -9,5 +9,6 @@ public record UpdateWorkflowCommand(
     string Id,
     string Name,
     string? Description = null,
+    string? TableId = null, 
     string? Status = null
 ) : IRequest<WorkflowDto>;

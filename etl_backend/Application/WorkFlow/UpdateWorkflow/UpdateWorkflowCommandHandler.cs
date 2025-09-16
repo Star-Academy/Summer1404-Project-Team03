@@ -35,13 +35,14 @@ public class UpdateWorkflowCommandHandler : IRequestHandler<UpdateWorkflowComman
             ? parsedStatus
             : workflow.Status;
 
-        workflow.Update(request.Name, request.Description, status);
+        workflow.Update(request.Name, request.Description, status,request.TableId); 
         await _writer.UpdateAsync(workflow, ct);
 
         return new WorkflowDto(
             Id: workflow.Id,
             Name: workflow.Name,
             Description: workflow.Description,
+            TableId: workflow.TableId,
             CreatedAt: workflow.CreatedAt,
             UpdatedAt: workflow.UpdatedAt,
             Status: workflow.Status.ToString()

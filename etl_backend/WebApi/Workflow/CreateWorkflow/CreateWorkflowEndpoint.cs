@@ -20,11 +20,12 @@ public class CreateWorkflowEndpoint : Endpoint<CreateWorkflowRequest, CreateWork
         Summary(s =>
         {
             s.Summary = "Create a new workflow";
-            s.Description = "Creates a new workflow for the authenticated user.";
+            s.Description = "Creates a new workflow for the authenticated user. TableId is optional.";
             s.ExampleRequest = new CreateWorkflowRequest
             {
                 Name = "Customer Analysis",
-                Description = "Analyze customer data"
+                Description = "Analyze customer data",
+                TableId = "table123" 
             };
         });
     }

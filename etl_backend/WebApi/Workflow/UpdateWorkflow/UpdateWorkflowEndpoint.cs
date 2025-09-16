@@ -15,16 +15,17 @@ public class UpdateWorkflowEndpoint : Endpoint<UpdateWorkflowRequest, UpdateWork
 
     public override void Configure()
     {
-        Put("api/workflows/{id}");
+        Put("api/workflows/{Id}");
         Summary(s =>
         {
             s.Summary = "Update workflow";
-            s.Description = "Updates workflow name, description, or status.";
-            // s.Params("Id", "Workflow ID", example: "workflow123");
+            s.Description = "Updates workflow name, description, table, or status.";
+            // s.Params("Id", "Workflow ID");
             s.ExampleRequest = new UpdateWorkflowRequest
             {
                 Name = "Updated Name",
                 Description = "Updated description",
+                TableId = "new_table_id", 
                 Status = "Running"
             };
         });
@@ -45,6 +46,7 @@ public class UpdateWorkflowEndpoint : Endpoint<UpdateWorkflowRequest, UpdateWork
             Id = result.Id,
             Name = result.Name,
             Description = result.Description,
+            TableId = result.TableId,
             CreatedAt = result.CreatedAt,
             UpdatedAt = result.UpdatedAt,
             Status = result.Status

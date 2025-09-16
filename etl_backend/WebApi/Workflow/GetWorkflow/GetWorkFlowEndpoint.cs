@@ -34,6 +34,7 @@ public class GetWorkflowEndpoint : EndpointWithoutRequest<GetWorkflowResponse>
             Id = result.Id,
             Name = result.Name,
             Description = result.Description,
+            TableId = result.TableId,
             CreatedAt = result.CreatedAt,
             UpdatedAt = result.UpdatedAt,
             Status = result.Status

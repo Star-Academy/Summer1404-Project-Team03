@@ -6,6 +6,7 @@ public class Workflow
 {
     public string Id { get; private set; }
     public string UserId { get; private set; } 
+    public string? TableId { get; private set; }
     public string Name { get; private set; }
     public string? Description { get; private set; }
     public DateTime CreatedAt { get; private set; }
@@ -20,12 +21,14 @@ public class Workflow
     public Workflow(
         string id,
         string userId, 
+        string ? tableId,
         string name,
         string? description = null,
         WorkflowStatus status = WorkflowStatus.Draft)
     {
         Id = id;
         UserId = userId;
+        TableId = tableId;
         Name = name;
         Description = description;
         Status = status;
@@ -33,9 +36,10 @@ public class Workflow
         UpdatedAt = DateTime.UtcNow;
     }
 
-    public void Update(string name, string? description, WorkflowStatus status)
+    public void Update(string name, string? description, WorkflowStatus status, string tableId)
     {
         Name = name;
+        TableId = tableId;
         Description = description;
         Status = status;
         UpdatedAt = DateTime.UtcNow;

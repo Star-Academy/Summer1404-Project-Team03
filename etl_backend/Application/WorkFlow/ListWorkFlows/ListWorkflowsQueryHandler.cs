@@ -27,6 +27,7 @@ public class ListWorkflowsQueryHandler : IRequestHandler<ListWorkflowsQuery, Lis
             Id: w.Id,
             Name: w.Name,
             Description: w.Description,
+            TableId: w.TableId,
             CreatedAt: w.CreatedAt,
             UpdatedAt: w.UpdatedAt,
             Status: w.Status.ToString()

@@ -34,6 +34,7 @@ public class ListWorkflowsEndpoint : EndpointWithoutRequest<ListWorkflowsRespons
                 Id = w.Id,
                 Name = w.Name,
                 Description = w.Description,
+                TableId = w.TableId,
                 CreatedAt = w.CreatedAt,
                 UpdatedAt = w.UpdatedAt,
                 Status = w.Status
