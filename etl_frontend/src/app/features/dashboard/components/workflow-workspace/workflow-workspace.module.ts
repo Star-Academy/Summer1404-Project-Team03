@@ -4,6 +4,7 @@ import { WorkflowWorkspaceComponent } from './workflow-workspace.component';
 import { RouterModule } from '@angular/router';
 import { workflowEditorRoutes } from './workflow-workspace-module.routing';
 import { WorkflowSidebarComponent } from './components/workflow-sidebar/workflow-sidebar.component';
+import { TableSelectorStore } from './components/workflow-sidebar/workflow-table-selector/stores/table-selector-store.service';
 
 
 
@@ -13,6 +14,7 @@ import { WorkflowSidebarComponent } from './components/workflow-sidebar/workflow
     CommonModule,
     RouterModule.forChild(workflowEditorRoutes),
     WorkflowSidebarComponent
-  ]
+  ],
+  providers: [TableSelectorStore]
 })
 export class WorkflowEditorModule { }

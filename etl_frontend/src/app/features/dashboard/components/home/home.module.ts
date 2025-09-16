@@ -18,6 +18,6 @@ import { HasRoleDirective } from '../../../../shared/directives/has-role/has-rol
     Button,
     HasRoleDirective
   ],
-  providers: [TableService]
+  providers: []
 })
 export class HomeModule { }

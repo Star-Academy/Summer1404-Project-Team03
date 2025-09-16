@@ -4,7 +4,7 @@ import { environment } from '../../../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { TableType, TableValidTypes } from '../models/tables.model';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TableService {
   private readonly tableApi = environment.api.tables;
   private readonly fileApi = environment.api.files;
