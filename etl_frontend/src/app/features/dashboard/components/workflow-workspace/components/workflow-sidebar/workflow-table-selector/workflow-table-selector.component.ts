@@ -14,6 +14,7 @@ import { TableType } from '../../../../home/manage-tables/models/tables.model';
 })
 export class WorkflowTableSelectorComponent {
   public readonly vm;
+  selectedTableName!: string;
 
   tablesName = computed(() =>
     this.vm().tables.map((t: TableType) => ({
@@ -28,6 +29,6 @@ export class WorkflowTableSelectorComponent {
 
   onSelectTable(event: any): void {
     const selected = event.value;
-    console.log('Selected table:', selected);
+    this.selectedTableName = selected.name
   }
 }

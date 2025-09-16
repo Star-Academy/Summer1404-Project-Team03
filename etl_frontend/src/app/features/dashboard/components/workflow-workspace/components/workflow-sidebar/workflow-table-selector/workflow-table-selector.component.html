@@ -1,8 +1,6 @@
 <p-button-group>
   <p-button
-    [label]="
-      vm().selectedTableId ? 'Table ' + vm().selectedTableId : 'Select Table'
-    "
+    [label]="selectedTableName ? selectedTableName : 'Select Table'"
     rounded
   ></p-button>
   <p-button

@@ -5,6 +5,7 @@ export type WorkflowInfo = {
   createdAt: Date;
   updatedAt: Date;
   status: 'Draft' | 'Running' | 'Completed' | 'Failed';
+  selectedTableId?: number | null;
 }
 
 export type WorkflowPost = {
